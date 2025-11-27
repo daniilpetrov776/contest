@@ -1,0 +1,46 @@
+{{#with header}}
+<header class="header" aria-label="{{ariaLabel}}">
+    <div class="header__container">
+        <a class="header__logo" href="{{logo.href}}" aria-label="{{logo.ariaLabel}}">
+            {{svg src="/images/logo-mobile.svg" alt="Logo" class="header__logo-img" width="52" height="17" }}
+        </a>
+
+        <div class="header__header-right">
+            <nav class="header__nav" aria-label="{{nav.ariaLabel}}">
+                <ul class="header__menu" role="list">
+                    {{#each nav.items}}
+                    <li class="header__menu-item">
+                        <a class="header__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0">
+                            {{label}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </nav>
+
+            <div class="header__star">
+                <span class="header__star-text">40</span>
+                <button class="header__toggle" type="button" aria-label="{{actions.toggle.ariaLabel}}" tabindex="0">
+                    <span class="header__toggle-dot" aria-hidden="true">
+                        {{!-- {{svg src="/images/star.svg" alt="Logo" class="header__star-img" width="36" height="36" }}
+                        --}} {{sprite name="star" class="header__star-img" width="36" height="36"}}
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- <div class="header__header-menu">
+            <nav class="header__header-menu-nav" aria-label="{{nav.ariaLabel}}">
+                <ul class="header-menu-nav__menu" role="list">
+                    {{#each nav.items}}
+                    <li class="header-menu-nav__menu-item">
+                        <a class="header-menu-nav__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0">
+                            {{label}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </nav>
+        </div> -->
+    </div>
+</header>
+{{/with}}

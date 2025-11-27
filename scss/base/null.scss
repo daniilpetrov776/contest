@@ -27,13 +27,16 @@ a:active {
 
 html,
 body {
-    min-width: $minWidth + px;
+    min-width: $mobile-min-width;
     height: 100%;
+    font-size: size-desktop($fz-default);
+    @include vp-1919 {
+        font-size: $fz-default;
+    }
 }
 
 body {
     font-family: $fontFamily;
-    font-size: $fontSize;
     line-height: 1;
     color: $mainColor;
     text-size-adjust: 100%;

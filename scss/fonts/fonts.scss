@@ -1,1 +1,54 @@
-// Шрифты
+$font-path: '../assets/fonts/pc';
+
+@mixin font-face($family, $file, $weight, $style: normal) {
+    @font-face {
+        font-family: '#{$family}';
+        src: url('#{$font-path}/#{$file}.woff2') format('woff2');
+        font-weight: $weight;
+        font-style: $style;
+        font-display: swap;
+    }
+}
+
+// TT Commons Pro
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Thin', 100);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Thin Italic', 100, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraLight', 200);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraLight Italic', 200, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Light', 300);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Light Italic', 300, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Regular', 400);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Italic', 400, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Medium', 500);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Medium Italic', 500, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial DemiBold', 600);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial DemiBold Italic', 600, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Bold', 700);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Bold Italic', 700, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraBold', 800);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraBold Italic', 800, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraBlack', 900);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraBlack Italic', 900, italic);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Black', 900);
+@include font-face('TT Commons Pro', 'TT Commons Pro Trial Black Italic', 900, italic);
+
+// TT Runs
+@include font-face('TT Runs', 'TT Runs Trial Thin', 100);
+@include font-face('TT Runs', 'TT Runs Trial Thin Italic', 100, italic);
+@include font-face('TT Runs', 'TT Runs Trial ExtraLight', 200);
+@include font-face('TT Runs', 'TT Runs Trial ExtraLight Italic', 200, italic);
+@include font-face('TT Runs', 'TT Runs Trial Light', 300);
+@include font-face('TT Runs', 'TT Runs Trial Light Italic', 300, italic);
+@include font-face('TT Runs', 'TT Runs Trial Regular', 400);
+@include font-face('TT Runs', 'TT Runs Trial Italic', 400, italic);
+@include font-face('TT Runs', 'TT Runs Trial Medium', 500);
+@include font-face('TT Runs', 'TT Runs Trial Medium Italic', 500, italic);
+@include font-face('TT Runs', 'TT Runs Trial DemiBold', 600);
+@include font-face('TT Runs', 'TT Runs Trial DemiBold Italic', 600, italic);
+@include font-face('TT Runs', 'TT Runs Trial Bold', 700);
+@include font-face('TT Runs', 'TT Runs Trial Bold Italic', 700, italic);
+@include font-face('TT Runs', 'TT Runs Trial ExtraBold', 800);
+@include font-face('TT Runs', 'TT Runs Trial ExtraBold Italic', 800, italic);
+@include font-face('TT Runs', 'TT Runs Trial Black', 900);
+@include font-face('TT Runs', 'TT Runs Trial Black Italic', 900, italic);
+@include font-face('TT Runs', 'TT Runs Trial Variable', 100 900);

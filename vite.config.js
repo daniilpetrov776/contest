@@ -1,20 +1,32 @@
-import type { Plugin } from 'vite'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
-import { handlebarsContext } from './data/handlebars-context'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { imageHelpers } from './js/handlebars-helpers.js'
+import { headerContext } from './partials/header/header.data'
+
+const templateContext = {
+    header: headerContext,
+}
 
 export default defineConfig({
     plugins: [
         ViteImageOptimizer({
             test: /\.(jpe?g|png|gif|tiff|webp|avif)$/i,
         }),
+        createSvgIconsPlugin({
+            iconDirs: [resolve(__dirname, 'public/icons')],
+            symbolId: 'icon-[dir]-[name]',
+            inject: 'body-last',
+            customDomId: '__svg__icons__dom__',
+        }),
         handlebars({
             reloadOnPartialChange: true,
             partialDirectory: resolve(__dirname, 'partials'),
-            context: handlebarsContext,
-        }) as unknown as Plugin,
+            context: templateContext,
+            helpers: imageHelpers,
+        })
     ],
     build: {
         minify: false,

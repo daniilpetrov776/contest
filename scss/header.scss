@@ -1,55 +1,59 @@
-/*
-.menu-icon {
-    position: relative;
-    z-index: 5;
-    display: none;
-    display: block;
-    width: rem(30);
-    height: rem(18);
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
 
-    @media (any-hover: none) {
-        cursor: default;
-    }
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: wrap row;
+        align-items: center;
+        padding: 0 $mobile-padding;
 
-    span,
-    &::before,
-    &::after {
-        position: absolute;
-        right: 0;
-        width: 100%;
-        height: rem(2);
-        content: '';
-        background-color: #000;
-        border-radius: rem(4);
-        transition: all 0.3s ease 0s;
-    }
-
-    &::before {
-        top: 0;
-    }
-
-    &::after {
-        bottom: 0;
-    }
-
-    span {
-        top: calc(50% - rem(1));
-    }
-
-    .menu-open & {
-        span {
-            width: 0;
+        @include vp-1439 {
+            padding: 0 $tablet-padding;
         }
-
-        &::before {
-            top: calc(50% - rem(1));
-            transform: rotate(-45deg);
+        @include vp-767 {
+            padding: 0 $mobile-padding;
         }
+    }
 
-        &::after {
-            bottom: calc(50% - rem(1));
-            transform: rotate(45deg);
+    &__logo {
+        img {
+            width: size(73px);
+            height: size(24px);
+        }
+    }
+
+    &__header-right {
+        display: flex;
+        flex-flow: wrap row;
+        align-items: center;
+    }
+
+    &__menu {
+        display: none;
+
+        @media #{$desktop-only} {
+            display: flex;
+            gap: size(32px);
+        }
+    }
+
+    &__menu-link {
+        font-family: 'TT Runs', sans-serif;
+        @include set-text(size(14px), size(64px), 500);
+        letter-spacing: -0.03em;
+    }
+
+    &__header-menu {
+        display: none;
+        @include vp-1439 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: absolute;
+            top: rem(50);
         }
     }
 }
-*/

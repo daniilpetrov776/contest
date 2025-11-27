@@ -1,5 +1,6 @@
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable unused-imports/no-unused-imports */
+import 'virtual:svg-icons-register'
 import * as flsFunctions from './files/functions'
 import * as flsForms from './files/forms/forms'
 import * as flsScroll from './files/scroll/scroll'

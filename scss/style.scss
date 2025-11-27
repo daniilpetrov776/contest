@@ -1,19 +1,21 @@
 @use 'sass:math';
 @import 'base/mixins';
 @import 'fonts/fonts';
+@import 'base/custom-properties';
+@import 'variables';
 
-$fontFamily: '', sans-serif;
-$fontSize: rem(16);
-$mainColor: #000;
-$minWidth: 375;
-$maxWidth: 1920;
-$maxWidthContainer: 1280;
-$containerPadding: 40;
-$containerWidth: $maxWidthContainer + $containerPadding;
-$pc: em($containerWidth);
-$tablet: em(991.98);
-$mobile: em(767.98);
-$mobileSmall: em(479.98);
+// $fontFamily: 'TT Commons Pro', sans-serif;
+// $fontSize: rem(16);
+// $mainColor: #000;
+// $minWidth: 375;
+// $maxWidth: 1920;
+// $maxWidthContainer: 1280;
+// $containerPadding: 40;
+// $containerWidth: $maxWidthContainer + $containerPadding;
+// $pc: em($containerWidth);
+// $tablet: em(991.98);
+// $mobile: em(767.98);
+// $mobileSmall: em(479.98);
 
 @import 'base/null';
 
@@ -43,25 +45,9 @@ body {
         min-width: 0;
     }
 }
-
-[class*='__container'] {
-    @if $maxWidthContainer > 0 {
-        max-width: rem($containerWidth);
-        margin: 0 auto;
-    }
-
-    @if $containerPadding > 0 {
-        @if $maxWidthContainer > 0 {
-            padding: 0 rem(math.div($containerPadding, 2));
-        } @else {
-            @include adaptive-value('padding-left', math.div($containerPadding, 2), 15);
-            @include adaptive-value('padding-right', math.div($containerPadding, 2), 15);
-        }
-    }
-}
-
 @import 'common';
 @import 'header';
 @import 'footer';
 @import 'home';
-@import 'cards';
+// @import 'cards';
+// @import 'fonts-sample';

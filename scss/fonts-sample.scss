@@ -1,0 +1,123 @@
+.fonts-sample {
+    padding: rem(60) 0;
+    background: #f7f7f7;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: rem(32);
+    }
+
+    &__header {
+        max-width: rem(720);
+        display: flex;
+        flex-direction: column;
+        gap: rem(12);
+    }
+
+    &__eyebrow {
+        font-size: rem(14);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba($mainColor, 0.6);
+    }
+
+    &__title {
+        font-size: clamp(rem(28), 4vw, rem(40));
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &__description {
+        font-size: rem(16);
+        color: rgba($mainColor, 0.7);
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(rem(280), 1fr));
+        gap: rem(24);
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: rem(14);
+        padding: rem(24);
+        border-radius: rem(16);
+        background: #fff;
+        box-shadow: 0 rem(12) rem(30) rgba(0, 0, 0, 0.05);
+        transition:
+            box-shadow 0.2s ease,
+            transform 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 rem(18) rem(40) rgba(0, 0, 0, 0.08);
+            transform: translateY(rem(-2));
+        }
+
+        &:focus-visible {
+            outline: rem(2) solid rgba($mainColor, 0.25);
+            outline-offset: rem(4);
+        }
+    }
+
+    &__item-head {
+        display: flex;
+        justify-content: space-between;
+        gap: rem(12);
+        flex-wrap: wrap;
+    }
+
+    &__family {
+        font-weight: 600;
+        color: $mainColor;
+    }
+
+    &__meta {
+        font-size: rem(14);
+        color: rgba($mainColor, 0.6);
+    }
+
+    &__text {
+        font-size: clamp(rem(18), 3vw, rem(24));
+        line-height: 1.4;
+        color: $mainColor;
+
+        &--commons {
+            font-family: 'TT Commons Pro', sans-serif;
+        }
+
+        &--runs {
+            font-family: 'TT Runs', sans-serif;
+        }
+
+        &--italic {
+            font-style: italic;
+        }
+    }
+}
+
+$font-weight-modifiers: (
+    thin: 100,
+    extralight: 200,
+    light: 300,
+    regular: 400,
+    normal: 400,
+    medium: 500,
+    demibold: 600,
+    bold: 700,
+    extrabold: 800,
+    extrablack: 900,
+    black: 900,
+    variable: 500,
+);
+
+@each $modifier, $weight in $font-weight-modifiers {
+    $modifier-name: '#{$modifier}';
+
+    .fonts-sample__text--#{$modifier-name} {
+        font-weight: $weight;
+    }
+}
