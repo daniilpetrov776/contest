@@ -1,0 +1,106 @@
+// Style the dropdown
+.nice-select {
+    position: relative;
+    display: block;
+    width: auto;
+    height: auto;
+    padding: rem(25);
+    font-family: inherit;
+    font-size: rem(14);
+    font-weight: normal;
+    line-height: 145%;
+    color: rgb(255 255 255 / 90%);
+    text-align: left !important;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    background-color: $accentColor;
+    border-radius: rem(20);
+    transition: all 0.2s ease-in-out;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+
+    // Arrow
+    &::after {
+        position: absolute;
+        top: rem(25);
+        right: rem(25);
+        display: block;
+        width: rem(24);
+        height: rem(24);
+        margin-top: 0;
+        pointer-events: none;
+        content: '';
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.9995 15.0006L7.75684 10.758L9.17106 9.34375L11.9995 12.1722L14.8279 9.34375L16.2421 10.758L11.9995 15.0006Z' fill='white'/%3E%3C/svg%3E%0A");
+        background-size: contain;
+        border: none;
+        transform: none;
+        transform-origin: center;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &.open {
+        &::after {
+            transform: rotate(-180deg);
+        }
+
+        .nice-select-dropdown {
+            pointer-events: auto;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .nice-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 9;
+        width: 100%;
+        margin-top: rem(15);
+        pointer-events: none;
+        background-color: $accentColor;
+        border-radius: rem(20);
+        box-shadow: none;
+        opacity: 0;
+        transform-origin: 50% 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    // List and options
+    .list {
+        display: grid;
+        gap: rem(14);
+        max-height: rem(217);
+        padding: rem(28);
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .option {
+        padding: 0;
+        font-size: rem(14);
+        font-weight: 500;
+        line-height: 145%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        list-style: none;
+        transition: all 0.2s;
+
+        &:hover,
+        &.focus,
+        &.selected.focus {
+            color: #d0d0d0;
+            background: transparent;
+        }
+
+        &.selected {
+            font-weight: bold;
+        }
+    }
+}
+
+.nice-select .list::-webkit-scrollbar {
+    width: 0;
+}

@@ -1,0 +1,48 @@
+{
+    "name": "starter-kit",
+    "type": "module",
+    "version": "0.0.0",
+    "private": true,
+    "browserslist": [
+        "last 2 versions"
+    ],
+    "scripts": {
+        "start": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "fonts": "tsx js/tasks/fonts.ts",
+        "stylelint": "stylelint scss/**/*.scss",
+        "eslint": "eslint --fix"
+    },
+    "dependencies": {
+        "inputmask": "^5.0.9",
+        "js-datepicker": "^5.18.4",
+        "lightgallery": "^2.8.3",
+        "nice-select2": "^2.4.0",
+        "nouislider": "^15.8.1",
+        "smooth-scrollbar": "^8.8.4",
+        "swiper": "^11.2.10",
+        "tippy.js": "^6.3.7"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^5.2.0",
+        "@types/inputmask": "^5.0.7",
+        "autoprefixer": "^10.4.21",
+        "eslint": "^9.32.0",
+        "eslint-plugin-format": "^1.0.1",
+        "fontmin": "^2.0.3",
+        "jiti": "^2.5.1",
+        "prettier": "^3.6.2",
+        "sass": "^1.90.0",
+        "sharp": "^0.34.3",
+        "stylelint": "^16.23.0",
+        "stylelint-config-recess-order": "^7.1.0",
+        "stylelint-config-standard-scss": "^15.0.1",
+        "svgo": "^4.0.0",
+        "tsx": "^4.20.3",
+        "typescript": "^5.9.2",
+        "vite": "^7.0.6",
+        "vite-plugin-handlebars": "^2.0.0",
+        "vite-plugin-image-optimizer": "^2.0.2"
+    }
+}

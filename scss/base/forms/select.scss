@@ -1,0 +1,135 @@
+.select {
+    position: relative;
+    min-width: 0;
+
+    // .select__body
+    &__body {
+        position: relative;
+    }
+
+    // .select__title
+    &__title {
+        width: 100%;
+        color: inherit;
+        text-align: left;
+        cursor: pointer;
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+    }
+
+    // .select__value
+    &__value {
+        display: flex;
+        gap: rem(10);
+        align-items: center;
+        min-width: 0;
+        height: rem(30);
+        padding: 0 rem(15);
+
+        > * {
+            flex: 1 1 auto;
+        }
+
+        &::after {
+            display: flex;
+            flex: 0 0 10px;
+            align-items: center;
+            align-self: stretch;
+            justify-content: center;
+            content: '';
+            transition: all 0.3s ease 0s;
+
+            ._select-open & {
+                transform: rotate(-180deg);
+            }
+        }
+
+        &._select-pseudo-label {
+            &::before {
+                content: attr(data-pseudo-label);
+                opacity: 0.5;
+            }
+        }
+    }
+
+    // .select__content
+    &__content {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // .select__text
+    &__text {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__input {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+
+    // .select__options
+    &__options {
+        position: absolute;
+        top: calc(100% - 1px);
+        left: 0;
+        min-width: 100%;
+        padding: 10px 0 5px;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-top: 0;
+        border-radius: 0 0 4px 4px;
+    }
+
+    // .select__scroll
+    &__scroll {
+        max-height: 200px;
+        overflow: hidden auto;
+
+        .simplebar-scrollbar {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    // .select__option
+    &__option {
+        width: 100%;
+        padding: 5px 15px;
+        color: inherit;
+        text-align: left;
+        cursor: pointer;
+
+        &._select-selected {
+            background-color: #eee;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                background: #d9d9d9;
+            }
+        }
+    }
+
+    &__row {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &._select-open {
+        z-index: 5;
+    }
+}
+
+._select-tag {
+    cursor: pointer;
+}

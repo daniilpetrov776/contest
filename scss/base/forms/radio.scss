@@ -1,0 +1,54 @@
+.options {
+    display: grid;
+    gap: rem(12);
+
+    // .options__item
+    &__item {
+        display: flex;
+        gap: rem(10);
+        align-items: center;
+        cursor: pointer;
+
+        &:has(input:checked) {
+            .options__text {
+                color: $mainColor;
+            }
+        }
+    }
+
+    // .options__input
+    &__input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(20);
+        height: rem(20);
+        appearance: none;
+        cursor: pointer;
+        content: '';
+        border: 1px solid rgb(34 36 51 / 18%);
+        border-radius: 50%;
+
+        &:checked {
+            border-color: $mainColor;
+
+            &::before {
+                position: absolute;
+                width: rem(12);
+                height: rem(12);
+                content: '';
+                background-color: $mainColor;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    // .options__text
+    &__text {
+        font-size: rem(14);
+        font-weight: 500;
+        line-height: 145%;
+        color: rgb(20 20 23 / 42%);
+    }
+}
