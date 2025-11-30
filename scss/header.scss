@@ -3,16 +3,20 @@
     left: 0;
     top: 0;
     right: 0;
+    background-color: $mainBackground;
+    z-index: 100;
 
     &__container {
         display: flex;
         justify-content: space-between;
         flex-flow: wrap row;
         align-items: center;
-        padding: 0 $mobile-padding;
+        padding: 0 $desktop-padding;
+        min-height: size(60px);
 
         @include vp-1439 {
             padding: 0 $tablet-padding;
+            min-height: size(52px);
         }
         @include vp-767 {
             padding: 0 $mobile-padding;
@@ -30,6 +34,7 @@
         display: flex;
         flex-flow: wrap row;
         align-items: center;
+        gap: size(32px);
     }
 
     &__menu {
@@ -43,17 +48,76 @@
 
     &__menu-link {
         font-family: 'TT Runs', sans-serif;
-        @include set-text(size(14px), size(64px), 500);
+        font-weight: 500;
         letter-spacing: -0.03em;
+        @include adaptive-value('font-size', 16, 14, 0, $maxWidth, 1440);
+        @include adaptive-value('line-height', 16, 14, 0, $maxWidth, 1440);
     }
 
-    &__header-menu {
-        display: none;
+    &__star {
+        display: flex;
+        align-items: center;
+        gap: size(10px);
+    }
+
+    &__star-text {
+        font-weight: 500;
+        @include adaptive-value('font-size', 14, 10);
+        @include adaptive-value('line-height', 14, 14);
         @include vp-1439 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            position: absolute;
-            top: rem(50);
+            display: none;
+        }
+    }
+
+    &__toggle {
+        @include vp-1439 {
+            width: size(32px);
+            height: size(32px);
+            position: relative;
+
+            &::before,
+            &::after {
+                position: absolute;
+                content: '';
+                display: block;
+                width: size(30px);
+                height: size(3px);
+                background-color: $mainColor;
+                left: size(1px);
+                transform-origin: center;
+                transition:
+                    transform 0.4s $smooth,
+                    scale 0.4s $smooth,
+                    top 0.4s $smooth;
+            }
+
+            &::before {
+                top: 40%;
+            }
+
+            &::after {
+                top: 70%;
+            }
+
+            &.is-active {
+                &::before {
+                    top: 50%;
+                    transform: translateY(-50%) rotate(45deg) scale(0.7);
+                }
+
+                &::after {
+                    top: 50%;
+                    transform: translateY(-50%) rotate(-45deg) scale(0.7);
+                }
+            }
+        }
+    }
+
+    &__star-img {
+        width: size(36px);
+        height: size(36px);
+        @include vp-1439 {
+            opacity: 0;
         }
     }
 }

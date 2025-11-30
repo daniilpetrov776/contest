@@ -15,6 +15,7 @@
         "eslint": "eslint --fix"
     },
     "dependencies": {
+        "gsap": "^3.13.0",
         "inputmask": "^5.0.9",
         "js-datepicker": "^5.18.4",
         "lightgallery": "^2.8.3",

@@ -4,26 +4,36 @@
 @import 'base/custom-properties';
 @import 'variables';
 
-// $fontFamily: 'TT Commons Pro', sans-serif;
-// $fontSize: rem(16);
-// $mainColor: #000;
-// $minWidth: 375;
-// $maxWidth: 1920;
-// $maxWidthContainer: 1280;
-// $containerPadding: 40;
-// $containerWidth: $maxWidthContainer + $containerPadding;
-// $pc: em($containerWidth);
-// $tablet: em(991.98);
-// $mobile: em(767.98);
-// $mobileSmall: em(479.98);
-
 @import 'base/null';
 
 body {
-    .lock & {
-        overflow: hidden;
-        overscroll-behavior: none;
-        touch-action: none;
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(39, 38, 38, 0.5);
+        z-index: 99;
+        opacity: 0;
+        transition: opacity 0.6s $smooth;
+        pointer-events: none;
+    }
+}
+
+body.lock {
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+
+    &::before {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .wrapper > main {
+        filter: blur(4px);
     }
 }
 
@@ -39,6 +49,7 @@ body {
 
     > main {
         flex: 1 1 auto;
+        transition: filter 0.3s $smooth;
     }
 
     > * {
@@ -49,5 +60,7 @@ body {
 @import 'header';
 @import 'footer';
 @import 'home';
+@import 'hero';
+@import 'header-menu';
 // @import 'cards';
 // @import 'fonts-sample';

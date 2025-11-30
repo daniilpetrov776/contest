@@ -11,6 +11,7 @@ $not-desktop: '(width <= #{$desktop-min-width})';
 $fontFamily: 'TT Commons Pro', sans-serif;
 $fz-default: 16px;
 $mainColor: #0e0e0e;
+$mainBackground: #f1f1f1;
 $vp-320: 320px;
 $vp-375: 375px;
 $vp-768: 768px;
@@ -22,3 +23,11 @@ $z-header: 100;
 $mobile-padding: size(15px);
 $tablet-padding: size(20px);
 $desktop-padding: size(30px);
+$smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Переменные для adaptive-value миксина
+$minWidth: 375;
+$maxWidth: 1920;
+$maxWidthContainer: 1380;
+$containerPadding: 40;
+$containerWidth: $maxWidthContainer + $containerPadding;

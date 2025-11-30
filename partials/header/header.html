@@ -20,7 +20,13 @@
 
             <div class="header__star">
                 <span class="header__star-text">40</span>
-                <button class="header__toggle" type="button" aria-label="{{actions.toggle.ariaLabel}}" tabindex="0">
+                <button
+                    class="header__toggle"
+                    data-burger-toggle
+                    type="button"
+                    aria-label="{{actions.toggle.ariaLabel}}"
+                    tabindex="0"
+                >
                     <span class="header__toggle-dot" aria-hidden="true">
                         {{!-- {{svg src="/images/star.svg" alt="Logo" class="header__star-img" width="36" height="36" }}
                         --}} {{sprite name="star" class="header__star-img" width="36" height="36"}}
@@ -28,19 +34,19 @@
                 </button>
             </div>
         </div>
-        <!-- <div class="header__header-menu">
-            <nav class="header__header-menu-nav" aria-label="{{nav.ariaLabel}}">
-                <ul class="header-menu-nav__menu" role="list">
-                    {{#each nav.items}}
-                    <li class="header-menu-nav__menu-item">
-                        <a class="header-menu-nav__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0">
-                            {{label}}
-                        </a>
-                    </li>
-                    {{/each}}
-                </ul>
-            </nav>
-        </div> -->
+    </div>
+    <div class="header__header-menu header-menu">
+        <nav class="header-menu__header-menu-nav" aria-label="{{nav.ariaLabel}}">
+            <ul class="header-menu__menu-list" role="list">
+                {{#each nav.items}}
+                <li class="header-menu__menu-item">
+                    <a class="header-menu__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0">
+                        {{label}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </nav>
     </div>
 </header>
 {{/with}}

@@ -74,6 +74,36 @@
     @return $result;
 }
 
+/**
+ * Миксин для создания адаптивных значений с плавным масштабированием
+ *
+ * @param {string} $property - CSS свойство (например: 'font-size', 'padding', 'margin')
+ * @param {number} $startSize - Размер на максимальной ширине ($widthFrom) - БОЛЬШЕЕ значение
+ * @param {number} $minSize - Размер на минимальной ширине ($widthTo) - МЕНЬШЕЕ значение
+ * @param {number} $keepSize - Флаг сохранения размера (0 - по умолчанию, 1-3 - варианты фиксации)
+ * @param {number} $widthFrom - Максимальная ширина экрана для масштабирования (по умолчанию: $containerWidth)
+ * @param {number} $widthTo - Минимальная ширина экрана для масштабирования (по умолчанию: $minWidth)
+ *
+ * @example
+ * // Размер шрифта от 14px (на 1440px) до 16px (на 1920px)
+ * @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
+ *
+ * @example
+ * // Padding от 20px (на 375px) до 40px (на 1420px)
+ * @include adaptive-value('padding', 40, 20);
+ *
+ * @example
+ * // Для десктопа: от 14px (1440px) до 18px (1920px)
+ * @include adaptive-value('font-size', 18, 14, 0, $maxWidth, 1440);
+ *
+ * @note
+ * - $startSize должен быть БОЛЬШЕ $minSize (если нужно увеличение при росте экрана)
+ * - $startSize должен быть МЕНЬШЕ $minSize (если нужно уменьшение при росте экрана)
+ * - $widthFrom должен быть БОЛЬШЕ $widthTo
+ * - На экранах больше $widthFrom применяется фиксированный $startSize
+ * - На экранах меньше $widthTo применяется фиксированный $minSize
+ * - Между $widthTo и $widthFrom происходит плавное масштабирование
+ */
 @mixin adaptive-value($property, $startSize, $minSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
     @if $startSize == 0 {
         $startSize: 0.0001;
@@ -89,16 +119,21 @@
         $widthFrom: $maxWidth;
     }
 
-    $widthFromMedia: em($widthFrom);
-    $widthToMedia: em($widthTo);
-    $slope: math.div(($startSize - $minSize), ($widthFrom - $widthTo));
-    $yIntersection: -$widthTo * $slope + $minSize;
+    // Извлекаем числовые значения без единиц
+    $widthFromNum: if(math.is-unitless($widthFrom), $widthFrom, $widthFrom / 1px);
+    $widthToNum: if(math.is-unitless($widthTo), $widthTo, $widthTo / 1px);
+
+    $widthFromMedia: em($widthFromNum);
+    $widthToMedia: em($widthToNum);
+    $slope: math.div(($startSize - $minSize), ($widthFromNum - $widthToNum));
+    $yIntersection: -$widthToNum * $slope + $minSize;
 
     @if $yIntersection == 0 {
         $yIntersection: 0.0001;
     }
 
-    $flyValue: #{rem($yIntersection)}' + ' #{$slope * 100}vw;
+    $slopeVw: $slope * 100;
+    $flyValue: #{rem($yIntersection)}' + ' #{$slopeVw}vw;
     $propertyValue: #{'clamp(' rem($minSize) ',' $flyValue ',' rem($startSize) ')'};
 
     @if $minSize > $startSize {
