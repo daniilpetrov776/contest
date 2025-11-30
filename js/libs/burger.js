@@ -102,6 +102,7 @@ function closeMenu() {
 
     if (headerMenu) {
         headerMenu.classList.remove('is-open')
+        headerMenu.classList.remove('is-scrollable')
     }
 
     setTimeout(() => {
@@ -126,6 +127,9 @@ function openMenu() {
                 animateMenuItems(true)
             }, 0) // Небольшая задержка после открытия меню
         }, 100)
+        setTimeout(() => {
+            headerMenu.classList.add('is-scrollable')
+        }, 500)
     }
 
     setTimeout(() => {

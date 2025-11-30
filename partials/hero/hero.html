@@ -1,10 +1,70 @@
 {{#with hero}}
 <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__container">
-        <h1 class="hero__title" id="hero-title">{{title}}</h1>
-        {{#if description}}
-        <p class="hero__description">{{description}}</p>
-        {{/if}}
+    <div class="hero__container container">
+        <div class="hero__static-wrapper">
+            <div class="hero__header">
+                <h1 class="hero__title" data-animate-element="30px,1.2" id="hero-title">
+                    Creative digital <br />
+                    production
+                </h1>
+                <ul class="hero__socials socials" data-animate-children="-30px,1.2" role="list">
+                    {{#each socials}}
+                    <li class="hero__socials-item socials__item">
+                        <a class="hero__socials-link socials__link" href="#">
+                            <span class="hero__socials-number">{{number}}</span>
+                            <div
+                                class="hero__socials-icon-wrapper socials__icon-wrapper {{#if this.class}} {{this.class}}{{/if}}"
+                            >
+                                {{sprite name=icon class="hero__socials-icon socials__icon" width=width height=height}}
+                            </div>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="hero__video">
+                <div class="hero__video-block"></div>
+            </div>
+            <div class="hero__footer">
+                <div class="hero__footer-left">
+                    <div class="hero__years">
+                        <span class="hero__years-number">{{footer.left.years}}</span>
+                    </div>
+                    <span class="hero__years-label">{{footer.left.yearsLabel}}</span>
+                    <p class="hero__footer-description">лучший креативный <br />разработчик для b2b</p>
+                </div>
+                <div class="hero__footer-contacts">
+                    <div class="hero__footer-contacts-item">
+                        <a href="mailto:{{footer.center.email}}" class="hero__contact-link">{{footer.center.email}}</a>
+                        <a href="tel:{{footer.center.tel}}" class="hero__contact-link">{{footer.center.phone}}</a>
+                    </div>
+                    <div class="hero__footer-contacts-item">
+                        <p class="hero__telegram-label">{{footer.center.telegram.label}}</p>
+                        <a href="https://t.me/{{footer.center.telegram.username}}" class="hero__contact-link"
+                            >{{footer.center.telegram.username}} {{sprite name="telegram-icon"
+                            class="hero__telegram-icon" width="14" height="14"}}
+                        </a>
+                    </div>
+                </div>
+                <div class="hero__footer-company-description-wrapper">
+                    <p class="hero__company-description">{{footer.right.description}}</p>
+                </div>
+                <div class="hero__footer-about-links-wrapper">
+                    <div class="hero__footer-about-links about-links">
+                        <div class="about-links__list">
+                            {{#each footer.right.about}}
+                            <a href="{{href}}" class="about-links__link">{{text}}</a>
+                            {{/each}}
+                        </div>
+                        <p class="about-links__description">
+                            Презентация <br />
+                            компании
+                        </p>
+                    </div>
+                </div>
+                <a href="{{footer.right.button.href}}" class="hero__button button">{{footer.right.button.text}}</a>
+            </div>
+        </div>
     </div>
 </section>
 {{/with}}

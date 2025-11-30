@@ -1,0 +1,45 @@
+.about-links {
+    display: flex;
+    min-height: size(49px);
+    align-items: center;
+    flex-flow: wrap;
+    gap: size(10px);
+    margin: size(20px) 0 0;
+
+    &__list {
+        display: flex;
+        flex-flow: wrap row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: size(5px);
+    }
+
+    &__link {
+        background-color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: size(45px);
+        padding: size(14.5px) size(14px);
+        color: $mainColor;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        @include adaptive-value('border-radius', 15, 15, 0, 1920, 1440);
+        @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
+        @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('border-radius', 12, 12, 0, 1439, 768);
+            @include adaptive-value('font-size', 14, 13, 0, 1439, 768);
+            @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1439, 768);
+        }
+    }
+
+    &__description {
+        color: $gray;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        @include adaptive-value('font-size', 16, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 16 * 1.1, 13 * 1.1, 0, 1920, 1440);
+    }
+}

@@ -1,0 +1,28 @@
+.button {
+    min-height: size(61px);
+    background-color: $black;
+    color: $white;
+    font-weight: 600;
+    font-family: 'TT Runs', Arial, sans-serif;
+    padding: size(22px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap;
+    letter-spacing: -0.03em;
+    @include adaptive-value('font-size', 18, 14, 0, 1920, 1440);
+    @include adaptive-value('line-height', 18 * 1.2, 14 * 1.2, 0, 1920, 1440);
+    @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
+
+    @include vp-1439 {
+        min-height: size(48px);
+        padding: size(16px);
+        @include adaptive-value('font-size', 14, 13, 0, 1439, 768);
+        @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1439, 768);
+        @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
+    }
+
+    @include vp-767 {
+        @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
+    }
+}

@@ -1,29 +1,374 @@
 .hero {
-    // background-color: #f5f5f5;
-    background-color: white;
+    background-color: $mainBackground;
     min-height: 100vh;
-    padding: size(120px) 0 size(200px);
-    padding-top: size(180px);
+    padding: size(120px) 0 size(40px);
     display: flex;
     align-items: center;
+    position: relative;
 
-    &__container {
+    &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: size(60px);
+        background-color: #e4e4e4;
+        width: size(1px);
+        height: var(--after-height, 0px);
+        transform: translateX(-50%);
+        z-index: 0;
+        pointer-events: none;
+
+        @include vp-1439 {
+            top: size(52px);
+        }
+
+        @include vp-767 {
+            width: 0;
+        }
+    }
+
+    &__static-wrapper {
+        max-width: 100vw;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &__header {
         display: flex;
-        flex-direction: column;
+        flex-flow: wrap row;
+        align-items: flex-start;
+        justify-content: space-between;
         gap: size(24px);
+        min-height: size(384px);
+    }
+
+    &__socials {
+        display: flex;
+        flex-flow: wrap column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: size(10px);
+
+        @include vp-1439 {
+            display: none;
+        }
+    }
+
+    &__socials-icon-wrapper {
+        &--w {
+            svg {
+                width: size(25.85px);
+                height: size(25.85px);
+            }
+        }
+        &--fwg {
+            svg {
+                width: size(37px);
+                height: size(11px);
+            }
+        }
+        &--arrows {
+            svg {
+                width: size(23.1px);
+                height: size(23.1px);
+            }
+        }
+        &--pointer {
+            svg {
+                width: size(20px);
+                height: size(26px);
+            }
+        }
+        &--human {
+            svg {
+                width: size(29px);
+                height: size(30px);
+            }
+        }
+    }
+
+    &__socials-item {
+        width: 100%;
+    }
+
+    &__socials-link {
+        display: flex;
+        flex-flow: wrap row;
+        align-items: center;
+        justify-content: space-between;
+        gap: size(10px);
+        width: 100%;
+        font-family: 'TT Runs', Arial, sans-serif;
     }
 
     &__title {
+        font-family: 'TT Runs', Arial, sans-serif;
         font-weight: 600;
-        line-height: 1.2;
-        color: $mainColor;
-        @include adaptive-value('font-size', 64, 32);
+        letter-spacing: -0.03em;
+        @include adaptive-value('font-size', 64, 50, 0, $maxWidth, 1440);
+        @include adaptive-value('line-height', 80, 62.5, 0, $maxWidth, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 44, 38, 0, 1439, 768);
+            @include adaptive-value('line-height', 55, 47.5, 0, 1439, 768);
+            letter-spacing: -0.01em;
+        }
+
+        @include vp-767 {
+            @include adaptive-value('font-size', 44, 32, 0, 767, 375);
+            @include adaptive-value('line-height', 55, 40, 0, 767, 375);
+        }
     }
 
-    &__description {
-        line-height: 1.5;
-        color: rgba($mainColor, 0.7);
-        max-width: size(600px);
-        @include adaptive-value('font-size', 20, 16);
+    &__video {
+        display: flex;
+        min-height: size(230px);
+        width: size(456px);
+        background: #000000;
+        position: absolute;
+        top: size(154px);
+        left: 50%;
+        right: 50%;
+        z-index: 2;
+        transform: translateX(-50%);
+        @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
+        }
+    }
+
+    &__footer {
+        margin: size(110px) 0 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0 size(24px);
+        align-items: start;
+
+        @include vp-1439 {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0 size(24px);
+        }
+
+        @include vp-767 {
+            grid-template-columns: repeat(2, 1fr);
+            gap: size(24px);
+        }
+    }
+
+    &__footer-left {
+        display: grid;
+        grid-template-columns: minmax(size(84px), 1fr) 3fr;
+        gap: size(15px);
+        align-items: start;
+        margin: size(67px) 0 0;
+        grid-row: span 2;
+
+        @include vp-1439 {
+            grid-template-columns: 1fr 7fr;
+            grid-column: 1;
+            grid-row: 1;
+            margin: 0;
+            gap: size(15px) size(8px);
+        }
+
+        @include vp-767 {
+            grid-column: 1;
+            grid-row: 1;
+            margin: 0;
+        }
+    }
+
+    &__years {
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        grid-row: span 2;
+        @include adaptive-value('font-size', 64, 56, 0, 1920, 1440);
+        @include adaptive-value('line-height', 57.6, 50.4, 0, 1920, 1440);
+
+        @include vp-1439 {
+            letter-spacing: -0.01em;
+            grid-row: span 1;
+            @include adaptive-value('font-size', 44, 38, 0, 1439, 768);
+            @include adaptive-value('line-height', 39.6, 34.2, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('font-size', 40, 32, 0, 767, 375);
+            @include adaptive-value('line-height', 36, 28.8, 0, 767, 375);
+        }
+    }
+
+    &__years-label {
+        font-family: 'TT Commons Pro', Arial, sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        @include adaptive-value('font-size', 22.5, 18, 0, 1920, 1440);
+        @include adaptive-value('line-height', 22.5 * 1.25, 18 * 1.25, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 20, 15, 0, 1439, 768);
+            @include adaptive-value('line-height', 20 * 1.25, 15 * 1.25, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            align-self: end;
+            @include adaptive-value('font-size', 18, 16, 0, 767, 375);
+            @include adaptive-value('line-height', 18 * 1.22, 16 * 1.22, 0, 767, 375);
+        }
+    }
+
+    &__footer-description {
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        color: $gray;
+        @include adaptive-value('font-size', 16, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 16 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+        @include vp-1439 {
+            grid-column: span 2;
+            @include adaptive-value('font-size', 15, 13, 0, 1439, 768);
+            @include adaptive-value('line-height', 15 * 1.1, 13 * 1.1, 0, 767, 375);
+        }
+        @include vp-767 {
+            @include adaptive-value('font-size', 13, 12, 0, 767, 375);
+            @include adaptive-value('line-height', 13 * 1.1, 12 * 1.1, 0, 374, 320);
+        }
+    }
+
+    &__footer-contacts {
+        display: flex;
+        flex-flow: wrap column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: size(39px);
+        grid-row: span 2;
+
+        @include vp-1439 {
+            grid-column: 2;
+            grid-row: 1;
+            flex-flow: wrap row;
+        }
+
+        @include vp-767 {
+            grid-column: 2;
+            grid-row: 1;
+            flex-flow: wrap column;
+            gap: size(20px);
+        }
+    }
+
+    &__footer-contacts-item {
+        display: flex;
+        flex-flow: wrap column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: size(5px);
+    }
+
+    &__contact-link {
+        color: $black;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        text-decoration: underline;
+        text-underline-offset: size(5px);
+        @include adaptive-value('font-size', 22, 18, 0, 1920, 1440);
+        @include adaptive-value('line-height', 22 * 1.25, 18 * 1.25, 0, 1920, 1440);
+
+        @include vp-1439 {
+            text-underline-offset: size(4px);
+            @include adaptive-value('font-size', 18, 15, 0, 1439, 768);
+            @include adaptive-value('line-height', 18 * 1.25, 15 * 1.25, 0, 1439, 768);
+        }
+    }
+
+    &__telegram-label {
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        color: $gray;
+        @include adaptive-value('font-size', 16, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 16 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__telegram-icon {
+        display: none;
+
+        @include vp-767 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: size(14px);
+            height: size(14px);
+            fill: currentColor;
+        }
+    }
+
+    &__footer-company-description-wrapper {
+        @include vp-1439 {
+            grid-column: 2;
+        }
+    }
+
+    &__company-description {
+        font-family: 'TT Commons Pro', Arial, sans-serif;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: $mainColor;
+        @include adaptive-value('font-size', 20, 16, 0, 1920, 1440);
+        @include adaptive-value('line-height', 20 * 1.4, 16 * 1.4, 0, 1920, 1440);
+
+        @include vp-1439 {
+            grid-column: 3;
+            @include adaptive-value('font-size', 16, 15, 0, 1439, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__footer-about-links-wrapper {
+        grid-column: 3;
+        @include vp-1439 {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__button {
+        align-self: end;
+        grid-column: 4;
+
+        @include vp-1439 {
+            grid-column: 2;
+            grid-row: 3;
+            align-self: end;
+            margin: size(40px) 0 0;
+        }
+
+        @include vp-767 {
+            grid-column: 1 / 3;
+            grid-row: 2;
+            margin: size(32px) 0 0;
+            justify-self: stretch;
+        }
     }
 }

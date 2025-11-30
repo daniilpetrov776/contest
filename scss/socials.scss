@@ -1,0 +1,11 @@
+.socials {
+    &__icon-wrapper {
+        min-height: size(48px);
+        width: size(48px);
+        background-color: $white;
+        border-radius: size(12px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -20,9 +20,11 @@
     &.is-open {
         @include vp-1439 {
             height: 100vh;
+        }
+
+        &.is-scrollable {
             overflow-y: auto;
             overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
         }
 
         .header-menu__header-menu-nav {

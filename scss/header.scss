@@ -6,6 +6,17 @@
     background-color: $mainBackground;
     z-index: 100;
 
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        background-color: #e4e4e4;
+        width: var(--before-width, 0%);
+        height: size(1px);
+        transform: translateX(-50%);
+    }
+
     &__container {
         display: flex;
         justify-content: space-between;
