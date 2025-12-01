@@ -1,0 +1,44 @@
+{{#with banner}}
+<section class="banner">
+    <div class="banner__container container">
+        <div class="banner__swiper swiper">
+            <div class="banner__wrapper">
+                {{#each slides}}
+                <div class="banner__slide swiper-slide">
+                    <div class="banner__content">
+                        <p class="banner__type">{{type}}</p>
+                        <h2 class="visually-hidden">
+                            {{#if title.parts}}{{extractText title.parts}}{{else}}{{title}}{{/if}}
+                        </h2>
+                        <div class="banner__title">
+                            {{#if title.parts}}{{titleWithSprites title.parts}}{{else}}{{title}}{{/if}}
+                        </div>
+                        <p class="banner__description">{{description}}</p>
+                        <a href="{{button.href}}" class="banner__button button">{{button.text}}</a>
+                    </div>
+                    {{#if images}}
+                    <div class="banner__images-wrapper">
+                        {{#each images}}
+                        <div class="{{getWrapperClass this.class 'banner__image-wrapper'}}">
+                            {{#if this.alt}} {{pictureRetina image=this alt=this.alt class=this.class}} {{else}}
+                            {{pictureRetina image=this alt=(extractText ../title.parts) class=this.class}} {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{else if image}}
+                    <div class="banner__images-wrapper">
+                        <div class="banner__image-wrapper">
+                            {{#if title.parts}} {{pictureRetina image=image alt=(extractText title.parts)
+                            class="banner__image-picture"}} {{else}} {{pictureRetina image=image alt=title
+                            class="banner__image-picture"}} {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="banner__pagination swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+{{/with}}

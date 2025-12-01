@@ -25,6 +25,10 @@ a:active {
     outline: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 body {
     min-width: $mobile-min-width;
@@ -73,4 +77,16 @@ h5,
 h6 {
     font-size: inherit;
     font-weight: inherit;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

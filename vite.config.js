@@ -7,11 +7,13 @@ import { imageHelpers } from './js/handlebars-helpers.js'
 import { headerContext } from './partials/header/header.data'
 import { heroContext } from './partials/hero/hero.data'
 import { portfolioContext } from './partials/portfolio/portfolio.data'
+import { bannerContext } from './partials/banner/banner.data'
 
 const templateContext = {
     header: headerContext,
     hero: heroContext,
     portfolio: portfolioContext,
+    banner: bannerContext,
 }
 
 export default defineConfig({

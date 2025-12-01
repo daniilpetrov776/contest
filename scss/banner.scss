@@ -1,0 +1,363 @@
+.banner {
+    background-color: $mainBackground;
+
+    &__slide {
+        background-color: $white;
+        display: grid;
+        grid-template-columns: minmax(size(539px), 1fr) 2fr;
+        @include adaptive-value('border-radius', 30, 30, 0, 1920, 1440);
+        @include adaptive-value('padding-top', 120, 100, 0, 1920, 1440);
+        @include adaptive-value('padding-left', 40, 30, 0, 1920, 1440);
+        @include adaptive-value('padding-right', 40, 30, 0, 1920, 1440);
+        @include adaptive-value('min-height', 870, 650, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('border-radius', 30, 20, 0, 1439, 768);
+            @include adaptive-value('padding-top', 100, 60, 0, 1439, 768);
+            @include adaptive-value('padding-left', 30, 25, 0, 1439, 768);
+            @include adaptive-value('padding-right', 30, 25, 0, 1439, 768);
+            @include adaptive-value('min-height', 650, 580, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('min-height', 580, 450, 0, 1279, 768);
+        }
+    }
+
+    &__type {
+        font-family: 'TT Runs', 'Arial', sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        @include adaptive-value('font-size', 18, 14, 0, 1920, 1440);
+        @include adaptive-value('line-height', 18 * 1.2, 14 * 1.2, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 14, 13, 0, 1439, 768);
+            @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1439, 768);
+        }
+    }
+
+    &__title {
+        &-line {
+            display: flex;
+            flex-flow: wrap row;
+            align-items: center;
+            @include adaptive-value('gap', 8, 5, 0, 1920, 1440);
+
+            @include vp-1439 {
+                @include adaptive-value('gap', 5, 4, 0, 1439, 768);
+            }
+        }
+        &-text {
+            color: $green;
+            font-family: 'TT Runs', 'Arial', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            @include adaptive-value('font-size', 42, 36, 0, 1920, 1440);
+            @include adaptive-value('line-height', 42 * 1.15, 36 * 1.15, 0, 1920, 1440);
+
+            @include vp-1439 {
+                @include adaptive-value('font-size', 36, 28, 0, 1439, 768);
+                @include adaptive-value('line-height', 36 * 1.15, 28 * 1.15, 0, 1439, 768);
+            }
+
+            &--highlight {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex-flow: wrap row;
+                background-color: $highlight;
+                min-height: size(48.7px);
+                border-radius: size(154px);
+                @include adaptive-value('padding-right', 25, 23, 0, 1920, 1440);
+                @include adaptive-value('padding-left', 25, 23, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('border-radius', 154, 120, 0, 1439, 768);
+                    @include adaptive-value('padding-right', 25, 18, 0, 1439, 768);
+                    @include adaptive-value('padding-left', 25, 18, 0, 1439, 768);
+                    @include adaptive-value('min-height', 48.7, 38, 0, 1439, 768);
+                }
+            }
+        }
+
+        &-icon {
+            &--wigle {
+                @include adaptive-value('width', 44, 40, 0, 1920, 1440);
+                @include adaptive-value('height', 36, 31, 0, 1920, 1440);
+                @include vp-1439 {
+                    @include adaptive-value('width', 40, 36, 0, 1439, 768);
+                    @include adaptive-value('height', 31, 29, 0, 1439, 768);
+                }
+            }
+            &--heart {
+                @include adaptive-value('width', 44, 40, 0, 1920, 1440);
+                @include adaptive-value('height', 44, 40, 0, 1920, 1440);
+                @include vp-1439 {
+                    @include adaptive-value('width', 40, 32, 0, 1439, 768);
+                    @include adaptive-value('height', 40, 32, 0, 1439, 768);
+                }
+            }
+            &--buildings {
+                @include adaptive-value('width', 44, 40, 0, 1920, 1440);
+                @include adaptive-value('height', 44, 40, 0, 1920, 1440);
+                @include vp-1439 {
+                    @include adaptive-value('width', 40, 32, 0, 1439, 768);
+                    @include adaptive-value('height', 40, 32, 0, 1439, 768);
+                }
+            }
+            &--global {
+                @include adaptive-value('width', 70, 64.2, 0, 1920, 1440);
+                @include adaptive-value('height', 53, 48.7, 0, 1920, 1440);
+                @include vp-1439 {
+                    @include adaptive-value('width', 64.2, 50, 0, 1439, 768);
+                    @include adaptive-value('height', 48.7, 38, 0, 1439, 768);
+                }
+            }
+            &--phone {
+                @include adaptive-value('width', 64, 56, 0, 1920, 1440);
+                @include adaptive-value('height', 54, 45, 0, 1920, 1440);
+                @include vp-1439 {
+                    @include adaptive-value('width', 56, 50, 0, 1439, 768);
+                    @include adaptive-value('height', 45, 40, 0, 1439, 768);
+                }
+            }
+        }
+    }
+
+    &__image-wrapper {
+        position: absolute;
+
+        &--building {
+            z-index: 1;
+            @include adaptive-value('top', 431, 327, 0, 1920, 1440);
+            @include adaptive-value('right', 796, 571, 0, 1920, 1440);
+            @include adaptive-value('width', 376, 279, 0, 1920, 1440);
+            @include adaptive-value('height', 261, 194, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 327, 289, 0, 1439, 1280);
+                @include adaptive-value('right', 571, 483, 0, 1439, 1280);
+                @include adaptive-value('width', 279, 234, 0, 1439, 1280);
+                @include adaptive-value('height', 194, 163, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 289, 236, 0, 1279, 768);
+                @include adaptive-value('right', 483, 206, 0, 1279, 768);
+                @include adaptive-value('width', 234, 148, 0, 1279, 768);
+                @include adaptive-value('height', 163, 103, 0, 1279, 768);
+            }
+        }
+
+        &--iphone {
+            z-index: 2;
+            @include adaptive-value('top', 86, 71, 0, 1920, 1440);
+            @include adaptive-value('right', 605.5, 430, 0, 1920, 1440);
+            @include adaptive-value('width', 242, 180, 0, 1920, 1440);
+            @include adaptive-value('height', 524, 390, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 71, 75, 0, 1439, 1280);
+                @include adaptive-value('right', 430, 365, 0, 1439, 1280);
+                @include adaptive-value('width', 180, 151, 0, 1439, 1280);
+                @include adaptive-value('height', 390, 326, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 75, 66, 0, 1279, 768);
+                @include adaptive-value('right', 365, 158, 0, 1279, 768);
+                @include adaptive-value('width', 151, 99, 0, 1279, 768);
+                @include adaptive-value('height', 326, 215, 0, 1279, 768);
+            }
+        }
+
+        &--number {
+            z-index: 4;
+            @include adaptive-value('top', 388, 296, 0, 1920, 1440);
+            @include adaptive-value('right', 312, 212, 0, 1920, 1440);
+            @include adaptive-value('width', 374, 278, 0, 1920, 1440);
+            @include adaptive-value('height', 374, 278, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 296, 262.6, 0, 1439, 1280);
+                @include adaptive-value('right', 212, 182, 0, 1439, 1280);
+                @include adaptive-value('width', 278, 232, 0, 1439, 1280);
+                @include adaptive-value('height', 278, 232, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 262.6, 229, 0, 1279, 768);
+                @include adaptive-value('right', 182, 56, 0, 1279, 768);
+                @include adaptive-value('width', 232, 144, 0, 1279, 768);
+                @include adaptive-value('height', 232, 144, 0, 1279, 768);
+            }
+        }
+
+        &--family {
+            z-index: 3;
+            @include adaptive-value('top', 163, 128, 0, 1920, 1440);
+            @include adaptive-value('right', 198, 127, 0, 1920, 1440);
+            @include adaptive-value('width', 401, 298, 0, 1920, 1440);
+            @include adaptive-value('height', 324, 240, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 128, 122, 0, 1439, 1280);
+                @include adaptive-value('right', 127, 111, 0, 1439, 1280);
+                @include adaptive-value('width', 298, 249, 0, 1439, 1280);
+                @include adaptive-value('height', 240, 201, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 122, 138, 0, 1279, 768);
+                @include adaptive-value('right', 111, 62, 0, 1279, 768);
+                @include adaptive-value('width', 249, 164, 0, 1279, 768);
+                @include adaptive-value('height', 201, 133, 0, 1279, 768);
+            }
+        }
+
+        &--laptop {
+            z-index: 5;
+            @include adaptive-value('top', 624, 483, 0, 1920, 1440);
+            @include adaptive-value('right', 254, 180.5, 0, 1920, 1440);
+            @include adaptive-value('width', 115, 62.5, 0, 1920, 1440);
+            @include adaptive-value('height', 92, 50, 0, 1920, 1440);
+
+            @include vp-1439 {
+                @include adaptive-value('top', 483, 409, 0, 1439, 1280);
+                @include adaptive-value('right', 180.5, 156, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                display: none;
+            }
+        }
+
+        &--chair {
+            z-index: 2;
+            @include adaptive-value('top', 473, 352, 0, 1920, 1440);
+            @include adaptive-value('right', 893, 646.5, 0, 1920, 1440);
+            @include adaptive-value('width', 315, 234, 0, 1920, 1440);
+            @include adaptive-value('height', 167, 124, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 352, 313, 0, 1439, 1280);
+                @include adaptive-value('right', 646.5, 554, 0, 1439, 1280);
+                @include adaptive-value('width', 234, 210, 0, 1439, 1280);
+                @include adaptive-value('height', 124, 111, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                display: none;
+            }
+        }
+
+        &--catalog {
+            z-index: 2;
+            @include adaptive-value('top', 337, 251, 0, 1920, 1440);
+            @include adaptive-value('right', 1000, 725, 0, 1920, 1440);
+            @include adaptive-value('width', 80, 59.4, 0, 1920, 1440);
+            @include adaptive-value('height', 80, 59.4, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 251, 222, 0, 1439, 1280);
+                @include adaptive-value('right', 725, 625, 0, 1439, 1280);
+                @include adaptive-value('width', 59.4, 53.3, 0, 1439, 1280);
+                @include adaptive-value('height', 59.4, 53.3, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                display: none;
+            }
+        }
+
+        &--chair-big {
+            z-index: 1;
+            @include adaptive-value('top', 67, 50, 0, 1920, 1440);
+            @include adaptive-value('right', 669, 479, 0, 1920, 1440);
+            @include adaptive-value('width', 309, 230, 0, 1920, 1440);
+            @include adaptive-value('height', 645, 479, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 50, 42, 0, 1439, 1280);
+                @include adaptive-value('right', 479, 405, 0, 1439, 1280);
+                @include adaptive-value('width', 230, 206, 0, 1439, 1280);
+                @include adaptive-value('height', 479, 430, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 42, 79, 0, 1279, 768);
+                @include adaptive-value('right', 405, 182, 0, 1279, 768);
+                @include adaptive-value('width', 206, 121, 0, 1279, 768);
+                @include adaptive-value('height', 430, 252, 0, 1279, 768);
+            }
+        }
+
+        &--chair-filter {
+            z-index: 1;
+            @include adaptive-value('top', 164, 122, 0, 1920, 1440);
+            @include adaptive-value('right', 316, 217, 0, 1920, 1440);
+            @include adaptive-value('width', 309, 230, 0, 1920, 1440);
+            @include adaptive-value('height', 645, 479, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 122, 107, 0, 1439, 1280);
+                @include adaptive-value('right', 217, 169, 0, 1439, 1280);
+                @include adaptive-value('width', 230, 206, 0, 1439, 1280);
+                @include adaptive-value('height', 479, 430, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                @include adaptive-value('top', 107, 117, 0, 1279, 768);
+                @include adaptive-value('right', 169, 43.5, 0, 1279, 768);
+                @include adaptive-value('width', 206, 121, 0, 1279, 768);
+                @include adaptive-value('height', 430, 252, 0, 1279, 768);
+            }
+        }
+
+        &--banquet {
+            z-index: 2;
+            @include adaptive-value('top', 570, 424, 0, 1279, 768);
+            @include adaptive-value('right', 154, 96, 0, 1279, 768);
+            @include adaptive-value('width', 315, 234, 0, 1920, 1440);
+            @include adaptive-value('height', 100, 74, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 424, 377, 0, 1439, 1280);
+                @include adaptive-value('right', 96, 61, 0, 1439, 1280);
+                @include adaptive-value('width', 234, 210, 0, 1439, 1280);
+                @include adaptive-value('height', 74, 67, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                display: none;
+            }
+        }
+
+        &--place-order {
+            z-index: 2;
+            @include adaptive-value('top', 689, 513, 0, 1279, 768);
+            @include adaptive-value('right', 222, 147, 0, 1279, 768);
+            @include adaptive-value('width', 140, 104, 0, 1920, 1440);
+            @include adaptive-value('height', 40, 30, 0, 1920, 1440);
+            @include vp-1439 {
+                @include adaptive-value('top', 513, 457, 0, 1439, 1280);
+                @include adaptive-value('right', 147, 107, 0, 1439, 1280);
+                @include adaptive-value('width', 104, 93, 0, 1439, 1280);
+                @include adaptive-value('height', 30, 27, 0, 1439, 1280);
+            }
+            @include vp-1279 {
+                display: none;
+            }
+        }
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__description {
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
+        @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+        @include adaptive-value('max-width', 530, 464, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('font-size', 16, 15, 0, 1439, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1439, 768);
+            @include adaptive-value('max-width', 464, 320, 0, 1439, 768);
+        }
+    }
+
+    &__button {
+        @include adaptive-value('max-width', 242, 224, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('max-width', 224, 193, 0, 1439, 768);
+        }
+    }
+}
