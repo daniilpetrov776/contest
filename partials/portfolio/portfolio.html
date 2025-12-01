@@ -1,0 +1,45 @@
+{{#with portfolio}}
+<section class="portfolio" aria-labelledby="portfolio-title">
+    <div class="portfolio__container container">
+        <header class="portfolio__header">
+            <p class="portfolio__label">{{label}}</p>
+            <div class="portfolio__intro">
+                <h2 class="portfolio__title" id="portfolio-title">
+                    Аналитика, брендинг <br />
+                    и разработка для B2B
+                </h2>
+                <p class="portfolio__description portfolio__description--mobile">{{mobileDescription}}</p>
+                <p class="portfolio__description">{{description}}</p>
+            </div>
+        </header>
+
+        <div class="portfolio__grid-wrapper">
+            {{#each categories}}
+            <div class="portfolio__category">
+                <h3 class="portfolio__category-title">{{title}}</h3>
+                <ul class="portfolio__grid" role="list">
+                    {{#each items}}
+                    <li class="portfolio__item">
+                        <a class="portfolio__card" href="{{href}}">
+                            <div class="portfolio__image" aria-hidden="true">
+                                {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture"}}
+                                {{/if}}
+                            </div>
+                            <div class="portfolio__content">
+                                <h3 class="portfolio__card-title">{{title}}</h3>
+                                <p class="portfolio__card-meta">{{meta}}</p>
+                            </div>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="portfolio__footer">
+            <button class="portfolio__button button" type="button">{{button.text}}</button>
+        </div>
+    </div>
+</section>
+{{/with}}

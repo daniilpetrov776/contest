@@ -213,6 +213,12 @@
         @include vp-767 {
             grid-template-columns: repeat(2, 1fr);
             gap: size(24px);
+
+            &::before {
+                height: 50%;
+                bottom: unset;
+                top: 0;
+            }
         }
     }
 
