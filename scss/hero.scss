@@ -136,7 +136,6 @@
         min-width: size(225px);
         min-height: size(135px);
         max-width: 100%;
-        // max-height: 90vh;
         max-height: 120%;
         background: #000000;
         position: absolute;
@@ -192,6 +191,15 @@
         gap: 0 size(24px);
         align-items: start;
         position: relative;
+        @include adaptive-value('padding-bottom', 50, 40, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('padding-bottom', 40, 20, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('padding-bottom', 20, 15, 0, 767, 375);
+        }
 
         &::before {
             content: '';
@@ -219,6 +227,17 @@
                 bottom: unset;
                 top: 0;
             }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            background-color: #e4e4e4;
+            width: 100%;
+            height: size(1px);
+            transform: translateX(-50%);
         }
     }
 

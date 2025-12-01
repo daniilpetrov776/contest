@@ -15,11 +15,11 @@
 
         <div class="portfolio__grid-wrapper">
             {{#each categories}}
-            <div class="portfolio__category">
+            <div class="portfolio__category swiper">
                 <h3 class="portfolio__category-title">{{title}}</h3>
-                <ul class="portfolio__grid" role="list">
+                <ul class="portfolio__grid swiper-wrapper" role="list">
                     {{#each items}}
-                    <li class="portfolio__item">
+                    <li class="portfolio__item swiper-slide">
                         <a class="portfolio__card" href="{{href}}">
                             <div class="portfolio__image" aria-hidden="true">
                                 {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture"}}

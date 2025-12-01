@@ -195,3 +195,11 @@
         height: 100%;
     }
 }
+
+@mixin hover() {
+    @media (any-hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+}

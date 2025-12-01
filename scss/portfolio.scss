@@ -1,5 +1,25 @@
 .portfolio {
     background-color: $mainBackground;
+    @include adaptive-value('padding-top', 150, 130, 0, 1920, 1440);
+    @include vp-1439 {
+        @include adaptive-value('padding-top', 130, 80, 0, 1439, 768);
+    }
+    @include vp-767 {
+        @include adaptive-value('padding-top', 80, 70, 0, 767, 375);
+    }
+
+    &__container {
+        display: grid;
+        @include adaptive-value('gap', 90, 80, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('gap', 80, 60, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('gap', 60, 40, 0, 767, 375);
+        }
+    }
 
     &__header {
         display: flex;
@@ -8,6 +28,53 @@
         justify-content: space-between;
         gap: size(24px);
         min-height: size(170px);
+        position: relative;
+
+        @include adaptive-value('padding-top', 45, 40, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('padding-top', 40, 20, 0, 1439, 768);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            background-color: #e4e4e4;
+            width: 100%;
+            height: size(1px);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            background-color: #e4e4e4;
+            width: size(1px);
+            height: 100%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        @include vp-767 {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &__intro {
+        @include adaptive-value('max-width', 750, 550, 0, 1920, 1440);
+        @include adaptive-value('margin-right', 120, 100, 0, 1920, 1440);
+
+        @include vp-1439 {
+            margin: 0;
+            @include adaptive-value('max-width', 550, 344, 0, 1439, 768);
+            @include adaptive-value('margin-right', 120, 0, 0, 1439, 768);
+        }
     }
 
     &__label {
@@ -76,8 +143,29 @@
     }
 
     &__category {
+        @include vp-767 {
+            &.swiper {
+                overflow: hidden;
+                margin-bottom: size(24px);
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
         @media (min-width: $vp-768) {
             display: contents;
+        }
+    }
+
+    &__category {
+        @include vp-767 {
+            &:not(:first-child) {
+                .portfolio__category-title {
+                    @include adaptive-value('margin-top', 80, 70, 0, 767, 375);
+                }
+            }
         }
     }
 
@@ -101,17 +189,38 @@
         list-style: none;
 
         @include vp-767 {
-            display: grid;
-            grid-template-columns: 1fr;
-            margin-bottom: size(24px);
-
-            &:last-child {
+            &.swiper-wrapper {
+                display: flex;
                 margin-bottom: 0;
+            }
+
+            // Fallback для случая, когда swiper не инициализирован
+            &:not(.swiper-wrapper) {
+                display: grid;
+                grid-template-columns: 1fr;
+                margin-bottom: size(24px);
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
 
         @media (min-width: $vp-768) {
             display: contents;
+        }
+    }
+
+    &__item {
+        min-width: 0;
+
+        @include vp-767 {
+            &.swiper-slide {
+                width: 100%;
+                max-width: size(315px);
+                height: auto;
+                flex-shrink: 0;
+            }
         }
     }
 
@@ -126,11 +235,22 @@
         width: 100%;
         text-decoration: none;
         color: inherit;
-        overflow: hidden;
+        overflow: visible;
         @include adaptive-value('gap', 28, 24, 0, 1439, 768);
 
         @include vp-1439 {
             @include adaptive-value('gap', 24, 20, 0, 1439, 768);
+        }
+
+        @include hover {
+            .portfolio__image {
+                border-radius: size(70px);
+                transform: scale(1.01);
+
+                @include vp-1439 {
+                    border-radius: size(52px);
+                }
+            }
         }
     }
 
@@ -142,9 +262,14 @@
         justify-content: flex-start;
         align-self: flex-start;
         @include adaptive-value('gap', 12, 10, 0, 1920, 1440);
+        @include adaptive-value('padding-left', 25, 20, 0, 1920, 1440);
 
         @include vp-1439 {
             @include adaptive-value('gap', 10, 8, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('padding-left', 20, 15, 0, 767, 375);
         }
     }
 
@@ -154,6 +279,10 @@
         overflow: hidden;
         background-color: $black;
         aspect-ratio: 448 / 451;
+        transform-origin: center;
+        transition:
+            border-radius 0.3s $smooth,
+            transform 0.4s $smooth;
         @include adaptive-value('border-radius', 30, 20, 0, 1920, 1440);
         @include adaptive-value('max-width', 700, 447, 0, 1920, 1440);
         @include adaptive-value('max-height', 650, 450, 0, 1920, 1440);
@@ -201,14 +330,13 @@
     &__footer {
         display: flex;
         justify-content: center;
-        @include adaptive-value('margin-top', 100, 80, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('margin-top', 80, 50, 0, 1439, 768);
+            @include adaptive-value('margin-top', 20, 10, 0, 1439, 768);
         }
 
         @include vp-767 {
-            @include adaptive-value('margin-top', 50, 40, 0, 767, 375);
+            margin: 0;
         }
     }
 
