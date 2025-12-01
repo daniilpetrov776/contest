@@ -1,0 +1,50 @@
+.content {
+    padding: size(80px) 0;
+    background-color: $mainBackground;
+
+    &__wrapper {
+        max-width: 100%;
+    }
+
+    &__title {
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin: 0 0 size(40px);
+        @include adaptive-value('font-size', 48, 32, 0, $maxWidth, 1440);
+        @include adaptive-value('line-height', 60, 40, 0, $maxWidth, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 36, 28, 0, 1439, 768);
+            @include adaptive-value('line-height', 45, 35, 0, 1439, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('font-size', 32, 24, 0, 767, 375);
+            @include adaptive-value('line-height', 40, 30, 0, 767, 375);
+        }
+    }
+
+    &__text {
+        font-family: 'TT Commons Pro', Arial, sans-serif;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: $mainColor;
+        @include adaptive-value('font-size', 18, 16, 0, $maxWidth, 1440);
+        @include adaptive-value('line-height', 28, 24, 0, $maxWidth, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 16, 15, 0, 1439, 768);
+            @include adaptive-value('line-height', 24, 22, 0, 1439, 768);
+        }
+
+        p {
+            margin: 0 0 size(24px);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+

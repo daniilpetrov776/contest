@@ -3,7 +3,7 @@
     min-height: 100vh;
     padding: size(120px) 0 size(40px);
     display: flex;
-    align-items: center;
+    align-items: stretch;
     position: relative;
 
     &::after {
@@ -25,6 +25,13 @@
         @include vp-767 {
             width: 0;
         }
+    }
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     &__static-wrapper {
@@ -124,8 +131,13 @@
 
     &__video {
         display: flex;
-        min-height: size(230px);
-        width: size(456px);
+        width: var(--video-width, 23.75%);
+        height: var(--video-height, 12.5%);
+        min-width: size(225px);
+        min-height: size(135px);
+        max-width: 100%;
+        // max-height: 90vh;
+        max-height: 120%;
         background: #000000;
         position: absolute;
         top: size(154px);
@@ -133,7 +145,19 @@
         right: 50%;
         z-index: 2;
         transform: translateX(-50%);
+        overflow: hidden;
+        cursor: pointer;
         @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
+
+        @include vp-1439 {
+            min-width: size(416px);
+            min-height: size(226px);
+        }
+
+        @media #{$desktop-only} {
+            min-width: size(456px);
+            min-height: size(230px);
+        }
 
         @include vp-1439 {
             @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
@@ -144,12 +168,42 @@
         }
     }
 
+    &__video-element {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &--muted {
+            display: block;
+        }
+
+        &--sound {
+            display: none;
+        }
+    }
+
     &__footer {
         margin: size(110px) 0 0;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 0 size(24px);
         align-items: start;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            background-color: #e4e4e4;
+            width: size(1px);
+            height: 100%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
 
         @include vp-1439 {
             grid-template-columns: repeat(2, 1fr);

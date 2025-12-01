@@ -4,7 +4,10 @@
     <body>
         <div class="wrapper">
             {{> header/header }}
-            <main class="page">{{> hero/hero }}</main>
+            <main class="page">
+                {{> hero/hero }}
+                {{> content }}
+            </main>
             {{> footer }}
         </div>
         {{> js }}

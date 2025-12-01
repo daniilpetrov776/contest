@@ -2,6 +2,8 @@ export const heroContext = {
     video: {
         text: 'Only digital',
         icon: 'star', // Используем существующую иконку star
+        preview: '/images/video-preview.jpg', // Путь к preview изображению
+        alt: 'Video preview',
     },
     socials: [
         { number: '25', icon: 'socials-w', width: 25.85, height: 25.85, class: 'hero__socials-icon-wrapper--w' },
