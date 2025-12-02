@@ -1,3 +1,7 @@
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:meta';
+
 @mixin font($font_name, $file_name, $weight, $style) {
     @font-face {
         font-family: $font_name;
@@ -200,6 +204,82 @@
     @media (any-hover: hover) {
         &:hover {
             @content;
+        }
+    }
+}
+
+/**
+ * Миксин для создания теней (box-shadow)
+ *
+ * @param {number|list} $x - Смещение по горизонтали или массив теней
+ * @param {number} $y - Смещение по вертикали (по умолчанию: 0)
+ * @param {number} $blur - Размытие (по умолчанию: 0)
+ * @param {number} $spread - Распространение (по умолчанию: 0)
+ * @param {color} $color - Цвет тени (по умолчанию: rgba(0, 0, 0, 0.1))
+ * @param {number} $opacity - Прозрачность (0-1, по умолчанию: берется из $color или 0.1)
+ *
+ * @example
+ * // Простая тень
+ * @include shadow(0, 4, 12, 0, rgba(0, 0, 0, 0.1));
+ *
+ * @example
+ * // Тень с прозрачностью
+ * @include shadow(0, 1.06, 0.9, 0, #000000, 0.0383);
+ *
+ * @example
+ * // Множественные тени (передать массив)
+ * @include shadow((
+ *     rem(0) rem(1.06) rem(0.9) rem(0) rgba(0, 0, 0, 0.0383),
+ *     rem(0) rem(2.42) rem(2.05) rem(0) rgba(0, 0, 0, 0.0557)
+ * ));
+ *
+ * @example
+ * // Множественные тени через список параметров (каждая тень - отдельный список)
+ * @include shadow((0, 1.06, 0.9, 0, rgba(0, 0, 0, 0.0383)), (0, 2.42, 2.05, 0, rgba(0, 0, 0, 0.0557)));
+ */
+@mixin shadow($x: 0, $y: 0, $blur: 0, $spread: 0, $color: rgba(0, 0, 0, 0.1), $opacity: null) {
+    // Если передан массив теней (список списков или строка с тенями)
+    @if meta.type-of($x) == 'list' and list.length($x) > 0 {
+        // Проверяем, является ли первый элемент списком (множественные тени)
+        $firstItem: list.nth($x, 1);
+        @if meta.type-of($firstItem) == 'list' {
+            // Множественные тени переданы как список списков
+            $shadows: ();
+            @each $shadow in $x {
+                $shadowX: list.nth($shadow, 1);
+                $shadowY: list.nth($shadow, 2);
+                $shadowBlur: list.nth($shadow, 3);
+                $shadowSpread: list.nth($shadow, 4);
+                $shadowColor: list.nth($shadow, 5);
+                $shadowOpacity: if(list.length($shadow) > 5, list.nth($shadow, 6), null);
+
+                @if $shadowOpacity != null {
+                    $shadowColor: rgba(red($shadowColor), green($shadowColor), blue($shadowColor), $shadowOpacity);
+                }
+
+                $shadows: list.append(
+                    $shadows,
+                    rem($shadowX) rem($shadowY) rem($shadowBlur) rem($shadowSpread) $shadowColor,
+                    comma
+                );
+            }
+            & {
+                box-shadow: $shadows;
+            }
+        } @else {
+            // Одна тень передана как список значений
+            & {
+                box-shadow: $x;
+            }
+        }
+    } @else {
+        // Обычная тень с отдельными параметрами
+        @if $opacity != null {
+            $color: rgba(red($color), green($color), blue($color), $opacity);
+        }
+
+        & {
+            box-shadow: rem($x) rem($y) rem($blur) rem($spread) $color;
         }
     }
 }

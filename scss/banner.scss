@@ -4,6 +4,7 @@
     &__slide {
         background-color: $white;
         display: grid;
+        height: 100%;
         grid-template-columns: minmax(size(539px), 1fr) 2fr;
         @include adaptive-value('border-radius', 30, 30, 0, 1920, 1440);
         @include adaptive-value('padding-top', 120, 100, 0, 1920, 1440);
@@ -125,20 +126,35 @@
 
     &__image-wrapper {
         position: absolute;
+        @include adaptive-value('border-radius', 24, 16, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('border-radius', 20, 14, 0, 1439, 768);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('border-radius', 16, 12, 0, 1279, 768);
+        }
 
         &--building {
             z-index: 1;
+            @include adaptive-value('border-radius', 8.6, 6.4, 0, 1920, 1440);
+            @include shadow(0, 26.38, 49.42, 0, rgba(0, 0, 0, 0.161));
             @include adaptive-value('top', 431, 327, 0, 1920, 1440);
             @include adaptive-value('right', 796, 571, 0, 1920, 1440);
             @include adaptive-value('width', 376, 279, 0, 1920, 1440);
             @include adaptive-value('height', 261, 194, 0, 1920, 1440);
             @include vp-1439 {
+                @include adaptive-value('border-radius', 6.4, 5.3, 0, 1439, 1280);
+                @include shadow(0, 19.6, 36.73, 0, rgba(0, 0, 0, 0.161));
                 @include adaptive-value('top', 327, 289, 0, 1439, 1280);
                 @include adaptive-value('right', 571, 483, 0, 1439, 1280);
                 @include adaptive-value('width', 279, 234, 0, 1439, 1280);
                 @include adaptive-value('height', 194, 163, 0, 1439, 1280);
             }
             @include vp-1279 {
+                @include adaptive-value('border-radius', 5.3, 3.3, 0, 1279, 768);
+                @include shadow(0, 16.41, 30.75, 0, rgba(0, 0, 0, 0.161));
                 @include adaptive-value('top', 289, 236, 0, 1279, 768);
                 @include adaptive-value('right', 483, 206, 0, 1279, 768);
                 @include adaptive-value('width', 234, 148, 0, 1279, 768);
@@ -148,17 +164,44 @@
 
         &--iphone {
             z-index: 2;
+            @include shadow(
+                (
+                    (0, 0.79, 0.67, 0, rgba(0, 0, 0, 0.039)),
+                    (0, 1.79, 1.53, 0, rgba(0, 0, 0, 0.055)),
+                    (0, 3.12, 2.65, 0, rgba(0, 0, 0, 0.071)),
+                    (0, 47.05, 33.68, 0, rgba(0, 0, 0, 0.141))
+                )
+            );
+            @include adaptive-value('border-radius', 29, 21.6, 0, 1920, 1440);
             @include adaptive-value('top', 86, 71, 0, 1920, 1440);
             @include adaptive-value('right', 605.5, 430, 0, 1920, 1440);
             @include adaptive-value('width', 242, 180, 0, 1920, 1440);
             @include adaptive-value('height', 524, 390, 0, 1920, 1440);
             @include vp-1439 {
+                @include shadow(
+                    (
+                        (0, 0.66, 0.56, 0, rgba(0, 0, 0, 0.039)),
+                        (0, 1.5, 1.28, 0, rgba(0, 0, 0, 0.055)),
+                        (0, 2.61, 2.22, 0, rgba(0, 0, 0, 0.071)),
+                        (0, 39.4, 28.2, 0, rgba(0, 0, 0, 0.141))
+                    )
+                );
+                @include adaptive-value('border-radius', 21.6, 18, 0, 1439, 1280);
                 @include adaptive-value('top', 71, 75, 0, 1439, 1280);
                 @include adaptive-value('right', 430, 365, 0, 1439, 1280);
                 @include adaptive-value('width', 180, 151, 0, 1439, 1280);
                 @include adaptive-value('height', 390, 326, 0, 1439, 1280);
             }
             @include vp-1279 {
+                @include shadow(
+                    (
+                        (0, 0.44, 0.37, 0, rgba(0, 0, 0, 0.039)),
+                        (0, 0.99, 0.84, 0, rgba(0, 0, 0, 0.055)),
+                        (0, 1.72, 1.46, 0, rgba(0, 0, 0, 0.071)),
+                        (0, 25.95, 18.58, 0, rgba(0, 0, 0, 0.141))
+                    )
+                );
+                @include adaptive-value('border-radius', 18, 12, 0, 1279, 768);
                 @include adaptive-value('top', 75, 66, 0, 1279, 768);
                 @include adaptive-value('right', 365, 158, 0, 1279, 768);
                 @include adaptive-value('width', 151, 99, 0, 1279, 768);
@@ -168,17 +211,23 @@
 
         &--number {
             z-index: 4;
+            @include adaptive-value('border-radius', 31, 23, 0, 1920, 1440);
+            @include shadow(0, 32.83, 33.68, 0, rgba(0, 0, 0, 0.122));
             @include adaptive-value('top', 388, 296, 0, 1920, 1440);
             @include adaptive-value('right', 312, 212, 0, 1920, 1440);
             @include adaptive-value('width', 374, 278, 0, 1920, 1440);
             @include adaptive-value('height', 374, 278, 0, 1920, 1440);
             @include vp-1439 {
+                @include adaptive-value('border-radius', 23, 19.5, 0, 1439, 1280);
+                @include shadow(0, 32.83, 33.68, 0, rgba(0, 0, 0, 0.122));
                 @include adaptive-value('top', 296, 262.6, 0, 1439, 1280);
                 @include adaptive-value('right', 212, 182, 0, 1439, 1280);
                 @include adaptive-value('width', 278, 232, 0, 1439, 1280);
                 @include adaptive-value('height', 278, 232, 0, 1439, 1280);
             }
             @include vp-1279 {
+                @include adaptive-value('border-radius', 19.5, 12, 0, 1279, 768);
+                @include shadow(0, 17.03, 17.47, 0, rgba(0, 0, 0, 0.122));
                 @include adaptive-value('top', 262.6, 229, 0, 1279, 768);
                 @include adaptive-value('right', 182, 56, 0, 1279, 768);
                 @include adaptive-value('width', 232, 144, 0, 1279, 768);
@@ -224,11 +273,15 @@
 
         &--chair {
             z-index: 2;
+            @include adaptive-value('border-radius', 20, 14.8, 0, 1920, 1440);
+            @include shadow(0, 7.43, 14.86, 0, rgba(0, 0, 0, 0.051));
             @include adaptive-value('top', 473, 352, 0, 1920, 1440);
             @include adaptive-value('right', 893, 646.5, 0, 1920, 1440);
             @include adaptive-value('width', 315, 234, 0, 1920, 1440);
             @include adaptive-value('height', 167, 124, 0, 1920, 1440);
             @include vp-1439 {
+                @include adaptive-value('border-radius', 14.8, 13.3, 0, 1439, 1280);
+                @include shadow(0, 6.67, 13.33, 0, rgba(0, 0, 0, 0.051));
                 @include adaptive-value('top', 352, 313, 0, 1439, 1280);
                 @include adaptive-value('right', 646.5, 554, 0, 1439, 1280);
                 @include adaptive-value('width', 234, 210, 0, 1439, 1280);
@@ -241,11 +294,15 @@
 
         &--catalog {
             z-index: 2;
+            @include adaptive-value('border-radius', 30, 30, 0, 1920, 1440);
+            @include shadow(0, 7.43, 14.86, 0, rgba(0, 0, 0, 0.051));
             @include adaptive-value('top', 337, 251, 0, 1920, 1440);
             @include adaptive-value('right', 1000, 725, 0, 1920, 1440);
             @include adaptive-value('width', 80, 59.4, 0, 1920, 1440);
             @include adaptive-value('height', 80, 59.4, 0, 1920, 1440);
             @include vp-1439 {
+                @include shadow(0, 6.67, 13.33, 0, rgba(0, 0, 0, 0.051));
+                @include adaptive-value('border-radius', 30, 25, 0, 1439, 1280);
                 @include adaptive-value('top', 251, 222, 0, 1439, 1280);
                 @include adaptive-value('right', 725, 625, 0, 1439, 1280);
                 @include adaptive-value('width', 59.4, 53.3, 0, 1439, 1280);
@@ -258,17 +315,20 @@
 
         &--chair-big {
             z-index: 1;
+            @include adaptive-value('border-radius', 38, 28, 0, 1920, 1440);
             @include adaptive-value('top', 67, 50, 0, 1920, 1440);
             @include adaptive-value('right', 669, 479, 0, 1920, 1440);
             @include adaptive-value('width', 309, 230, 0, 1920, 1440);
             @include adaptive-value('height', 645, 479, 0, 1920, 1440);
             @include vp-1439 {
+                @include adaptive-value('border-radius', 28, 25, 0, 1439, 1280);
                 @include adaptive-value('top', 50, 42, 0, 1439, 1280);
                 @include adaptive-value('right', 479, 405, 0, 1439, 1280);
                 @include adaptive-value('width', 230, 206, 0, 1439, 1280);
                 @include adaptive-value('height', 479, 430, 0, 1439, 1280);
             }
             @include vp-1279 {
+                @include adaptive-value('border-radius', 25, 15, 0, 1279, 768);
                 @include adaptive-value('top', 42, 79, 0, 1279, 768);
                 @include adaptive-value('right', 405, 182, 0, 1279, 768);
                 @include adaptive-value('width', 206, 121, 0, 1279, 768);
@@ -278,17 +338,20 @@
 
         &--chair-filter {
             z-index: 1;
+            @include adaptive-value('border-radius', 38, 28, 0, 1920, 1440);
             @include adaptive-value('top', 164, 122, 0, 1920, 1440);
             @include adaptive-value('right', 316, 217, 0, 1920, 1440);
             @include adaptive-value('width', 309, 230, 0, 1920, 1440);
             @include adaptive-value('height', 645, 479, 0, 1920, 1440);
             @include vp-1439 {
+                @include adaptive-value('border-radius', 28, 25, 0, 1439, 1280);
                 @include adaptive-value('top', 122, 107, 0, 1439, 1280);
                 @include adaptive-value('right', 217, 169, 0, 1439, 1280);
                 @include adaptive-value('width', 230, 206, 0, 1439, 1280);
                 @include adaptive-value('height', 479, 430, 0, 1439, 1280);
             }
             @include vp-1279 {
+                @include adaptive-value('border-radius', 25, 15, 0, 1279, 768);
                 @include adaptive-value('top', 107, 117, 0, 1279, 768);
                 @include adaptive-value('right', 169, 43.5, 0, 1279, 768);
                 @include adaptive-value('width', 206, 121, 0, 1279, 768);
@@ -298,11 +361,13 @@
 
         &--banquet {
             z-index: 2;
-            @include adaptive-value('top', 570, 424, 0, 1279, 768);
-            @include adaptive-value('right', 154, 96, 0, 1279, 768);
+            @include shadow(0, 7.43, 14.86, 0, rgba(0, 0, 0, 0.051));
+            @include adaptive-value('top', 570, 424, 0, 1920, 1440);
+            @include adaptive-value('right', 154, 96, 0, 1920, 1440);
             @include adaptive-value('width', 315, 234, 0, 1920, 1440);
             @include adaptive-value('height', 100, 74, 0, 1920, 1440);
             @include vp-1439 {
+                @include shadow(0, 6.67, 13.33, 0, rgba(0, 0, 0, 0.051));
                 @include adaptive-value('top', 424, 377, 0, 1439, 1280);
                 @include adaptive-value('right', 96, 61, 0, 1439, 1280);
                 @include adaptive-value('width', 234, 210, 0, 1439, 1280);
@@ -315,11 +380,13 @@
 
         &--place-order {
             z-index: 2;
-            @include adaptive-value('top', 689, 513, 0, 1279, 768);
-            @include adaptive-value('right', 222, 147, 0, 1279, 768);
+            @include shadow(0, 7.43, 14.86, 0, rgba(0, 0, 0, 0.051));
+            @include adaptive-value('top', 689, 513, 0, 1920, 1440);
+            @include adaptive-value('right', 222, 147, 0, 1920, 1440);
             @include adaptive-value('width', 140, 104, 0, 1920, 1440);
             @include adaptive-value('height', 40, 30, 0, 1920, 1440);
             @include vp-1439 {
+                @include shadow(0, 6.67, 13.33, 0, rgba(0, 0, 0, 0.051));
                 @include adaptive-value('top', 513, 457, 0, 1439, 1280);
                 @include adaptive-value('right', 147, 107, 0, 1439, 1280);
                 @include adaptive-value('width', 104, 93, 0, 1439, 1280);
