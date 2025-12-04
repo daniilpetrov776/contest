@@ -1,0 +1,85 @@
+{{#with footer}}
+<footer class="footer">
+    <div class="footer__container container">
+        <div class="footer__top">
+            <div class="footer__logo-wrapper">
+                <a class="footer__logo" href="{{logo.href}}" aria-label="{{logo.ariaLabel}}">
+                    {{svg src="/images/logo-long.svg" alt="Logo" class="footer__logo-img" width="188" height="30" }}
+                </a>
+            </div>
+            <button class="footer__button button" type="button">Начать проект</button>
+            {{#if contacts}}
+            <div class="footer__column-wrapper">
+                <p class="footer__description">
+                    Создаем качественный digital-продукт на базе <br />стратегии, креатива и технологий
+                </p>
+                <div class="footer__contacts">
+                    <ul class="footer__contacts-list" role="list">
+                        {{#if contacts.email}}
+                        <li class="footer__contacts-item">
+                            <a class="footer__contacts-link" href="{{contacts.email.href}}">{{contacts.email.value}}</a>
+                        </li>
+                        {{/if}} {{#if contacts.phone}}
+                        <li class="footer__contacts-item">
+                            <a class="footer__contacts-link" href="{{contacts.phone.href}}">{{contacts.phone.value}}</a>
+                        </li>
+                        {{/if}} {{#if contacts.telegram}}
+                        <li class="footer__contacts-item">
+                            <span class="footer__contacts-label">{{contacts.telegram.tip}}</span>
+                            <a
+                                class="footer__contacts-link{{#if contacts.telegram.class}} {{contacts.telegram.class}}{{/if}}"
+                                href="{{contacts.telegram.href}}"
+                            >
+                                {{#if contacts.telegram.icon}} {{sprite name=contacts.telegram.icon
+                                class="footer__contacts-icon" width="16" height="16"}} {{contacts.telegram.label}}
+                                {{/if}}
+                            </a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}} {{#if social}}
+            <h3 class="footer__socials-title visually-hidden">{{social.title}}</h3>
+            <ul class="socials footer__socials" role="list">
+                {{#each social.items}}
+                <li class="socials__item">
+                    <a
+                        class="socials__link"
+                        href="{{href}}"
+                        aria-label="{{ariaLabel}}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><div class="socials__icon-wrapper secondary-button">{{name}}</div>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}} {{#if copyright}}
+            <p class="footer__copyright">{{copyright.text}}</p>
+            {{/if}} {{#if about}}
+            <div class="footer__about about-links">
+                <div class="about-links__list">
+                    {{#each about.items}}
+                    <a href="{{href}}" class="about-links__link secondary-button secondary-button--strict">{{text}}</a>
+                    {{/each}}
+                </div>
+
+                <p class="about-links__description">
+                    Презентация <br />
+                    компании
+                </p>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="footer__bottom">
+            <h2 class="footer__title" data-scroll-animation="from-down, 150px, 1.3, 0.15">
+                сreative <br />
+                digital <br />production
+            </h2>
+            <p class="footer__policy" data-scroll-animation="from-down, 20px, 1.3, 0.1">{{policy.title}}</p>
+        </div>
+    </div>
+</footer>
+{{/with}}

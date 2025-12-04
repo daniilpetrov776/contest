@@ -8,12 +8,14 @@ import { headerContext } from './partials/header/header.data'
 import { heroContext } from './partials/hero/hero.data'
 import { portfolioContext } from './partials/portfolio/portfolio.data'
 import { bannerContext } from './partials/banner/banner.data'
+import { footerContext } from './partials/footer/footer.data'
 
 const templateContext = {
     header: headerContext,
     hero: heroContext,
     portfolio: portfolioContext,
     banner: bannerContext,
+    footer: footerContext,
 }
 
 export default defineConfig({

@@ -1,11 +1,22 @@
 .socials {
-    &__icon-wrapper {
-        min-height: size(48px);
-        width: size(48px);
-        background-color: $white;
-        border-radius: size(12px);
+    display: flex;
+    flex-flow: wrap column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: size(10px);
+
+    &__link {
         display: flex;
-        justify-content: center;
+        flex-flow: wrap row;
         align-items: center;
+        justify-content: space-between;
+        gap: size(10px);
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &__icon-wrapper {
+        flex-shrink: 0;
     }
 }

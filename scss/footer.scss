@@ -1,1 +1,305 @@
-// Footer
+.footer {
+    @include adaptive-value('padding-bottom', 40, 30, 0, 1920, 1440);
+    @include vp-1439 {
+        @include adaptive-value('padding-bottom', 30, 28, 0, 1439, 1280);
+    }
+    @include vp-1279 {
+        @include adaptive-value('padding-bottom', 28, 24, 0, 1279, 768);
+    }
+    @include vp-767 {
+        @include adaptive-value('padding-bottom', 24, 20, 0, 767, 375);
+    }
+    &__container {
+        display: flex;
+        flex-flow: wrap column;
+        justify-content: flex-start;
+        @include vp-1439 {
+            @include adaptive-value('gap', 25, 20, 0, 1439, 768);
+        }
+        @include vp-1279 {
+            @include adaptive-value('gap', 20, 15, 0, 1279, 768);
+        }
+        @include vp-767 {
+            @include adaptive-value('gap', 15, 10, 0, 767, 375);
+        }
+    }
+    .footer__socials {
+        flex-flow: wrap row;
+        justify-content: flex-start;
+        max-width: size(300px);
+        grid-column: 1 / 2;
+        @include adaptive-value('margin-top', 111, 91, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('margin-top', 91, 114, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            max-width: size(207px);
+            gap: size(5px);
+            @include adaptive-value('margin-top', 114, 32, 0, 1279, 768);
+        }
+        @include vp-767 {
+            @include adaptive-value('margin-top', 32, 40, 0, 767, 375);
+        }
+    }
+
+    &__top {
+        display: grid;
+        align-items: start;
+        justify-content: space-between;
+        grid-template-columns: minmax(max-content, 0.55fr) minmax(max-content, size(373px)) minmax(
+                max-content,
+                size(188px)
+            );
+        @include adaptive-value('padding-top', 51, 50, 0, 1920, 1440);
+        @include vp-1439 {
+            grid-template-columns: minmax(max-content, 1fr) minmax(max-content, size(373px)) minmax(
+                    max-content,
+                    size(154px)
+                );
+            column-gap: size(63px);
+            @include adaptive-value('padding-top', 50, 30, 0, 1439, 768);
+        }
+        @include vp-1279 {
+            grid-template-columns: minmax(max-content, size(207px)) minmax(max-content, size(344px));
+        }
+        @include vp-767 {
+            grid-template-columns: 1fr;
+            @include adaptive-value('padding-top', 30, 25, 0, 767, 375);
+        }
+    }
+
+    &__column-wrapper {
+        grid-row: span 2;
+
+        @include vp-1279 {
+            grid-row: 1 / 4;
+        }
+
+        @include vp-767 {
+            grid-row: unset;
+        }
+    }
+
+    &__logo-wrapper {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        @include vp-1279 {
+            grid-column: 1 / 2;
+            margin: 0 0 size(20px);
+        }
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__button {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        max-width: size(287px);
+
+        @include vp-1439 {
+            max-width: size(230px);
+        }
+
+        @include vp-1279 {
+            grid-row: unset;
+            max-width: unset;
+        }
+    }
+
+    &__description {
+        grid-column: 2 / 3;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
+        @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+        }
+        @include vp-767 {
+            grid-column: unset;
+            display: none;
+        }
+    }
+
+    &__contacts {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        @include adaptive-value('margin-top', 40, 32, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('margin-top', 32, 28, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('margin-top', 28, 24, 0, 1279, 768);
+        }
+        @include vp-767 {
+            @include adaptive-value('margin-top', 24, 40, 0, 767, 375);
+            grid-column: unset;
+        }
+    }
+
+    &__contacts-list {
+        @include vp-767 {
+            display: flex;
+            gap: size(15px);
+            flex-flow: wrap column;
+        }
+    }
+
+    &__contacts-item {
+        display: flex;
+        flex-flow: wrap column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: size(5px);
+
+        &:last-child {
+            @include adaptive-value('margin-top', 30, 24, 0, 1920, 1440);
+
+            @include vp-1279 {
+                @include adaptive-value('margin-top', 24, 20, 0, 1279, 768);
+            }
+            @include vp-767 {
+                @include adaptive-value('margin-top', 20, 9, 0, 767, 375);
+            }
+        }
+    }
+
+    &__contacts-link {
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        text-decoration: underline;
+        text-underline-offset: size(5px);
+        @include adaptive-value('font-size', 24, 22, 0, 1920, 1440);
+        @include adaptive-value('line-height', 24 * 1.2, 22 * 1.2, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 22, 18, 0, 1439, 768);
+            @include adaptive-value('line-height', 22 * 1.2, 18 * 1.2, 0, 1439, 768);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 18, 16, 0, 1279, 768);
+            @include adaptive-value('line-height', 18 * 1.2, 16 * 1.2, 0, 1279, 768);
+        }
+
+        &--static {
+            font-size: size(24px);
+            line-height: size(24px) * 1.2;
+        }
+    }
+
+    &__contacts-label {
+        font-weight: 500;
+        color: $gray;
+        letter-spacing: -0.04em;
+        font-family: 'TT Runs', Arial, sans-serif;
+        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__contacts-icon {
+        display: none;
+
+        @include vp-767 {
+            display: inline-flex;
+            align-items: center;
+        }
+    }
+
+    &__copyright {
+        grid-column: 1 / 2;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        @include adaptive-value('margin-top', 126, 111, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('margin-top', 111, 71, 0, 1439, 1280);
+        }
+        @include vp-767 {
+            @include adaptive-value('margin-top', 71, 70, 0, 767, 375);
+        }
+        @include adaptive-value('font-size', 20, 18, 0, 1920, 1440);
+        @include adaptive-value('line-height', 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 18, 16, 0, 1439, 768);
+            @include adaptive-value('line-height', 18 * 1.25, 16 * 1.25, 0, 1439, 768);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 16 * 1.25, 15 * 1.25, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('font-size', 15, 13, 0, 767, 375);
+            @include adaptive-value('line-height', 15 * 1.25, 13 * 1.25, 0, 767, 375);
+        }
+    }
+
+    &__about {
+        grid-column: 2 / 3;
+        align-self: end;
+        @include vp-767 {
+            grid-column: unset;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        flex-flow: wrap column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: size(5px);
+    }
+
+    &__policy {
+        overflow: hidden;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: $gray;
+        @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
+        @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+        }
+    }
+
+    &__title {
+        br {
+            display: none;
+        }
+        overflow: hidden;
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        @include adaptive-value('font-size', 116, 87, 0, 1920, 1440);
+        @include adaptive-value('line-height', 116 * 1.2, 87 * 1.2, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 87, 78, 0, 1439, 1280);
+            @include adaptive-value('line-height', 87 * 1.2, 78 * 1.2, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 78, 46, 0, 1279, 768);
+            @include adaptive-value('line-height', 78 * 1.2, 46 * 1.2, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            br {
+                display: block;
+            }
+            @include adaptive-value('font-size', 46, 33, 0, 767, 375);
+            @include adaptive-value('line-height', 46 * 1.2, 33 * 1.2, 0, 767, 375);
+        }
+    }
+}

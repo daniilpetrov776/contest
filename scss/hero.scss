@@ -52,15 +52,13 @@
     }
 
     &__socials {
-        display: flex;
-        flex-flow: wrap column;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: size(10px);
-
         @include vp-1439 {
             display: none;
         }
+    }
+
+    &__socials-item {
+        width: 100%;
     }
 
     &__socials-icon-wrapper {
@@ -96,18 +94,8 @@
         }
     }
 
-    &__socials-item {
-        width: 100%;
-    }
-
     &__socials-link {
-        display: flex;
-        flex-flow: wrap row;
-        align-items: center;
-        justify-content: space-between;
         gap: size(10px);
-        width: 100%;
-        font-family: 'TT Runs', Arial, sans-serif;
     }
 
     &__title {

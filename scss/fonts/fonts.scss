@@ -10,7 +10,6 @@ $font-path: '../assets/fonts/pc';
     }
 }
 
-// TT Commons Pro
 @include font-face('TT Commons Pro', 'TT Commons Pro Trial Thin', 100);
 @include font-face('TT Commons Pro', 'TT Commons Pro Trial Thin Italic', 100, italic);
 @include font-face('TT Commons Pro', 'TT Commons Pro Trial ExtraLight', 200);
@@ -32,7 +31,6 @@ $font-path: '../assets/fonts/pc';
 @include font-face('TT Commons Pro', 'TT Commons Pro Trial Black', 900);
 @include font-face('TT Commons Pro', 'TT Commons Pro Trial Black Italic', 900, italic);
 
-// TT Runs
 @include font-face('TT Runs', 'TT Runs Trial Thin', 100);
 @include font-face('TT Runs', 'TT Runs Trial Thin Italic', 100, italic);
 @include font-face('TT Runs', 'TT Runs Trial ExtraLight', 200);
