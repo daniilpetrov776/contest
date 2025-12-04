@@ -11,6 +11,9 @@
         font-weight: 600;
         letter-spacing: -0.03em;
         margin: 0 0 size(40px);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         @include adaptive-value('font-size', 48, 32, 0, $maxWidth, 1440);
         @include adaptive-value('line-height', 60, 40, 0, $maxWidth, 1440);
 
@@ -30,6 +33,9 @@
         font-weight: 400;
         letter-spacing: -0.02em;
         color: $mainColor;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         @include adaptive-value('font-size', 18, 16, 0, $maxWidth, 1440);
         @include adaptive-value('line-height', 28, 24, 0, $maxWidth, 1440);
 

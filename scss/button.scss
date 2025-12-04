@@ -10,6 +10,9 @@
     justify-content: center;
     flex-flow: wrap;
     letter-spacing: -0.03em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
     @include adaptive-value('font-size', 18, 14, 0, 1920, 1440);
     @include adaptive-value('line-height', 18 * 1.2, 14 * 1.2, 0, 1920, 1440);
     @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);

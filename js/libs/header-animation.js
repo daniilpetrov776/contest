@@ -30,7 +30,7 @@ function initHeaderAnimation() {
     let isHeaderVisible = true
 
     const handleScroll = () => {
-        const isDesktop = window.innerWidth >= 1440
+        const isDesktop = window.innerWidth >= 1280
 
         if (!isDesktop) {
             return

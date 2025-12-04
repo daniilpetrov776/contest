@@ -46,21 +46,18 @@
         display: grid;
         align-items: start;
         justify-content: space-between;
-        grid-template-columns: minmax(max-content, 0.55fr) minmax(max-content, size(373px)) minmax(
-                max-content,
-                size(188px)
-            );
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        grid-template-columns: minmax(0, 0.55fr) minmax(0, size(373px)) minmax(0, size(188px));
         @include adaptive-value('padding-top', 51, 50, 0, 1920, 1440);
         @include vp-1439 {
-            grid-template-columns: minmax(max-content, 1fr) minmax(max-content, size(373px)) minmax(
-                    max-content,
-                    size(154px)
-                );
+            grid-template-columns: minmax(0, 1fr) minmax(0, size(373px)) minmax(0, size(154px));
             column-gap: size(63px);
             @include adaptive-value('padding-top', 50, 30, 0, 1439, 768);
         }
         @include vp-1279 {
-            grid-template-columns: minmax(max-content, size(207px)) minmax(max-content, size(344px));
+            grid-template-columns: minmax(0, size(207px)) minmax(0, size(344px));
         }
         @include vp-767 {
             grid-template-columns: 1fr;
@@ -70,6 +67,9 @@
 
     &__column-wrapper {
         grid-row: span 2;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
 
         @include vp-1279 {
             grid-row: 1 / 4;
@@ -109,8 +109,14 @@
 
     &__description {
         grid-column: 2 / 3;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
         font-weight: 400;
         letter-spacing: -0.02em;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
 
@@ -127,6 +133,9 @@
     &__contacts {
         grid-column: 2 / 3;
         grid-row: 2 / 3;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
         @include adaptive-value('margin-top', 40, 32, 0, 1920, 1440);
         @include vp-1439 {
             @include adaptive-value('margin-top', 32, 28, 0, 1439, 1280);
@@ -172,6 +181,9 @@
         letter-spacing: -0.01em;
         text-decoration: underline;
         text-underline-offset: size(5px);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         @include adaptive-value('font-size', 24, 22, 0, 1920, 1440);
         @include adaptive-value('line-height', 24 * 1.2, 22 * 1.2, 0, 1920, 1440);
 
@@ -264,6 +276,9 @@
         font-weight: 400;
         letter-spacing: -0.02em;
         color: $gray;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
 
@@ -277,21 +292,33 @@
         br {
             display: none;
         }
+        display: flex;
+        align-items: center;
+        flex-flow: wrap row;
+
         overflow: hidden;
+        max-width: 100%;
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
         font-family: 'TT Runs', Arial, sans-serif;
         font-weight: 700;
         letter-spacing: -0.02em;
         @include adaptive-value('font-size', 116, 87, 0, 1920, 1440);
         @include adaptive-value('line-height', 116 * 1.2, 87 * 1.2, 0, 1920, 1440);
+        @include adaptive-value('gap', 8, 5, 0, 1920, 1440);
 
         @include vp-1439 {
             @include adaptive-value('font-size', 87, 78, 0, 1439, 1280);
             @include adaptive-value('line-height', 87 * 1.2, 78 * 1.2, 0, 1439, 1280);
+            @include adaptive-value('gap', 5, 4, 0, 1439, 768);
         }
 
         @include vp-1279 {
             @include adaptive-value('font-size', 78, 46, 0, 1279, 768);
             @include adaptive-value('line-height', 78 * 1.2, 46 * 1.2, 0, 1279, 768);
+            @include adaptive-value('gap', 4, 3, 0, 1279, 768);
         }
 
         @include vp-767 {
@@ -300,6 +327,7 @@
             }
             @include adaptive-value('font-size', 46, 33, 0, 767, 375);
             @include adaptive-value('line-height', 46 * 1.2, 33 * 1.2, 0, 767, 375);
+            @include adaptive-value('gap', 3, 2, 0, 767, 375);
         }
     }
 }

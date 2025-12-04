@@ -22,15 +22,15 @@
         justify-content: space-between;
         flex-flow: wrap row;
         align-items: center;
-        padding: 0 $desktop-padding;
+        padding: size(10px) $desktop-padding;
         min-height: size(60px);
 
         @include vp-1439 {
-            padding: 0 $tablet-padding;
+            padding: size(10px) $tablet-padding;
             min-height: size(52px);
         }
         @include vp-767 {
-            padding: 0 $mobile-padding;
+            padding: size(10px) $mobile-padding;
         }
     }
 
@@ -46,14 +46,18 @@
         flex-flow: wrap row;
         align-items: center;
         gap: size(32px);
+        max-width: 60%;
+    }
+
+    &__nav {
+        max-width: 90%;
     }
 
     &__menu {
-        display: none;
-
-        @media #{$desktop-only} {
-            display: flex;
-            gap: size(32px);
+        display: flex;
+        gap: size(32px);
+        @include vp-1279 {
+            display: none;
         }
     }
 
@@ -67,6 +71,7 @@
 
     &__star {
         display: flex;
+        max-width: 5%;
         align-items: center;
         gap: size(10px);
     }
@@ -75,13 +80,13 @@
         font-weight: 500;
         @include adaptive-value('font-size', 14, 10);
         @include adaptive-value('line-height', 14, 14);
-        @include vp-1439 {
+        @include vp-1279 {
             display: none;
         }
     }
 
     &__toggle {
-        @include vp-1439 {
+        @include vp-1279 {
             width: size(32px);
             height: size(32px);
             position: relative;
@@ -127,7 +132,7 @@
     &__star-img {
         width: size(36px);
         height: size(36px);
-        @include vp-1439 {
+        @include vp-1279 {
             opacity: 0;
         }
     }

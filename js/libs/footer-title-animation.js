@@ -56,7 +56,9 @@ function wrapWordsInSpans(element) {
                 const span = document.createElement('span')
                 span.textContent = word
                 span.style.display = 'inline-block'
-                span.style.whiteSpace = 'nowrap'
+                span.style.maxWidth = '100%'
+                span.style.overflowWrap = 'break-word'
+                span.style.wordBreak = 'break-word'
                 wordSpans.push(span)
 
                 element.appendChild(span)
