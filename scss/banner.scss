@@ -23,6 +23,34 @@
         }
     }
 
+    &__content {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        @include adaptive-value('gap', 40, 32, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('gap', 32, 28, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('gap', 28, 24, 0, 1279, 768);
+        }
+    }
+
+    &__content-bottom {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      @include adaptive-value('gap', 30, 24, 0, 1920, 1440);
+      @include vp-1439 {
+        @include adaptive-value('gap', 24, 24, 0, 1439, 1280);
+      }
+      @include vp-1279 {
+        @include adaptive-value('gap', 24, 12, 0, 1279, 768);
+      }
+    }
+
     &__type {
         font-family: 'TT Runs', 'Arial', sans-serif;
         font-weight: 600;

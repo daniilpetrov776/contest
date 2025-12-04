@@ -13,8 +13,10 @@
                         <div class="banner__title">
                             {{#if title.parts}}{{titleWithSprites title.parts}}{{else}}{{title}}{{/if}}
                         </div>
-                        <p class="banner__description">{{description}}</p>
-                        <a href="{{button.href}}" class="banner__button button">{{button.text}}</a>
+                        <div class="banner__content-bottom">
+                            <p class="banner__description">{{description}}</p>
+                            <a href="{{button.href}}" class="banner__button button">{{button.text}}</a>
+                        </div>
                     </div>
                     {{#if images}}
                     <div class="banner__images-wrapper">
