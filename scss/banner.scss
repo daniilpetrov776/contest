@@ -1,5 +1,18 @@
 .banner {
     background-color: $mainBackground;
+    @include adaptive-value('margin-top', 160, 70, 0, 1920, 1440);
+
+    @include vp-1439 {
+        margin: size(70px) 0 0;
+    }
+
+    @include vp-1279 {
+        margin: size(60px) 0 0;
+    }
+
+    @include vp-767 {
+        display: none;
+    }
 
     &__slide {
         background-color: $white;
@@ -38,17 +51,17 @@
     }
 
     &__content-bottom {
-      display: flex;
-      flex-flow: column wrap;
-      align-items: flex-start;
-      justify-content: flex-start;
-      @include adaptive-value('gap', 30, 24, 0, 1920, 1440);
-      @include vp-1439 {
-        @include adaptive-value('gap', 24, 24, 0, 1439, 1280);
-      }
-      @include vp-1279 {
-        @include adaptive-value('gap', 24, 12, 0, 1279, 768);
-      }
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        @include adaptive-value('gap', 30, 24, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('gap', 24, 24, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('gap', 24, 12, 0, 1279, 768);
+        }
     }
 
     &__type {
@@ -264,7 +277,7 @@
         }
 
         &--family {
-            z-index: 3;
+            z-index: 5;
             @include adaptive-value('top', 163, 128, 0, 1920, 1440);
             @include adaptive-value('right', 198, 127, 0, 1920, 1440);
             @include adaptive-value('width', 401, 298, 0, 1920, 1440);
@@ -454,5 +467,78 @@
         @include vp-1439 {
             @include adaptive-value('max-width', 224, 193, 0, 1439, 768);
         }
+    }
+
+    &__swiper {
+        position: relative;
+        &.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
+        > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
+            bottom: unset;
+            left: size(40px);
+            top: auto;
+            display: flex;
+            width: auto;
+            transform: none;
+            gap: 10px;
+            @include adaptive-value('bottom', 30, 40, 0, 1920, 1440);
+
+            @include vp-1439 {
+                @include adaptive-value('bottom', 40, 30, 0, 1439, 1280);
+                @include adaptive-value('left', 40, 30, 0, 1439, 768);
+            }
+
+            @include vp-1279 {
+                @include adaptive-value('bottom', 30, 25, 0, 1279, 768);
+            }
+
+            @include vp-767 {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .swiper-pagination-bullet {
+            width: size(10px);
+            height: size(10px);
+            border-radius: 50%;
+            background-color: rgba($black, 0.2);
+            opacity: 1;
+            transition:
+                background-color 0.3s ease,
+                transform 0.3s ease;
+            cursor: pointer;
+            margin: 0;
+            display: flex;
+
+            @include vp-1439 {
+                @include adaptive-value('width', 10, 8, 0, 1439, 1280);
+                @include adaptive-value('height', 10, 8, 0, 1439, 1280);
+            }
+
+            @include vp-767 {
+                @include adaptive-value('width', 8, 6, 0, 767, 375);
+                @include adaptive-value('height', 8, 6, 0, 767, 375);
+            }
+
+            &.banner__pagination-bullet--gray {
+                background-color: rgba($black, 0.3);
+            }
+
+            &.banner__pagination-bullet--light {
+                background-color: rgba($black, 0.1);
+            }
+
+            &.swiper-pagination-bullet-active {
+                background-color: $black;
+                transform: scale(1);
+            }
+
+            &:hover {
+                background-color: $black;
+            }
+        }
+    }
+
+    &__wrapper {
+        display: flex;
     }
 }

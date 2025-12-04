@@ -239,6 +239,7 @@ export const imageHelpers = {
                     const spriteHeight = part.sprite.height || 16
                     const spriteClass = part.sprite.class || ''
                     const spritePosition = part.sprite.position || 'after' // 'before' или 'after'
+                    const spriteSequence = part.sprite.sequence || part.sequence || ''
 
                     let iconHtml = ''
 
@@ -265,6 +266,7 @@ export const imageHelpers = {
                                 `height="${spriteHeight}"`,
                                 spriteAlt ? `alt="${spriteAlt}"` : '',
                                 imageSrc2x ? `srcset="${imageSrc} 1x, ${imageSrc2x} 2x"` : '',
+                                spriteSequence ? `data-sequence="${spriteSequence}"` : '',
                             ]
                                 .filter(Boolean)
                                 .join(' ')
@@ -278,6 +280,7 @@ export const imageHelpers = {
                                 spriteClass ? `class="${spriteClass}"` : '',
                                 `width="${spriteWidth}"`,
                                 `height="${spriteHeight}"`,
+                                spriteSequence ? `data-sequence="${spriteSequence}"` : '',
                             ]
                                 .filter(Boolean)
                                 .join(' ')
@@ -304,6 +307,7 @@ export const imageHelpers = {
                             `style="${style}"`,
                             `width="${spriteWidth}"`,
                             `height="${spriteHeight}"`,
+                            spriteSequence ? `data-sequence="${spriteSequence}"` : '',
                         ]
                             .filter(Boolean)
                             .join(' ')
@@ -322,6 +326,7 @@ export const imageHelpers = {
                             `height="${spriteHeight}"`,
                             imageAlt ? `alt="${imageAlt}"` : '',
                             imageSrc2x ? `srcset="${imageSrc} 1x, ${imageSrc2x} 2x"` : '',
+                            spriteSequence ? `data-sequence="${spriteSequence}"` : '',
                         ]
                             .filter(Boolean)
                             .join(' ')
@@ -335,6 +340,7 @@ export const imageHelpers = {
                     // Обрабатываем текст: может быть строкой или объектом с value и class
                     let text = ''
                     let textClass = ''
+                    const textSequence = part.textSequence || part.sequence || ''
 
                     if (part.text) {
                         if (typeof part.text === 'string') {
@@ -353,7 +359,13 @@ export const imageHelpers = {
                     const spriteBeforeText = objectKeys.indexOf('sprite') < objectKeys.indexOf('text')
 
                     if (iconHtml) {
-                        const textHtml = textClass ? `<span class="${textClass}">${text}</span>` : text
+                        const textAttrs = [
+                            textClass ? `class="${textClass}"` : '',
+                            textSequence ? `data-sequence="${textSequence}"` : '',
+                        ]
+                            .filter(Boolean)
+                            .join(' ')
+                        const textHtml = textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text)
                         // Убираем внешний span, оставляем элементы на одном уровне
                         if (spriteBeforeText || spritePosition === 'before') {
                             lineHtml += `${iconHtml} ${textHtml}`
@@ -361,12 +373,19 @@ export const imageHelpers = {
                             lineHtml += `${textHtml} ${iconHtml}`
                         }
                     } else if (text) {
-                        lineHtml += textClass ? `<span class="${textClass}">${text}</span>` : text
+                        const textAttrs = [
+                            textClass ? `class="${textClass}"` : '',
+                            textSequence ? `data-sequence="${textSequence}"` : '',
+                        ]
+                            .filter(Boolean)
+                            .join(' ')
+                        lineHtml += textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text)
                     }
                 } else if (part.text) {
                     // Текст без спрайта
                     let text = ''
                     let textClass = ''
+                    const textSequence = part.textSequence || part.sequence || ''
 
                     if (typeof part.text === 'string') {
                         text = part.text
@@ -376,7 +395,14 @@ export const imageHelpers = {
                         textClass = part.text.class || ''
                     }
 
-                    lineHtml += textClass ? `<span class="${textClass}">${text}</span>` : text
+                    const textAttrs = [
+                        textClass ? `class="${textClass}"` : '',
+                        textSequence ? `data-sequence="${textSequence}"` : '',
+                    ]
+                        .filter(Boolean)
+                        .join(' ')
+
+                    lineHtml += textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text)
                 }
             })
 

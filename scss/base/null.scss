@@ -33,6 +33,7 @@ html,
 body {
     min-width: $mobile-min-width;
     height: 100%;
+    background-color: $mainBackground;
     font-size: size-desktop($fz-default);
     @include vp-1919 {
         font-size: $fz-default;

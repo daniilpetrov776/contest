@@ -4,19 +4,22 @@ export const bannerContext = {
             type: 'недвижимость',
             title: {
                 parts: [
-                    { text: 'Формируем', textClass: 'banner__title-text', sprite: { name: 'wigle-icon', width: 44, height: 31, class: 'banner__title-icon banner__title-icon--wigle' } },
+                    { text: 'Формируем', textClass: 'banner__title-text', sprite: { name: 'wigle-icon', width: 44, height: 31, class: 'banner__title-icon banner__title-icon--wigle', sequence: 'scale, from-left, 0, 1.0, 1' }, textSequence: 'text, from-down, 20px, 1.2, 1' },
                     { br: true },
                     { sprite: { name: 'heart-icon.png', width: 40, height: 40, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
                     { sprite: { name: 'buildings-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--buildings', alt: 'buildings' }, text: 'ЖК', textClass: 'banner__title-text' },
                     { br: true },
-                    { sprite: { name: 'global-icon', width: 75, height: 62, class: 'banner__title-icon banner__title-icon--global' }, text: 'в digital - среде', textClass: 'banner__title-text banner__title-text--highlight' },
+                    { sprite: { name: 'global-icon', width: 75, height: 62, class: 'banner__title-icon banner__title-icon--global', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'в digital - среде', textClass: 'banner__title-text banner__title-text--highlight' },
                 ],
             },
+            titleSequence: 'text, from-down, 10px, 0.5, 2',
             description:
                 'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности бренда и сервисности.',
+            descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
                 text: 'Подробнее',
                 href: '#',
+                sequence: 'text, from-down, 20px, 1.5, 15',
             },
             images: [
                 {
@@ -26,6 +29,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-building@2x.png',
                     'class': 'banner__image banner__image--building',
                     'alt': 'building',
+                    'sequence': 'scale, from-down, 0, 1.2, 1',
                 },
                 {
                     'webp': '/images/banner/banner-iphone.webp',
@@ -34,6 +38,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-iphone@2x.png',
                     'class': 'banner__image banner__image--iphone',
                     'alt': 'iphone',
+                    'sequence': 'scale, from-down, 0, 1.0, 3',
                 },
                 {
                     'webp': '/images/banner/banner-number.webp',
@@ -42,6 +47,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-number@2x.png',
                     'class': 'banner__image banner__image--number',
                     'alt': 'number',
+                    'sequence': 'scale, from-down, 0, 1.1, 6',
                 },
                 {
                     'webp': '/images/banner/banner-family.webp',
@@ -50,6 +56,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-family@2x.png',
                     'class': 'banner__image banner__image--family',
                     'alt': 'family',
+                    'sequence': 'scale, from-down, 0, 1.1, 8',
                 },
                 {
                     'webp': '/images/banner/banner-laptop.webp',
@@ -58,6 +65,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-laptop@2x.png',
                     'class': 'banner__image banner__image--laptop',
                     'alt': 'laptop',
+                    'sequence': 'scale, from-down, 0, 1.4, 10',
                 },
             ],
         },
@@ -67,16 +75,19 @@ export const bannerContext = {
                 parts: [
                     { text: 'Проектируем', textClass: 'banner__title-text' },
                     { br: true },
-                    { sprite: { name: 'phone-icon', width: 56, height: 45, class: 'banner__title-icon banner__title-icon--phone' }, text: 'мобильные', textClass: 'banner__title-text' },
+                    { sprite: { name: 'phone-icon', width: 56, height: 45, class: 'banner__title-icon banner__title-icon--phone', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'мобильные', textClass: 'banner__title-text' },
                     { br: true },
                     { text: 'приложения', textClass: 'banner__title-text' },
                 ],
             },
+            titleSequence: 'text, from-down, 10px, 0.5, 2',
             description:
                 'Разрабатываем приложения для мобильных устройств, решая реальные запросы пользователей.',
+            descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
                 text: 'Подробнее',
                 href: '#',
+                sequence: 'slide, from-down, 20px, 1.2, 5',
             },
             images: [
                 {
@@ -86,6 +97,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-chair@2x.png',
                     'class': 'banner__image banner__image--chair',
                     'alt': 'chair',
+                    'sequence': 'scale, from-down, 0, 1.2, 3',
                 },
                 {
                     'webp': '/images/banner/banner-2-catalog.webp',
@@ -94,6 +106,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-catalog@2x.png',
                     'class': 'banner__image banner__image--catalog',
                     'alt': 'catalog',
+                    'sequence': 'scale, from-down, 0, 1.5, 4',
                 },
                 {
                     'webp': '/images/banner/banner-2-chair-big.webp',
@@ -102,6 +115,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-chair-big@2x.png',
                     'class': 'banner__image banner__image--chair-big',
                     'alt': 'chair-big',
+                    'sequence': 'scale, from-down, 0, 1.3, 1',
                 },
                 {
                     'webp': '/images/banner/banner-2-chair-filter.webp',
@@ -110,6 +124,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-chair-filter@2x.png',
                     'class': 'banner__image banner__image--chair-filter',
                     'alt': 'chair-filter',
+                    'sequence': 'scale, from-down, 0, 1.1, 2',
                 },
                 {
                     'webp': '/images/banner/banner-2-banquet.webp',
@@ -118,6 +133,7 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-banquet@2x.png',
                     'class': 'banner__image banner__image--banquet',
                     'alt': 'banquet',
+                    'sequence': 'scale, from-down, 0, 1.4, 10',
                 },
                 {
                     'webp': '/images/banner/banner-2-place-order.webp',
@@ -126,6 +142,153 @@ export const bannerContext = {
                     'jpeg@2x': '/images/banner/banner-2-place-order@2x.png',
                     'class': 'banner__image banner__image--place-order',
                     'alt': 'place-order',
+                    'sequence': 'scale, from-down, 0, 1.2, 16',
+                },
+            ],
+        },
+        {
+            type: 'недвижимость',
+            title: {
+                parts: [
+                    { text: 'Формируем', textClass: 'banner__title-text', sprite: { name: 'wigle-icon', width: 44, height: 31, class: 'banner__title-icon banner__title-icon--wigle', sequence: 'scale, from-left, 0, 1.0, 1' }, textSequence: 'text, from-down, 20px, 1.2, 1' },
+                    { br: true },
+                    { sprite: { name: 'heart-icon.png', width: 40, height: 40, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
+                    { sprite: { name: 'buildings-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--buildings', alt: 'buildings' }, text: 'ЖК', textClass: 'banner__title-text' },
+                    { br: true },
+                    { sprite: { name: 'global-icon', width: 75, height: 62, class: 'banner__title-icon banner__title-icon--global', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'в digital - среде', textClass: 'banner__title-text banner__title-text--highlight' },
+                ],
+            },
+            titleSequence: 'text, from-down, 10px, 0.5, 2',
+            description:
+              'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности бренда и сервисности.',
+            descriptionSequence: 'text, from-down, 30px, 1.0, 3',
+            button: {
+                text: 'Подробнее',
+                href: '#',
+                sequence: 'text, from-down, 20px, 1.5, 15',
+            },
+            images: [
+                {
+                    'webp': '/images/banner/banner-building.webp',
+                    'webp@2x': '/images/banner/banner-building@2x.webp',
+                    'jpeg': '/images/banner/banner-building.png',
+                    'jpeg@2x': '/images/banner/banner-building@2x.png',
+                    'class': 'banner__image banner__image--building',
+                    'alt': 'building',
+                    'sequence': 'scale, from-down, 0, 1.2, 1',
+                },
+                {
+                    'webp': '/images/banner/banner-iphone.webp',
+                    'webp@2x': '/images/banner/banner-iphone@2x.webp',
+                    'jpeg': '/images/banner/banner-iphone.png',
+                    'jpeg@2x': '/images/banner/banner-iphone@2x.png',
+                    'class': 'banner__image banner__image--iphone',
+                    'alt': 'iphone',
+                    'sequence': 'scale, from-down, 0, 1.0, 3',
+                },
+                {
+                    'webp': '/images/banner/banner-number.webp',
+                    'webp@2x': '/images/banner/banner-number@2x.webp',
+                    'jpeg': '/images/banner/banner-number.png',
+                    'jpeg@2x': '/images/banner/banner-number@2x.png',
+                    'class': 'banner__image banner__image--number',
+                    'alt': 'number',
+                    'sequence': 'scale, from-down, 0, 1.1, 6',
+                },
+                {
+                    'webp': '/images/banner/banner-family.webp',
+                    'webp@2x': '/images/banner/banner-family@2x.webp',
+                    'jpeg': '/images/banner/banner-family.png',
+                    'jpeg@2x': '/images/banner/banner-family@2x.png',
+                    'class': 'banner__image banner__image--family',
+                    'alt': 'family',
+                    'sequence': 'scale, from-down, 0, 1.1, 8',
+                },
+                {
+                    'webp': '/images/banner/banner-laptop.webp',
+                    'webp@2x': '/images/banner/banner-laptop@2x.webp',
+                    'jpeg': '/images/banner/banner-laptop.png',
+                    'jpeg@2x': '/images/banner/banner-laptop@2x.png',
+                    'class': 'banner__image banner__image--laptop',
+                    'alt': 'laptop',
+                    'sequence': 'scale, from-down, 0, 1.4, 10',
+                },
+            ],
+        },
+        {
+            type: 'mobile app',
+            title: {
+                parts: [
+                    { text: 'Проектируем', textClass: 'banner__title-text' },
+                    { br: true },
+                    { sprite: { name: 'phone-icon', width: 56, height: 45, class: 'banner__title-icon banner__title-icon--phone', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'мобильные', textClass: 'banner__title-text' },
+                    { br: true },
+                    { text: 'приложения', textClass: 'banner__title-text' },
+                ],
+            },
+            titleSequence: 'text, from-down, 10px, 0.5, 2',
+            description:
+              'Разрабатываем приложения для мобильных устройств, решая реальные запросы пользователей.',
+            descriptionSequence: 'text, from-down, 30px, 1.0, 3',
+            button: {
+                text: 'Подробнее',
+                href: '#',
+                sequence: 'slide, from-down, 20px, 1.2, 5',
+            },
+            images: [
+                {
+                    'webp': '/images/banner/banner-2-chair.webp',
+                    'webp@2x': '/images/banner/banner-2-chair@2x.webp',
+                    'jpeg': '/images/banner/banner-2-chair.png',
+                    'jpeg@2x': '/images/banner/banner-2-chair@2x.png',
+                    'class': 'banner__image banner__image--chair',
+                    'alt': 'chair',
+                    'sequence': 'scale, from-down, 0, 1.2, 3',
+                },
+                {
+                    'webp': '/images/banner/banner-2-catalog.webp',
+                    'webp@2x': '/images/banner/banner-2-catalog@2x.webp',
+                    'jpeg': '/images/banner/banner-2-catalog.png',
+                    'jpeg@2x': '/images/banner/banner-2-catalog@2x.png',
+                    'class': 'banner__image banner__image--catalog',
+                    'alt': 'catalog',
+                    'sequence': 'scale, from-down, 0, 1.5, 4',
+                },
+                {
+                    'webp': '/images/banner/banner-2-chair-big.webp',
+                    'webp@2x': '/images/banner/banner-2-chair-big@2x.webp',
+                    'jpeg': '/images/banner/banner-2-chair-big.png',
+                    'jpeg@2x': '/images/banner/banner-2-chair-big@2x.png',
+                    'class': 'banner__image banner__image--chair-big',
+                    'alt': 'chair-big',
+                    'sequence': 'scale, from-down, 0, 1.3, 1',
+                },
+                {
+                    'webp': '/images/banner/banner-2-chair-filter.webp',
+                    'webp@2x': '/images/banner/banner-2-chair-filter@2x.webp',
+                    'jpeg': '/images/banner/banner-2-chair-filter.png',
+                    'jpeg@2x': '/images/banner/banner-2-chair-filter@2x.png',
+                    'class': 'banner__image banner__image--chair-filter',
+                    'alt': 'chair-filter',
+                    'sequence': 'scale, from-down, 0, 1.1, 2',
+                },
+                {
+                    'webp': '/images/banner/banner-2-banquet.webp',
+                    'webp@2x': '/images/banner/banner-2-banquet@2x.webp',
+                    'jpeg': '/images/banner/banner-2-banquet.png',
+                    'jpeg@2x': '/images/banner/banner-2-banquet@2x.png',
+                    'class': 'banner__image banner__image--banquet',
+                    'alt': 'banquet',
+                    'sequence': 'scale, from-down, 0, 1.4, 10',
+                },
+                {
+                    'webp': '/images/banner/banner-2-place-order.webp',
+                    'webp@2x': '/images/banner/banner-2-place-order@2x.webp',
+                    'jpeg': '/images/banner/banner-2-place-order.png',
+                    'jpeg@2x': '/images/banner/banner-2-place-order@2x.png',
+                    'class': 'banner__image banner__image--place-order',
+                    'alt': 'place-order',
+                    'sequence': 'scale, from-down, 0, 1.2, 16',
                 },
             ],
         },

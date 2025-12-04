@@ -2,26 +2,26 @@
 <section class="banner">
     <div class="banner__container container">
         <div class="banner__swiper swiper">
-            <div class="banner__wrapper">
+            <div class="banner__wrapper swiper-wrapper">
                 {{#each slides}}
                 <div class="banner__slide swiper-slide">
                     <div class="banner__content">
-                        <p class="banner__type">{{type}}</p>
+                        <p class="banner__type" {{#if typeSequence}}data-sequence="{{typeSequence}}"{{/if}}>{{type}}</p>
                         <h2 class="visually-hidden">
                             {{#if title.parts}}{{extractText title.parts}}{{else}}{{title}}{{/if}}
                         </h2>
-                        <div class="banner__title">
+                        <div class="banner__title" {{#if titleSequence}}data-sequence="{{titleSequence}}"{{/if}}>
                             {{#if title.parts}}{{titleWithSprites title.parts}}{{else}}{{title}}{{/if}}
                         </div>
                         <div class="banner__content-bottom">
-                            <p class="banner__description">{{description}}</p>
-                            <a href="{{button.href}}" class="banner__button button">{{button.text}}</a>
+                            <p class="banner__description" {{#if descriptionSequence}}data-sequence="{{descriptionSequence}}"{{/if}}>{{description}}</p>
+                            <a href="{{button.href}}" class="banner__button button" {{#if button.sequence}}data-sequence="{{button.sequence}}"{{/if}}>{{button.text}}</a>
                         </div>
                     </div>
                     {{#if images}}
                     <div class="banner__images-wrapper">
                         {{#each images}}
-                        <div class="{{getWrapperClass this.class 'banner__image-wrapper'}}">
+                        <div class="{{getWrapperClass this.class 'banner__image-wrapper'}}" {{#if this.sequence}}data-sequence="{{this.sequence}}"{{/if}}>
                             {{#if this.alt}} {{pictureRetina image=this alt=this.alt class=this.class}} {{else}}
                             {{pictureRetina image=this alt=(extractText ../title.parts) class=this.class}} {{/if}}
                         </div>
