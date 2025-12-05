@@ -1,8 +1,11 @@
 .portfolio {
     background-color: $mainBackground;
-    @include adaptive-value('padding-top', 150, 130, 0, 1920, 1440);
+    @include adaptive-value('padding-top', 120, 70, 0, 1920, 1440);
     @include vp-1439 {
-        @include adaptive-value('padding-top', 130, 80, 0, 1439, 768);
+        @include adaptive-value('padding-top', 130, 0, 0, 1439, 1280);
+    }
+    @include vp-1279 {
+        @include adaptive-value('padding-top', 0, 60, 0, 1279, 768);
     }
     @include vp-767 {
         @include adaptive-value('padding-top', 80, 70, 0, 767, 375);
@@ -10,10 +13,14 @@
 
     &__container {
         display: grid;
-        @include adaptive-value('gap', 90, 80, 0, 1920, 1440);
+        @include adaptive-value('gap', 98, 79, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('gap', 80, 60, 0, 1439, 768);
+            @include adaptive-value('gap', 80, 45, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('gap', 45, 10, 0, 1279, 768);
         }
 
         @include vp-767 {
@@ -30,9 +37,13 @@
         min-height: size(170px);
         position: relative;
 
-        @include adaptive-value('padding-top', 45, 40, 0, 1920, 1440);
+        @include adaptive-value('padding-top', 50, 40, 0, 1920, 1440);
         @include vp-1439 {
-            @include adaptive-value('padding-top', 40, 20, 0, 1439, 768);
+            @include adaptive-value('padding-top', 40, 20, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('padding-top', 20, 10, 0, 1279, 768);
         }
 
         &::before {
@@ -45,6 +56,7 @@
             height: size(1px);
             transform: translateX(-50%);
             z-index: 1;
+            @include adaptive-value('top', 0, -10, 0, 1439, 1280);
         }
 
         &::after {
@@ -67,13 +79,18 @@
     }
 
     &__intro {
+        width: 100%;
         @include adaptive-value('max-width', 750, 550, 0, 1920, 1440);
-        @include adaptive-value('margin-right', 120, 100, 0, 1920, 1440);
+        @include adaptive-value('margin-right', 130, 100, 0, 1920, 1440);
 
         @include vp-1439 {
             margin: 0;
-            @include adaptive-value('max-width', 550, 344, 0, 1439, 768);
-            @include adaptive-value('margin-right', 120, 0, 0, 1439, 768);
+            @include adaptive-value('max-width', 550, 344, 0, 1439, 1280);
+            @include adaptive-value('margin-right', 120, 246, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('margin-right', 120, 0, 0, 1279, 768);
         }
     }
 
@@ -84,12 +101,15 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         word-break: break-word;
-        @include adaptive-value('font-size', 20, 16, 0, 1920, 1440);
-        @include adaptive-value('line-height', 20 * 1.2, 16 * 1.2, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('font-size', 16, 13, 0, 1439, 768);
-            @include adaptive-value('line-height', 16 * 1.2, 13 * 1.2, 0, 1439, 768);
+            @include adaptive-value('font-size', 16, 14, 0, 1439, 1280);
+            @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 14, 13, 0, 1279, 768);
+            @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1279, 768);
         }
 
         @include vp-767 {
@@ -105,12 +125,19 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         word-break: break-word;
-        @include adaptive-value('font-size', 36, 26, 0, 1920, 1440);
-        @include adaptive-value('line-height', 36 * 1.2, 26 * 1.2, 0, 1920, 1440);
+        @include adaptive-value('font-size', 32, 26, 0, 1920, 1440);
+        @include adaptive-value('line-height', 32 * 1.2, 26 * 1.2, 0, 1920, 1440);
+        @include adaptive-value('margin-bottom', 30, 24, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('font-size', 26, 20, 0, 1439, 768);
-            @include adaptive-value('line-height', 26 * 1.2, 20 * 1.2, 0, 1439, 768);
+            @include adaptive-value('font-size', 26, 24, 0, 1439, 1280);
+            @include adaptive-value('line-height', 26 * 1.2, 24 * 1.2, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 24, 20, 0, 1279, 768);
+            @include adaptive-value('line-height', 24 * 1.2, 20 * 1.2, 0, 1279, 768);
+            @include adaptive-value('margin-bottom', 24, 20, 0, 1279, 768);
         }
     }
 
@@ -121,12 +148,22 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         word-break: break-word;
+        max-width: size(480px);
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+        @include adaptive-value('max-width', 480, 550, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('font-size', 16, 15, 0, 1439, 768);
-            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1439, 768);
+            @include adaptive-value('width', 550, 559, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+            @include adaptive-value('width', 550, 324, 0, 1279, 768);
+            br {
+                display: none;
+            }
         }
 
         &--mobile {
@@ -139,14 +176,33 @@
     }
 
     &__grid-wrapper {
-        @media (min-width: $vp-768) {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            @include adaptive-value('column-gap', 20, 15, 0, 1440, 768);
-            @include adaptive-value('row-gap', 80, 60, 0, 1440, 768);
+        &--desktop {
+            display: none;
 
-            @include vp-1439 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+            @media (min-width: ($vp-1440 + 1px)) {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                @include adaptive-value('column-gap', 20, 20, 0, 1920, 1440);
+                @include adaptive-value('row-gap', 100, 80, 0, 1920, 1440);
+            }
+        }
+
+        &--mobile {
+            display: none;
+
+            @media (max-width: $vp-1440) {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                @include adaptive-value('column-gap', 20, 15, 0, 1440, 768);
+                @include adaptive-value('row-gap', 80, 60, 0, 1440, 768);
+
+                @include vp-1439 {
+                    @include adaptive-value('row-gap', 60, 70, 0, 1440, 1280);
+                }
+
+                @include vp-1279 {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
             }
         }
     }
@@ -203,7 +259,6 @@
                 margin-bottom: 0;
             }
 
-            // Fallback для случая, когда swiper не инициализирован
             &:not(.swiper-wrapper) {
                 display: grid;
                 grid-template-columns: 1fr;
@@ -245,16 +300,21 @@
         text-decoration: none;
         color: inherit;
         overflow: visible;
-        @include adaptive-value('gap', 28, 24, 0, 1439, 768);
+        @include adaptive-value('gap', 30, 24, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('gap', 24, 20, 0, 1439, 768);
+            @include adaptive-value('gap', 24, 23, 0, 1439, 1280);
         }
 
         @include hover {
             .portfolio__image {
                 border-radius: size(70px);
                 transform: scale(1.01);
+
+                img {
+                    @include adaptive-value('width', 607, 447.74, 0, 1920, 1440);
+                    @include adaptive-value('height', 607, 450.74, 0, 1920, 1440);
+                }
 
                 @include vp-1439 {
                     border-radius: size(52px);
@@ -282,10 +342,11 @@
         justify-content: flex-start;
         align-self: flex-start;
         @include adaptive-value('gap', 12, 10, 0, 1920, 1440);
-        @include adaptive-value('padding-left', 25, 20, 0, 1920, 1440);
+        @include adaptive-value('padding-left', 20, 20, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('gap', 10, 8, 0, 1439, 768);
+            @include adaptive-value('gap', 10, 10, 0, 1439, 1280);
+            @include adaptive-value('padding-left', 20, 15, 0, 1439, 1280);
         }
 
         @include vp-767 {
@@ -303,14 +364,18 @@
         transition:
             border-radius 0.3s $smooth,
             transform 0.4s $smooth;
-        @include adaptive-value('border-radius', 30, 20, 0, 1920, 1440);
-        @include adaptive-value('max-width', 700, 447, 0, 1920, 1440);
-        @include adaptive-value('max-height', 650, 450, 0, 1920, 1440);
+        @include adaptive-value('border-radius', 30, 30, 0, 1920, 1440);
+        @include adaptive-value('max-width', 607, 447, 0, 1920, 1440);
+        @include adaptive-value('max-height', 607, 450.74, 0, 1920, 1440);
         @include vp-1439 {
             aspect-ratio: 358 / 350;
-            @include adaptive-value('border-radius', 30, 20, 0, 1439, 768);
-            @include adaptive-value('max-width', 700, 357, 0, 1439, 768);
-            @include adaptive-value('max-height', 650, 349, 0, 1439, 768);
+            @include adaptive-value('border-radius', 30, 25, 0, 1439, 1280);
+            @include adaptive-value('max-width', 447, 400.66, 0, 1439, 1280);
+            @include adaptive-value('height', 450.74, 400.66, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('max-width', 400.66, 356.59, 0, 1279, 768);
+            @include adaptive-value('height', 400.66, 349.58, 0, 1279, 768);
         }
     }
 
@@ -330,11 +395,11 @@
         letter-spacing: -0.03em;
         margin: 0;
         @include adaptive-value('font-size', 20, 18, 0, 1920, 1440);
-        @include adaptive-value('line-height', 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
+        @include adaptive-value('line-height', 20 * 1.16, 18 * 1.25, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('font-size', 18, 15, 0, 1439, 768);
-            @include adaptive-value('line-height', 18 * 1.25, 15 * 1.25, 0, 1439, 768);
+            @include adaptive-value('font-size', 18, 16, 0, 1439, 1280);
+            @include adaptive-value('line-height', 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
         }
     }
 
@@ -343,8 +408,8 @@
         color: $gray;
         letter-spacing: -0.02em;
         margin: 0;
-        @include adaptive-value('font-size', 18, 15, 0, 1920, 1440);
-        @include adaptive-value('line-height', 18 * 1.3, 15 * 1.3, 0, 1920, 1440);
+        @include adaptive-value('font-size', 16, 15, 0, 1920, 1440);
+        @include adaptive-value('line-height', 16 * 1.3, 15 * 1.3, 0, 1920, 1440);
     }
 
     &__footer {
@@ -352,7 +417,7 @@
         justify-content: center;
 
         @include vp-1439 {
-            @include adaptive-value('margin-top', 20, 10, 0, 1439, 768);
+            @include adaptive-value('margin-top', 20, 25, 0, 1439, 1280);
         }
 
         @include vp-767 {
@@ -361,9 +426,9 @@
     }
 
     &__button {
-        @include adaptive-value('min-width', 334, 234, 0, 1920, 1440);
+        @include adaptive-value('min-width', 269, 234, 0, 1920, 1440);
         @include vp-1439 {
-            @include adaptive-value('min-width', 234, 203, 0, 1439, 768);
+            @include adaptive-value('min-width', 234, 214, 0, 1439, 1280);
         }
 
         @include vp-767 {

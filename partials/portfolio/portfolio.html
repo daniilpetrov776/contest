@@ -9,11 +9,30 @@
                     и разработка для B2B
                 </h2>
                 <p class="portfolio__description portfolio__description--mobile">{{mobileDescription}}</p>
-                <p class="portfolio__description">{{description}}</p>
+                <p class="portfolio__description">{{{description}}}</p>
             </div>
         </header>
 
-        <div class="portfolio__grid-wrapper">
+        <div class="portfolio__grid-wrapper portfolio__grid-wrapper--desktop">
+            <ul class="portfolio__grid portfolio__grid--desktop" role="list">
+                {{#each desktopItems}}
+                <li class="portfolio__item">
+                    <a class="portfolio__card" href="{{href}}">
+                        <div class="portfolio__image" aria-hidden="true">
+                            {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture"}}
+                            {{/if}}
+                        </div>
+                        <div class="portfolio__content">
+                            <h3 class="portfolio__card-title">{{title}}</h3>
+                            <p class="portfolio__card-meta">{{{meta}}}</p>
+                        </div>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="portfolio__grid-wrapper portfolio__grid-wrapper--mobile">
             {{#each categories}}
             <div class="portfolio__category swiper">
                 <h3 class="portfolio__category-title">{{title}}</h3>
@@ -27,7 +46,7 @@
                             </div>
                             <div class="portfolio__content">
                                 <h3 class="portfolio__card-title">{{title}}</h3>
-                                <p class="portfolio__card-meta">{{meta}}</p>
+                                <p class="portfolio__card-meta">{{{meta}}}</p>
                             </div>
                         </a>
                     </li>

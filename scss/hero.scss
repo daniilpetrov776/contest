@@ -257,6 +257,7 @@
         @include vp-1279 {
             @include adaptive-value('margin-top', 83, 190, 0, 1279, 768);
             @include adaptive-value('column-gap', 24, 41, 0, 1279, 768);
+            @include adaptive-value('padding-bottom', 23, 12, 0, 1279, 768);
         }
 
         @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {

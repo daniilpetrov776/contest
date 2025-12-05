@@ -1,7 +1,7 @@
 export const portfolioContext = {
     label: 'проекты',
     description:
-        'Создаём комплексные продукты с глубоким пониманием задач и данных, превращая их в понятные цифровые сервисы.',
+        'Обеспечиваем компании лучшими техническими и дизайн-решениями, <br> создавая digital-проекты.',
     mobileDescription: 'Only — digital–агентство с фокусом на сильную аналитику, дизайн и разработку. В основе наших проектов лежат идеи, создаваемые на стыке стратегии, креатива и технологий.',
     categories: [
         {
@@ -13,10 +13,10 @@ export const portfolioContext = {
                     meta: '3D, Анимация, Production, Web-design',
                     href: '#',
                     image: {
-                        'webp': '/images/portfolio/sibur.webp',
-                        'webp@2x': '/images/portfolio/sibur@2x.webp',
-                        'jpeg': '/images/portfolio/sibur.jpg',
-                        'jpeg@2x': '/images/portfolio/sibur@2x.jpg',
+                        'webp': '/images/portfolio/sibur-smaller.webp',
+                        'webp@2x': '/images/portfolio/sibur-smaller@2x.webp',
+                        'jpeg': '/images/portfolio/sibur-smaller.png',
+                        'jpeg@2x': '/images/portfolio/sibur-smaller@2x.png',
                     },
                 },
                 {
@@ -28,7 +28,7 @@ export const portfolioContext = {
                         'webp': '/images/portfolio/mr.webp',
                         'webp@2x': '/images/portfolio/mr@2x.webp',
                         'png': '/images/portfolio/mr.png',
-                        'png@2x': '/images/portfolio/mr@2x.jpg',
+                        'png@2x': '/images/portfolio/mr@2x.png',
                     },
                 },
                 {
@@ -40,7 +40,7 @@ export const portfolioContext = {
                         'webp': '/images/portfolio/severstal.webp',
                         'webp@2x': '/images/portfolio/severstal@2x.webp',
                         'png': '/images/portfolio/severstal.png',
-                        'png@2x': '/images/portfolio/severstal@2x.jpg',
+                        'png@2x': '/images/portfolio/severstal@2x.png',
                     },
                 },
             ],
@@ -56,8 +56,8 @@ export const portfolioContext = {
                     image: {
                         'webp': '/images/portfolio/whoosh.webp',
                         'webp@2x': '/images/portfolio/whoosh@2x.webp',
-                        'jpeg': '/images/portfolio/whoosh.jpg',
-                        'jpeg@2x': '/images/portfolio/whoosh@2x.jpg',
+                        'jpeg': '/images/portfolio/whoosh.png',
+                        'jpeg@2x': '/images/portfolio/whoosh@2x.png',
                     },
                 },
                 {
@@ -68,8 +68,8 @@ export const portfolioContext = {
                     image: {
                         'webp': '/images/portfolio/rd.webp',
                         'webp@2x': '/images/portfolio/rd@2x.webp',
-                        'jpeg': '/images/portfolio/rd.jpg',
-                        'jpeg@2x': '/images/portfolio/rd@2x.jpg',
+                        'jpeg': '/images/portfolio/rd.png',
+                        'jpeg@2x': '/images/portfolio/rd@2x.png',
                     },
                 },
                 {
@@ -80,8 +80,8 @@ export const portfolioContext = {
                     image: {
                         'webp': '/images/portfolio/new-academy.webp',
                         'webp@2x': '/images/portfolio/new-academy@2x.webp',
-                        'jpeg': '/images/portfolio/new-academy.jpg',
-                        'jpeg@2x': '/images/portfolio/new-academy@2x.jpg',
+                        'jpeg': '/images/portfolio/new-academy.png',
+                        'jpeg@2x': '/images/portfolio/new-academy@2x.png',
                     },
                 },
             ],
@@ -97,39 +97,149 @@ export const portfolioContext = {
                     image: {
                         'webp': '/images/portfolio/ash-tau.webp',
                         'webp@2x': '/images/portfolio/ash-tau@2x.webp',
-                        'jpeg': '/images/portfolio/ash-tau.jpg',
-                        'jpeg@2x': '/images/portfolio/ash-tau@2x.jpg',
+                        'jpeg': '/images/portfolio/ash-tau.png',
+                        'jpeg@2x': '/images/portfolio/ash-tau@2x.png',
                     },
                 },
                 {
                     id: 'wheat',
-                    title: 'Урожай',
+                    title: 'Уралхим',
                     meta: '3D, Анимация, Production, Web-design',
                     href: '#',
                     image: {
                         'webp': '/images/portfolio/ural-chem.webp',
                         'webp@2x': '/images/portfolio/ural-chem@2x.webp',
-                        'jpeg': '/images/portfolio/ural-chem.jpg',
-                        'jpeg@2x': '/images/portfolio/ural-chem@2x.jpg',
+                        'jpeg': '/images/portfolio/ural-chem.png',
+                        'jpeg@2x': '/images/portfolio/ural-chem@2x.png',
                     },
                 },
                 {
                     id: 'circles',
-                    title: 'Платежи частями',
+                    title: 'Плати частями',
                     meta: '3D, Анимация, Production, Web-design',
                     href: '#',
                     image: {
                         'webp': '/images/portfolio/pay-partly.webp',
                         'webp@2x': '/images/portfolio/pay-partly@2x.webp',
-                        'jpeg': '/images/portfolio/pay-partly.jpg',
-                        'jpeg@2x': '/images/portfolio/pay-partly@2x.jpg',
+                        'jpeg': '/images/portfolio/pay-partly.png',
+                        'jpeg@2x': '/images/portfolio/pay-partly@2x.png',
                     },
                 },
             ],
         },
     ],
+    desktopItems: [
+        {
+            id: 'sibur',
+            title: 'Корпоративный сайт Сибура',
+            meta: 'Адаптация нового брендинга для digital. Разработка, дизайн <br> основного сайта и подразделений',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/sibur.webp',
+                'webp@2x': '/images/portfolio/sibur@2x.webp',
+                'png': '/images/portfolio/sibur.png',
+                'png@2x': '/images/portfolio/sibur@2x.png',
+            },
+        },
+        {
+            id: 'severstal',
+            title: 'Корпоративный сайт Северстали',
+            meta: 'Единая digital-платформа, объединяющая группу сайтов и суббрендов компании. Блочная разработка, формирование дизайн-системы и цифрового брендбука',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/severstal.webp',
+                'webp@2x': '/images/portfolio/severstal@2x.webp',
+                'png': '/images/portfolio/severstal.png',
+                'png@2x': '/images/portfolio/severstal@2x.png',
+            },
+        },
+        {
+            id: 'vk-capsule',
+            title: 'Лендинг VK Капсула Про',
+            meta: 'Дизайн промо-лендинга для флагманской колонки VK',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/vk.webp',
+                'webp@2x': '/images/portfolio/vk@2x.webp',
+                'png': '/images/portfolio/vk.png',
+                'png@2x': '/images/portfolio/vk@2x.png',
+            },
+        },
+        {
+            id: 'mr-group',
+            title: 'Маркетплейс недвижимости MR Group',
+            meta: 'UX-проектирование и дизайн интерфейса, который увеличил конверсию бронирования квартир',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/mr-nature.webp',
+                'webp@2x': '/images/portfolio/mr-nature@2x.webp',
+                'png': '/images/portfolio/mr-nature.png',
+                'png@2x': '/images/portfolio/mr-nature@2x.png',
+            },
+        },
+        {
+            id: 'academy',
+            title: 'Сайт ЖК Новые академики',
+            meta: 'UX-проектирование, UI/UX-дизайн, разработка на Next.js сайта ЖК Главстроя',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/new-academy-flowers.webp',
+                'webp@2x': '/images/portfolio/new-academy-flowers@2x.webp',
+                'jpeg': '/images/portfolio/new-academy-flowers.png',
+                'jpeg@2x': '/images/portfolio/new-academy-flowers@2x.png',
+            },
+        },
+        {
+            id: 'ash-tau',
+            title: 'Промосайт Аш-тау',
+            meta: 'Промосайт, 3D-визуализация и карта глубин для бренда минеральной воды',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/ash-tau.webp',
+                'webp@2x': '/images/portfolio/ash-tau@2x.webp',
+                'png': '/images/portfolio/ash-tau.png',
+                'png@2x': '/images/portfolio/ash-tau@2x.png',
+            },
+        },
+        {
+            id: 'rd',
+            title: 'Сайт RGD-центра НЛМК',
+            meta: 'Креативная концепция, разработка сайта и дизайн для направления R&D НЛМК',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/rd.webp',
+                'webp@2x': '/images/portfolio/rd@2x.webp',
+                'png': '/images/portfolio/rd.png',
+                'png@2x': '/images/portfolio/rd@2x.png',
+            },
+        },
+        {
+            id: 'stool',
+            title: 'Интернет-магазин Stool Group',
+            meta: 'Онлайн-магазин с акцентом на заботу и комфорт. Создание бренд-платформы и digital-айдентики, разработка сервисных UX-решений',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/stool.webp',
+                'webp@2x': '/images/portfolio/stool@2x.webp',
+                'png': '/images/portfolio/stool.png',
+                'png@2x': '/images/portfolio/stool@2x.png',
+            },
+        },
+        {
+            id: 'ural-chem',
+            title: 'Сайт агропродукции Уралхим',
+            meta: 'Продуктовый сайт, каталог продукции, семантическое проектирование',
+            href: '#',
+            image: {
+                'webp': '/images/portfolio/ural-chem.webp',
+                'webp@2x': '/images/portfolio/ural-chem@2x.webp',
+                'png': '/images/portfolio/ural-chem.png',
+                'png@2x': '/images/portfolio/ural-chem@2x.png',
+            },
+        },
+    ],
     button: {
-        text: 'Все проекты',
+        text: 'все проекты',
         href: '#',
     },
 }

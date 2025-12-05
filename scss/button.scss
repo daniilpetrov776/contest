@@ -43,9 +43,9 @@
         &:focus-visible {
             border-radius: size(30px);
         }
-        @include adaptive-value('font-size', 14, 13, 0, 1439, 768);
-        @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1439, 768);
-        @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
+        @include adaptive-value('font-size', 14, 14, 0, 1439, 1280);
+        @include adaptive-value('line-height', 14 * 1.2, 14 * 1.2, 0, 1439, 1280);
+        @include adaptive-value('border-radius', 15, 15, 0, 1439, 1280);
         @include adaptive-value('min-height', 61, 55, 0, 1439, 1280);
         @include hover {
             border-radius: size(30px);
