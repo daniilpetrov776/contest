@@ -18,8 +18,8 @@
         background-color 0.3s $smooth,
         box-shadow 0.3s $smooth,
         border-radius 0.3s $smooth;
-    @include adaptive-value('font-size', 18, 14, 0, 1920, 1440);
-    @include adaptive-value('line-height', 18 * 1.2, 14 * 1.2, 0, 1920, 1440);
+    @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
+    @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
     @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
     @include adaptive-value('min-height', 69, 61, 0, 1920, 1440);
     @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0)), (0, 20, 20, 0, rgba(14, 14, 14, 0)));

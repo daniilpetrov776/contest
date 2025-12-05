@@ -22,12 +22,13 @@
         justify-content: space-between;
         flex-flow: wrap row;
         align-items: center;
-        padding: size(10px) $desktop-padding;
-        min-height: size(60px);
-
+        padding: size(6px) $desktop-padding;
+        @include adaptive-value('min-height', 58, 60, 0, 1920, 1440);
         @include vp-1439 {
             padding: size(10px) $tablet-padding;
             min-height: size(52px);
+            @include adaptive-value('min-height', 60, 52, 0, 1439, 1280);
+            padding: size(4px) $tablet-padding;
         }
         @include vp-767 {
             padding: size(10px) $mobile-padding;
@@ -36,8 +37,23 @@
 
     &__logo {
         img {
-            width: size(73px);
-            height: size(24px);
+            @include adaptive-value('width', 82, 73, 0, 1920, 1440);
+            @include adaptive-value('height', 27, 24, 0, 1920, 1440);
+
+            @include vp-1439 {
+                @include adaptive-value('width', 73, 67, 0, 1439, 1280);
+                @include adaptive-value('height', 24, 22, 0, 1439, 1280);
+            }
+
+            @include vp-1279 {
+                @include adaptive-value('width', 67, 55, 0, 1279, 768);
+                @include adaptive-value('height', 22, 18, 0, 1279, 768);
+            }
+
+            @include vp-767 {
+                @include adaptive-value('width', 55, 52, 0, 767, 375);
+                @include adaptive-value('height', 18, 17, 0, 767, 375);
+            }
         }
     }
 
@@ -45,8 +61,11 @@
         display: flex;
         flex-flow: wrap row;
         align-items: center;
-        gap: size(32px);
         max-width: 60%;
+        @include adaptive-value('gap', 189, 32, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('gap', 32, 28, 0, 1439, 1280);
+        }
     }
 
     &__nav {
@@ -55,7 +74,11 @@
 
     &__menu {
         display: flex;
-        gap: size(32px);
+        position: relative;
+        @include adaptive-value('gap', 40, 34, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('gap', 32, 26, 0, 1439, 1280);
+        }
         @include vp-1279 {
             display: none;
         }
@@ -64,10 +87,10 @@
     &__menu-link {
         font-family: 'TT Runs', sans-serif;
         font-weight: 500;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.04em;
         transition: opacity 0.3s $smooth;
-        @include adaptive-value('font-size', 16, 14, 0, $maxWidth, 1440);
-        @include adaptive-value('line-height', 16, 14, 0, $maxWidth, 1440);
+        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
 
         @include hover {
             opacity: 0.7;
@@ -85,12 +108,22 @@
         max-width: 5%;
         align-items: center;
         gap: size(10px);
+        position: relative;
+        top: size(2px);
     }
 
     &__star-text {
         font-weight: 500;
-        @include adaptive-value('font-size', 14, 10);
-        @include adaptive-value('line-height', 14, 14);
+        letter-spacing: -0.04em;
+        font-family: 'TT Runs', sans-serif;
+        position: relative;
+        top: size(-2px);
+        @include adaptive-value('font-size', 12, 13, 0, 1920, 1440);
+        @include adaptive-value('line-height', 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('font-size', 13, 12, 0, 1439, 1280);
+            @include adaptive-value('line-height', 13 * 1.1, 12 * 1.1, 0, 1439, 1280);
+        }
         @include vp-1279 {
             display: none;
         }
@@ -119,11 +152,11 @@
             }
 
             &::before {
-                top: 40%;
+                top: 30%;
             }
 
             &::after {
-                top: 70%;
+                top: 50%;
             }
 
             &.is-active {
@@ -141,8 +174,12 @@
     }
 
     &__star-img {
-        width: size(36px);
-        height: size(36px);
+        @include adaptive-value('width', 42, 36, 0, 1920, 1440);
+        @include adaptive-value('height', 42, 36, 0, 1920, 1440);
+        @include vp-1439 {
+            @include adaptive-value('width', 36, 32, 0, 1439, 1280);
+            @include adaptive-value('height', 36, 32, 0, 1439, 1280);
+        }
         @include vp-1279 {
             opacity: 0;
         }

@@ -9,6 +9,7 @@ import { heroContext } from './partials/hero/hero.data'
 import { portfolioContext } from './partials/portfolio/portfolio.data'
 import { bannerContext } from './partials/banner/banner.data'
 import { footerContext } from './partials/footer/footer.data'
+import { clientsContext } from './partials/clients/clients.data'
 
 const templateContext = {
     header: headerContext,
@@ -16,6 +17,7 @@ const templateContext = {
     portfolio: portfolioContext,
     banner: bannerContext,
     footer: footerContext,
+    clients: clientsContext,
 }
 
 export default defineConfig({

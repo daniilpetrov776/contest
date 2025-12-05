@@ -9,7 +9,7 @@
         display: flex;
         flex-flow: wrap row;
         align-items: center;
-        justify-content: space-between;
+        // justify-content: space-between;
         gap: size(10px);
         width: 100%;
         text-decoration: none;
@@ -31,5 +31,6 @@
 
     &__icon-wrapper {
         flex-shrink: 0;
+        margin: 0 0 0 auto;
     }
 }

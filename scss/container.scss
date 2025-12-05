@@ -2,10 +2,14 @@
     width: 100%;
     position: relative;
     padding: 0 $desktop-padding;
+
     @include vp-1439 {
-        padding: 0 $tablet-padding;
+        @include adaptive-value('padding-left', 30, 20, 0, 1439, 1280);
+        @include adaptive-value('padding-right', 30, 20, 0, 1439, 1280);
     }
+
     @include vp-767 {
-        padding: 0 $mobile-padding;
+        @include adaptive-value('padding-left', 20, 15, 0, 1279, 768);
+        @include adaptive-value('padding-right', 20, 15, 0, 1279, 768);
     }
 }

@@ -312,7 +312,7 @@ function initHeroVideo() {
     // Также добавляем обработчик на сами видео элементы
     mutedVideo.addEventListener('click', handleVideoClick)
     soundVideo.addEventListener('click', handleVideoClick)
-    
+
     // Делаем видео элементы недоступными через табуляцию (доступ через контейнер)
     mutedVideo.setAttribute('tabindex', '-1')
     soundVideo.setAttribute('tabindex', '-1')

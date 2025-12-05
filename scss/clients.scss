@@ -1,0 +1,160 @@
+.clients {
+    @include adaptive-value('padding-top', 160, 130, 0, 1920, 1440);
+
+    @include vp-1439 {
+        @include adaptive-value('padding-top', 130, 100, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+        @include adaptive-value('padding-top', 100, 80, 0, 1279, 768);
+    }
+
+    @include vp-767 {
+        @include adaptive-value('padding-top', 80, 32, 0, 767, 375);
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        @include adaptive-value('gap', 100, 80, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('gap', 80, 70, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('gap', 70, 60, 0, 1279, 768);
+        }
+    }
+
+    &__title {
+        font-family: 'TT Runs', Arial, sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        text-align: center;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        @include adaptive-value('font-size', 32, 26, 0, 1920, 1440);
+        @include adaptive-value('line-height', 32 * 1.2, 26 * 1.2, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('font-size', 26, 24, 0, 1439, 1280);
+            @include adaptive-value('line-height', 26 * 1.2, 24 * 1.2, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 24, 20, 0, 1279, 768);
+            @include adaptive-value('line-height', 24 * 1.2, 20 * 1.2, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            display: none;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        list-style: none;
+        margin: 0;
+        @include adaptive-value('padding-left', 197.5, 65, 0, 1920, 1440);
+        @include adaptive-value('padding-right', 197.5, 65, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('padding-left', 65, 82.5, 0, 1439, 1280);
+            @include adaptive-value('padding-right', 65, 82.5, 0, 1439, 1280);
+        }
+
+        @include vp-1279 {
+            grid-template-columns: repeat(3, 1fr);
+            @include adaptive-value('padding-left', 82.5, 41.5, 0, 1279, 768);
+            @include adaptive-value('padding-right', 82.5, 41.5, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            grid-template-columns: repeat(3, 1fr);
+            @include adaptive-value('padding-left', 41.5, 6, 0, 767, 375);
+            @include adaptive-value('padding-right', 41.5, 6, 0, 767, 375);
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include adaptive-value('width', 293, 250, 0, 1920, 1440);
+        @include adaptive-value('min-height', 200, 180, 0, 1920, 1440);
+
+        @include vp-1439 {
+            @include adaptive-value('width', 250, 215, 0, 1439, 1280);
+            @include adaptive-value('min-height', 180, 150, 0, 1439, 1280);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('width', 215, 111, 0, 767, 375);
+            @include adaptive-value('min-height', 150, 100, 0, 767, 375);
+        }
+    }
+
+    &__link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: $white;
+            border-radius: 50%;
+            z-index: -1;
+            transition: transform 0.4s $smooth;
+            @include adaptive-value('width', 306, 242, 0, 1920, 1440);
+            @include adaptive-value('height', 306, 242, 0, 1920, 1440);
+        }
+
+        @include vp-1439 {
+            &::before {
+                @include adaptive-value('width', 242, 203.12, 0, 1439, 1280);
+                @include adaptive-value('height', 242, 203.12, 0, 1439, 1280);
+            }
+        }
+
+        @include hover {
+            &::before {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        &:focus-visible {
+            &::before {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @include vp-1279 {
+            &::before {
+                display: none;
+            }
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+    }
+
+    &__logo-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}

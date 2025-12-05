@@ -2,8 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: size(52px);
-    width: size(52px);
     background-color: $white;
     border-radius: size(15px);
     font-family: 'TT Runs', Arial, sans-serif;
@@ -12,6 +10,8 @@
     transition: background-color 0.3s $smooth;
     @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
     @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+    @include adaptive-value('min-height', 52, 48, 0, 1920, 1440);
+    @include adaptive-value('width', 52, 48, 0, 1920, 1440);
 
     @include hover {
         background-color: $highlight;
@@ -24,7 +24,6 @@
     @include vp-1439 {
         font-size: size(14px);
         line-height: size(14px) * 1.2;
-        @include adaptive-value('min-height', 52, 48, 0, 1439, 1280);
         @include adaptive-value('width', 52, 48, 0, 1439, 1280);
         @include adaptive-value('border-radius', 15, 10, 0, 1439, 1280);
     }
@@ -38,5 +37,14 @@
     &--strict {
         padding: 0 size(15px);
         width: auto;
+    }
+
+    &--loose {
+        width: auto;
+        min-height: unset;
+        padding: size(16px) size(15px);
+        @include vp-1439 {
+            padding: size(14px) size(12px);
+        }
     }
 }

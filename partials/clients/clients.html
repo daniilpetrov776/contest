@@ -1,0 +1,20 @@
+{{#with clients}}
+<section class="clients">
+    <div class="clients__container container">
+        <h2 class="clients__title">
+            20 клиентов — крупнейшие компании <br />из списка Forbes. Более 100 <br />реализованных проектов
+        </h2>
+        <ul class="clients__grid" role="list">
+            {{#each items}}
+            <li class="clients__item">
+                <a class="clients__link" href="{{href}}" aria-label="{{ariaLabel}}">
+                    <div class="clients__logo">
+                        {{svg src=logo alt=name class="clients__logo-img" width="120" height="40" }}
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>
+{{/with}}

@@ -35,6 +35,7 @@ body {
     height: 100%;
     background-color: $mainBackground;
     font-size: size-desktop($fz-default);
+    // overflow-y: hidden;
     @include vp-1919 {
         font-size: $fz-default;
     }
