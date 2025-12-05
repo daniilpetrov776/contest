@@ -427,9 +427,6 @@ function initFooterPolicyAnimation() {
         return
     }
 
-    // Устанавливаем overflow: hidden на родительский элемент для скрытия текста за границей
-    footerPolicy.style.overflow = 'hidden'
-
     // Устанавливаем начальное состояние
     const offsetValue = Number.parseFloat(params.offset) || 20
     const offsetUnit = params.offset.replace(/\d/g, '') || 'px'

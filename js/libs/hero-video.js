@@ -13,12 +13,26 @@ function initHeroVideo() {
     let isExpanded = false
     let currentAnimation = null
 
+    // Константы
+    const DESKTOP_MIN_WIDTH = 1280
+    const MAX_WIDTH = 100
+    const MAX_HEIGHT = 90
+    const STEP_SIZE = 25
+    const ANIMATION_DURATION_NORMAL = 1.6
+    const ANIMATION_DURATION_FAST = 0.6
+    const ANIMATION_DURATION_RESIZE = 0.3
+    const ANIMATION_EASE = 'power2.out'
+    const SCROLL_PROGRESS_MULTIPLIER = 0.2
+
+    // Функция для проверки десктопа
+    const checkIsDesktop = () => window.innerWidth >= DESKTOP_MIN_WIDTH
+
     // Функция для получения минимальных размеров в зависимости от размера экрана
     const getMinSizes = () => {
         const windowWidth = window.innerWidth
         const windowHeight = window.innerHeight
 
-        if (windowWidth >= 1440) {
+        if (windowWidth >= DESKTOP_MIN_WIDTH) {
             // Десктоп: 456px на 230px
             return {
                 width: (456 / windowWidth) * 100,
@@ -39,47 +53,52 @@ function initHeroVideo() {
         }
     }
 
-    const maxWidth = 100
-    const maxHeight = 90
+    // Функция для вычисления размеров на основе скролла
+    const calculateSizesFromScroll = (scrollY, viewportHeight, useAggressiveProgress = false) => {
+        const currentMinSizes = getMinSizes()
+        const scrollProgress = useAggressiveProgress
+            ? Math.min(scrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER), 1)
+            : Math.min(scrollY / viewportHeight, 1)
+        const stepPercent = Math.min(scrollProgress, 1)
 
-    // Получаем минимальные размеры
-    const minSizes = getMinSizes()
-    const isDesktop = window.innerWidth >= 1440
+        const widthRange = MAX_WIDTH - currentMinSizes.width
+        const heightRange = MAX_HEIGHT - currentMinSizes.height
+        let targetWidth = currentMinSizes.width + widthRange * stepPercent
+        let targetHeight = currentMinSizes.height + heightRange * stepPercent
+
+        // Ограничиваем минимальными и максимальными значениями
+        targetWidth = Math.max(targetWidth, currentMinSizes.width)
+        targetWidth = Math.min(targetWidth, MAX_WIDTH)
+        targetHeight = Math.max(targetHeight, currentMinSizes.height)
+        targetHeight = Math.min(targetHeight, MAX_HEIGHT)
+
+        return { targetWidth, targetHeight }
+    }
+
+    const isDesktop = checkIsDesktop()
 
     // Устанавливаем начальные размеры только на десктопе
     if (isDesktop) {
-        // Вычисляем начальные размеры на основе текущего скролла (или минимальные, если scrollY = 0)
-        const currentScrollY = window.scrollY
-        const viewportHeight = window.innerHeight
-        const scrollProgress = Math.min(currentScrollY / viewportHeight, 1)
-        const stepPercent = Math.min(scrollProgress, 1)
-
-        const widthRange = maxWidth - minSizes.width
-        const heightRange = maxHeight - minSizes.height
-        let initialWidth = minSizes.width + widthRange * stepPercent
-        let initialHeight = minSizes.height + heightRange * stepPercent
-
-        // Ограничиваем минимальными значениями
-        initialWidth = Math.max(initialWidth, minSizes.width)
-        initialHeight = Math.max(initialHeight, minSizes.height)
+        const { targetWidth, targetHeight } = calculateSizesFromScroll(
+            window.scrollY,
+            window.innerHeight
+        )
 
         // Устанавливаем начальные размеры через CSS переменные
         gsap.set(heroVideo, {
-            '--video-width': `${initialWidth}%`,
-            '--video-height': `${initialHeight}%`,
+            '--video-width': `${targetWidth}%`,
+            '--video-height': `${targetHeight}%`,
         })
     }
 
     // Обработчик скролла для изменения размера видео
     let lastScrollY = window.scrollY
     let currentStep = 0
-    const stepSize = 25 // Увеличенный шаг для более быстрой реакции
-    const maxStep = Math.ceil(100 / stepSize)
+    const MAX_STEP = Math.ceil(100 / STEP_SIZE)
 
     const handleScroll = () => {
         // Работает только на десктопе
-        const isDesktop = window.innerWidth >= 1440
-        if (!isDesktop) {
+        if (!checkIsDesktop()) {
             return
         }
 
@@ -96,31 +115,29 @@ function initHeroVideo() {
 
         const viewportHeight = window.innerHeight
         // Используем более агрессивное вычисление прогресса для быстрого раскрытия
-        // Видео должно полностью раскрыться за половину высоты окна
-        const scrollProgress = Math.min(currentScrollY / (viewportHeight * 0.2), 1)
-        const newStep = Math.floor(scrollProgress * maxStep)
-        const clampedStep = Math.min(newStep, maxStep)
-
-        // Вычисляем процент прогресса от 0 до 1
-        const stepPercent = clampedStep / maxStep
-
-        // Получаем актуальные минимальные размеры (на случай изменения размера окна)
-        const currentMinSizes = getMinSizes()
-
-        // Вычисляем размеры: от минимальных до максимальных
-        const widthRange = maxWidth - currentMinSizes.width
-        const heightRange = maxHeight - currentMinSizes.height
-        let targetWidth = currentMinSizes.width + widthRange * stepPercent
-        let targetHeight = currentMinSizes.height + heightRange * stepPercent
-
-        // Ограничиваем минимальными и максимальными значениями
-        targetWidth = Math.max(targetWidth, currentMinSizes.width)
-        targetWidth = Math.min(targetWidth, maxWidth)
-        targetHeight = Math.max(targetHeight, currentMinSizes.height)
-        targetHeight = Math.min(targetHeight, maxHeight)
+        const scrollProgress = Math.min(
+            currentScrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER),
+            1
+        )
+        const newStep = Math.floor(scrollProgress * MAX_STEP)
+        const clampedStep = Math.min(newStep, MAX_STEP)
 
         if (clampedStep !== currentStep) {
             currentStep = clampedStep
+
+            // Вычисляем процент прогресса от 0 до 1
+            const stepPercent = clampedStep / MAX_STEP
+            const currentMinSizes = getMinSizes()
+            const widthRange = MAX_WIDTH - currentMinSizes.width
+            const heightRange = MAX_HEIGHT - currentMinSizes.height
+            let targetWidth = currentMinSizes.width + widthRange * stepPercent
+            let targetHeight = currentMinSizes.height + heightRange * stepPercent
+
+            // Ограничиваем минимальными и максимальными значениями
+            targetWidth = Math.max(targetWidth, currentMinSizes.width)
+            targetWidth = Math.min(targetWidth, MAX_WIDTH)
+            targetHeight = Math.max(targetHeight, currentMinSizes.height)
+            targetHeight = Math.min(targetHeight, MAX_HEIGHT)
 
             if (currentAnimation) {
                 currentAnimation.kill()
@@ -129,8 +146,8 @@ function initHeroVideo() {
             currentAnimation = gsap.to(heroVideo, {
                 '--video-width': `${targetWidth}%`,
                 '--video-height': `${targetHeight}%`,
-                'duration': 1.6,
-                'ease': 'power2.out',
+                'duration': ANIMATION_DURATION_NORMAL,
+                'ease': ANIMATION_EASE,
                 'onComplete': () => {
                     currentAnimation = null
                 },
@@ -142,8 +159,7 @@ function initHeroVideo() {
 
     const handleVideoClick = (e) => {
         // Работает только на десктопе
-        const isDesktop = window.innerWidth >= 1440
-        if (!isDesktop) {
+        if (!checkIsDesktop()) {
             // На планшете и мобилке просто переключаем звук без изменения размера
             if (!isPlayingWithSound) {
                 isPlayingWithSound = true
@@ -182,30 +198,16 @@ function initHeroVideo() {
             }
 
             // Возвращаем к размеру на основе текущего скролла
-            const currentScrollY = window.scrollY
-            const viewportHeight = window.innerHeight
-            const scrollProgress = Math.min(currentScrollY / viewportHeight, 1)
-            const stepPercent = Math.min(scrollProgress, 1)
-
-            // Получаем актуальные минимальные размеры
-            const currentMinSizes = getMinSizes()
-
-            const widthRange = maxWidth - currentMinSizes.width
-            const heightRange = maxHeight - currentMinSizes.height
-            let targetWidth = currentMinSizes.width + widthRange * stepPercent
-            let targetHeight = currentMinSizes.height + heightRange * stepPercent
-
-            // Ограничиваем минимальными и максимальными значениями
-            targetWidth = Math.max(targetWidth, currentMinSizes.width)
-            targetWidth = Math.min(targetWidth, maxWidth)
-            targetHeight = Math.max(targetHeight, currentMinSizes.height)
-            targetHeight = Math.min(targetHeight, maxHeight)
+            const { targetWidth, targetHeight } = calculateSizesFromScroll(
+                window.scrollY,
+                window.innerHeight
+            )
 
             currentAnimation = gsap.to(heroVideo, {
                 '--video-width': `${targetWidth}%`,
                 '--video-height': `${targetHeight}%`,
-                'duration': 0.6,
-                'ease': 'power2.out',
+                'duration': ANIMATION_DURATION_FAST,
+                'ease': ANIMATION_EASE,
                 'onComplete': () => {
                     currentAnimation = null
                 },
@@ -232,10 +234,10 @@ function initHeroVideo() {
         }
 
         currentAnimation = gsap.to(heroVideo, {
-            '--video-width': `${maxWidth}%`,
-            '--video-height': `${maxHeight}%`,
-            'duration': 0.6,
-            'ease': 'power2.out',
+            '--video-width': `${MAX_WIDTH}%`,
+            '--video-height': `${MAX_HEIGHT}%`,
+            'duration': ANIMATION_DURATION_FAST,
+            'ease': ANIMATION_EASE,
             'onComplete': () => {
                 currentAnimation = null
             },
@@ -297,8 +299,7 @@ function initHeroVideo() {
     let resizeTimeout
     window.addEventListener('resize', () => {
         // Работает только на десктопе
-        const isDesktop = window.innerWidth >= 1440
-        if (!isDesktop) {
+        if (!checkIsDesktop()) {
             return
         }
 
@@ -308,22 +309,10 @@ function initHeroVideo() {
         resizeTimeout = setTimeout(() => {
             // Если видео не увеличено, обновляем размер на основе текущего скролла
             if (!isExpanded) {
-                const currentScrollY = window.scrollY
-                const viewportHeight = window.innerHeight
-                const scrollProgress = Math.min(currentScrollY / viewportHeight, 1)
-                const stepPercent = Math.min(scrollProgress, 1)
-
-                const currentMinSizes = getMinSizes()
-                const widthRange = maxWidth - currentMinSizes.width
-                const heightRange = maxHeight - currentMinSizes.height
-                let targetWidth = currentMinSizes.width + widthRange * stepPercent
-                let targetHeight = currentMinSizes.height + heightRange * stepPercent
-
-                // Ограничиваем минимальными и максимальными значениями
-                targetWidth = Math.max(targetWidth, currentMinSizes.width)
-                targetWidth = Math.min(targetWidth, maxWidth)
-                targetHeight = Math.max(targetHeight, currentMinSizes.height)
-                targetHeight = Math.min(targetHeight, maxHeight)
+                const { targetWidth, targetHeight } = calculateSizesFromScroll(
+                    window.scrollY,
+                    window.innerHeight
+                )
 
                 if (currentAnimation) {
                     currentAnimation.kill()
@@ -332,8 +321,8 @@ function initHeroVideo() {
                 currentAnimation = gsap.to(heroVideo, {
                     '--video-width': `${targetWidth}%`,
                     '--video-height': `${targetHeight}%`,
-                    'duration': 0.3,
-                    'ease': 'power2.out',
+                    'duration': ANIMATION_DURATION_RESIZE,
+                    'ease': ANIMATION_EASE,
                     'onComplete': () => {
                         currentAnimation = null
                     },

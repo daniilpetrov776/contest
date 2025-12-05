@@ -13,21 +13,53 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
+    transition:
+        color 0.3s $smooth,
+        background-color 0.3s $smooth,
+        box-shadow 0.3s $smooth,
+        border-radius 0.3s $smooth;
     @include adaptive-value('font-size', 18, 14, 0, 1920, 1440);
     @include adaptive-value('line-height', 18 * 1.2, 14 * 1.2, 0, 1920, 1440);
     @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
     @include adaptive-value('min-height', 69, 61, 0, 1920, 1440);
+    @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0)), (0, 20, 20, 0, rgba(14, 14, 14, 0)));
+
+    @include hover {
+        background-color: $white;
+        color: $black;
+        border-radius: size(40px);
+        @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0.039)), (0, 20, 20, 0, rgba(14, 14, 14, 0.051)));
+    }
+
+    &:focus-visible {
+        background-color: $white;
+        color: $black;
+        border-radius: size(40px);
+        @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0.039)), (0, 20, 20, 0, rgba(14, 14, 14, 0.051)));
+    }
 
     @include vp-1439 {
         padding: size(16px);
+        &:focus-visible {
+            border-radius: size(30px);
+        }
         @include adaptive-value('font-size', 14, 13, 0, 1439, 768);
         @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1439, 768);
         @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
         @include adaptive-value('min-height', 61, 55, 0, 1439, 1280);
+        @include hover {
+            border-radius: size(30px);
+        }
     }
 
     @include vp-1279 {
+        &:focus-visible {
+            border-radius: size(25px);
+        }
         @include adaptive-value('min-height', 55, 48, 0, 1279, 768);
+        @include hover {
+            border-radius: size(25px);
+        }
     }
 
     @include vp-767 {

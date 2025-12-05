@@ -272,13 +272,46 @@
     }
 
     &__policy {
-        overflow: hidden;
+        position: relative;
         font-weight: 400;
         letter-spacing: -0.02em;
         color: $gray;
         word-wrap: break-word;
         overflow-wrap: break-word;
         word-break: break-word;
+        transition: color 0.3s $smooth;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: size(1px);
+            background-image: repeating-linear-gradient(
+                to right,
+                #000000 0,
+                #000000 size(4px),
+                transparent size(4px),
+                transparent size(8px)
+            );
+            transition: width 0.5s $smooth;
+        }
+
+        @include hover {
+            color: $gray;
+            &::before {
+                width: 100%;
+            }
+        }
+
+        &:focus-visible {
+            color: $gray;
+            &::before {
+                width: 100%;
+            }
+        }
+
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
 

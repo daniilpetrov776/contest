@@ -238,8 +238,51 @@
  * @include shadow((0, 1.06, 0.9, 0, rgba(0, 0, 0, 0.0383)), (0, 2.42, 2.05, 0, rgba(0, 0, 0, 0.0557)));
  */
 @mixin shadow($x: 0, $y: 0, $blur: 0, $spread: 0, $color: rgba(0, 0, 0, 0.1), $opacity: null) {
-    // Если передан массив теней (список списков или строка с тенями)
-    @if meta.type-of($x) == 'list' and list.length($x) > 0 {
+    // Проверяем, переданы ли множественные тени как отдельные аргументы-списки
+    @if meta.type-of($x) == 'list' and meta.type-of($y) == 'list' and list.length($x) >= 5 and list.length($y) >= 5 {
+        // Множественные тени переданы как отдельные аргументы
+        $shadows: ();
+        
+        // Обрабатываем первую тень ($x)
+        $shadowX1: list.nth($x, 1);
+        $shadowY1: list.nth($x, 2);
+        $shadowBlur1: list.nth($x, 3);
+        $shadowSpread1: list.nth($x, 4);
+        $shadowColor1: list.nth($x, 5);
+        $shadowOpacity1: if(list.length($x) > 5, list.nth($x, 6), null);
+        
+        @if $shadowOpacity1 != null {
+            $shadowColor1: rgba(red($shadowColor1), green($shadowColor1), blue($shadowColor1), $shadowOpacity1);
+        }
+        
+        $shadows: list.append(
+            $shadows,
+            rem($shadowX1) rem($shadowY1) rem($shadowBlur1) rem($shadowSpread1) $shadowColor1,
+            comma
+        );
+        
+        // Обрабатываем вторую тень ($y)
+        $shadowX2: list.nth($y, 1);
+        $shadowY2: list.nth($y, 2);
+        $shadowBlur2: list.nth($y, 3);
+        $shadowSpread2: list.nth($y, 4);
+        $shadowColor2: list.nth($y, 5);
+        $shadowOpacity2: if(list.length($y) > 5, list.nth($y, 6), null);
+        
+        @if $shadowOpacity2 != null {
+            $shadowColor2: rgba(red($shadowColor2), green($shadowColor2), blue($shadowColor2), $shadowOpacity2);
+        }
+        
+        $shadows: list.append(
+            $shadows,
+            rem($shadowX2) rem($shadowY2) rem($shadowBlur2) rem($shadowSpread2) $shadowColor2,
+            comma
+        );
+        
+        & {
+            box-shadow: $shadows;
+        }
+    } @else if meta.type-of($x) == 'list' and list.length($x) > 0 {
         // Проверяем, является ли первый элемент списком (множественные тени)
         $firstItem: list.nth($x, 1);
         @if meta.type-of($firstItem) == 'list' {
@@ -268,8 +311,14 @@
             }
         } @else {
             // Одна тень передана как список значений
+            $shadowX: list.nth($x, 1);
+            $shadowY: list.nth($x, 2);
+            $shadowBlur: list.nth($x, 3);
+            $shadowSpread: list.nth($x, 4);
+            $shadowColor: list.nth($x, 5);
+            
             & {
-                box-shadow: $x;
+                box-shadow: rem($shadowX) rem($shadowY) rem($shadowBlur) rem($shadowSpread) $shadowColor;
             }
         }
     } @else {

@@ -9,8 +9,17 @@
     font-family: 'TT Runs', Arial, sans-serif;
     font-weight: 600;
     letter-spacing: -0.03em;
+    transition: background-color 0.3s $smooth;
     @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
     @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+
+    @include hover {
+        background-color: $highlight;
+    }
+
+    &:focus-visible {
+        background-color: $highlight;
+    }
 
     @include vp-1439 {
         font-size: size(14px);

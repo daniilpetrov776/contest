@@ -52,7 +52,7 @@
     }
 
     &__socials {
-        @include vp-1439 {
+        @include vp-1279 {
             display: none;
         }
     }
@@ -96,6 +96,18 @@
 
     &__socials-link {
         gap: size(10px);
+
+        @include hover {
+            .hero__socials-icon-wrapper {
+                background-color: $highlight;
+            }
+        }
+
+        &:focus-visible {
+            .hero__socials-icon-wrapper {
+                background-color: $highlight;
+            }
+        }
     }
 
     &__title {
