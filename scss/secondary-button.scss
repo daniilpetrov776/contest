@@ -46,5 +46,9 @@
         @include vp-1439 {
             padding: size(14px) size(12px);
         }
+
+        @include vp-1279 {
+            padding: size(14.5px) size(14px);
+        }
     }
 }
