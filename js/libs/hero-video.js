@@ -27,6 +27,29 @@ function initHeroVideo() {
     // Функция для проверки десктопа
     const checkIsDesktop = () => window.innerWidth >= DESKTOP_MIN_WIDTH
 
+    // Функция для обновления aria-label в зависимости от состояния
+    const updateAriaLabel = () => {
+        if (checkIsDesktop()) {
+            if (isExpanded) {
+                heroVideo.setAttribute('aria-label', 'Видео увеличено. Нажмите для уменьшения размера')
+            } else {
+                heroVideo.setAttribute('aria-label', 'Видео. Нажмите для увеличения размера и воспроизведения со звуком')
+            }
+        } else {
+            if (isPlayingWithSound) {
+                heroVideo.setAttribute('aria-label', 'Видео воспроизводится со звуком. Нажмите для паузы или возобновления')
+            } else {
+                heroVideo.setAttribute('aria-label', 'Видео. Нажмите для воспроизведения со звуком')
+            }
+        }
+    }
+
+    // Настраиваем доступность видео
+    heroVideo.setAttribute('role', 'button')
+    heroVideo.setAttribute('tabindex', '0')
+    heroVideo.setAttribute('aria-pressed', 'false')
+    updateAriaLabel()
+
     // Функция для получения минимальных размеров в зависимости от размера экрана
     const getMinSizes = () => {
         const windowWidth = window.innerWidth
@@ -158,6 +181,11 @@ function initHeroVideo() {
     }
 
     const handleVideoClick = (e) => {
+        // Предотвращаем стандартное поведение для клавиатуры
+        if (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault()
+        }
+
         // Работает только на десктопе
         if (!checkIsDesktop()) {
             // На планшете и мобилке просто переключаем звук без изменения размера
@@ -180,6 +208,7 @@ function initHeroVideo() {
                     })
                 }
             }
+            updateAriaLabel()
             return
         }
 
@@ -192,6 +221,8 @@ function initHeroVideo() {
         if (isExpanded) {
             // Уменьшаем видео
             isExpanded = false
+            heroVideo.setAttribute('aria-pressed', 'false')
+            updateAriaLabel()
 
             if (currentAnimation) {
                 currentAnimation.kill()
@@ -228,6 +259,8 @@ function initHeroVideo() {
 
         // Увеличиваем видео до максимума
         isExpanded = true
+        heroVideo.setAttribute('aria-pressed', 'true')
+        updateAriaLabel()
 
         if (currentAnimation) {
             currentAnimation.kill()
@@ -273,9 +306,16 @@ function initHeroVideo() {
     // Добавляем обработчик клика на контейнер видео
     heroVideo.addEventListener('click', handleVideoClick)
 
+    // Обработчик клавиатуры для доступности
+    heroVideo.addEventListener('keydown', handleVideoClick)
+
     // Также добавляем обработчик на сами видео элементы
     mutedVideo.addEventListener('click', handleVideoClick)
     soundVideo.addEventListener('click', handleVideoClick)
+    
+    // Делаем видео элементы недоступными через табуляцию (доступ через контейнер)
+    mutedVideo.setAttribute('tabindex', '-1')
+    soundVideo.setAttribute('tabindex', '-1')
 
     // Добавляем обработчик скролла с оптимизацией через requestAnimationFrame
     let scrollTimeout

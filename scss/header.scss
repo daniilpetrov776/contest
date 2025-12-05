@@ -65,8 +65,19 @@
         font-family: 'TT Runs', sans-serif;
         font-weight: 500;
         letter-spacing: -0.03em;
+        transition: opacity 0.3s $smooth;
         @include adaptive-value('font-size', 16, 14, 0, $maxWidth, 1440);
         @include adaptive-value('line-height', 16, 14, 0, $maxWidth, 1440);
+
+        @include hover {
+            opacity: 0.7;
+        }
+
+        &:focus-visible {
+            opacity: 0.7;
+            outline: size(2px) solid $black;
+            outline-offset: size(2px);
+        }
     }
 
     &__star {

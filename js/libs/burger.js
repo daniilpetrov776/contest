@@ -7,6 +7,60 @@ const body = document.body
 let isAnimating = false
 const ANIMATION_DURATION = 700
 let menuAnimation = null
+const DESKTOP_MIN_WIDTH = 1280
+
+/**
+ * Обновляет доступность кнопки бургер-меню
+ */
+function updateToggleButtonAccessibility() {
+    if (!toggleButton) {
+        return
+    }
+
+    const isDesktop = window.innerWidth >= DESKTOP_MIN_WIDTH
+
+    if (isDesktop) {
+        // На десктопе делаем кнопку недоступной
+        toggleButton.setAttribute('tabindex', '-1')
+        toggleButton.setAttribute('aria-hidden', 'true')
+        toggleButton.style.pointerEvents = 'none'
+    } else {
+        // На планшете/мобилке делаем доступной
+        toggleButton.setAttribute('tabindex', '0')
+        toggleButton.removeAttribute('aria-hidden')
+        toggleButton.style.pointerEvents = 'auto'
+    }
+}
+
+/**
+ * Обновляет доступность ссылок в меню
+ */
+function updateMenuLinksAccessibility() {
+    const menuLinks = document.querySelectorAll('.header-menu__menu-link')
+    
+    if (!menuLinks.length || !headerMenu) {
+        return
+    }
+
+    const isDesktop = window.innerWidth >= DESKTOP_MIN_WIDTH
+    const isMenuOpen = headerMenu.classList.contains('is-open')
+    // Проверяем видимость меню через computed style
+    const menuStyle = window.getComputedStyle(headerMenu)
+    const isMenuVisible = menuStyle.display !== 'none' && menuStyle.height !== '0px'
+
+    menuLinks.forEach((link) => {
+        // На десктопе или когда меню закрыто/невидимо - делаем недоступными
+        if (isDesktop || !isMenuOpen || !isMenuVisible) {
+            link.setAttribute('tabindex', '-1')
+            // Также скрываем визуально для screen readers
+            link.setAttribute('aria-hidden', 'true')
+        } else {
+            // Когда меню открыто на планшете/мобилке - делаем доступными
+            link.setAttribute('tabindex', '0')
+            link.removeAttribute('aria-hidden')
+        }
+    })
+}
 
 function animateMenuItems(isOpening) {
     const menuItems = document.querySelectorAll('.header-menu__menu-item')
@@ -103,7 +157,12 @@ function closeMenu() {
     if (headerMenu) {
         headerMenu.classList.remove('is-open')
         headerMenu.classList.remove('is-scrollable')
+        // Обновляем доступность сразу после удаления класса
+        updateMenuLinksAccessibility()
     }
+
+    // Обновляем доступность ссылок
+    updateMenuLinksAccessibility()
 
     setTimeout(() => {
         isAnimating = false
@@ -122,9 +181,13 @@ function openMenu() {
     if (headerMenu) {
         setTimeout(() => {
             headerMenu.classList.add('is-open')
+            // Обновляем доступность сразу после добавления класса
+            updateMenuLinksAccessibility()
             // Запускаем анимацию элементов меню после открытия
             setTimeout(() => {
                 animateMenuItems(true)
+                // Обновляем доступность ссылок после анимации
+                updateMenuLinksAccessibility()
             }, 0) // Небольшая задержка после открытия меню
         }, 100)
         setTimeout(() => {
@@ -139,6 +202,11 @@ function openMenu() {
 
 if (toggleButton) {
     toggleButton.addEventListener('click', () => {
+        // На десктопе кнопка не работает
+        if (window.innerWidth >= DESKTOP_MIN_WIDTH) {
+            return
+        }
+
         if (isAnimating) {
             return
         }
@@ -158,4 +226,31 @@ if (toggleButton) {
             closeMenu()
         }
     })
+
+    // Обновляем доступность при изменении размера окна
+    let resizeTimeout
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout)
+        }
+        resizeTimeout = setTimeout(() => {
+            updateToggleButtonAccessibility()
+            updateMenuLinksAccessibility()
+        }, 100)
+    })
+
+    // Инициализируем доступность при загрузке
+    const initAccessibility = () => {
+        // Небольшая задержка для гарантии, что DOM полностью загружен
+        setTimeout(() => {
+            updateToggleButtonAccessibility()
+            updateMenuLinksAccessibility()
+        }, 100)
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAccessibility)
+    } else {
+        initAccessibility()
+    }
 }

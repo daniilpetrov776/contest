@@ -36,16 +36,58 @@ function initBannerSlider() {
         observeParents: true,
         on: {
             init: (swiper) => {
+                // Добавляем id к слайдам для доступности
+                swiper.slides.forEach((slide, index) => {
+                    slide.id = `banner-slide-${index}`
+                })
                 // Небольшая задержка для полной инициализации Swiper
                 setTimeout(() => {
                     updatePaginationStyles(swiper)
+                    updateSlideButtonsAccessibility(swiper)
                 }, 50)
             },
             slideChange: (swiper) => {
                 updatePaginationStyles(swiper)
+                updateSlideButtonsAccessibility(swiper)
             },
         },
     })
+
+    /**
+     * Обновляет доступность кнопок в слайдах
+     * @param {Swiper} swiper - Экземпляр Swiper
+     */
+    function updateSlideButtonsAccessibility(swiper) {
+        const activeIndex = swiper.activeIndex
+        const slides = swiper.slides
+
+        slides.forEach((slide, index) => {
+            // Находим все интерактивные элементы в слайде (кнопки и ссылки)
+            const interactiveElements = slide.querySelectorAll('a, button, [tabindex]')
+
+            if (index === activeIndex) {
+                // В активном слайде делаем элементы доступными
+                interactiveElements.forEach((element) => {
+                    // Если элемент имеет tabindex, убираем его или устанавливаем 0
+                    if (element.hasAttribute('tabindex')) {
+                        const currentTabIndex = parseInt(element.getAttribute('tabindex'), 10)
+                        // Если tabindex был -1 (недоступный), убираем атрибут или ставим 0
+                        if (currentTabIndex === -1) {
+                            element.removeAttribute('tabindex')
+                        }
+                    }
+                })
+            } else {
+                // В неактивных слайдах делаем элементы недоступными
+                interactiveElements.forEach((element) => {
+                    // Устанавливаем tabindex=-1 только если элемент не был специально скрыт
+                    if (!element.hasAttribute('tabindex') || parseInt(element.getAttribute('tabindex'), 10) >= 0) {
+                        element.setAttribute('tabindex', '-1')
+                    }
+                })
+            }
+        })
+    }
 
     /**
      * Обновляет стили пагинации в зависимости от активного слайда
@@ -62,6 +104,9 @@ function initBannerSlider() {
 
         // Удаляем все существующие точки
         paginationEl.innerHTML = ''
+        paginationEl.setAttribute('role', 'tablist')
+        paginationEl.setAttribute('aria-label', 'Навигация по слайдам')
+        paginationEl.tabIndex = -1
 
         // Определяем, какие точки показывать и как их стилизовать
         let visibleIndices = []
@@ -115,14 +160,21 @@ function initBannerSlider() {
                 break
             }
 
-            const bullet = document.createElement('span')
+            const realSlideIndex = visibleIndices[i]
+            const isActive = i === activeBulletIndex
+
+            const bullet = document.createElement('button')
             bullet.className = 'swiper-pagination-bullet'
+            bullet.type = 'button'
+            bullet.setAttribute('role', 'tab')
+            bullet.tabIndex = 0
+            bullet.setAttribute('aria-label', `Перейти к слайду ${realSlideIndex + 1} из ${totalSlides}`)
+            bullet.setAttribute('aria-selected', isActive ? 'true' : 'false')
+            bullet.setAttribute('aria-controls', `banner-slide-${realSlideIndex}`)
+            bullet.dataset.slideIndex = realSlideIndex.toString()
 
             // Принудительно применяем transition для плавной анимации
             bullet.style.transition = 'background-color 0.3s ease, transform 0.3s ease'
-
-            const realSlideIndex = visibleIndices[i]
-            const isActive = i === activeBulletIndex
 
             if (isActive) {
                 bullet.classList.add('swiper-pagination-bullet-active')
@@ -166,8 +218,35 @@ function initBannerSlider() {
             }
 
             // Устанавливаем обработчик клика
-            bullet.addEventListener('click', () => {
+            const handleBulletClick = () => {
                 swiper.slideTo(realSlideIndex)
+            }
+
+            bullet.addEventListener('click', handleBulletClick)
+
+            // Обработчик клавиатуры для доступности
+            bullet.addEventListener('keydown', (e) => {
+                const bullets = Array.from(paginationEl.querySelectorAll('.swiper-pagination-bullet'))
+                const currentIndex = bullets.indexOf(bullet)
+
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleBulletClick()
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    e.preventDefault()
+                    let targetIndex
+
+                    if (e.key === 'ArrowLeft') {
+                        targetIndex = currentIndex > 0 ? currentIndex - 1 : bullets.length - 1
+                    } else {
+                        targetIndex = currentIndex < bullets.length - 1 ? currentIndex + 1 : 0
+                    }
+
+                    const targetBullet = bullets[targetIndex]
+                    if (targetBullet) {
+                        targetBullet.focus()
+                    }
+                }
             })
 
             paginationEl.appendChild(bullet)

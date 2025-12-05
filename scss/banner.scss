@@ -525,7 +525,11 @@
                 transform 0.3s ease;
             cursor: pointer;
             margin: 0;
+            padding: 0;
+            border: none;
             display: flex;
+            align-items: center;
+            justify-content: center;
 
             @include vp-1439 {
                 @include adaptive-value('width', 10, 8, 0, 1439, 1280);
@@ -551,6 +555,12 @@
             }
 
             &:hover {
+                background-color: $black;
+            }
+
+            &:focus-visible {
+                outline: size(2px) solid $black;
+                outline-offset: size(2px);
                 background-color: $black;
             }
         }

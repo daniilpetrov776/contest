@@ -261,6 +261,17 @@
                 }
             }
         }
+
+        &:focus-visible {
+            .portfolio__image {
+                border-radius: size(70px);
+                transform: scale(1.01);
+
+                @include vp-1439 {
+                    border-radius: size(52px);
+                }
+            }
+        }
     }
 
     &__content {

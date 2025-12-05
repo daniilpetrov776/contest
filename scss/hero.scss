@@ -154,7 +154,13 @@
         transform: translateX(-50%);
         overflow: hidden;
         cursor: pointer;
+        transition: outline 0.3s $smooth;
         @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
+
+        &:focus-visible {
+            outline: size(2px) solid $black;
+            outline-offset: size(2px);
+        }
 
         @include vp-1439 {
             min-width: size(416px);
@@ -367,6 +373,16 @@
         letter-spacing: -0.01em;
         text-decoration: underline;
         text-underline-offset: size(5px);
+
+        transition: color 0.3s $smooth;
+
+        @include hover {
+            color: $gray;
+        }
+
+        &:focus-visible {
+            color: $gray;
+        }
         @include adaptive-value('font-size', 22, 18, 0, 1920, 1440);
         @include adaptive-value('line-height', 22 * 1.25, 18 * 1.25, 0, 1920, 1440);
 
