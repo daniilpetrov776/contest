@@ -79,102 +79,14 @@
         }
     }
 
-    &__logo-img {
-        @include adaptive-value('width', 293, 250, 0, 1920, 1440);
-        @include adaptive-value('min-height', 200, 180, 0, 1920, 1440);
-
-        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
-            min-height: size(180px);
-        }
-    }
-
     &__item {
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        cursor: pointer;
         @include adaptive-value('width', 293, 250, 0, 1920, 1440);
         @include adaptive-value('min-height', 200, 180, 0, 1920, 1440);
-
-        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
-            min-height: size(180px);
-            &.clients__item--severstal {
-                order: 1;
-            }
-
-            &.clients__item--sibur {
-                order: 2;
-            }
-
-            &.clients__item--uralchem {
-                order: 3;
-            }
-
-            &.clients__item--rosteh {
-                order: 4;
-            }
-
-            &.clients__item--hlmk {
-                order: 5;
-            }
-
-            &.clients__item--rosatom {
-                order: 6;
-            }
-
-            &.clients__item--tek {
-                order: 7;
-            }
-
-            &.clients__item--phs {
-                order: 8;
-            }
-
-            &.clients__item--schlumberger {
-                order: 9;
-            }
-
-            &.clients__item--sber {
-                order: 10;
-            }
-
-            &.clients__item--vk {
-                order: 11;
-            }
-
-            &.clients__item--open {
-                order: 12;
-            }
-
-            &.clients__item--mr {
-                order: 13;
-            }
-
-            &.clients__item--coldy {
-                order: 14;
-            }
-
-            &.clients__item--glavstroy {
-                order: 15;
-            }
-        }
-
-        @include vp-1439 {
-            @include adaptive-value('width', 250, 215, 0, 1439, 1280);
-            @include adaptive-value('min-height', 180, 150, 0, 1439, 1280);
-        }
-
-        @include vp-767 {
-            @include adaptive-value('width', 215, 111, 0, 767, 375);
-            @include adaptive-value('min-height', 150, 100, 0, 767, 375);
-        }
-    }
-
-    &__link {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
 
         &::before {
             content: '';
@@ -203,7 +115,7 @@
             }
         }
 
-        &:focus-visible {
+        &:focus-within {
             &::before {
                 transform: translate(-50%, -50%) scale(1);
             }
@@ -213,6 +125,409 @@
             &::before {
                 display: none;
             }
+        }
+
+        img {
+            position: relative;
+        }
+
+        &--severstal {
+            img {
+                @include adaptive-value('top', -7, 0, 0, 1920, 1440);
+                @include adaptive-value('left', 0, 30, 0, 1920, 1440);
+                @include adaptive-value('width', 187, 162.07, 0, 1920, 1440);
+                @include adaptive-value('min-height', 60, 52, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('top', 0, -4, 0, 1439, 1280);
+                    @include adaptive-value('left', 0, 0, 0, 1439, 1280);
+                    @include adaptive-value('width', 162.07, 140.72, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 52, 45.15, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 140.72, 90.06, 0, 767, 375);
+                    @include adaptive-value('min-height', 45.15, 28.9, 0, 767, 375);
+                }
+            }
+        }
+        &--sibur {
+            img {
+                @include adaptive-value('width', 144, 123.43, 0, 1920, 1440);
+                @include adaptive-value('min-height', 28, 24, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 123.43, 108.36, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 24, 21.07, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 108.36, 69, 0, 767, 375);
+                    @include adaptive-value('min-height', 21.07, 13, 0, 767, 375);
+                }
+            }
+        }
+        &--tek {
+            img {
+                @include adaptive-value('width', 174.29, 156.86, 0, 1920, 1440);
+                @include adaptive-value('min-height', 40.92, 36.83, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 156.86, 131.16, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 36.83, 30.79, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 131.16, 83.94, 0, 767, 375);
+                    @include adaptive-value('min-height', 30.79, 19.71, 0, 767, 375);
+                }
+            }
+        }
+        &--rosatom {
+            img {
+                @include adaptive-value('width', 143, 125.12, 0, 1920, 1440);
+                @include adaptive-value('min-height', 64, 56, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('left', 0, -7, 0, 1439, 1280);
+                    @include adaptive-value('width', 125.12, 116.29, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 56, 48, 0, 1920, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('left', -7, 0, 0, 1279, 768);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 116.29, 74.43, 0, 767, 375);
+                    @include adaptive-value('min-height', 48, 30.72, 0, 767, 375);
+                }
+            }
+        }
+        &--hlmk {
+            img {
+                @include adaptive-value('width', 124, 107.83, 0, 1920, 1440);
+                @include adaptive-value('min-height', 69, 60, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 107.83, 108.46, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 60, 50, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('width', 108.46, 109.39, 0, 1439, 768);
+                    @include adaptive-value('min-height', 50, 50.43, 0, 1920, 768);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 109.39, 69.41, 0, 767, 375);
+                    @include adaptive-value('min-height', 50.43, 32, 0, 767, 375);
+                }
+            }
+        }
+        &--rosteh {
+            img {
+                @include adaptive-value('width', 166, 149.4, 0, 1920, 1440);
+                @include adaptive-value('min-height', 51, 45.9, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 149.4, 124.91, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 45.9, 38.38, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 124.91, 80, 0, 767, 375);
+                    @include adaptive-value('min-height', 38.38, 25, 0, 767, 375);
+                }
+            }
+        }
+        &--uralchem {
+            img {
+                @include adaptive-value('width', 205.71, 185.14, 0, 1920, 1440);
+                @include adaptive-value('min-height', 26, 23.4, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 185.14, 154.79, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 23.4, 19.56, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 154.79, 99, 0, 767, 375);
+                    @include adaptive-value('min-height', 19.56, 13, 0, 767, 375);
+                }
+            }
+        }
+        &--schlumberger {
+            img {
+                @include adaptive-value('width', 171, 153.9, 0, 1920, 1440);
+                @include adaptive-value('min-height', 38.86, 34.98, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 153.9, 129.13, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 34.98, 29.35, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 129.13, 82.64, 0, 767, 375);
+                    @include adaptive-value('min-height', 29.35, 18.78, 0, 767, 375);
+                }
+            }
+        }
+        &--mr {
+            img {
+                @include adaptive-value('left', -7, 0, 0, 1920, 1440);
+                @include adaptive-value('top', -2, 0, 0, 1920, 1440);
+                @include adaptive-value('width', 159.83, 145.13, 0, 1920, 1440);
+                @include adaptive-value('min-height', 35, 32, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 145.13, 127.87, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 32, 28, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 127.87, 82, 0, 767, 375);
+                    @include adaptive-value('min-height', 28, 18, 0, 767, 375);
+                }
+            }
+        }
+        &--coldy {
+            img {
+                @include adaptive-value('width', 145, 120.83, 0, 1920, 1440);
+                @include adaptive-value('min-height', 24, 20, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 120.83, 109.11, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 20, 18.06, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 109.11, 72, 0, 767, 375);
+                    @include adaptive-value('min-height', 18.06, 12, 0, 767, 375);
+                }
+            }
+        }
+        &--glavstroy {
+            img {
+                @include adaptive-value('left', 1, 0, 0, 1920, 1440);
+                @include adaptive-value('top', -2, 0, 0, 1920, 1440);
+                @include adaptive-value('width', 226.28, 193.95, 0, 1920, 1440);
+                @include adaptive-value('min-height', 28, 24, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 193.95, 170.27, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 24, 21.07, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 170.27, 107, 0, 767, 375);
+                    @include adaptive-value('min-height', 21.07, 12.76, 0, 767, 375);
+                }
+            }
+        }
+        &--vk {
+            img {
+                @include adaptive-value('width', 70, 63, 0, 1920, 1440);
+                @include adaptive-value('min-height', 70, 63, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 63, 52.67, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 63, 52.67, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 52.67, 33, 0, 767, 375);
+                    @include adaptive-value('min-height', 52.67, 34, 0, 767, 375);
+                }
+            }
+        }
+        &--open {
+            img {
+                @include adaptive-value('width', 205, 184.5, 0, 1920, 1440);
+                @include adaptive-value('min-height', 40, 36, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 184.5, 154.26, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 36, 30.1, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 154.26, 98, 0, 767, 375);
+                    @include adaptive-value('min-height', 30.1, 19, 0, 767, 375);
+                }
+            }
+        }
+        &--sber {
+            img {
+                @include adaptive-value('width', 149, 134.54, 0, 1920, 1440);
+                @include adaptive-value('min-height', 41, 36.9, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 134.54, 112.5, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 36.9, 30.85, 0, 1920, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('width', 112.5, 120.68, 0, 1439, 768);
+                    @include adaptive-value('min-height', 30.85, 33.1, 0, 1920, 768);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 120.68, 76.57, 0, 767, 375);
+                    @include adaptive-value('min-height', 33.1, 21, 0, 767, 375);
+                }
+            }
+        }
+        &--phs {
+            img {
+                @include adaptive-value('width', 177.96, 160.17, 0, 1920, 1440);
+                @include adaptive-value('min-height', 40.93, 36.84, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('width', 160.17, 133.91, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 36.84, 30.8, 0, 1920, 1280);
+                }
+
+                @include vp-767 {
+                    @include adaptive-value('width', 133.91, 85.71, 0, 767, 375);
+                    @include adaptive-value('min-height', 30.8, 19.71, 0, 767, 375);
+                }
+            }
+        }
+
+        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
+            min-height: size(180px);
+            &--severstal {
+                order: 1;
+                width: size(187px);
+                height: size(60px);
+            }
+            &--sibur {
+                order: 2;
+            }
+            &--uralchem {
+                order: 3;
+            }
+            &--rosteh {
+                order: 4;
+            }
+            &--hlmk {
+                order: 5;
+            }
+            &--rosatom {
+                order: 6;
+            }
+            &--tek {
+                order: 7;
+            }
+            &--phs {
+                order: 8;
+            }
+            &--schlumberger {
+                order: 9;
+            }
+            &--sber {
+                order: 10;
+            }
+            &--vk {
+                order: 11;
+            }
+            &--open {
+                order: 12;
+            }
+            &--mr {
+                order: 13;
+            }
+            &--coldy {
+                order: 14;
+            }
+            &--glavstroy {
+                order: 15;
+            }
+        }
+
+        @include vp-1279 {
+            &--severstal {
+                order: 1;
+            }
+
+            &--sibur {
+                order: 2;
+            }
+
+            &--uralchem {
+                order: 3;
+            }
+
+            &--rosteh {
+                order: 4;
+            }
+
+            &--hlmk {
+                order: 5;
+            }
+
+            &--rosatom {
+                order: 6;
+            }
+
+            &--tek {
+                order: 7;
+            }
+
+            &--phs {
+                order: 8;
+            }
+
+            &--schlumberger {
+                order: 9;
+            }
+
+            &--sber {
+                order: 10;
+            }
+
+            &--vk {
+                order: 11;
+            }
+
+            &--open {
+                order: 12;
+            }
+
+            &--mr {
+                order: 13;
+            }
+
+            &--coldy {
+                order: 14;
+            }
+
+            &--glavstroy {
+                order: 15;
+            }
+        }
+
+        @include vp-1439 {
+            @include adaptive-value('width', 250, 215, 0, 1439, 1280);
+            @include adaptive-value('min-height', 180, 150, 0, 1439, 1280);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('width', 215, 111, 0, 767, 375);
+            @include adaptive-value('min-height', 150, 100, 0, 767, 375);
+        }
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        &:focus-visible {
+            outline: none;
         }
     }
 
