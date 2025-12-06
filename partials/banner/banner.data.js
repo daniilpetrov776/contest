@@ -6,7 +6,7 @@ export const bannerContext = {
                 parts: [
                     { text: 'Формируем', textClass: 'banner__title-text', sprite: { name: 'wigle-icon', width: 44, height: 31, class: 'banner__title-icon banner__title-icon--wigle', sequence: 'scale, from-left, 0, 1.0, 1' }, textSequence: 'text, from-down, 20px, 1.2, 1' },
                     { br: true },
-                    { sprite: { name: 'heart-icon.png', width: 40, height: 40, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
+                    { sprite: { name: 'heart-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
                     { sprite: { name: 'buildings-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--buildings', alt: 'buildings' }, text: 'ЖК', textClass: 'banner__title-text' },
                     { br: true },
                     { sprite: { name: 'global-icon', width: 75, height: 62, class: 'banner__title-icon banner__title-icon--global', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'в digital - среде', textClass: 'banner__title-text banner__title-text--highlight' },
@@ -17,7 +17,7 @@ export const bannerContext = {
                 'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности бренда и сервисности.',
             descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
-                text: 'Подробнее',
+                text: 'подробнее',
                 href: '#',
                 sequence: 'text, from-down, 20px, 1.5, 15',
             },
@@ -85,7 +85,7 @@ export const bannerContext = {
                 'Разрабатываем приложения для мобильных устройств, решая реальные запросы пользователей.',
             descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
-                text: 'Подробнее',
+                text: 'подробнее',
                 href: '#',
                 sequence: 'slide, from-down, 20px, 1.2, 5',
             },
@@ -152,7 +152,7 @@ export const bannerContext = {
                 parts: [
                     { text: 'Формируем', textClass: 'banner__title-text', sprite: { name: 'wigle-icon', width: 44, height: 31, class: 'banner__title-icon banner__title-icon--wigle', sequence: 'scale, from-left, 0, 1.0, 1' }, textSequence: 'text, from-down, 20px, 1.2, 1' },
                     { br: true },
-                    { sprite: { name: 'heart-icon.png', width: 40, height: 40, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
+                    { sprite: { name: 'heart-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--heart', alt: 'heart' }, text: 'ценность бренда', textClass: 'banner__title-text' },
                     { sprite: { name: 'buildings-icon.png', width: 44, height: 44, class: 'banner__title-icon banner__title-icon--buildings', alt: 'buildings' }, text: 'ЖК', textClass: 'banner__title-text' },
                     { br: true },
                     { sprite: { name: 'global-icon', width: 75, height: 62, class: 'banner__title-icon banner__title-icon--global', sequence: 'scale, from-left, 0, 1.0, 1, shift' }, text: 'в digital - среде', textClass: 'banner__title-text banner__title-text--highlight' },
@@ -163,7 +163,7 @@ export const bannerContext = {
               'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности бренда и сервисности.',
             descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
-                text: 'Подробнее',
+                text: 'подробнее',
                 href: '#',
                 sequence: 'text, from-down, 20px, 1.5, 15',
             },
@@ -231,7 +231,7 @@ export const bannerContext = {
               'Разрабатываем приложения для мобильных устройств, решая реальные запросы пользователей.',
             descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
-                text: 'Подробнее',
+                text: 'подробнее',
                 href: '#',
                 sequence: 'slide, from-down, 20px, 1.2, 5',
             },
