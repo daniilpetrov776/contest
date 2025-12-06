@@ -6,7 +6,7 @@
         </h2>
         <ul class="clients__grid" role="list">
             {{#each items}}
-            <li class="clients__item">
+            <li class="clients__item clients__item--{{modifier}}">
                 <a class="clients__link" href="{{href}}" aria-label="{{ariaLabel}}">
                     <div class="clients__logo">
                         {{svg src=logo alt=name class="clients__logo-img" width="120" height="40" }}

@@ -79,12 +79,84 @@
         }
     }
 
+    &__logo-img {
+        @include adaptive-value('width', 293, 250, 0, 1920, 1440);
+        @include adaptive-value('min-height', 200, 180, 0, 1920, 1440);
+
+        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
+            min-height: size(180px);
+        }
+    }
+
     &__item {
         display: flex;
         align-items: center;
         justify-content: center;
         @include adaptive-value('width', 293, 250, 0, 1920, 1440);
         @include adaptive-value('min-height', 200, 180, 0, 1920, 1440);
+
+        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
+            min-height: size(180px);
+            &.clients__item--severstal {
+                order: 1;
+            }
+
+            &.clients__item--sibur {
+                order: 2;
+            }
+
+            &.clients__item--uralchem {
+                order: 3;
+            }
+
+            &.clients__item--rosteh {
+                order: 4;
+            }
+
+            &.clients__item--hlmk {
+                order: 5;
+            }
+
+            &.clients__item--rosatom {
+                order: 6;
+            }
+
+            &.clients__item--tek {
+                order: 7;
+            }
+
+            &.clients__item--phs {
+                order: 8;
+            }
+
+            &.clients__item--schlumberger {
+                order: 9;
+            }
+
+            &.clients__item--sber {
+                order: 10;
+            }
+
+            &.clients__item--vk {
+                order: 11;
+            }
+
+            &.clients__item--open {
+                order: 12;
+            }
+
+            &.clients__item--mr {
+                order: 13;
+            }
+
+            &.clients__item--coldy {
+                order: 14;
+            }
+
+            &.clients__item--glavstroy {
+                order: 15;
+            }
+        }
 
         @include vp-1439 {
             @include adaptive-value('width', 250, 215, 0, 1439, 1280);
