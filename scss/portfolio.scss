@@ -371,11 +371,11 @@
             aspect-ratio: 358 / 350;
             @include adaptive-value('border-radius', 30, 25, 0, 1439, 1280);
             @include adaptive-value('max-width', 447, 400.66, 0, 1439, 1280);
-            @include adaptive-value('height', 450.74, 400.66, 0, 1439, 1280);
+            @include adaptive-value('max-height', 450.74, 400.66, 0, 1439, 1280);
         }
         @include vp-1279 {
-            @include adaptive-value('max-width', 400.66, 356.59, 0, 1279, 768);
-            @include adaptive-value('height', 400.66, 349.58, 0, 1279, 768);
+            @include adaptive-value('max-width', 600, 356.59, 0, 1279, 768);
+            @include adaptive-value('max-height', 600, 349.58, 0, 1279, 768);
         }
     }
 
