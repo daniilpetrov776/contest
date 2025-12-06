@@ -8,7 +8,7 @@
         @include adaptive-value('padding-top', 0, 60, 0, 1279, 768);
     }
     @include vp-767 {
-        @include adaptive-value('padding-top', 80, 70, 0, 767, 375);
+        @include adaptive-value('padding-top', 80, 0, 0, 767, 375);
     }
 
     &__container {
@@ -20,11 +20,11 @@
         }
 
         @include vp-1279 {
-            @include adaptive-value('gap', 45, 10, 0, 1279, 768);
+            @include adaptive-value('gap', 45, 11, 0, 1279, 768);
         }
 
         @include vp-767 {
-            @include adaptive-value('gap', 60, 40, 0, 767, 375);
+            @include adaptive-value('gap', 60, 23, 0, 767, 375);
         }
     }
 
@@ -43,7 +43,12 @@
         }
 
         @include vp-1279 {
-            @include adaptive-value('padding-top', 20, 10, 0, 1279, 768);
+            @include adaptive-value('padding-top', 20, 12, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('gap', 24, 90, 0, 767, 375);
+            @include adaptive-value('padding-top', 12, 23, 0, 767, 375);
         }
 
         &::before {
@@ -57,6 +62,11 @@
             transform: translateX(-50%);
             z-index: 1;
             @include adaptive-value('top', 0, -10, 0, 1439, 1280);
+
+            @include vp-767 {
+                top: unset;
+                bottom: size(35px);
+            }
         }
 
         &::after {
@@ -115,6 +125,7 @@
         @include vp-767 {
             @include adaptive-value('font-size', 13, 12, 0, 767, 375);
             @include adaptive-value('line-height', 13 * 1.2, 12 * 1.2, 0, 767, 375);
+            order: 2;
         }
     }
 
@@ -139,6 +150,9 @@
             @include adaptive-value('line-height', 24 * 1.2, 20 * 1.2, 0, 1279, 768);
             @include adaptive-value('margin-bottom', 24, 20, 0, 1279, 768);
         }
+        @include vp-767 {
+            @include adaptive-value('margin-bottom', 20, 15, 0, 767, 375);
+        }
     }
 
     &__description {
@@ -148,10 +162,16 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         word-break: break-word;
-        max-width: size(480px);
+
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
-        @include adaptive-value('max-width', 480, 550, 0, 1920, 1440);
+        @include adaptive-value('max-width', 560, 550, 0, 1920, 1440);
+
+        @media (max-width: ($vp-1440)) {
+            br {
+                display: none;
+            }
+        }
 
         @include vp-1439 {
             @include adaptive-value('width', 550, 559, 0, 1439, 1280);
@@ -163,6 +183,12 @@
             @include adaptive-value('width', 550, 324, 0, 1279, 768);
             br {
                 display: none;
+            }
+
+            &:not(:last-child) {
+                @include vp-767 {
+                    margin: 0 0 size(8px);
+                }
             }
         }
 
@@ -202,6 +228,12 @@
 
                 @include vp-1279 {
                     grid-template-columns: repeat(2, minmax(0, 1fr));
+                    @include adaptive-value('row-gap', 70, 56, 0, 1279, 768);
+                }
+
+                @include vp-767 {
+                    grid-template-columns: 1fr;
+                    @include adaptive-value('row-gap', 56, 46, 0, 767, 375);
                 }
             }
         }
@@ -228,7 +260,7 @@
         @include vp-767 {
             &:not(:first-child) {
                 .portfolio__category-title {
-                    @include adaptive-value('margin-top', 80, 70, 0, 767, 375);
+                    @include adaptive-value('margin-top', 80, 0, 0, 767, 375);
                 }
             }
         }
@@ -306,15 +338,18 @@
             @include adaptive-value('gap', 24, 23, 0, 1439, 1280);
         }
 
+        @include vp-1279 {
+            @include adaptive-value('gap', 23, 20, 0, 1279, 768);
+        }
+
+        @include vp-767 {
+            @include adaptive-value('gap', 20, 14, 0, 767, 375);
+        }
+
         @include hover {
             .portfolio__image {
                 border-radius: size(70px);
                 transform: scale(1.01);
-
-                img {
-                    @include adaptive-value('width', 607, 447.74, 0, 1920, 1440);
-                    @include adaptive-value('height', 607, 450.74, 0, 1920, 1440);
-                }
 
                 @include vp-1439 {
                     border-radius: size(52px);
@@ -350,7 +385,8 @@
         }
 
         @include vp-767 {
-            @include adaptive-value('padding-left', 20, 15, 0, 767, 375);
+            @include adaptive-value('gap', 10, 5, 0, 767, 375);
+            @include adaptive-value('padding-left', 20, 10, 0, 767, 375);
         }
     }
 
@@ -368,14 +404,19 @@
         @include adaptive-value('max-width', 607, 447, 0, 1920, 1440);
         @include adaptive-value('max-height', 607, 450.74, 0, 1920, 1440);
         @include vp-1439 {
-            aspect-ratio: 358 / 350;
             @include adaptive-value('border-radius', 30, 25, 0, 1439, 1280);
             @include adaptive-value('max-width', 447, 400.66, 0, 1439, 1280);
             @include adaptive-value('max-height', 450.74, 400.66, 0, 1439, 1280);
         }
         @include vp-1279 {
+            @include adaptive-value('border-radius', 25, 20, 0, 1279, 768);
             @include adaptive-value('max-width', 600, 356.59, 0, 1279, 768);
-            @include adaptive-value('max-height', 600, 349.58, 0, 1279, 768);
+            @include adaptive-value('max-height', 600, 350.58, 0, 1279, 768);
+        }
+        @include vp-767 {
+            @include adaptive-value('border-radius', 20, 15, 0, 767, 375);
+            @include adaptive-value('max-width', 356.59, 315.52, 0, 767, 375);
+            @include adaptive-value('max-height', 350.58, 315.52, 0, 767, 375);
         }
     }
 
@@ -401,6 +442,11 @@
             @include adaptive-value('font-size', 18, 16, 0, 1439, 1280);
             @include adaptive-value('line-height', 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
         }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 18, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 18 * 1.25, 15 * 1.25, 0, 1279, 768);
+        }
     }
 
     &__card-meta {
@@ -420,8 +466,12 @@
             @include adaptive-value('margin-top', 20, 25, 0, 1439, 1280);
         }
 
+        @include vp-1279 {
+            @include adaptive-value('margin-top', 25, 37, 0, 1279, 768);
+        }
+
         @include vp-767 {
-            margin: 0;
+            @include adaptive-value('margin-top', 37, 17, 0, 767, 375);
         }
     }
 
@@ -429,6 +479,9 @@
         @include adaptive-value('min-width', 269, 234, 0, 1920, 1440);
         @include vp-1439 {
             @include adaptive-value('min-width', 234, 214, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('min-width', 214, 203, 0, 1279, 768);
         }
 
         @include vp-767 {
