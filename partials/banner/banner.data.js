@@ -14,7 +14,7 @@ export const bannerContext = {
             },
             titleSequence: 'text, from-down, 10px, 0.5, 2',
             description:
-                'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности бренда и сервисности.',
+                'Создаем digital-пространство для девелоперов и проектов ЖК, находя баланс идентичности <br> бренда и сервисности.',
             descriptionSequence: 'text, from-down, 30px, 1.0, 3',
             button: {
                 text: 'подробнее',

@@ -34,7 +34,8 @@
             @include adaptive-value('min-height', 650, 580, 0, 1439, 1280);
         }
         @include vp-1279 {
-            @include adaptive-value('border-radius', 25, 20, 0, 1279, 768);
+            @include adaptive-value('border-radius', 25, 25, 0, 1279, 768);
+            @include adaptive-value('padding-top', 121, 60, 0, 1279, 768);
             @include adaptive-value('padding-left', 30, 25, 0, 1279, 768);
             @include adaptive-value('padding-right', 30, 25, 0, 1279, 768);
             @include adaptive-value('padding-bottom', 30, 25, 0, 1279, 768);
@@ -68,10 +69,10 @@
         @include adaptive-value('top', -3, 0, 0, 1920, 1440);
         @include adaptive-value('gap', 29, 24, 0, 1920, 1440);
         @include vp-1439 {
-            @include adaptive-value('gap', 24, 24, 0, 1439, 1280);
+            @include adaptive-value('gap', 24, 23, 0, 1439, 1280);
         }
         @include vp-1279 {
-            @include adaptive-value('gap', 24, 12, 0, 1279, 768);
+            @include adaptive-value('gap', 24, 20, 0, 1279, 768);
         }
     }
 
@@ -101,7 +102,7 @@
         @include adaptive-value('gap', 5, 0, 0, 1920, 1440);
 
         @include vp-1439 {
-            @include adaptive-value('gap', 5, 4, 0, 1439, 768);
+            @include adaptive-value('gap', 5, 0, 0, 1439, 1280);
         }
         &-line {
             display: flex;
@@ -111,12 +112,24 @@
             @include adaptive-value('gap', 1, 2, 0, 1920, 1440);
 
             @include vp-1439 {
-                @include adaptive-value('gap', 5, 4, 0, 1439, 768);
+                @include adaptive-value('gap', 5, 2, 0, 1439, 1280);
+            }
+
+            @include vp-1279 {
+                @include adaptive-value('gap', 1, 2, 0, 1279, 768);
             }
 
             &:last-child {
                 display: inline-flex;
                 @include adaptive-value('margin-top', 7, 6, 0, 1920, 1440);
+
+                @include vp-1439 {
+                    @include adaptive-value('margin-top', 6, 6, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('margin-top', 7, 5, 0, 1279, 768);
+                }
             }
         }
         &-text {
@@ -135,6 +148,11 @@
                 @include adaptive-value('line-height', 36 * 1.15, 32 * 1.15, 0, 1439, 1280);
             }
 
+            @include vp-1279 {
+                @include adaptive-value('font-size', 32, 28, 0, 1279, 768);
+                @include adaptive-value('line-height', 32 * 1.15, 28 * 1.15, 0, 1279, 768);
+            }
+
             &--highlight {
                 display: inline-flex;
                 align-items: center;
@@ -149,10 +167,17 @@
                 @include adaptive-value('left', 0, -1, 0, 1920, 1440);
 
                 @include vp-1439 {
-                    @include adaptive-value('border-radius', 154, 120, 0, 1439, 768);
-                    @include adaptive-value('padding-right', 25, 18, 0, 1439, 768);
-                    @include adaptive-value('padding-left', 25, 18, 0, 1439, 768);
-                    @include adaptive-value('min-height', 48.7, 38, 0, 1439, 768);
+                    @include adaptive-value('border-radius', 154, 120, 0, 1439, 1280);
+                    @include adaptive-value('padding-right', 25, 22, 0, 1439, 1280);
+                    @include adaptive-value('padding-left', 25, 21, 0, 1439, 1280);
+                    @include adaptive-value('min-height', 48.7, 43.88, 0, 1439, 1280);
+                    @include adaptive-value('left', -1, -3, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('min-height', 43.88, 37.99, 0, 1279, 768);
+                    @include adaptive-value('padding-right', 21, 20, 0, 1279, 768);
+                    @include adaptive-value('padding-left', 20, 19, 0, 1279, 768);
                 }
             }
         }
@@ -160,23 +185,33 @@
         &-icon {
             &--wigle {
                 position: relative;
-                left: size(11px);
                 @include adaptive-value('width', 44, 40, 0, 1920, 1440);
                 @include adaptive-value('height', 36, 31, 0, 1920, 1440);
+                @include adaptive-value('left', 11, 11, 0, 1920, 1440);
                 @include vp-1439 {
-                    @include adaptive-value('width', 40, 36, 0, 1439, 768);
-                    @include adaptive-value('height', 31, 29, 0, 1439, 768);
+                    @include adaptive-value('width', 40, 36, 0, 1439, 1280);
+                    @include adaptive-value('height', 31, 29, 0, 1439, 1280);
+                    @include adaptive-value('left', 11, 10, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('left', 8, 7, 0, 1279, 768);
                 }
             }
             &--heart {
                 position: relative;
-                @include adaptive-value('top', 0, 2, 0, 1920, 1440);
+                @include adaptive-value('top', 2, 3, 0, 1920, 1440);
                 @include adaptive-value('left', 0, 0, 0, 1920, 1440);
                 @include adaptive-value('width', 48, 43, 0, 1920, 1440);
                 @include adaptive-value('height', 48, 43, 0, 1920, 1440);
                 @include vp-1439 {
-                    @include adaptive-value('width', 40, 32, 0, 1439, 768);
-                    @include adaptive-value('height', 40, 32, 0, 1439, 768);
+                    @include adaptive-value('width', 40, 39, 0, 1439, 1280);
+                    @include adaptive-value('height', 40, 39, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('width', 32, 34, 0, 1439, 1280);
+                    @include adaptive-value('height', 32, 34, 0, 1439, 1280);
                 }
             }
             &--buildings {
@@ -185,8 +220,15 @@
                 @include adaptive-value('width', 44, 40, 0, 1920, 1440);
                 @include adaptive-value('height', 44, 40, 0, 1920, 1440);
                 @include vp-1439 {
-                    @include adaptive-value('width', 40, 32, 0, 1439, 768);
-                    @include adaptive-value('height', 40, 32, 0, 1439, 768);
+                    @include adaptive-value('width', 40, 32, 0, 1439, 1280);
+                    @include adaptive-value('height', 40, 32, 0, 1439, 1280);
+                    @include adaptive-value('margin-left', 9, 11, 0, 1439, 1280);
+                    @include adaptive-value('margin-right', 3, 3, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('margin-left', 9, 4, 0, 1279, 768);
+                    @include adaptive-value('margin-right', 1, 2, 0, 1279, 768);
                 }
             }
             &--global {
@@ -195,8 +237,13 @@
                 @include adaptive-value('width', 74.91, 64.26, 0, 1920, 1440);
                 @include adaptive-value('height', 61.99, 48.71, 0, 1920, 1440);
                 @include vp-1439 {
-                    @include adaptive-value('width', 64.2, 50, 0, 1439, 768);
-                    @include adaptive-value('height', 48.7, 38, 0, 1439, 768);
+                    @include adaptive-value('width', 64.2, 57.3, 0, 1439, 1280);
+                    @include adaptive-value('height', 48.7, 43.8, 0, 1439, 1280);
+                }
+
+                @include vp-1279 {
+                    @include adaptive-value('width', 57.3, 49.96, 0, 1279, 768);
+                    @include adaptive-value('height', 43.8, 37.99, 0, 1279, 768);
                 }
             }
             &--phone {
@@ -328,15 +375,15 @@
             @include adaptive-value('width', 510, 380, 0, 1920, 1440);
             @include adaptive-value('height', 324, 240, 0, 1920, 1440);
             @include vp-1439 {
-                @include adaptive-value('top', 128, 122, 0, 1439, 1280);
-                @include adaptive-value('right', 127, 111, 0, 1439, 1280);
-                @include adaptive-value('width', 298, 249, 0, 1439, 1280);
+                @include adaptive-value('top', 128, 104, 0, 1439, 1280);
+                @include adaptive-value('right', 127, 23, 0, 1439, 1280);
+                @include adaptive-value('width', 298, 310, 0, 1439, 1280);
                 @include adaptive-value('height', 240, 201, 0, 1439, 1280);
             }
             @include vp-1279 {
-                @include adaptive-value('top', 122, 138, 0, 1279, 768);
-                @include adaptive-value('right', 111, 62, 0, 1279, 768);
-                @include adaptive-value('width', 249, 164, 0, 1279, 768);
+                @include adaptive-value('top', 122, 126, 0, 1279, 768);
+                @include adaptive-value('right', 111, 4, 0, 1279, 768);
+                @include adaptive-value('width', 249, 205, 0, 1279, 768);
                 @include adaptive-value('height', 201, 133, 0, 1279, 768);
             }
         }
@@ -500,20 +547,38 @@
         word-break: break-word;
         font-weight: 400;
         letter-spacing: -0.02em;
+        br {
+            display: none;
+        }
         @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
         @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
         @include adaptive-value('max-width', 530, 464, 0, 1920, 1440);
         @include vp-1439 {
-            @include adaptive-value('font-size', 16, 15, 0, 1439, 768);
-            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1439, 768);
-            @include adaptive-value('max-width', 464, 320, 0, 1439, 768);
+            @include adaptive-value('font-size', 16, 16, 0, 1439, 1280);
+            @include adaptive-value('line-height', 16 * 1.4, 16 * 1.4, 0, 1439, 1280);
+            @include adaptive-value('max-width', 464, 464, 0, 1439, 1280);
+        }
+
+        @media (max-width: $vp-768) {
+            br {
+                display: block;
+            }
+        }
+
+        @include vp-1279 {
+            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
+            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+            @include adaptive-value('max-width', 464, 332, 0, 1279, 768);
         }
     }
 
     &__button {
         @include adaptive-value('min-width', 257, 224, 0, 1920, 1440);
         @include vp-1439 {
-            @include adaptive-value('min-width', 224, 193, 0, 1439, 768);
+            @include adaptive-value('min-width', 224, 204, 0, 1439, 1280);
+        }
+        @include vp-1279 {
+            @include adaptive-value('min-width', 204, 193, 0, 1279, 768);
         }
     }
 
@@ -532,11 +597,17 @@
 
             @include vp-1439 {
                 @include adaptive-value('bottom', 40, 30, 0, 1439, 1280);
-                @include adaptive-value('left', 36, 30, 0, 1439, 1280);
+                @include adaptive-value('left', 36, 26, 0, 1439, 1280);
             }
 
             @include vp-1279 {
                 @include adaptive-value('bottom', 30, 25, 0, 1279, 768);
+            }
+
+            @media (max-width: $vp-768) {
+                left: 50%;
+                transform: translateX(-50%);
+                gap: size(5px);
             }
 
             @include vp-767 {
@@ -564,6 +635,16 @@
             @include vp-1439 {
                 @include adaptive-value('width', 10, 8, 0, 1439, 1280);
                 @include adaptive-value('height', 10, 8, 0, 1439, 1280);
+            }
+
+            @include vp-1279 {
+                @include adaptive-value('width', 8, 6, 0, 1279, 768);
+                @include adaptive-value('height', 8, 6, 0, 1279, 768);
+            }
+            @media (max-width: $vp-768) {
+                &.swiper-pagination-bullet {
+                    margin: 0;
+                }
             }
 
             @include vp-767 {
