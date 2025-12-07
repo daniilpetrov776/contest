@@ -60,7 +60,7 @@
             width: 100%;
             height: size(1px);
             transform: translateX(-50%);
-            z-index: 1;
+            z-index: 0;
             @include adaptive-value('top', 0, -10, 0, 1439, 1280);
 
             @include vp-767 {
@@ -78,7 +78,7 @@
             width: size(1px);
             height: 100%;
             transform: translateX(-50%);
-            z-index: 1;
+            z-index: 0;
         }
 
         @include vp-767 {

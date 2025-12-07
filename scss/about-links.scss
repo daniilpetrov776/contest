@@ -35,13 +35,26 @@
         @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
         @include adaptive-value('min-height', 52, 48, 0, 1920, 1440);
 
+        &.secondary-button {
+            padding: size(14px) size(12px);
+            @include adaptive-value('min-height', 52, 48, 0, 1920, 1440);
+        }
+
         @include vp-1439 {
             @include adaptive-value('border-radius', 15, 12, 0, 1439, 1280);
+            @include adaptive-value('min-height', 48, 45, 0, 1439, 1280);
+
+            &.secondary-button {
+                @include adaptive-value('min-height', 48, 45, 0, 1439, 1280);
+            }
         }
 
         @include vp-1279 {
             @include adaptive-value('font-size', 14, 13, 0, 1279, 768);
             @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1279, 768);
+            &.secondary-button {
+                padding: size(14.5px) size(14px);
+            }
         }
 
         @include vp-767 {

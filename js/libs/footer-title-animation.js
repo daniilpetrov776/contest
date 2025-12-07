@@ -339,34 +339,38 @@ function initFooterTitleAnimation() {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            const currentScrollY = window.scrollY
-            const scrollingDown = currentScrollY > lastScrollY
+            // Используем requestAnimationFrame для отложенного чтения scrollY
+            // чтобы избежать forced reflow
+            requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY
+                const scrollingDown = currentScrollY > lastScrollY
 
-            if (entry.isIntersecting) {
-                // Элемент появился в viewport
-                // Если элемент был виден и мы анимируем исчезновение, останавливаем и запускаем появление
-                if (wasVisible && isAnimating) {
-                    // Проверяем, идет ли анимация исчезновения (слова двигаются вниз)
-                    // Если да, останавливаем и запускаем появление
-                    startShowAnimation(!scrollingDown)
-                } else if (!wasVisible || !isAnimating) {
-                    // Элемент только появился или анимация завершена
-                    startShowAnimation(!scrollingDown)
+                if (entry.isIntersecting) {
+                    // Элемент появился в viewport
+                    // Если элемент был виден и мы анимируем исчезновение, останавливаем и запускаем появление
+                    if (wasVisible && isAnimating) {
+                        // Проверяем, идет ли анимация исчезновения (слова двигаются вниз)
+                        // Если да, останавливаем и запускаем появление
+                        startShowAnimation(!scrollingDown)
+                    } else if (!wasVisible || !isAnimating) {
+                        // Элемент только появился или анимация завершена
+                        startShowAnimation(!scrollingDown)
+                    }
+                } else if (!entry.isIntersecting) {
+                    // Элемент вышел из viewport
+                    // Если элемент был виден и мы анимируем появление, останавливаем и запускаем исчезновение
+                    if (wasVisible && isAnimating) {
+                        // Проверяем, идет ли анимация появления (слова двигаются вверх)
+                        // Если да, останавливаем и запускаем исчезновение
+                        startHideAnimation()
+                    } else if (wasVisible && !isAnimating) {
+                        // Элемент был виден, но анимация завершена - запускаем исчезновение
+                        startHideAnimation()
+                    }
                 }
-            } else if (!entry.isIntersecting) {
-                // Элемент вышел из viewport
-                // Если элемент был виден и мы анимируем появление, останавливаем и запускаем исчезновение
-                if (wasVisible && isAnimating) {
-                    // Проверяем, идет ли анимация появления (слова двигаются вверх)
-                    // Если да, останавливаем и запускаем исчезновение
-                    startHideAnimation()
-                } else if (wasVisible && !isAnimating) {
-                    // Элемент был виден, но анимация завершена - запускаем исчезновение
-                    startHideAnimation()
-                }
-            }
 
-            lastScrollY = currentScrollY
+                lastScrollY = currentScrollY
+            })
         })
     }, observerOptions)
 
@@ -379,18 +383,21 @@ function initFooterTitleAnimation() {
         const scrollingDown = currentScrollY > lastKnownScrollY
 
         // Если анимация идет и направление скролла изменилось, проверяем состояние
+        // Используем requestAnimationFrame для отложенного чтения layout свойств
         if (isAnimating) {
-            const rect = footerTitle.getBoundingClientRect()
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+            requestAnimationFrame(() => {
+                const rect = footerTitle.getBoundingClientRect()
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0
 
-            // Если элемент виден, но мы анимируем исчезновение, переключаем на появление
-            if (isVisible && !wasVisible) {
-                startShowAnimation(!scrollingDown)
-            }
-            // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
-            else if (!isVisible && wasVisible) {
-                startHideAnimation()
-            }
+                // Если элемент виден, но мы анимируем исчезновение, переключаем на появление
+                if (isVisible && !wasVisible) {
+                    startShowAnimation(!scrollingDown)
+                }
+                // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
+                else if (!isVisible && wasVisible) {
+                    startHideAnimation()
+                }
+            })
         }
 
         lastKnownScrollY = currentScrollY
@@ -602,18 +609,21 @@ function initFooterPolicyAnimation() {
 
     window.addEventListener('scroll', () => {
         // Если анимация идет, проверяем состояние
+        // Используем requestAnimationFrame для отложенного чтения layout свойств
         if (isAnimating) {
-            const rect = footerPolicy.getBoundingClientRect()
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+            requestAnimationFrame(() => {
+                const rect = footerPolicy.getBoundingClientRect()
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0
 
-            // Если элемент виден, но мы анимируем исчезновение, переключаем на появление
-            if (isVisible && !wasVisible) {
-                startShowAnimation()
-            }
-            // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
-            else if (!isVisible && wasVisible) {
-                startHideAnimation()
-            }
+                // Если элемент виден, но мы анимируем исчезновение, переключаем на появление
+                if (isVisible && !wasVisible) {
+                    startShowAnimation()
+                }
+                // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
+                else if (!isVisible && wasVisible) {
+                    startHideAnimation()
+                }
+            })
         }
 
         clearTimeout(scrollTimeout)

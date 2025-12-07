@@ -168,21 +168,29 @@ function setInitialStates(slide) {
                 if (isHorizontal && shiftLine) {
                     const parentLine = element.closest('.banner__title-line')
                     if (parentLine) {
-                        // Временно устанавливаем scale: 1 для измерения ширины
-                        const originalVisibility = element.style.visibility
-                        gsap.set(element, {
-                            scale: 1,
-                            visibility: 'hidden',
-                        })
-                        const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0
-                        gsap.set(element, {
-                            scale: 0,
-                            visibility: originalVisibility || 'visible',
-                        })
+                        // Используем requestAnimationFrame для отложенного чтения layout свойств
+                        // чтобы избежать forced reflow
+                        requestAnimationFrame(() => {
+                            // Временно устанавливаем scale: 1 для измерения ширины
+                            const originalVisibility = element.style.visibility
+                            gsap.set(element, {
+                                scale: 1,
+                                visibility: 'hidden',
+                            })
+                            
+                            // Читаем ширину в следующем кадре после применения стилей
+                            requestAnimationFrame(() => {
+                                const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0
+                                gsap.set(element, {
+                                    scale: 0,
+                                    visibility: originalVisibility || 'visible',
+                                })
 
-                        const initialTranslateX = direction === 'from-left' ? -elementWidth : elementWidth
-                        gsap.set(parentLine, {
-                            x: initialTranslateX,
+                                const initialTranslateX = direction === 'from-left' ? -elementWidth : elementWidth
+                                gsap.set(parentLine, {
+                                    x: initialTranslateX,
+                                })
+                            })
                         })
                     }
                 }

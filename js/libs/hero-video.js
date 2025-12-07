@@ -14,7 +14,7 @@ function initHeroVideo() {
     let currentAnimation = null
 
     // Константы
-    const DESKTOP_MIN_WIDTH = 1280
+    const DESKTOP_MIN_WIDTH = 768
     const MAX_WIDTH = 100
     const MAX_HEIGHT = 90
     const STEP_SIZE = 25
@@ -186,35 +186,73 @@ function initHeroVideo() {
             e.preventDefault()
         }
 
+        // Предотвращаем всплытие события от самого видео элемента
+        if (e.target === mutedVideo || e.target === soundVideo) {
+            e.stopPropagation()
+        }
+
         // Работает только на десктопе
         if (!checkIsDesktop()) {
             // На планшете и мобилке просто переключаем звук без изменения размера
             if (!isPlayingWithSound) {
                 isPlayingWithSound = true
-                mutedVideo.pause()
+
+                // Останавливаем muted видео
+                if (!mutedVideo.paused) {
+                    mutedVideo.pause()
+                }
                 mutedVideo.style.display = 'none'
+
+                // Показываем и настраиваем видео со звуком
                 soundVideo.style.display = 'block'
                 soundVideo.currentTime = 0
                 soundVideo.muted = false
-                soundVideo.play().catch((error) => {
-                    console.error('Ошибка воспроизведения видео:', error)
-                })
+
+                // Ждем готовности видео перед воспроизведением
+                const playSoundVideo = () => {
+                    // Используем requestAnimationFrame для гарантии, что pause() завершен
+                    requestAnimationFrame(() => {
+                        if (soundVideo.readyState >= 2) {
+                            soundVideo.play().catch((error) => {
+                                // Игнорируем ошибку AbortError, так как она может возникнуть при быстром переключении
+                                if (error.name !== 'AbortError') {
+                                    console.error('Ошибка воспроизведения видео:', error)
+                                }
+                            })
+                        } else {
+                            soundVideo.addEventListener('loadeddata', playSoundVideo, { once: true })
+                        }
+                    })
+                }
+
+                playSoundVideo()
             } else {
                 if (!soundVideo.paused) {
                     soundVideo.pause()
                 } else {
-                    soundVideo.play().catch((error) => {
-                        console.error('Ошибка воспроизведения видео:', error)
+                    // Проверяем готовность перед воспроизведением
+                    requestAnimationFrame(() => {
+                        if (soundVideo.readyState >= 2) {
+                            soundVideo.play().catch((error) => {
+                                // Игнорируем ошибку AbortError
+                                if (error.name !== 'AbortError') {
+                                    console.error('Ошибка воспроизведения видео:', error)
+                                }
+                            })
+                        } else {
+                            soundVideo.addEventListener('loadeddata', () => {
+                                soundVideo.play().catch((error) => {
+                                    if (error.name !== 'AbortError') {
+                                        console.error('Ошибка воспроизведения видео:', error)
+                                    }
+                                })
+                            }, { once: true })
+                        }
                     })
                 }
             }
             updateAriaLabel()
             return
-        }
-
-        // Предотвращаем всплытие события от самого видео элемента
-        if (e.target === mutedVideo || e.target === soundVideo) {
-            e.stopPropagation()
         }
 
         // Если видео увеличено - уменьшаем и управляем воспроизведением

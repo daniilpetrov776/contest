@@ -4,12 +4,12 @@ import handlebars from 'vite-plugin-handlebars'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { imageHelpers } from './js/handlebars-helpers.js'
+import { bannerContext } from './partials/banner/banner.data'
+import { clientsContext } from './partials/clients/clients.data'
+import { footerContext } from './partials/footer/footer.data'
 import { headerContext } from './partials/header/header.data'
 import { heroContext } from './partials/hero/hero.data'
 import { portfolioContext } from './partials/portfolio/portfolio.data'
-import { bannerContext } from './partials/banner/banner.data'
-import { footerContext } from './partials/footer/footer.data'
-import { clientsContext } from './partials/clients/clients.data'
 
 const templateContext = {
     header: headerContext,
@@ -39,12 +39,15 @@ export default defineConfig({
         })
     ],
     build: {
-        minify: false,
+        minify: 'esbuild', // Включаем минификацию для уменьшения размера CSS
+        cssMinify: true, // Минификация CSS
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
             },
         },
+        // Оптимизация CSS
+        cssCodeSplit: true, // Разделение CSS на чанки
     },
     server: {
         port: 3000,

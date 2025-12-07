@@ -30,19 +30,21 @@
                     loop
                     playsinline
                     preload="auto"
+                    fetchpriority="high"
                     poster="/images/video-preview.png"
                 >
-                    <source src="/videos/hero-no-sound.mp4" type="video/mp4" />
+                    <source src="/videos/hero-no-sound.mp4" type="video/mp4" fetchpriority="high" />
                 </video>
                 <video
                     class="hero__video-element hero__video-element--sound"
                     muted
                     loop
                     playsinline
-                    preload="auto"
+                    preload="none"
+                    fetchpriority="high"
                     poster="/images/video-preview.png"
                 >
-                    <source src="/videos/hero-sound.mp4" type="video/mp4" />
+                    <source src="/videos/hero-sound.mp4" type="video/mp4" fetchpriority="high" />
                 </video>
                 <div class="hero__video-block"></div>
             </div>

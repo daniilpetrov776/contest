@@ -13,8 +13,14 @@ function initHeroAfterAnimation() {
     })
 
     // Анимация при загрузке - вычисляем начальную высоту в процентах
+    // Кэшируем высоту hero для избежания повторных чтений layout свойств
+    let cachedHeroHeight = null
     const getInitialHeightPercent = () => {
-        const heroHeight = hero.offsetHeight
+        // Кэшируем высоту при первом вызове
+        if (cachedHeroHeight === null) {
+            cachedHeroHeight = hero.offsetHeight
+        }
+        const heroHeight = cachedHeroHeight
         const isTablet = window.innerWidth >= 768 && window.innerWidth < 1440
         const initialHeightPx = isTablet ? 120 : 130
         return (initialHeightPx / heroHeight) * 100
@@ -48,8 +54,12 @@ function initHeroAfterAnimation() {
             return
         }
 
-        // Получаем высоту hero контейнера
-        const heroHeight = hero.offsetHeight
+        // Используем кэшированную высоту hero контейнера
+        // Обновляем кэш только при изменении размера окна
+        if (cachedHeroHeight === null) {
+            cachedHeroHeight = hero.offsetHeight
+        }
+        const heroHeight = cachedHeroHeight
 
         // Получаем начальную высоту в процентах от контейнера
         const isTablet = window.innerWidth >= 768 && window.innerWidth < 1440
@@ -107,7 +117,18 @@ function initHeroAfterAnimation() {
             cancelAnimationFrame(scrollTimeout)
         }
         scrollTimeout = requestAnimationFrame(handleScroll)
-    })
+    }, { passive: true })
+
+    // Обновляем кэш высоты при изменении размера окна
+    let resizeTimeout
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout)
+        }
+        resizeTimeout = setTimeout(() => {
+            cachedHeroHeight = hero.offsetHeight
+        }, 250)
+    }, { passive: true })
 }
 
 // Запускаем анимацию после загрузки DOM
