@@ -7,7 +7,7 @@
 
     <div class="header__header-right">
       <nav class="header__nav" aria-label="{{nav.ariaLabel}}">
-        <ul class="header__menu" data-animate-children="-30px,1.2" role="list">
+        <ul class="header__menu" data-animate-children="-30px,1.2">
           {{#each nav.items}}
           <li class="header__menu-item">
             <a class="header__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0"> {{label}} </a>
@@ -35,7 +35,7 @@
   </div>
   <div class="header__header-menu header-menu">
     <nav class="header-menu__header-menu-nav" aria-label="{{nav.ariaLabel}}">
-      <ul class="header-menu__menu-list" role="list">
+      <ul class="header-menu__menu-list">
         {{#each nav.items}}
         <li class="header-menu__menu-item">
           <a class="header-menu__menu-link" href="{{href}}" aria-label="{{ariaLabel}}" tabindex="0"> {{label}} </a>

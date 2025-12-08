@@ -4,10 +4,10 @@
     <div class="hero__static-wrapper">
       <div class="hero__header">
         <h1 class="hero__title" data-animate-element="30px,1.2" id="hero-title">
-          Creative digital <br />
+          Creative digital <br>
           production
         </h1>
-        <ul class="hero__socials socials" data-animate-children="-30px,1.2" role="list">
+        <ul class="hero__socials socials" data-animate-children="-30px,1.2">
           {{#each socials}}
           <li class="hero__socials-item socials__item">
             <a class="hero__socials-link socials__link" href="#">
@@ -30,10 +30,9 @@
           loop
           playsinline
           preload="auto"
-          fetchpriority="high"
           poster="/images/video-preview.png"
         >
-          <source src="/videos/hero-no-sound.mp4" type="video/mp4" fetchpriority="high" />
+          <source src="/videos/hero-no-sound.mp4" type="video/mp4">
         </video>
         <video
           class="hero__video-element hero__video-element--sound"
@@ -41,10 +40,9 @@
           loop
           playsinline
           preload="none"
-          fetchpriority="high"
           poster="/images/video-preview.png"
         >
-          <source src="/videos/hero-sound.mp4" type="video/mp4" fetchpriority="high" />
+          <source src="/videos/hero-sound.mp4" type="video/mp4">
         </video>
         <div class="hero__video-block"></div>
       </div>
@@ -54,7 +52,7 @@
             <span class="hero__years-number">{{footer.left.years}}</span>
           </div>
           <span class="hero__years-label">{{footer.left.yearsLabel}}</span>
-          <p class="hero__footer-description">лучший креативный <br />разработчик для b2b</p>
+          <p class="hero__footer-description">лучший креативный <br>разработчик для b2b</p>
         </div>
         <div class="hero__footer-contacts">
           <div class="hero__footer-contacts-item">
@@ -80,7 +78,7 @@
               {{/each}}
             </div>
             <p class="about-links__description">
-              Презентация <br />
+              Презентация <br>
               компании
             </p>
           </div>

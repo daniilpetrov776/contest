@@ -11,10 +11,10 @@
       {{#if contacts}}
       <div class="footer__column-wrapper">
         <p class="footer__description">
-          Создаем качественный digital-продукт на базе <br />стратегии, креатива и технологий
+          Создаем качественный digital-продукт на базе <br>стратегии, креатива и технологий
         </p>
         <div class="footer__contacts">
-          <ul class="footer__contacts-list" role="list">
+          <ul class="footer__contacts-list">
             {{#if contacts.email}}
             <li class="footer__contacts-item">
               <a class="footer__contacts-link" href="{{contacts.email.href}}">{{contacts.email.value}}</a>
@@ -40,7 +40,7 @@
       </div>
       {{/if}} {{#if social}}
       <h3 class="footer__socials-title visually-hidden">{{social.title}}</h3>
-      <ul class="socials footer__socials" role="list">
+      <ul class="socials footer__socials">
         {{#each social.items}}
         <li class="socials__item">
           <a class="socials__link" href="{{href}}" aria-label="{{ariaLabel}}" target="_blank" rel="noopener noreferrer"
@@ -60,7 +60,7 @@
         </div>
 
         <p class="about-links__description">
-          Презентация <br />
+          Презентация <br>
           компании
         </p>
       </div>
@@ -69,8 +69,8 @@
 
     <div class="footer__bottom">
       <h2 class="footer__title" data-scroll-animation="from-down, 150px, 1.3, 0.15">
-        сreative <br />
-        digital <br />production
+        сreative <br>
+        digital <br>production
       </h2>
       <a
         href="#"

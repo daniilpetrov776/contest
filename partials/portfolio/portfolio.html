@@ -5,7 +5,7 @@
       <p class="portfolio__label">{{label}}</p>
       <div class="portfolio__intro">
         <h2 class="portfolio__title" id="portfolio-title">
-          Аналитика, брендинг <br />
+          Аналитика, брендинг <br>
           и разработка для B2B
         </h2>
         <p class="portfolio__description portfolio__description--mobile">{{mobileDescription}}</p>
@@ -14,7 +14,7 @@
     </header>
 
     <div class="portfolio__grid-wrapper portfolio__grid-wrapper--desktop">
-      <ul class="portfolio__grid portfolio__grid--desktop" role="list">
+      <ul class="portfolio__grid portfolio__grid--desktop">
         {{#each desktopItems}}
         <li class="portfolio__item">
           <a class="portfolio__card" href="{{href}}">
@@ -35,7 +35,7 @@
       {{#each categories}}
       <div class="portfolio__category swiper">
         <h3 class="portfolio__category-title">{{title}}</h3>
-        <ul class="portfolio__grid swiper-wrapper" role="list">
+        <ul class="portfolio__grid swiper-wrapper">
           {{#each items}}
           <li class="portfolio__item swiper-slide">
             <a class="portfolio__card" href="{{href}}">
