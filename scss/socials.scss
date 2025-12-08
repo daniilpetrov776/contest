@@ -4,40 +4,40 @@
   align-items: flex-start;
   justify-content: flex-end;
   gap: calc(10px / 16px * 1rem);
+}
 
-  &__link {
-    display: flex;
-    flex-flow: wrap row;
-    align-items: center;
-    gap: calc(10px / 16px * 1rem);
-    width: 100%;
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s $smooth, opacity 0.3s $smooth;
+.socials__link {
+  display: flex;
+  flex-flow: wrap row;
+  align-items: center;
+  gap: calc(10px / 16px * 1rem);
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s $smooth, opacity 0.3s $smooth;
 
-    @include hover {
-      .socials__icon-wrapper {
-        background-color: $highlight;
-      }
-    }
-
-    &:focus-visible {
-      .socials__icon-wrapper {
-        background-color: $highlight;
-      }
-    }
-
-    &:active {
-      opacity: 0.8;
-
-      .socials__icon-wrapper {
-        background-color: $highlight;
-      }
+  @include hover {
+    .socials__icon-wrapper {
+      background-color: $highlight;
     }
   }
 
-  &__icon-wrapper {
-    flex-shrink: 0;
-    margin: 0 0 0 auto;
+  &:focus-visible {
+    .socials__icon-wrapper {
+      background-color: $highlight;
+    }
   }
+
+  &:active {
+    opacity: 0.8;
+
+    .socials__icon-wrapper {
+      background-color: $highlight;
+    }
+  }
+}
+
+.socials__icon-wrapper {
+  flex-shrink: 0;
+  margin: 0 0 0 auto;
 }

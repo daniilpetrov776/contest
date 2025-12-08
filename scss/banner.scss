@@ -16,491 +16,309 @@
   @include vp-767 {
     display: none;
   }
+}
 
-  &__slide {
-    background-color: $white;
-    display: grid;
-    height: 100%;
-    grid-template-columns: minmax(calc(539px / 16px * 1rem), 1fr) 2fr;
+.banner__slide {
+  background-color: $white;
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(calc(539px / 16px * 1rem), 1fr) 2fr;
 
-    @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
-    @include adaptive-value("padding-top", 180, 100, 0, 1920, 1440);
-    @include adaptive-value("padding-left", 30, 30, 0, 1920, 1440);
-    @include adaptive-value("padding-right", 30, 30, 0, 1920, 1440);
-    @include adaptive-value("padding-bottom", 30, 40, 0, 1920, 1440);
-    @include adaptive-value("min-height", 870, 650, 0, 1920, 1440);
+  @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
+  @include adaptive-value("padding-top", 180, 100, 0, 1920, 1440);
+  @include adaptive-value("padding-left", 30, 30, 0, 1920, 1440);
+  @include adaptive-value("padding-right", 30, 30, 0, 1920, 1440);
+  @include adaptive-value("padding-bottom", 30, 40, 0, 1920, 1440);
+  @include adaptive-value("min-height", 870, 650, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("border-radius", 30, 25, 0, 1439, 1280);
+    @include adaptive-value("padding-top", 100, 121, 0, 1439, 1280);
+    @include adaptive-value("padding-left", 30, 30, 0, 1439, 1280);
+    @include adaptive-value("padding-right", 30, 30, 0, 1439, 1280);
+    @include adaptive-value("padding-bottom", 40, 30, 0, 1439, 1280);
+    @include adaptive-value("min-height", 650, 580, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("border-radius", 25, 25, 0, 1279, 768);
+    @include adaptive-value("padding-top", 121, 60, 0, 1279, 768);
+    @include adaptive-value("padding-left", 30, 25, 0, 1279, 768);
+    @include adaptive-value("padding-right", 30, 25, 0, 1279, 768);
+    @include adaptive-value("padding-bottom", 30, 25, 0, 1279, 768);
+    @include adaptive-value("min-height", 580, 450, 0, 1279, 768);
+  }
+
+  @include vp-767 {
+    @include adaptive-value("border-radius", 20, 15, 0, 767, 375);
+  }
+}
+
+.banner__content {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  @include adaptive-value("gap", 43, 32, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("gap", 32, 28, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("gap", 28, 24, 0, 1279, 768);
+  }
+}
+
+.banner__content-bottom {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+
+  @include adaptive-value("top", -3, 0, 0, 1920, 1440);
+  @include adaptive-value("gap", 29, 24, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("gap", 24, 23, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("gap", 24, 20, 0, 1279, 768);
+  }
+}
+
+.banner__type {
+  font-family: "TT Runs", "Arial", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
+  @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("font-size", 14, 13, 0, 1439, 768);
+    @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1439, 768);
+  }
+}
+
+.banner__title {
+  width: calc(723px / 16px * 1rem);
+  display: flex;
+  flex-flow: wrap column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  @include adaptive-value("gap", 5, 0, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("gap", 5, 0, 0, 1439, 1280);
+  }
+}
+
+.banner__title-line {
+  display: flex;
+  flex-flow: wrap row;
+  align-items: center;
+
+  @include adaptive-value("gap", 1, 2, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("gap", 5, 2, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("gap", 1, 2, 0, 1279, 768);
+  }
+
+  &:last-child {
+    display: inline-flex;
+
+    @include adaptive-value("margin-top", 7, 6, 0, 1920, 1440);
 
     @include vp-1439 {
-      @include adaptive-value("border-radius", 30, 25, 0, 1439, 1280);
-      @include adaptive-value("padding-top", 100, 121, 0, 1439, 1280);
-      @include adaptive-value("padding-left", 30, 30, 0, 1439, 1280);
-      @include adaptive-value("padding-right", 30, 30, 0, 1439, 1280);
-      @include adaptive-value("padding-bottom", 40, 30, 0, 1439, 1280);
-      @include adaptive-value("min-height", 650, 580, 0, 1439, 1280);
+      @include adaptive-value("margin-top", 6, 6, 0, 1439, 1280);
     }
 
     @include vp-1279 {
-      @include adaptive-value("border-radius", 25, 25, 0, 1279, 768);
-      @include adaptive-value("padding-top", 121, 60, 0, 1279, 768);
-      @include adaptive-value("padding-left", 30, 25, 0, 1279, 768);
-      @include adaptive-value("padding-right", 30, 25, 0, 1279, 768);
-      @include adaptive-value("padding-bottom", 30, 25, 0, 1279, 768);
-      @include adaptive-value("min-height", 580, 450, 0, 1279, 768);
-    }
-
-    @include vp-767 {
-      @include adaptive-value("border-radius", 20, 15, 0, 767, 375);
+      @include adaptive-value("margin-top", 7, 5, 0, 1279, 768);
     }
   }
+}
 
-  &__content {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
+.banner__title-text {
+  color: $green;
+  font-family: "TT Runs", "Arial", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 
-    @include adaptive-value("gap", 43, 32, 0, 1920, 1440);
+  @include adaptive-value("font-size", 42, 36, 0, 1920, 1440);
+  @include adaptive-value("line-height", 42 * 1.15, 36 * 1.15, 0, 1920, 1440);
 
-    @include vp-1439 {
-      @include adaptive-value("gap", 32, 28, 0, 1439, 1280);
-    }
-
-    @include vp-1279 {
-      @include adaptive-value("gap", 28, 24, 0, 1279, 768);
-    }
+  @include vp-1439 {
+    @include adaptive-value("font-size", 36, 32, 0, 1439, 1280);
+    @include adaptive-value("line-height", 36 * 1.15, 32 * 1.15, 0, 1439, 1280);
   }
 
-  &__content-bottom {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: relative;
+  @include vp-1279 {
+    @include adaptive-value("font-size", 32, 28, 0, 1279, 768);
+    @include adaptive-value("line-height", 32 * 1.15, 28 * 1.15, 0, 1279, 768);
+  }
+}
 
-    @include adaptive-value("top", -3, 0, 0, 1920, 1440);
-    @include adaptive-value("gap", 29, 24, 0, 1920, 1440);
+.banner__title-text--highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap row;
+  background-color: $highlight;
+  border-radius: calc(154px / 16px * 1rem);
+  position: relative;
 
-    @include vp-1439 {
-      @include adaptive-value("gap", 24, 23, 0, 1439, 1280);
-    }
+  @include adaptive-value("min-height", 62, 48.71, 0, 1920, 1440);
+  @include adaptive-value("padding-right", 26.97, 25, 0, 1920, 1440);
+  @include adaptive-value("padding-left", 26.97, 23, 0, 1920, 1440);
+  @include adaptive-value("left", 0, -1, 0, 1920, 1440);
 
-    @include vp-1279 {
-      @include adaptive-value("gap", 24, 20, 0, 1279, 768);
-    }
+  @include vp-1439 {
+    @include adaptive-value("border-radius", 154, 120, 0, 1439, 1280);
+    @include adaptive-value("padding-right", 25, 22, 0, 1439, 1280);
+    @include adaptive-value("padding-left", 25, 21, 0, 1439, 1280);
+    @include adaptive-value("min-height", 48.7, 43.88, 0, 1439, 1280);
+    @include adaptive-value("left", -1, -3, 0, 1439, 1280);
   }
 
-  &__type {
-    font-family: "TT Runs", "Arial", sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
+  @include vp-1279 {
+    @include adaptive-value("min-height", 43.88, 37.99, 0, 1279, 768);
+    @include adaptive-value("padding-right", 21, 20, 0, 1279, 768);
+    @include adaptive-value("padding-left", 20, 19, 0, 1279, 768);
+  }
+}
 
-    @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
-    @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+.banner__title-icon--wigle {
+  position: relative;
 
-    @include vp-1439 {
-      @include adaptive-value("font-size", 14, 13, 0, 1439, 768);
-      @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1439, 768);
-    }
+  @include adaptive-value("width", 44, 40, 0, 1920, 1440);
+  @include adaptive-value("height", 36, 31, 0, 1920, 1440);
+  @include adaptive-value("left", 11, 11, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("width", 40, 36, 0, 1439, 1280);
+    @include adaptive-value("height", 31, 29, 0, 1439, 1280);
+    @include adaptive-value("left", 11, 10, 0, 1439, 1280);
   }
 
-  &__title {
-    width: calc(723px / 16px * 1rem);
-    display: flex;
-    flex-flow: wrap column;
-    align-items: flex-start;
-    justify-content: flex-start;
+  @include vp-1279 {
+    @include adaptive-value("left", 8, 7, 0, 1279, 768);
+  }
+}
 
-    @include adaptive-value("gap", 5, 0, 0, 1920, 1440);
+.banner__title-icon--heart {
+  position: relative;
 
-    @include vp-1439 {
-      @include adaptive-value("gap", 5, 0, 0, 1439, 1280);
-    }
+  @include adaptive-value("top", 2, 3, 0, 1920, 1440);
+  @include adaptive-value("left", 0, 0, 0, 1920, 1440);
+  @include adaptive-value("width", 48, 43, 0, 1920, 1440);
+  @include adaptive-value("height", 48, 43, 0, 1920, 1440);
 
-    &-line {
-      display: flex;
-      flex-flow: wrap row;
-      align-items: center;
-
-      @include adaptive-value("gap", 1, 2, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("gap", 5, 2, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("gap", 1, 2, 0, 1279, 768);
-      }
-
-      &:last-child {
-        display: inline-flex;
-
-        @include adaptive-value("margin-top", 7, 6, 0, 1920, 1440);
-
-        @include vp-1439 {
-          @include adaptive-value("margin-top", 6, 6, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-          @include adaptive-value("margin-top", 7, 5, 0, 1279, 768);
-        }
-      }
-    }
-
-    &-text {
-      color: $green;
-      font-family: "TT Runs", "Arial", sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      word-break: break-word;
-
-      @include adaptive-value("font-size", 42, 36, 0, 1920, 1440);
-      @include adaptive-value("line-height", 42 * 1.15, 36 * 1.15, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("font-size", 36, 32, 0, 1439, 1280);
-        @include adaptive-value("line-height", 36 * 1.15, 32 * 1.15, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("font-size", 32, 28, 0, 1279, 768);
-        @include adaptive-value("line-height", 32 * 1.15, 28 * 1.15, 0, 1279, 768);
-      }
-    }
-
-    .banner__title-text--highlight {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-flow: wrap row;
-      background-color: $highlight;
-      border-radius: calc(154px / 16px * 1rem);
-      position: relative;
-
-      @include adaptive-value("min-height", 62, 48.71, 0, 1920, 1440);
-      @include adaptive-value("padding-right", 26.97, 25, 0, 1920, 1440);
-      @include adaptive-value("padding-left", 26.97, 23, 0, 1920, 1440);
-      @include adaptive-value("left", 0, -1, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("border-radius", 154, 120, 0, 1439, 1280);
-        @include adaptive-value("padding-right", 25, 22, 0, 1439, 1280);
-        @include adaptive-value("padding-left", 25, 21, 0, 1439, 1280);
-        @include adaptive-value("min-height", 48.7, 43.88, 0, 1439, 1280);
-        @include adaptive-value("left", -1, -3, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("min-height", 43.88, 37.99, 0, 1279, 768);
-        @include adaptive-value("padding-right", 21, 20, 0, 1279, 768);
-        @include adaptive-value("padding-left", 20, 19, 0, 1279, 768);
-      }
-    }
-
-    .banner__title-icon--wigle {
-      position: relative;
-
-      @include adaptive-value("width", 44, 40, 0, 1920, 1440);
-      @include adaptive-value("height", 36, 31, 0, 1920, 1440);
-      @include adaptive-value("left", 11, 11, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("width", 40, 36, 0, 1439, 1280);
-        @include adaptive-value("height", 31, 29, 0, 1439, 1280);
-        @include adaptive-value("left", 11, 10, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("left", 8, 7, 0, 1279, 768);
-      }
-    }
-
-    .banner__title-icon--heart {
-      position: relative;
-
-      @include adaptive-value("top", 2, 3, 0, 1920, 1440);
-      @include adaptive-value("left", 0, 0, 0, 1920, 1440);
-      @include adaptive-value("width", 48, 43, 0, 1920, 1440);
-      @include adaptive-value("height", 48, 43, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("width", 40, 39, 0, 1439, 1280);
-        @include adaptive-value("height", 40, 39, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("width", 32, 34, 0, 1439, 1280);
-        @include adaptive-value("height", 32, 34, 0, 1439, 1280);
-      }
-    }
-
-    .banner__title-icon--buildings {
-      @include adaptive-value("margin-left", 10, 9, 0, 1920, 1440);
-      @include adaptive-value("margin-right", 6, 3, 0, 1920, 1440);
-      @include adaptive-value("width", 44, 40, 0, 1920, 1440);
-      @include adaptive-value("height", 44, 40, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("width", 40, 32, 0, 1439, 1280);
-        @include adaptive-value("height", 40, 32, 0, 1439, 1280);
-        @include adaptive-value("margin-left", 9, 11, 0, 1439, 1280);
-        @include adaptive-value("margin-right", 3, 3, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("margin-left", 9, 4, 0, 1279, 768);
-        @include adaptive-value("margin-right", 1, 2, 0, 1279, 768);
-      }
-    }
-
-    .banner__title-icon--global {
-      background-color: $highlight;
-
-      @include adaptive-value("border-radius", 179.78, 154.23, 0, 1920, 1440);
-      @include adaptive-value("width", 74.91, 64.26, 0, 1920, 1440);
-      @include adaptive-value("height", 61.99, 48.71, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("width", 64.2, 57.3, 0, 1439, 1280);
-        @include adaptive-value("height", 48.7, 43.8, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("width", 57.3, 49.96, 0, 1279, 768);
-        @include adaptive-value("height", 43.8, 37.99, 0, 1279, 768);
-      }
-    }
-
-    .banner__title-icon--phone {
-      @include adaptive-value("width", 64, 56, 0, 1920, 1440);
-      @include adaptive-value("height", 54, 45, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("width", 56, 50, 0, 1439, 768);
-        @include adaptive-value("height", 45, 40, 0, 1439, 768);
-      }
-    }
+  @include vp-1439 {
+    @include adaptive-value("width", 40, 39, 0, 1439, 1280);
+    @include adaptive-value("height", 40, 39, 0, 1439, 1280);
   }
 
-  &__image-wrapper {
-    position: absolute;
+  @include vp-1279 {
+    @include adaptive-value("width", 32, 34, 0, 1439, 1280);
+    @include adaptive-value("height", 32, 34, 0, 1439, 1280);
+  }
+}
 
-    @include adaptive-value("border-radius", 24, 16, 0, 1920, 1440);
+.banner__title-icon--buildings {
+  @include adaptive-value("margin-left", 10, 9, 0, 1920, 1440);
+  @include adaptive-value("margin-right", 6, 3, 0, 1920, 1440);
+  @include adaptive-value("width", 44, 40, 0, 1920, 1440);
+  @include adaptive-value("height", 44, 40, 0, 1920, 1440);
 
-    @include vp-1439 {
-      @include adaptive-value("border-radius", 20, 14, 0, 1439, 768);
-    }
-
-    @include vp-1279 {
-      @include adaptive-value("border-radius", 16, 12, 0, 1279, 768);
-    }
-
-    &--building {
-      z-index: 1;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(26.38, 16) + rem} #{math.div(49.42, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.16);
-
-      @include adaptive-value("border-radius", 8.6, 6.4, 0, 1920, 1440);
-      @include adaptive-value("top", 431, 327, 0, 1920, 1440);
-      @include adaptive-value("right", 796, 571, 0, 1920, 1440);
-      @include adaptive-value("width", 376, 279, 0, 1920, 1440);
-      @include adaptive-value("height", 261, 194, 0, 1920, 1440);
-    }
-
-    &--iphone {
-      z-index: 2;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(0.79, 16) + rem} #{math.div(0.67, 16) + rem} #{math.div(0, 16) + rem}
-        rgba(0, 0, 0, 0.04),
-        #{math.div(0, 16) + rem} #{math.div(1.79, 16) + rem} #{math.div(1.53, 16) + rem} #{math.div(0, 16) + rem}
-        rgba(0, 0, 0, 0.06),
-        #{math.div(0, 16) + rem} #{math.div(3.12, 16) + rem} #{math.div(2.65, 16) + rem} #{math.div(0, 16) + rem}
-        rgba(0, 0, 0, 0.07),
-        #{math.div(0, 16) + rem} #{math.div(47.05, 16) + rem} #{math.div(33.68, 16) + rem} #{math.div(0, 16) + rem}
-        rgba(0, 0, 0, 0.14);
-
-      @include adaptive-value("border-radius", 29, 21.6, 0, 1920, 1440);
-      @include adaptive-value("top", 86, 71, 0, 1920, 1440);
-      @include adaptive-value("right", 605.5, 429, 0, 1920, 1440);
-      @include adaptive-value("width", 242, 180, 0, 1920, 1440);
-      @include adaptive-value("height", 524, 390, 0, 1920, 1440);
-    }
-
-    &--number {
-      z-index: 4;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(32.83, 16) + rem} #{math.div(33.68, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.12);
-
-      @include adaptive-value("border-radius", 31, 23, 0, 1920, 1440);
-      @include adaptive-value("top", 388, 296, 0, 1920, 1440);
-      @include adaptive-value("right", 312, 210, 0, 1920, 1440);
-      @include adaptive-value("width", 374, 278, 0, 1920, 1440);
-      @include adaptive-value("height", 374, 278, 0, 1920, 1440);
-    }
-
-    &--family {
-      z-index: 5;
-
-      @include adaptive-value("top", 135, 107, 0, 1920, 1440);
-      @include adaptive-value("right", 50, 15, 0, 1920, 1440);
-      @include adaptive-value("width", 510, 380, 0, 1920, 1440);
-      @include adaptive-value("height", 324, 240, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("top", 128, 104, 0, 1439, 1280);
-        @include adaptive-value("right", 127, 23, 0, 1439, 1280);
-        @include adaptive-value("width", 298, 310, 0, 1439, 1280);
-        @include adaptive-value("height", 240, 201, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("top", 122, 126, 0, 1279, 768);
-        @include adaptive-value("right", 111, 4, 0, 1279, 768);
-        @include adaptive-value("width", 249, 205, 0, 1279, 768);
-        @include adaptive-value("height", 201, 133, 0, 1279, 768);
-      }
-    }
-
-    &--laptop {
-      z-index: 5;
-
-      @include adaptive-value("top", 624, 483, 0, 1920, 1440);
-      @include adaptive-value("right", 254, 179, 0, 1920, 1440);
-      @include adaptive-value("width", 115, 62.5, 0, 1920, 1440);
-      @include adaptive-value("height", 92, 50, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("top", 483, 409, 0, 1439, 1280);
-        @include adaptive-value("right", 180.5, 156, 0, 1439, 1280);
-      }
-    }
-
-    &--chair {
-      z-index: 2;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.05);
-
-      @include adaptive-value("border-radius", 20, 14.8, 0, 1920, 1440);
-      @include adaptive-value("top", 473, 352, 0, 1920, 1440);
-      @include adaptive-value("right", 893, 646.5, 0, 1920, 1440);
-      @include adaptive-value("width", 315, 234, 0, 1920, 1440);
-      @include adaptive-value("height", 167, 124, 0, 1920, 1440);
-    }
-
-    &--catalog {
-      z-index: 2;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.05);
-
-      @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
-      @include adaptive-value("top", 337, 251, 0, 1920, 1440);
-      @include adaptive-value("right", 1000, 725, 0, 1920, 1440);
-      @include adaptive-value("width", 80, 59.4, 0, 1920, 1440);
-      @include adaptive-value("height", 80, 59.4, 0, 1920, 1440);
-    }
-
-    &--chair-big {
-      z-index: 1;
-
-      @include adaptive-value("border-radius", 38, 28, 0, 1920, 1440);
-      @include adaptive-value("top", 67, 50, 0, 1920, 1440);
-      @include adaptive-value("right", 669, 479, 0, 1920, 1440);
-      @include adaptive-value("width", 309, 230, 0, 1920, 1440);
-      @include adaptive-value("height", 645, 479, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("border-radius", 28, 25, 0, 1439, 1280);
-        @include adaptive-value("top", 50, 42, 0, 1439, 1280);
-        @include adaptive-value("right", 479, 405, 0, 1439, 1280);
-        @include adaptive-value("width", 230, 206, 0, 1439, 1280);
-        @include adaptive-value("height", 479, 430, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("border-radius", 25, 15, 0, 1279, 768);
-        @include adaptive-value("top", 42, 79, 0, 1279, 768);
-        @include adaptive-value("right", 405, 182, 0, 1279, 768);
-        @include adaptive-value("width", 206, 121, 0, 1279, 768);
-        @include adaptive-value("height", 430, 252, 0, 1279, 768);
-      }
-    }
-
-    &--chair-filter {
-      z-index: 1;
-
-      @include adaptive-value("border-radius", 38, 28, 0, 1920, 1440);
-      @include adaptive-value("top", 164, 122, 0, 1920, 1440);
-      @include adaptive-value("right", 316, 217, 0, 1920, 1440);
-      @include adaptive-value("width", 309, 230, 0, 1920, 1440);
-      @include adaptive-value("height", 645, 479, 0, 1920, 1440);
-
-      @include vp-1439 {
-        @include adaptive-value("border-radius", 28, 25, 0, 1439, 1280);
-        @include adaptive-value("top", 122, 107, 0, 1439, 1280);
-        @include adaptive-value("right", 217, 169, 0, 1439, 1280);
-        @include adaptive-value("width", 230, 206, 0, 1439, 1280);
-        @include adaptive-value("height", 479, 430, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("border-radius", 25, 15, 0, 1279, 768);
-        @include adaptive-value("top", 107, 117, 0, 1279, 768);
-        @include adaptive-value("right", 169, 43.5, 0, 1279, 768);
-        @include adaptive-value("width", 206, 121, 0, 1279, 768);
-        @include adaptive-value("height", 430, 252, 0, 1279, 768);
-      }
-    }
-
-    &--banquet {
-      z-index: 2;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.05);
-
-      @include adaptive-value("top", 570, 424, 0, 1920, 1440);
-      @include adaptive-value("right", 154, 96, 0, 1920, 1440);
-      @include adaptive-value("width", 315, 234, 0, 1920, 1440);
-      @include adaptive-value("height", 100, 74, 0, 1920, 1440);
-    }
-
-    &--place-order {
-      z-index: 2;
-
-      box-shadow:
-        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
-        rem} rgba(0, 0, 0, 0.05);
-
-      @include adaptive-value("top", 689, 513, 0, 1920, 1440);
-      @include adaptive-value("right", 222, 147, 0, 1920, 1440);
-      @include adaptive-value("width", 140, 104, 0, 1920, 1440);
-      @include adaptive-value("height", 40, 30, 0, 1920, 1440);
-    }
+  @include vp-1439 {
+    @include adaptive-value("width", 40, 32, 0, 1439, 1280);
+    @include adaptive-value("height", 40, 32, 0, 1439, 1280);
+    @include adaptive-value("margin-left", 9, 11, 0, 1439, 1280);
+    @include adaptive-value("margin-right", 3, 3, 0, 1439, 1280);
   }
 
-  .banner__image-wrapper--building {
+  @include vp-1279 {
+    @include adaptive-value("margin-left", 9, 4, 0, 1279, 768);
+    @include adaptive-value("margin-right", 1, 2, 0, 1279, 768);
+  }
+}
+
+.banner__title-icon--global {
+  background-color: $highlight;
+
+  @include adaptive-value("border-radius", 179.78, 154.23, 0, 1920, 1440);
+  @include adaptive-value("width", 74.91, 64.26, 0, 1920, 1440);
+  @include adaptive-value("height", 61.99, 48.71, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("width", 64.2, 57.3, 0, 1439, 1280);
+    @include adaptive-value("height", 48.7, 43.8, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("width", 57.3, 49.96, 0, 1279, 768);
+    @include adaptive-value("height", 43.8, 37.99, 0, 1279, 768);
+  }
+}
+
+.banner__title-icon--phone {
+  @include adaptive-value("width", 64, 56, 0, 1920, 1440);
+  @include adaptive-value("height", 54, 45, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("width", 56, 50, 0, 1439, 768);
+    @include adaptive-value("height", 45, 40, 0, 1439, 768);
+  }
+}
+
+.banner__image-wrapper {
+  position: absolute;
+
+  @include adaptive-value("border-radius", 24, 16, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("border-radius", 20, 14, 0, 1439, 768);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("border-radius", 16, 12, 0, 1279, 768);
+  }
+
+  &--building {
+    z-index: 1;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(26.38, 16) + rem} #{math.div(49.42, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.16);
+
+    @include adaptive-value("border-radius", 8.6, 6.4, 0, 1920, 1440);
+    @include adaptive-value("top", 431, 327, 0, 1920, 1440);
+    @include adaptive-value("right", 796, 571, 0, 1920, 1440);
+    @include adaptive-value("width", 376, 279, 0, 1920, 1440);
+    @include adaptive-value("height", 261, 194, 0, 1920, 1440);
+
     @include vp-1439 {
       box-shadow:
         #{math.div(0, 16) + rem} #{math.div(19.6, 16) + rem} #{math.div(36.73, 16) + rem} #{math.div(0, 16) +
         rem} rgba(0, 0, 0, 0.16);
 
       @include adaptive-value("border-radius", 6.4, 5.3, 0, 1439, 1280);
-    }
-
-    @include vp-1439 {
       @include adaptive-value("top", 327, 289, 0, 1439, 1280);
       @include adaptive-value("right", 571, 483, 0, 1439, 1280);
       @include adaptive-value("width", 279, 234, 0, 1439, 1280);
@@ -513,9 +331,6 @@
         rem} rgba(0, 0, 0, 0.16);
 
       @include adaptive-value("border-radius", 5.3, 3.3, 0, 1279, 768);
-    }
-
-    @include vp-1279 {
       @include adaptive-value("top", 289, 236, 0, 1279, 768);
       @include adaptive-value("right", 483, 206, 0, 1279, 768);
       @include adaptive-value("width", 234, 148, 0, 1279, 768);
@@ -523,7 +338,25 @@
     }
   }
 
-  .banner__image-wrapper--iphone {
+  &--iphone {
+    z-index: 2;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(0.79, 16) + rem} #{math.div(0.67, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(0, 0, 0, 0.04),
+      #{math.div(0, 16) + rem} #{math.div(1.79, 16) + rem} #{math.div(1.53, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(0, 0, 0, 0.06),
+      #{math.div(0, 16) + rem} #{math.div(3.12, 16) + rem} #{math.div(2.65, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(0, 0, 0, 0.07),
+      #{math.div(0, 16) + rem} #{math.div(47.05, 16) + rem} #{math.div(33.68, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(0, 0, 0, 0.14);
+
+    @include adaptive-value("border-radius", 29, 21.6, 0, 1920, 1440);
+    @include adaptive-value("top", 86, 71, 0, 1920, 1440);
+    @include adaptive-value("right", 605.5, 429, 0, 1920, 1440);
+    @include adaptive-value("width", 242, 180, 0, 1920, 1440);
+    @include adaptive-value("height", 524, 390, 0, 1920, 1440);
+
     @include vp-1439 {
       box-shadow:
         #{math.div(0, 16) + rem} #{math.div(0.66, 16) + rem} #{math.div(0.56, 16) + rem} #{math.div(0, 16) + rem}
@@ -561,7 +394,19 @@
     }
   }
 
-  .banner__image-wrapper--number {
+  &--number {
+    z-index: 4;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(32.83, 16) + rem} #{math.div(33.68, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.12);
+
+    @include adaptive-value("border-radius", 31, 23, 0, 1920, 1440);
+    @include adaptive-value("top", 388, 296, 0, 1920, 1440);
+    @include adaptive-value("right", 312, 210, 0, 1920, 1440);
+    @include adaptive-value("width", 374, 278, 0, 1920, 1440);
+    @include adaptive-value("height", 374, 278, 0, 1920, 1440);
+
     @include vp-1439 {
       @include adaptive-value("border-radius", 23, 19.5, 0, 1439, 1280);
       box-shadow:
@@ -587,7 +432,60 @@
     }
   }
 
-  .banner__image-wrapper--chair {
+  &--family {
+    z-index: 5;
+
+    @include adaptive-value("top", 135, 107, 0, 1920, 1440);
+    @include adaptive-value("right", 50, 15, 0, 1920, 1440);
+    @include adaptive-value("width", 510, 380, 0, 1920, 1440);
+    @include adaptive-value("height", 324, 240, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("top", 128, 104, 0, 1439, 1280);
+      @include adaptive-value("right", 127, 23, 0, 1439, 1280);
+      @include adaptive-value("width", 298, 310, 0, 1439, 1280);
+      @include adaptive-value("height", 240, 201, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      @include adaptive-value("top", 122, 126, 0, 1279, 768);
+      @include adaptive-value("right", 111, 4, 0, 1279, 768);
+      @include adaptive-value("width", 249, 205, 0, 1279, 768);
+      @include adaptive-value("height", 201, 133, 0, 1279, 768);
+    }
+  }
+
+  &--laptop {
+    z-index: 5;
+
+    @include adaptive-value("top", 624, 483, 0, 1920, 1440);
+    @include adaptive-value("right", 254, 179, 0, 1920, 1440);
+    @include adaptive-value("width", 115, 62.5, 0, 1920, 1440);
+    @include adaptive-value("height", 92, 50, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("top", 483, 409, 0, 1439, 1280);
+      @include adaptive-value("right", 180.5, 156, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      display: none;
+    }
+  }
+
+  &--chair {
+    z-index: 2;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.05);
+
+    @include adaptive-value("border-radius", 20, 14.8, 0, 1920, 1440);
+    @include adaptive-value("top", 473, 352, 0, 1920, 1440);
+    @include adaptive-value("right", 893, 646.5, 0, 1920, 1440);
+    @include adaptive-value("width", 315, 234, 0, 1920, 1440);
+    @include adaptive-value("height", 167, 124, 0, 1920, 1440);
+
     @include vp-1439 {
       @include adaptive-value("border-radius", 14.8, 13.3, 0, 1439, 1280);
       box-shadow:
@@ -605,7 +503,19 @@
     }
   }
 
-  .banner__image-wrapper--catalog {
+  &--catalog {
+    z-index: 2;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.05);
+
+    @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
+    @include adaptive-value("top", 337, 251, 0, 1920, 1440);
+    @include adaptive-value("right", 1000, 725, 0, 1920, 1440);
+    @include adaptive-value("width", 80, 59.4, 0, 1920, 1440);
+    @include adaptive-value("height", 80, 59.4, 0, 1920, 1440);
+
     @include vp-1439 {
       box-shadow:
         #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem} #{math.div(0, 16) +
@@ -623,7 +533,70 @@
     }
   }
 
-  .banner__image-wrapper--banquet {
+  &--chair-big {
+    z-index: 1;
+
+    @include adaptive-value("border-radius", 38, 28, 0, 1920, 1440);
+    @include adaptive-value("top", 67, 50, 0, 1920, 1440);
+    @include adaptive-value("right", 669, 479, 0, 1920, 1440);
+    @include adaptive-value("width", 309, 230, 0, 1920, 1440);
+    @include adaptive-value("height", 645, 479, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("border-radius", 28, 25, 0, 1439, 1280);
+      @include adaptive-value("top", 50, 42, 0, 1439, 1280);
+      @include adaptive-value("right", 479, 405, 0, 1439, 1280);
+      @include adaptive-value("width", 230, 206, 0, 1439, 1280);
+      @include adaptive-value("height", 479, 430, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      @include adaptive-value("border-radius", 25, 15, 0, 1279, 768);
+      @include adaptive-value("top", 42, 79, 0, 1279, 768);
+      @include adaptive-value("right", 405, 182, 0, 1279, 768);
+      @include adaptive-value("width", 206, 121, 0, 1279, 768);
+      @include adaptive-value("height", 430, 252, 0, 1279, 768);
+    }
+  }
+
+  &--chair-filter {
+    z-index: 1;
+
+    @include adaptive-value("border-radius", 38, 28, 0, 1920, 1440);
+    @include adaptive-value("top", 164, 122, 0, 1920, 1440);
+    @include adaptive-value("right", 316, 217, 0, 1920, 1440);
+    @include adaptive-value("width", 309, 230, 0, 1920, 1440);
+    @include adaptive-value("height", 645, 479, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("border-radius", 28, 25, 0, 1439, 1280);
+      @include adaptive-value("top", 122, 107, 0, 1439, 1280);
+      @include adaptive-value("right", 217, 169, 0, 1439, 1280);
+      @include adaptive-value("width", 230, 206, 0, 1439, 1280);
+      @include adaptive-value("height", 479, 430, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      @include adaptive-value("border-radius", 25, 15, 0, 1279, 768);
+      @include adaptive-value("top", 107, 117, 0, 1279, 768);
+      @include adaptive-value("right", 169, 43.5, 0, 1279, 768);
+      @include adaptive-value("width", 206, 121, 0, 1279, 768);
+      @include adaptive-value("height", 430, 252, 0, 1279, 768);
+    }
+  }
+
+  &--banquet {
+    z-index: 2;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.05);
+
+    @include adaptive-value("top", 570, 424, 0, 1920, 1440);
+    @include adaptive-value("right", 154, 96, 0, 1920, 1440);
+    @include adaptive-value("width", 315, 234, 0, 1920, 1440);
+    @include adaptive-value("height", 100, 74, 0, 1920, 1440);
+
     @include vp-1439 {
       box-shadow:
         #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem} #{math.div(0, 16) +
@@ -640,7 +613,18 @@
     }
   }
 
-  .banner__image-wrapper--place-order {
+  &--place-order {
+    z-index: 2;
+
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem} #{math.div(0, 16) +
+      rem} rgba(0, 0, 0, 0.05);
+
+    @include adaptive-value("top", 689, 513, 0, 1920, 1440);
+    @include adaptive-value("right", 222, 147, 0, 1920, 1440);
+    @include adaptive-value("width", 140, 104, 0, 1920, 1440);
+    @include adaptive-value("height", 40, 30, 0, 1920, 1440);
+
     @include vp-1439 {
       box-shadow:
         #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem} #{math.div(0, 16) +
@@ -656,179 +640,164 @@
       display: none;
     }
   }
+}
 
-  .banner__image-wrapper--laptop {
-    @include vp-1279 {
-      display: none;
-    }
+
+.banner__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner__description {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+
+  br {
+    display: none;
   }
 
-  &__image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  @include adaptive-value("font-size", 18, 16, 0, 1920, 1440);
+  @include adaptive-value("line-height", 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+  @include adaptive-value("max-width", 530, 464, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("font-size", 16, 16, 0, 1439, 1280);
+    @include adaptive-value("line-height", 16 * 1.4, 16 * 1.4, 0, 1439, 1280);
+    @include adaptive-value("max-width", 464, 464, 0, 1439, 1280);
   }
 
-  &__description {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-
+  @media (max-width: $vp-768) {
     br {
-      display: none;
-    }
-
-    @include adaptive-value("font-size", 18, 16, 0, 1920, 1440);
-    @include adaptive-value("line-height", 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
-    @include adaptive-value("max-width", 530, 464, 0, 1920, 1440);
-
-    @include vp-1439 {
-      @include adaptive-value("font-size", 16, 16, 0, 1439, 1280);
-      @include adaptive-value("line-height", 16 * 1.4, 16 * 1.4, 0, 1439, 1280);
-      @include adaptive-value("max-width", 464, 464, 0, 1439, 1280);
-    }
-
-    @media (max-width: $vp-768) {
-      br {
-        display: block;
-      }
-    }
-
-    @include vp-1279 {
-      @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
-      @include adaptive-value("line-height", 16 * 1.4, 15 * 1.4, 0, 1279, 768);
-      @include adaptive-value("max-width", 464, 332, 0, 1279, 768);
+      display: block;
     }
   }
 
-  &__button {
-    @include adaptive-value("min-width", 257, 224, 0, 1920, 1440);
+  @include vp-1279 {
+    @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
+    @include adaptive-value("line-height", 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+    @include adaptive-value("max-width", 464, 332, 0, 1279, 768);
+  }
+}
 
-    @include vp-1439 {
-      @include adaptive-value("min-width", 224, 204, 0, 1439, 1280);
-    }
+.banner__button {
+  @include adaptive-value("min-width", 257, 224, 0, 1920, 1440);
 
-    @include vp-1279 {
-      @include adaptive-value("min-width", 204, 193, 0, 1279, 768);
-    }
+  @include vp-1439 {
+    @include adaptive-value("min-width", 224, 204, 0, 1439, 1280);
   }
 
-  &__swiper {
-    position: relative;
+  @include vp-1279 {
+    @include adaptive-value("min-width", 204, 193, 0, 1279, 768);
+  }
+}
 
-    &.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
-    > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
-      bottom: unset;
-      left: calc(36px / 16px * 1rem);
-      top: auto;
-      display: flex;
-      width: auto;
-      transform: none;
-      gap: 2px;
+.banner__swiper {
+  position: relative;
+}
 
-      @include adaptive-value("bottom", 30, 40, 0, 1920, 1440);
+.banner__swiper.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
+.banner__swiper > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: unset;
+  left: calc(36px / 16px * 1rem);
+  top: auto;
+  display: flex;
+  width: auto;
+  transform: none;
+  gap: 2px;
 
-      @include vp-1439 {
-        @include adaptive-value("bottom", 40, 30, 0, 1439, 1280);
-        @include adaptive-value("left", 36, 26, 0, 1439, 1280);
-      }
+  @include adaptive-value("bottom", 30, 40, 0, 1920, 1440);
 
-      @include vp-1279 {
-        @include adaptive-value("bottom", 30, 25, 0, 1279, 768);
-      }
-    }
-
-    .swiper-pagination-bullet {
-      width: calc(10px / 16px * 1rem);
-      height: calc(10px / 16px * 1rem);
-      border-radius: 50%;
-      background-color: rgba($black, 0.2);
-      opacity: 1;
-      transition:
-        background-color 0.3s ease,
-        transform 0.3s ease;
-      cursor: pointer;
-      margin: 0;
-      padding: 0;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @include vp-1439 {
-        @include adaptive-value("width", 10, 8, 0, 1439, 1280);
-        @include adaptive-value("height", 10, 8, 0, 1439, 1280);
-      }
-
-      @include vp-1279 {
-        @include adaptive-value("width", 8, 6, 0, 1279, 768);
-        @include adaptive-value("height", 8, 6, 0, 1279, 768);
-      }
-
-      &:hover {
-        background-color: $black;
-      }
-
-      &:focus-visible {
-        outline: calc(2px / 16px * 1rem) solid $black;
-        outline-offset: calc(2px / 16px * 1rem);
-        background-color: $black;
-      }
-
-      &:active {
-        background-color: $black;
-        opacity: 0.8;
-      }
-    }
+  @include vp-1439 {
+    @include adaptive-value("bottom", 40, 30, 0, 1439, 1280);
+    @include adaptive-value("left", 36, 26, 0, 1439, 1280);
   }
 
-  .banner__swiper .swiper-pagination-bullet.banner__pagination-bullet--gray {
-    background-color: rgba($black, 0.3);
+  @include vp-1279 {
+    @include adaptive-value("bottom", 30, 25, 0, 1279, 768);
   }
 
-  .banner__swiper .swiper-pagination-bullet.banner__pagination-bullet--light {
-    background-color: rgba($black, 0.1);
+  @media (max-width: $vp-768) {
+    left: 50%;
+    transform: translateX(-50%);
+    gap: calc(5px / 16px * 1rem);
   }
 
-  .banner__swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  @include vp-767 {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.banner__swiper .swiper-pagination-bullet {
+  width: calc(10px / 16px * 1rem);
+  height: calc(10px / 16px * 1rem);
+  border-radius: 50%;
+  background-color: rgba($black, 0.2);
+  opacity: 1;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include vp-1439 {
+    @include adaptive-value("width", 10, 8, 0, 1439, 1280);
+    @include adaptive-value("height", 10, 8, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("width", 8, 6, 0, 1279, 768);
+    @include adaptive-value("height", 8, 6, 0, 1279, 768);
+  }
+
+  @include vp-767 {
+    @include adaptive-value("width", 8, 6, 0, 767, 375);
+    @include adaptive-value("height", 8, 6, 0, 767, 375);
+  }
+
+  &:hover {
     background-color: $black;
-    transform: scale(1);
   }
 
-  .banner__swiper.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
-  .banner__swiper > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
-    @media (max-width: $vp-768) {
-      left: 50%;
-      transform: translateX(-50%);
-      gap: calc(5px / 16px * 1rem);
-    }
-
-    @include vp-767 {
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  &:focus-visible {
+    outline: calc(2px / 16px * 1rem) solid $black;
+    outline-offset: calc(2px / 16px * 1rem);
+    background-color: $black;
   }
 
-  .banner__swiper .swiper-pagination-bullet {
-    @media (max-width: $vp-768) {
-      &.swiper-pagination-bullet {
-        margin: 0;
-      }
-    }
-
-    @include vp-767 {
-      @include adaptive-value("width", 8, 6, 0, 767, 375);
-      @include adaptive-value("height", 8, 6, 0, 767, 375);
-    }
+  &:active {
+    background-color: $black;
+    opacity: 0.8;
   }
+}
 
-  &__wrapper {
-    display: flex;
-  }
+.banner__swiper .swiper-pagination-bullet.banner__pagination-bullet--gray {
+  background-color: rgba($black, 0.3);
+}
+
+.banner__swiper .swiper-pagination-bullet.banner__pagination-bullet--light {
+  background-color: rgba($black, 0.1);
+}
+
+.banner__swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: $black;
+  transform: scale(1);
+}
+
+
+.banner__wrapper {
+  display: flex;
 }

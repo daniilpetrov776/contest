@@ -16,201 +16,201 @@
     height: calc(1px / 16px * 1rem);
     transform: translateX(-50%);
   }
+}
 
-  &__container {
-    display: flex;
-    justify-content: space-between;
-    flex-flow: wrap row;
-    align-items: center;
-    padding: calc(6px / 16px * 1rem) $desktop-padding;
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap row;
+  align-items: center;
+  padding: calc(6px / 16px * 1rem) $desktop-padding;
 
-    @include adaptive-value("min-height", 58, 60, 0, 1920, 1440);
+  @include adaptive-value("min-height", 58, 60, 0, 1920, 1440);
+
+  @include vp-1439 {
+    min-height: calc(52px / 16px * 1rem);
+
+    @include adaptive-value("min-height", 60, 52, 0, 1439, 1280);
+    padding: calc(4px / 16px * 1rem) $tablet-padding;
+  }
+
+  @include vp-767 {
+    padding: calc(10px / 16px * 1rem) $mobile-padding;
+  }
+}
+
+.header__logo {
+  img {
+    @include adaptive-value("width", 82, 73, 0, 1920, 1440);
+    @include adaptive-value("height", 27, 24, 0, 1920, 1440);
 
     @include vp-1439 {
-      min-height: calc(52px / 16px * 1rem);
+      @include adaptive-value("width", 73, 67, 0, 1439, 1280);
+      @include adaptive-value("height", 24, 22, 0, 1439, 1280);
+    }
 
-      @include adaptive-value("min-height", 60, 52, 0, 1439, 1280);
-      padding: calc(4px / 16px * 1rem) $tablet-padding;
+    @include vp-1279 {
+      @include adaptive-value("width", 67, 55, 0, 1279, 768);
+      @include adaptive-value("height", 22, 18, 0, 1279, 768);
     }
 
     @include vp-767 {
-      padding: calc(10px / 16px * 1rem) $mobile-padding;
+      @include adaptive-value("width", 55, 52, 0, 767, 375);
+      @include adaptive-value("height", 18, 17, 0, 767, 375);
     }
   }
+}
 
-  &__logo {
-    img {
-      @include adaptive-value("width", 82, 73, 0, 1920, 1440);
-      @include adaptive-value("height", 27, 24, 0, 1920, 1440);
+.header__header-right {
+  display: flex;
+  flex-flow: wrap row;
+  align-items: center;
+  max-width: 60%;
 
-      @include vp-1439 {
-        @include adaptive-value("width", 73, 67, 0, 1439, 1280);
-        @include adaptive-value("height", 24, 22, 0, 1439, 1280);
-      }
+  @include adaptive-value("gap", 189, 32, 0, 1920, 1440);
 
-      @include vp-1279 {
-        @include adaptive-value("width", 67, 55, 0, 1279, 768);
-        @include adaptive-value("height", 22, 18, 0, 1279, 768);
-      }
+  @include vp-1439 {
+    @include adaptive-value("gap", 32, 28, 0, 1439, 1280);
+  }
+}
 
-      @include vp-767 {
-        @include adaptive-value("width", 55, 52, 0, 767, 375);
-        @include adaptive-value("height", 18, 17, 0, 767, 375);
-      }
-    }
+.header__nav {
+  max-width: 90%;
+}
+
+.header__menu {
+  display: flex;
+  position: relative;
+
+  @include adaptive-value("gap", 40, 34, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("gap", 32, 26, 0, 1439, 1280);
   }
 
-  &__header-right {
-    display: flex;
-    flex-flow: wrap row;
-    align-items: center;
-    max-width: 60%;
+  @include vp-1279 {
+    display: none;
+  }
+}
 
-    @include adaptive-value("gap", 189, 32, 0, 1920, 1440);
+.header__menu-link {
+  font-family: "TT Runs", sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  transition: opacity 0.3s $smooth;
 
-    @include vp-1439 {
-      @include adaptive-value("gap", 32, 28, 0, 1439, 1280);
-    }
+  @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
+  @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+  @include hover {
+    opacity: 0.7;
   }
 
-  &__nav {
-    max-width: 90%;
+  &:focus-visible {
+    opacity: 0.7;
+    outline: calc(2px / 16px * 1rem) solid $black;
+    outline-offset: calc(2px / 16px * 1rem);
   }
 
-  &__menu {
-    display: flex;
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.header__star {
+  display: flex;
+  max-width: 5%;
+  align-items: center;
+  gap: calc(10px / 16px * 1rem);
+  position: relative;
+  top: calc(2px / 16px * 1rem);
+}
+
+.header__star-text {
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  font-family: "TT Runs", sans-serif;
+  position: relative;
+  top: calc(-2px / 16px * 1rem);
+
+  @include adaptive-value("font-size", 12, 13, 0, 1920, 1440);
+  @include adaptive-value("line-height", 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("font-size", 13, 12, 0, 1439, 1280);
+    @include adaptive-value("line-height", 13 * 1.1, 12 * 1.1, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    display: none;
+  }
+}
+
+.header__toggle {
+  pointer-events: none;
+
+  @include vp-1279 {
+    width: calc(32px / 16px * 1rem);
+    height: calc(32px / 16px * 1rem);
     position: relative;
+    pointer-events: auto;
+  }
+}
 
-    @include adaptive-value("gap", 40, 34, 0, 1920, 1440);
+.header__toggle::before,
+.header__toggle::after {
+  @include vp-1279 {
+    position: absolute;
+    content: "";
+    display: block;
+    width: calc(30px / 16px * 1rem);
+    height: calc(3px / 16px * 1rem);
+    background-color: $mainColor;
+    left: calc(1px / 16px * 1rem);
+    transform-origin: center;
+    transition:
+      transform 0.4s $smooth,
+      scale 0.4s $smooth,
+      top 0.4s $smooth;
+  }
+}
 
-    @include vp-1439 {
-      @include adaptive-value("gap", 32, 26, 0, 1439, 1280);
-    }
+.header__toggle::before {
+  @include vp-1279 {
+    top: 30%;
+  }
+}
 
-    @include vp-1279 {
-      display: none;
-    }
+.header__toggle::after {
+  @include vp-1279 {
+    top: 50%;
+  }
+}
+
+.header__toggle.is-active::before {
+  @include vp-1279 {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg) scale(0.7);
+  }
+}
+
+.header__toggle.is-active::after {
+  @include vp-1279 {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg) scale(0.7);
+  }
+}
+
+.header__star-img {
+  @include adaptive-value("width", 42, 36, 0, 1920, 1440);
+  @include adaptive-value("height", 42, 36, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("width", 36, 32, 0, 1439, 1280);
+    @include adaptive-value("height", 36, 32, 0, 1439, 1280);
   }
 
-  &__menu-link {
-    font-family: "TT Runs", sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.04em;
-    transition: opacity 0.3s $smooth;
-
-    @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
-    @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
-
-    @include hover {
-      opacity: 0.7;
-    }
-
-    &:focus-visible {
-      opacity: 0.7;
-      outline: calc(2px / 16px * 1rem) solid $black;
-      outline-offset: calc(2px / 16px * 1rem);
-    }
-
-    &:active {
-      opacity: 0.5;
-    }
-  }
-
-  &__star {
-    display: flex;
-    max-width: 5%;
-    align-items: center;
-    gap: calc(10px / 16px * 1rem);
-    position: relative;
-    top: calc(2px / 16px * 1rem);
-  }
-
-  &__star-text {
-    font-weight: 500;
-    letter-spacing: -0.04em;
-    font-family: "TT Runs", sans-serif;
-    position: relative;
-    top: calc(-2px / 16px * 1rem);
-
-    @include adaptive-value("font-size", 12, 13, 0, 1920, 1440);
-    @include adaptive-value("line-height", 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
-
-    @include vp-1439 {
-      @include adaptive-value("font-size", 13, 12, 0, 1439, 1280);
-      @include adaptive-value("line-height", 13 * 1.1, 12 * 1.1, 0, 1439, 1280);
-    }
-
-    @include vp-1279 {
-      display: none;
-    }
-  }
-
-  &__toggle {
-    pointer-events: none;
-
-    @include vp-1279 {
-      width: calc(32px / 16px * 1rem);
-      height: calc(32px / 16px * 1rem);
-      position: relative;
-      pointer-events: auto;
-    }
-  }
-
-  .header__toggle::before,
-  .header__toggle::after {
-    @include vp-1279 {
-      position: absolute;
-      content: "";
-      display: block;
-      width: calc(30px / 16px * 1rem);
-      height: calc(3px / 16px * 1rem);
-      background-color: $mainColor;
-      left: calc(1px / 16px * 1rem);
-      transform-origin: center;
-      transition:
-        transform 0.4s $smooth,
-        scale 0.4s $smooth,
-        top 0.4s $smooth;
-    }
-  }
-
-  .header__toggle::before {
-    @include vp-1279 {
-      top: 30%;
-    }
-  }
-
-  .header__toggle::after {
-    @include vp-1279 {
-      top: 50%;
-    }
-  }
-
-  .header__toggle.is-active::before {
-    @include vp-1279 {
-      top: 50%;
-      transform: translateY(-50%) rotate(45deg) scale(0.7);
-    }
-  }
-
-  .header__toggle.is-active::after {
-    @include vp-1279 {
-      top: 50%;
-      transform: translateY(-50%) rotate(-45deg) scale(0.7);
-    }
-  }
-
-  &__star-img {
-    @include adaptive-value("width", 42, 36, 0, 1920, 1440);
-    @include adaptive-value("height", 42, 36, 0, 1920, 1440);
-
-    @include vp-1439 {
-      @include adaptive-value("width", 36, 32, 0, 1439, 1280);
-      @include adaptive-value("height", 36, 32, 0, 1439, 1280);
-    }
-
-    @include vp-1279 {
-      opacity: 0;
-    }
+  @include vp-1279 {
+    opacity: 0;
   }
 }
