@@ -256,7 +256,11 @@
     }
 
     @media (min-width: $vp-1280) and (max-width: ($vp-1440 - 1px)) {
-      grid-template-columns: 1.5fr 1.1fr minmax(calc(342px / 16px * 1rem), 0.7fr) minmax(calc(230px / 16px * 1rem), 0.8fr);
+      grid-template-columns:
+        1.5fr 1.1fr minmax(calc(342px / 16px * 1rem), 0.7fr) minmax(
+          calc(230px / 16px * 1rem),
+          0.8fr
+        );
       gap: 0 calc(19px / 16px * 1rem);
     }
 

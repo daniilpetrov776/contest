@@ -25,14 +25,22 @@
   @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
   @include adaptive-value("border-radius", 20, 15, 0, 1920, 1440);
   @include adaptive-value("min-height", 69, 61, 0, 1920, 1440);
-  box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0);
+  box-shadow:
+    #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
+    rgba(14, 14, 14, 0),
+    #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
+    rgba(14, 14, 14, 0);
 
   @include hover {
     background-color: $white;
     color: $black;
     border-radius: calc(40px / 16px * 1rem);
 
-    box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0.04), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0.05);
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
+      rgba(14, 14, 14, 0.04),
+      #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(14, 14, 14, 0.05);
   }
 
   &:focus-visible {
@@ -40,7 +48,11 @@
     color: $black;
     border-radius: calc(40px / 16px * 1rem);
 
-    box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0.04), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0.05);
+    box-shadow:
+      #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
+      rgba(14, 14, 14, 0.04),
+      #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
+      rgba(14, 14, 14, 0.05);
   }
 
   @include vp-1439 {

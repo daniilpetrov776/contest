@@ -140,8 +140,7 @@
     @supports not (#{$property}: $propertyValue) {
       #{$property}:
         calc(
-          #{$minSizeRem} + #{$addSize} * (100vw - #{$widthToRem}) /
-          #{math.div($widthFrom, 16) - math.div($widthTo, 16)}
+          #{$minSizeRem} + #{$addSize} * (100vw - #{$widthToRem}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)}
         );
     }
   }

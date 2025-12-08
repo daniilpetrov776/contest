@@ -9,15 +9,15 @@ import { gsap } from 'gsap'
  * @returns {gsap.core.Tween} - GSAP анимация
  */
 export function animateFade(element, direction, offset, duration) {
-    // Устанавливаем начальное состояние
-    gsap.set(element, {
-        opacity: 0,
-    })
+  // Устанавливаем начальное состояние
+  gsap.set(element, {
+    opacity: 0,
+  })
 
-    // Запускаем анимацию
-    return gsap.to(element, {
-        opacity: 1,
-        duration,
-        ease: 'power2.out',
-    })
+  // Запускаем анимацию
+  return gsap.to(element, {
+    opacity: 1,
+    duration,
+    ease: 'power2.out',
+  })
 }

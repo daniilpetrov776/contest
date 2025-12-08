@@ -1,6 +1,6 @@
 /* eslint-env node */
 module.exports = {
-    extends: [
-        'stylelint-config-htmlacademy'
-    ],
+  extends: [
+    'stylelint-config-htmlacademy',
+  ],
 }
