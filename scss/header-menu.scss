@@ -59,6 +59,11 @@
 
   &:focus-visible {
     opacity: 0.7;
+
+    @include vp-1439 {
+      outline: calc(2px / 16px * 1rem) solid $black;
+      outline-offset: calc(2px / 16px * 1rem);
+    }
   }
 
   &:active {

@@ -40,6 +40,9 @@
 }
 
 .header__logo {
+  display: block;
+  transition: opacity 0.3s $smooth;
+
   img {
     @include adaptive-value("width", 82, 73, 0, 1920, 1440);
     @include adaptive-value("height", 27, 24, 0, 1920, 1440);
@@ -58,6 +61,20 @@
       @include adaptive-value("width", 55, 52, 0, 767, 375);
       @include adaptive-value("height", 18, 17, 0, 767, 375);
     }
+  }
+
+  @include hover {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    opacity: 0.7;
+    outline: calc(2px / 16px * 1rem) solid $black;
+    outline-offset: calc(2px / 16px * 1rem);
+  }
+
+  &:active {
+    opacity: 0.5;
   }
 }
 
@@ -148,6 +165,13 @@
 
 .header__toggle {
   pointer-events: none;
+
+  @include vp-1439 {
+    &:focus-visible {
+      outline: calc(2px / 16px * 1rem) solid $black;
+      outline-offset: calc(2px / 16px * 1rem);
+    }
+  }
 
   @include vp-1279 {
     width: calc(32px / 16px * 1rem);

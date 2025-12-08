@@ -32,12 +32,17 @@ const EASING_CLOSE = EASING_HIDE;
 // Константы для клавиатуры
 const ESCAPE_KEY = 'Escape';
 
+// Константы для breakpoints
+const DESKTOP_BREAKPOINT = 1440; // Меню скрыто на >= 1440px
+const TABLET_BREAKPOINT = 1280; // Toggle видим только на < 1280px
+
 const toggleButton = document.querySelector('[data-burger-toggle]');
 const headerMenu = document.querySelector('.header__header-menu');
 const body = document.body;
 
 let isAnimating = false;
 let menuAnimation = null;
+let resizeTimeout = null;
 
 function animateMenuItems(isOpening) {
   const menuItems = document.querySelectorAll('.header-menu__menu-item');
@@ -118,6 +123,43 @@ function animateMenuItems(isOpening) {
   }
 }
 
+const manageTabindex = () => {
+  const menuLinks = document.querySelectorAll('.header-menu__menu-link');
+  const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+  const isTabletOrMobile = window.innerWidth < TABLET_BREAKPOINT;
+  const isMenuOpen = headerMenu && headerMenu.classList.contains('is-open');
+
+  if (isDesktop) {
+    // На десктопе (>= 1440px): скрываем от фокуса меню и toggle
+    menuLinks.forEach((link) => {
+      link.setAttribute('tabindex', '-1');
+    });
+    if (toggleButton) {
+      toggleButton.setAttribute('tabindex', '-1');
+    }
+  } else {
+    // На ширине < 1440px: управляем toggle и меню
+    // Toggle доступен для фокуса только на ширине < 1280px (где он видим)
+    if (toggleButton) {
+      toggleButton.setAttribute('tabindex', isTabletOrMobile ? '0' : '-1');
+    }
+    menuLinks.forEach((link) => {
+      // Меню доступно для фокуса только когда открыто
+      link.setAttribute('tabindex', isMenuOpen ? '0' : '-1');
+    });
+  }
+};
+
+const handleResize = () => {
+  // Debounce для оптимизации производительности
+  if (resizeTimeout) {
+    clearTimeout(resizeTimeout);
+  }
+  resizeTimeout = setTimeout(() => {
+    manageTabindex();
+  }, 150);
+};
+
 function closeMenu() {
   if (isAnimating || !toggleButton.classList.contains('is-active')) {
     return;
@@ -136,6 +178,9 @@ function closeMenu() {
     headerMenu.classList.remove('is-scrollable');
   }
 
+  // Управляем tabindex после закрытия меню
+  manageTabindex();
+
   setTimeout(() => {
     isAnimating = false;
   }, CLOSE_ANIMATION_DURATION);
@@ -153,6 +198,8 @@ function openMenu() {
   if (headerMenu) {
     setTimeout(() => {
       headerMenu.classList.add('is-open');
+      // Управляем tabindex после открытия меню
+      manageTabindex();
       // Запускаем анимацию элементов меню после открытия
       setTimeout(() => {
         animateMenuItems(true);
@@ -166,6 +213,15 @@ function openMenu() {
   setTimeout(() => {
     isAnimating = false;
   }, ANIMATION_DURATION);
+}
+
+// Инициализация управления tabindex
+if (toggleButton || headerMenu) {
+  // Устанавливаем начальное состояние tabindex
+  manageTabindex();
+
+  // Обработчик изменения размера окна
+  window.addEventListener('resize', handleResize);
 }
 
 if (toggleButton) {
