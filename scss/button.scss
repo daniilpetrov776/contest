@@ -1,11 +1,11 @@
-@use "sass:math";
+@use 'sass:math';
 
 .button {
   min-height: calc(69px / 16px * 1rem);
   background-color: $black;
   color: $white;
   font-weight: 600;
-  font-family: "TT Runs", "Arial", sans-serif;
+  font-family: 'TT Runs', 'Arial', sans-serif;
   padding: calc(22px / 16px * 1rem);
   display: flex;
   align-items: center;
@@ -21,15 +21,15 @@
     box-shadow 0.3s $smooth,
     border-radius 0.3s $smooth;
 
-  @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
-  @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
-  @include adaptive-value("border-radius", 20, 15, 0, 1920, 1440);
-  @include adaptive-value("min-height", 69, 61, 0, 1920, 1440);
   box-shadow:
     #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
-    rgba(14, 14, 14, 0),
+      rgba(14, 14, 14, 0),
     #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
-    rgba(14, 14, 14, 0);
+      rgba(14, 14, 14, 0);
+  @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
+  @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+  @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
+  @include adaptive-value('min-height', 69, 61, 0, 1920, 1440);
 
   @include hover {
     background-color: $white;
@@ -38,9 +38,9 @@
 
     box-shadow:
       #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
-      rgba(14, 14, 14, 0.04),
+        rgba(14, 14, 14, 0.04),
       #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
-      rgba(14, 14, 14, 0.05);
+        rgba(14, 14, 14, 0.05);
   }
 
   &:focus-visible {
@@ -50,9 +50,9 @@
 
     box-shadow:
       #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem}
-      rgba(14, 14, 14, 0.04),
+        rgba(14, 14, 14, 0.04),
       #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem}
-      rgba(14, 14, 14, 0.05);
+        rgba(14, 14, 14, 0.05);
   }
 
   @include vp-1439 {
@@ -62,10 +62,10 @@
       border-radius: calc(30px / 16px * 1rem);
     }
 
-    @include adaptive-value("font-size", 14, 14, 0, 1439, 1280);
-    @include adaptive-value("line-height", 14 * 1.2, 14 * 1.2, 0, 1439, 1280);
-    @include adaptive-value("border-radius", 15, 15, 0, 1439, 1280);
-    @include adaptive-value("min-height", 61, 55, 0, 1439, 1280);
+    @include adaptive-value('font-size', 14, 14, 0, 1439, 1280);
+    @include adaptive-value('line-height', 14 * 1.2, 14 * 1.2, 0, 1439, 1280);
+    @include adaptive-value('border-radius', 15, 15, 0, 1439, 1280);
+    @include adaptive-value('min-height', 61, 55, 0, 1439, 1280);
 
     @include hover {
       border-radius: calc(30px / 16px * 1rem);
@@ -77,9 +77,9 @@
       border-radius: calc(25px / 16px * 1rem);
     }
 
-    @include adaptive-value("font-size", 14, 13, 0, 1279, 768);
-    @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1279, 768);
-    @include adaptive-value("min-height", 55, 48, 0, 1279, 768);
+    @include adaptive-value('font-size', 14, 13, 0, 1279, 768);
+    @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1279, 768);
+    @include adaptive-value('min-height', 55, 48, 0, 1279, 768);
 
     @include hover {
       border-radius: calc(25px / 16px * 1rem);
@@ -87,6 +87,6 @@
   }
 
   @include vp-767 {
-    @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
+    @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
   }
 }

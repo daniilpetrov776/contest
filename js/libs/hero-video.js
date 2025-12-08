@@ -14,7 +14,8 @@ function initHeroVideo() {
   let currentAnimation = null
 
   // Константы
-  const DESKTOP_MIN_WIDTH = 768
+  const EXPANDABLE_MIN_WIDTH = 376 // Минимальная ширина для расширения видео при скролле
+  const DESKTOP_MIN_WIDTH = 1280 // Минимальная ширина для десктопных размеров
   const MAX_WIDTH = 100
   const MAX_HEIGHT = 90
   const STEP_SIZE = 25
@@ -24,8 +25,8 @@ function initHeroVideo() {
   const ANIMATION_EASE = 'power2.out'
   const SCROLL_PROGRESS_MULTIPLIER = 0.2
 
-  // Функция для проверки десктопа
-  const checkIsDesktop = () => window.innerWidth >= DESKTOP_MIN_WIDTH
+  // Функция для проверки, должно ли видео расширяться при скролле
+  const checkIsDesktop = () => window.innerWidth >= EXPANDABLE_MIN_WIDTH
 
   // Функция для обновления aria-label в зависимости от состояния
   const updateAriaLabel = () => {
@@ -67,16 +68,18 @@ function initHeroVideo() {
     }
     else if (windowWidth >= 768) {
       // Планшет: 416px на 226px
+      // Высота рассчитывается от высоты окна для получения точного значения 226px
       return {
         width: (416 / windowWidth) * 100,
-        height: (226 / windowHeight) * 100,
+        height: (212 / windowHeight) * 100,
       }
     }
     else {
       // Мобилка: 225px на 135px
+      // Высота рассчитывается от высоты окна для получения точного значения 135px
       return {
         width: (225 / windowWidth) * 100,
-        height: (135 / windowHeight) * 100,
+        height: (105 / windowHeight) * 100,
       }
     }
   }

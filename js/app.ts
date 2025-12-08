@@ -3,7 +3,6 @@
 import 'virtual:svg-icons-register'
 import * as flsFunctions from './files/functions'
 import * as flsForms from './files/forms/forms'
-import * as flsScroll from './files/scroll/scroll'
 // import './libs/parallax-mouse'
 // import './libs/popup'
 import './libs/burger'
