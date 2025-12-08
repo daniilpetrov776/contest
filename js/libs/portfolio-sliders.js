@@ -1,5 +1,7 @@
 import Swiper from 'swiper';
 import 'swiper/css';
+import { RESIZE_DEBOUNCE_DELAY } from './animation-constants.js';
+import { initOnDOMReady, createDebouncedResizeHandler } from './animation-utils.js';
 
 // Константы для размеров экрана
 const MOBILE_BREAKPOINT = 768;
@@ -7,9 +9,6 @@ const MOBILE_BREAKPOINT = 768;
 // Константы для настройки Swiper
 const SWIPER_SPACE_BETWEEN = 10;
 const SWIPER_SPEED = 800;
-
-// Константы для обработки событий
-const RESIZE_DEBOUNCE_DELAY = 250;
 
 const portfolioSwipers = new Map();
 
@@ -58,20 +57,10 @@ function handleResize() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPortfolioSliders);
-} else {
-  initPortfolioSliders();
-}
+initOnDOMReady(initPortfolioSliders);
 
 // Обработка изменения размера окна с debounce
-let resizeTimer = null;
-window.addEventListener('resize', () => {
-  if (resizeTimer) {
-    clearTimeout(resizeTimer);
-  }
-  resizeTimer = setTimeout(handleResize, RESIZE_DEBOUNCE_DELAY);
-});
+createDebouncedResizeHandler(handleResize, RESIZE_DEBOUNCE_DELAY);
 
 // Экспорт для возможности ручного управления
 export { destroyPortfolioSliders, initPortfolioSliders };

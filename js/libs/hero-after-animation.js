@@ -1,4 +1,6 @@
 import { gsap } from 'gsap';
+import { EASE_TYPE, RESIZE_DEBOUNCE_DELAY } from './animation-constants.js';
+import { createOptimizedScrollHandler, createDebouncedResizeHandler, initOnDOMReady } from './animation-utils.js';
 
 // Константы для размеров экрана
 const TABLET_MIN_WIDTH = 768;
@@ -21,10 +23,7 @@ const SCROLL_ANIMATION_DURATION = 1.6;
 const SCROLL_PROGRESS_MAX = 1;
 const MAX_STEP_CALCULATION = 100;
 
-// Константы для обработки событий
-const RESIZE_DEBOUNCE_DELAY = 250;
 function initHeroAfterAnimation() {
-
   const hero = document.querySelector('.hero');
 
   if (!hero) {
@@ -60,7 +59,7 @@ function initHeroAfterAnimation() {
   timeline.to(hero, {
     '--after-height': `${initialHeightPercent}%`,
     'duration': LOAD_ANIMATION_DURATION,
-    'ease': 'power2.out',
+    'ease': EASE_TYPE,
   });
 
   // Обработчик скролла для анимации ::after
@@ -122,7 +121,7 @@ function initHeroAfterAnimation() {
       currentAnimation = gsap.to(hero, {
         '--after-height': `${targetHeightPercent}%`,
         'duration': SCROLL_ANIMATION_DURATION,
-        'ease': 'power2.out',
+        'ease': EASE_TYPE,
         'onComplete': () => {
           currentAnimation = null;
         },
@@ -133,29 +132,13 @@ function initHeroAfterAnimation() {
   };
 
   // Добавляем обработчик скролла с оптимизацией через requestAnimationFrame
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-      cancelAnimationFrame(scrollTimeout);
-    }
-    scrollTimeout = requestAnimationFrame(handleScroll);
-  }, { passive: true });
+  createOptimizedScrollHandler(handleScroll);
 
   // Обновляем кэш высоты при изменении размера окна
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    if (resizeTimeout) {
-      clearTimeout(resizeTimeout);
-    }
-    resizeTimeout = setTimeout(() => {
-      cachedHeroHeight = hero.offsetHeight;
-    }, RESIZE_DEBOUNCE_DELAY);
-  }, { passive: true });
+  createDebouncedResizeHandler(() => {
+    cachedHeroHeight = hero.offsetHeight;
+  }, RESIZE_DEBOUNCE_DELAY);
 }
 
 // Запускаем анимацию после загрузки DOM
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHeroAfterAnimation);
-} else {
-  initHeroAfterAnimation();
-}
+initOnDOMReady(initHeroAfterAnimation);

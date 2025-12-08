@@ -1,10 +1,6 @@
 import { gsap } from 'gsap';
-
-const DEFAULT_OFFSET_VALUE = 20;
-const DEFAULT_OFFSET_UNIT = 'px';
-const INITIAL_POSITION = 0;
-const FINAL_POSITION = 0;
-const EASE_TYPE = 'power2.out';
+import { INITIAL_POSITION, FINAL_POSITION, EASE_TYPE } from '../animation-constants.js';
+import { parseOffset, calculateInitialPosition } from './utils.js';
 
 /**
  * Анимация slide (скольжение)
@@ -16,31 +12,12 @@ const EASE_TYPE = 'power2.out';
  */
 export function animateSlide(element, direction, offset, duration) {
   // Парсим смещение
-  const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET_VALUE;
-  const offsetUnit = offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
+  const { offsetValue, offsetUnit } = parseOffset(offset);
 
   // Определяем начальные значения в зависимости от направления
-  let initialX = INITIAL_POSITION;
-  let initialY = INITIAL_POSITION;
+  const { initialX, initialY } = calculateInitialPosition(direction, offsetValue);
   const finalX = FINAL_POSITION;
   const finalY = FINAL_POSITION;
-
-  switch (direction) {
-    case 'from-down':
-      initialY = offsetValue;
-      break;
-    case 'from-up':
-      initialY = -offsetValue;
-      break;
-    case 'from-left':
-      initialX = -offsetValue;
-      break;
-    case 'from-right':
-      initialX = offsetValue;
-      break;
-    default:
-      initialY = offsetValue;
-  }
 
   // Устанавливаем начальное состояние
   gsap.set(element, {

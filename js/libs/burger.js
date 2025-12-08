@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { EASE_TYPE, EASING_HIDE } from './animation-constants.js';
 
 // Константы для анимации меню
 const ANIMATION_DURATION = 700;
@@ -24,9 +25,9 @@ const MENU_OPEN_DELAY = 0;
 const IS_OPEN_CLASS_DELAY = 100;
 const IS_SCROLLABLE_CLASS_DELAY = 500;
 
-// Константы для easing
-const EASING_OPEN = 'power2.out';
-const EASING_CLOSE = 'power2.in';
+// Константы для easing (используем общие)
+const EASING_OPEN = EASE_TYPE;
+const EASING_CLOSE = EASING_HIDE;
 
 // Константы для клавиатуры
 const ESCAPE_KEY = 'Escape';

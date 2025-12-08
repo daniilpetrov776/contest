@@ -3,6 +3,19 @@ import { animateFade } from './fade.js';
 import { animateScale } from './scale.js';
 import { animateSlide } from './slide.js';
 import { animateText } from './text.js';
+import {
+  DEFAULT_OFFSET_VALUE,
+  DEFAULT_OFFSET_UNIT,
+  INITIAL_POSITION,
+  INITIAL_OPACITY,
+  INITIAL_SCALE,
+  MEASUREMENT_SCALE,
+  VISIBILITY_HIDDEN,
+  VISIBILITY_VISIBLE,
+  OBSERVER_ROOT_MARGIN,
+  OBSERVER_THRESHOLD,
+} from '../animation-constants.js';
+import { parseOffset, calculateInitialPosition, getTransformOrigin } from './utils.js';
 
 export { animateFade } from './fade.js';
 export { animateScale } from './scale.js';
@@ -14,28 +27,10 @@ const MIN_SEQUENCE_PARTS_COUNT = 5;
 const DEFAULT_DURATION = 1;
 const DEFAULT_ORDER = 0;
 
-// Константы для смещения
-const DEFAULT_OFFSET_VALUE = 20;
-const DEFAULT_OFFSET_UNIT = 'px';
-const INITIAL_POSITION = 0;
-
-// Константы для opacity
-const INITIAL_OPACITY = 0;
-
-// Константы для scale
-const INITIAL_SCALE = 0;
-const MEASUREMENT_SCALE = 1;
-
-// Константы для visibility
-const VISIBILITY_HIDDEN = 'hidden';
-const VISIBILITY_VISIBLE = 'visible';
-
 // Константы для анимации
 const GROUP_DELAY_MULTIPLIER = 0.1;
 
-// Константы для IntersectionObserver
-const OBSERVER_ROOT_MARGIN = '0px';
-const OBSERVER_THRESHOLD = 0.1;
+// Константы для IntersectionObserver (импортированы из animation-constants.js)
 
 // Константы для задержек
 const SWIPER_INIT_DELAY = 200;
@@ -100,27 +95,8 @@ function setInitialStates(slide) {
     // Устанавливаем начальные состояния в зависимости от типа анимации
     switch (animationType) {
       case 'text': {
-        const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET_VALUE;
-        const offsetUnit = offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
-        let initialX = INITIAL_POSITION;
-        let initialY = INITIAL_POSITION;
-
-        switch (direction) {
-          case 'from-down':
-            initialY = offsetValue;
-            break;
-          case 'from-up':
-            initialY = -offsetValue;
-            break;
-          case 'from-left':
-            initialX = -offsetValue;
-            break;
-          case 'from-right':
-            initialX = offsetValue;
-            break;
-          default:
-            initialY = offsetValue;
-        }
+        const { offsetValue, offsetUnit } = parseOffset(offset);
+        const { initialX, initialY } = calculateInitialPosition(direction, offsetValue);
 
         gsap.set(element, {
           opacity: INITIAL_OPACITY,
@@ -138,27 +114,8 @@ function setInitialStates(slide) {
       }
 
       case 'slide': {
-        const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET_VALUE;
-        const offsetUnit = offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
-        let initialX = INITIAL_POSITION;
-        let initialY = INITIAL_POSITION;
-
-        switch (direction) {
-          case 'from-down':
-            initialY = offsetValue;
-            break;
-          case 'from-up':
-            initialY = -offsetValue;
-            break;
-          case 'from-left':
-            initialX = -offsetValue;
-            break;
-          case 'from-right':
-            initialX = offsetValue;
-            break;
-          default:
-            initialY = offsetValue;
-        }
+        const { offsetValue, offsetUnit } = parseOffset(offset);
+        const { initialX, initialY } = calculateInitialPosition(direction, offsetValue);
 
         gsap.set(element, {
           x: `${initialX}${offsetUnit}`,
@@ -168,25 +125,8 @@ function setInitialStates(slide) {
       }
 
       case 'scale': {
-        let transformOrigin = 'bottom';
+        const transformOrigin = getTransformOrigin(direction);
         const isHorizontal = direction === 'from-left' || direction === 'from-right';
-
-        switch (direction) {
-          case 'from-down':
-            transformOrigin = 'bottom';
-            break;
-          case 'from-up':
-            transformOrigin = 'top';
-            break;
-          case 'from-left':
-            transformOrigin = 'left';
-            break;
-          case 'from-right':
-            transformOrigin = 'right';
-            break;
-          default:
-            transformOrigin = 'bottom';
-        }
 
         gsap.set(element, {
           scale: INITIAL_SCALE,
@@ -430,14 +370,11 @@ function initBannerAnimation() {
   }, SWIPER_INIT_DELAY);
 }
 
+import { initOnDOMReady } from '../animation-utils.js';
+
 /**
  * Инициализация при загрузке DOM
  */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initBannerAnimation);
-} else {
-  // Небольшая задержка для инициализации Swiper
-  setTimeout(initBannerAnimation, DOM_READY_DELAY);
-}
+initOnDOMReady(initBannerAnimation, DOM_READY_DELAY);
 
 export { initBannerAnimation };

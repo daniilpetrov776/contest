@@ -1,10 +1,6 @@
 import { gsap } from 'gsap';
-
-const DEFAULT_OFFSET = 20;
-const INITIAL_POSITION = 0;
-const INITIAL_OPACITY = 0;
-const FINAL_OPACITY = 1;
-const EASE_TYPE = 'power2.out';
+import { INITIAL_POSITION, INITIAL_OPACITY, FINAL_OPACITY, EASE_TYPE } from '../animation-constants.js';
+import { parseOffset, calculateInitialPosition } from './utils.js';
 
 /**
  * Анимация текста с направлением
@@ -16,31 +12,12 @@ const EASE_TYPE = 'power2.out';
  */
 export function animateText(element, direction, offset, duration) {
   // Парсим смещение
-  const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET;
-  const offsetUnit = offset.replace(/\d/g, '') || 'px';
+  const { offsetValue, offsetUnit } = parseOffset(offset);
 
   // Определяем начальные значения в зависимости от направления
-  let initialX = INITIAL_POSITION;
-  let initialY = INITIAL_POSITION;
+  const { initialX, initialY } = calculateInitialPosition(direction, offsetValue);
   const finalX = INITIAL_POSITION;
   const finalY = INITIAL_POSITION;
-
-  switch (direction) {
-    case 'from-down':
-      initialY = offsetValue;
-      break;
-    case 'from-up':
-      initialY = -offsetValue;
-      break;
-    case 'from-left':
-      initialX = -offsetValue;
-      break;
-    case 'from-right':
-      initialX = offsetValue;
-      break;
-    default:
-      initialY = offsetValue;
-  }
 
   // Устанавливаем начальное состояние
   gsap.set(element, {

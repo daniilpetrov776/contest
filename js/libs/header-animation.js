@@ -1,4 +1,6 @@
 import { gsap } from 'gsap';
+import { EASE_TYPE } from './animation-constants.js';
+import { createOptimizedScrollHandler, initOnDOMReady } from './animation-utils.js';
 
 // Константы для размеров экрана
 const HEADER_ANIMATION_SCREEN_WIDTH = 1280;
@@ -38,7 +40,7 @@ function initHeaderAnimation() {
   timeline.to(header, {
     '--before-width': `${FINAL_BEFORE_WIDTH}%`,
     'duration': LOAD_ANIMATION_DURATION,
-    'ease': 'power2.out',
+    'ease': EASE_TYPE,
   });
 
   // Обработчик скролла для скрытия/показа хедера только на десктопе
@@ -75,7 +77,7 @@ function initHeaderAnimation() {
         gsap.to(header, {
           y: targetY,
           duration: SCROLL_ANIMATION_DURATION,
-          ease: 'power2.out',
+          ease: EASE_TYPE,
           onComplete: () => {
             isAnimating = false;
             isHeaderVisible = !shouldHide;
@@ -88,18 +90,8 @@ function initHeaderAnimation() {
   };
 
   // Добавляем обработчик скролла с оптимизацией через requestAnimationFrame
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-      cancelAnimationFrame(scrollTimeout);
-    }
-    scrollTimeout = requestAnimationFrame(handleScroll);
-  });
+  createOptimizedScrollHandler(handleScroll);
 }
 
 // Запускаем анимацию после загрузки DOM
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHeaderAnimation);
-} else {
-  initHeaderAnimation();
-}
+initOnDOMReady(initHeaderAnimation);

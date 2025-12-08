@@ -1,8 +1,5 @@
 import { gsap } from 'gsap';
-
-const INITIAL_OPACITY = 0;
-const FINAL_OPACITY = 1;
-const EASE_TYPE = 'power2.out';
+import { INITIAL_OPACITY, FINAL_OPACITY, EASE_TYPE } from '../animation-constants.js';
 
 /**
  * Анимация fade (появление)

@@ -1,4 +1,7 @@
 import { gsap } from 'gsap';
+import { EASE_TYPE } from './animation-constants.js';
+import { createOptimizedScrollHandler, initOnDOMReady } from './animation-utils.js';
+
 const INITIAL_Y_PERCENT = 0;
 const STEP_SIZE = 13;
 const MAX_TRANSLATE_Y_PERCENT = 150;
@@ -6,7 +9,6 @@ const SCROLL_PROGRESS_MAX = 1;
 const ANIMATION_DURATION = 1.6;
 
 function initHeroHeaderAnimation() {
-
   const heroHeader = document.querySelector('.hero__header');
 
   if (!heroHeader) {
@@ -53,7 +55,7 @@ function initHeroHeaderAnimation() {
       gsap.to(heroHeader, {
         y: `${finalTranslateY}%`,
         duration: ANIMATION_DURATION,
-        ease: 'power2.out',
+        ease: EASE_TYPE,
       });
     }
 
@@ -61,18 +63,8 @@ function initHeroHeaderAnimation() {
   };
 
   // Добавляем обработчик скролла с оптимизацией через requestAnimationFrame
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-      cancelAnimationFrame(scrollTimeout);
-    }
-    scrollTimeout = requestAnimationFrame(handleScroll);
-  });
+  createOptimizedScrollHandler(handleScroll);
 }
 
 // Запускаем анимацию после загрузки DOM
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHeroHeaderAnimation);
-} else {
-  initHeroHeaderAnimation();
-}
+initOnDOMReady(initHeroHeaderAnimation);
