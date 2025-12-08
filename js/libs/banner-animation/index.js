@@ -4,8 +4,6 @@ import { animateScale } from './scale.js';
 import { animateSlide } from './slide.js';
 import { animateText } from './text.js';
 import {
-  DEFAULT_OFFSET_VALUE,
-  DEFAULT_OFFSET_UNIT,
   INITIAL_POSITION,
   INITIAL_OPACITY,
   INITIAL_SCALE,

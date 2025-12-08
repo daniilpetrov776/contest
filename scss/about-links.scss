@@ -16,6 +16,9 @@
 }
 
 .about-links__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-flow: wrap row;
   align-items: center;
@@ -30,6 +33,7 @@
   justify-content: center;
   min-height: calc(45px / 16px * 1rem);
   color: $mainColor;
+  text-decoration: none;
   font-weight: 600;
   letter-spacing: -0.03em;
 
@@ -70,6 +74,7 @@
 }
 
 .about-links__description {
+  margin: 0;
   color: $gray;
   font-weight: 500;
   font-family: "TT Runs", "Arial", sans-serif;

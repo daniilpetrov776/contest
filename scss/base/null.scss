@@ -1,21 +1,12 @@
-* {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-html {
+body {
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
 }
 
@@ -38,37 +29,6 @@ body {
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-input,
-button,
-textarea {
-  font-family: $fontFamily;
-  font-size: inherit;
-}
-
-button {
-  color: inherit;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-ul li {
-  list-style: none;
-}
-
-img {
-  vertical-align: top;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
 }
 
 .visually-hidden {

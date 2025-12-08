@@ -1,9 +1,13 @@
 @use "sass:math";
 
 .button {
+  margin: 0;
+  padding: 0;
+  border: 0;
   min-height: calc(69px / 16px * 1rem);
   background-color: $black;
   color: $white;
+  text-decoration: none;
   font-weight: 600;
   font-family: "TT Runs", "Arial", sans-serif;
   padding: calc(22px / 16px * 1rem);

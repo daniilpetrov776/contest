@@ -72,12 +72,19 @@
 }
 
 .hero__socials {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
   @include vp-1279 {
     display: none;
   }
 }
 
 .hero__socials-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   width: 100%;
 }
 
@@ -142,6 +149,7 @@
 }
 
 .hero__title {
+  margin: 0;
   font-family: "TT Runs", "Arial", sans-serif;
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -420,6 +428,7 @@
 }
 
 .hero__footer-description {
+  margin: 0;
   font-family: "TT Runs", "Arial", sans-serif;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -555,6 +564,7 @@
 }
 
 .hero__telegram-label {
+  margin: 0;
   font-family: "TT Runs", "Arial", sans-serif;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -599,6 +609,7 @@
 }
 
 .hero__company-description {
+  margin: 0;
   font-family: "TT Commons Pro", "Arial", sans-serif;
   font-weight: 400;
   letter-spacing: -0.02em;

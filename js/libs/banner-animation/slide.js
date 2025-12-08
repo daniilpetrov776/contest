@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { INITIAL_POSITION, FINAL_POSITION, EASE_TYPE } from '../animation-constants.js';
+import { FINAL_POSITION, EASE_TYPE } from '../animation-constants.js';
 import { parseOffset, calculateInitialPosition } from './utils.js';
 
 /**

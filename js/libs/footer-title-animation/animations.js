@@ -3,7 +3,6 @@ import {
   FINAL_POSITION,
   EASING_SHOW,
   EASING_HIDE,
-  MILLISECONDS_PER_SECOND,
 } from '../animation-constants.js';
 import { parseOffset, calculateInitialPosition } from '../banner-animation/utils.js';
 import { setInitialPosition } from './utils.js';
