@@ -1,6 +1,30 @@
 import { gsap } from 'gsap';
 
+// Константы для размеров экрана
+const TABLET_MIN_WIDTH = 768;
+const TABLET_MAX_WIDTH = 1440;
+
+// Константы для высоты псевдоэлемента
+const INITIAL_HEIGHT_TABLET_PX = 120;
+const INITIAL_HEIGHT_DESKTOP_PX = 130;
+const MAX_HEIGHT_PERCENT = 50;
+const INITIAL_HEIGHT_PERCENT = 0;
+const PERCENT_MULTIPLIER = 100;
+
+// Константы для анимации при загрузке
+const LOAD_ANIMATION_DELAY = 0.3;
+const LOAD_ANIMATION_DURATION = 2;
+
+// Константы для анимации при скролле
+const SCROLL_STEP_SIZE = 1;
+const SCROLL_ANIMATION_DURATION = 1.6;
+const SCROLL_PROGRESS_MAX = 1;
+const MAX_STEP_CALCULATION = 100;
+
+// Константы для обработки событий
+const RESIZE_DEBOUNCE_DELAY = 250;
 function initHeroAfterAnimation() {
+
   const hero = document.querySelector('.hero');
 
   if (!hero) {
@@ -9,7 +33,7 @@ function initHeroAfterAnimation() {
 
   // Устанавливаем начальное состояние псевдоэлемента
   gsap.set(hero, {
-    '--after-height': '0%',
+    '--after-height': `${INITIAL_HEIGHT_PERCENT}%`,
   });
 
   // Анимация при загрузке - вычисляем начальную высоту в процентах
@@ -21,13 +45,13 @@ function initHeroAfterAnimation() {
       cachedHeroHeight = hero.offsetHeight;
     }
     const heroHeight = cachedHeroHeight;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1440;
-    const initialHeightPx = isTablet ? 120 : 130;
-    return (initialHeightPx / heroHeight) * 100;
+    const isTablet = window.innerWidth >= TABLET_MIN_WIDTH && window.innerWidth < TABLET_MAX_WIDTH;
+    const initialHeightPx = isTablet ? INITIAL_HEIGHT_TABLET_PX : INITIAL_HEIGHT_DESKTOP_PX;
+    return (initialHeightPx / heroHeight) * PERCENT_MULTIPLIER;
   };
 
   const timeline = gsap.timeline({
-    delay: 0.3, // Небольшая задержка после загрузки
+    delay: LOAD_ANIMATION_DELAY,
   });
 
   // Анимация ::after - расширение до начальной высоты в процентах
@@ -35,7 +59,7 @@ function initHeroAfterAnimation() {
 
   timeline.to(hero, {
     '--after-height': `${initialHeightPercent}%`,
-    'duration': 2,
+    'duration': LOAD_ANIMATION_DURATION,
     'ease': 'power2.out',
   });
 
@@ -43,8 +67,7 @@ function initHeroAfterAnimation() {
   let lastScrollY = window.scrollY;
   let currentStep = 0;
   let currentAnimation = null;
-  const stepSize = 1; // Шаг в процентах
-  const maxStep = Math.ceil(100 / stepSize); // Максимальный шаг для 100% (50% контейнера)
+  const maxStep = Math.ceil(MAX_STEP_CALCULATION / SCROLL_STEP_SIZE);
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -62,12 +85,11 @@ function initHeroAfterAnimation() {
     const heroHeight = cachedHeroHeight;
 
     // Получаем начальную высоту в процентах от контейнера
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1440;
-    const initialHeightPx = isTablet ? 120 : 130; // Начальная высота в пикселях
-    const initialHeightPercent = (initialHeightPx / heroHeight) * 100; // Начальная высота в процентах
+    const isTablet = window.innerWidth >= TABLET_MIN_WIDTH && window.innerWidth < TABLET_MAX_WIDTH;
+    const initialHeightPx = isTablet ? INITIAL_HEIGHT_TABLET_PX : INITIAL_HEIGHT_DESKTOP_PX;
+    const initialHeightPercent = (initialHeightPx / heroHeight) * PERCENT_MULTIPLIER;
 
-    // Максимальная высота - 50% от контейнера
-    const maxHeightPercent = 50;
+    const maxHeightPercent = MAX_HEIGHT_PERCENT;
 
     // Вычисляем диапазон от начальной высоты до максимальной в процентах
     const heightRangePercent = maxHeightPercent - initialHeightPercent;
@@ -75,7 +97,7 @@ function initHeroAfterAnimation() {
     // Вычисляем новый шаг на основе позиции скролла
     // Используем высоту окна как единицу измерения
     const viewportHeight = window.innerHeight;
-    const scrollProgress = Math.min(currentScrollY / viewportHeight, 1);
+    const scrollProgress = Math.min(currentScrollY / viewportHeight, SCROLL_PROGRESS_MAX);
     const newStep = Math.floor(scrollProgress * maxStep);
 
     // Ограничиваем шаг максимальным значением
@@ -99,7 +121,7 @@ function initHeroAfterAnimation() {
       // Анимируем от текущего значения до целевого (в процентах)
       currentAnimation = gsap.to(hero, {
         '--after-height': `${targetHeightPercent}%`,
-        'duration': 1.6,
+        'duration': SCROLL_ANIMATION_DURATION,
         'ease': 'power2.out',
         'onComplete': () => {
           currentAnimation = null;
@@ -127,7 +149,7 @@ function initHeroAfterAnimation() {
     }
     resizeTimeout = setTimeout(() => {
       cachedHeroHeight = hero.offsetHeight;
-    }, 250);
+    }, RESIZE_DEBOUNCE_DELAY);
   }, { passive: true });
 }
 

@@ -13,7 +13,7 @@
     width: 100%;
     text-decoration: none;
     color: inherit;
-    transition: color 0.3s $smooth;
+    transition: color 0.3s $smooth, opacity 0.3s $smooth;
 
     @include hover {
       .socials__icon-wrapper {
@@ -22,6 +22,14 @@
     }
 
     &:focus-visible {
+      .socials__icon-wrapper {
+        background-color: $highlight;
+      }
+    }
+
+    &:active {
+      opacity: 0.8;
+
       .socials__icon-wrapper {
         background-color: $highlight;
       }

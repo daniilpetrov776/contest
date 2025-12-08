@@ -1,7 +1,15 @@
 import Swiper from 'swiper';
 import 'swiper/css';
 
+// Константы для размеров экрана
 const MOBILE_BREAKPOINT = 768;
+
+// Константы для настройки Swiper
+const SWIPER_SPACE_BETWEEN = 10;
+const SWIPER_SPEED = 800;
+
+// Константы для обработки событий
+const RESIZE_DEBOUNCE_DELAY = 250;
 
 const portfolioSwipers = new Map();
 
@@ -25,8 +33,8 @@ function initPortfolioSliders() {
 
     const swiper = new Swiper(category, {
       slidesPerView: 'auto',
-      spaceBetween: 10,
-      speed: 800,
+      spaceBetween: SWIPER_SPACE_BETWEEN,
+      speed: SWIPER_SPEED,
       observer: true,
       observeParents: true,
     });
@@ -62,7 +70,7 @@ window.addEventListener('resize', () => {
   if (resizeTimer) {
     clearTimeout(resizeTimer);
   }
-  resizeTimer = setTimeout(handleResize, 250);
+  resizeTimer = setTimeout(handleResize, RESIZE_DEBOUNCE_DELAY);
 });
 
 // Экспорт для возможности ручного управления

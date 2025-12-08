@@ -172,7 +172,6 @@
       }
     }
 
-    // Модификатор вынесен на уровень выше для уменьшения вложенности
     .banner__title-text--highlight {
       display: inline-flex;
       align-items: center;
@@ -492,7 +491,6 @@
     }
   }
 
-  // Медиа-запросы вынесены на уровень выше для уменьшения вложенности
   .banner__image-wrapper--building {
     @include vp-1439 {
       box-shadow:
@@ -782,10 +780,14 @@
         outline-offset: calc(2px / 16px * 1rem);
         background-color: $black;
       }
+
+      &:active {
+        background-color: $black;
+        opacity: 0.8;
+      }
     }
   }
 
-  // Модификаторы вынесены на уровень выше для уменьшения вложенности
   .banner__swiper .swiper-pagination-bullet.banner__pagination-bullet--gray {
     background-color: rgba($black, 0.3);
   }
@@ -799,7 +801,6 @@
     transform: scale(1);
   }
 
-  // Медиа-запросы вынесены на уровень выше для уменьшения вложенности
   .banner__swiper.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
   .banner__swiper > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
     @media (max-width: $vp-768) {

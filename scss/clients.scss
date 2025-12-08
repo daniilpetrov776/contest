@@ -128,6 +128,13 @@
       }
     }
 
+    &:active {
+      &::before {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.8;
+      }
+    }
+
     @include vp-1279 {
       &::before {
         display: none;
@@ -149,8 +156,6 @@
     }
   }
 
-  // Модификаторы вынесены на уровень выше для уменьшения вложенности
-  // Используем полные селекторы для сохранения специфичности
   .clients__item--severstal img {
     @include adaptive-value("top", -7, 0, 0, 1920, 1440);
     @include adaptive-value("left", 0, 30, 0, 1920, 1440);
@@ -538,6 +543,10 @@
 
     &:focus-visible {
       outline: none;
+    }
+
+    &:active {
+      opacity: 0.8;
     }
   }
 

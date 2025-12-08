@@ -1,5 +1,29 @@
 import { gsap } from 'gsap';
 
+// Константы для парсинга анимации
+const MIN_ANIMATION_PARTS_COUNT = 4;
+const DEFAULT_DURATION = 1;
+const DEFAULT_STAGGER_DELAY = 0.1;
+
+// Константы для обработки текста
+const BR_TAG_REGEX = /(<br\s*\/?>)/i;
+const WHITESPACE_REGEX = /\s+/;
+
+// Константы для анимации
+const DEFAULT_OFFSET_VALUE = 20;
+const DEFAULT_OFFSET_UNIT = 'px';
+const FINAL_POSITION = 0;
+const EASING_SHOW = 'power2.out';
+const EASING_HIDE = 'power2.in';
+const MILLISECONDS_PER_SECOND = 1000;
+
+// Константы для IntersectionObserver
+const OBSERVER_ROOT_MARGIN = '0px';
+const OBSERVER_THRESHOLD = 0.1;
+
+// Константы для скролла
+const SCROLL_DEBOUNCE_DELAY = 50;
+
 /**
  * Парсит значение data-scroll-animation атрибута
  * @param {string} animationValue - Значение атрибута data-scroll-animation
@@ -12,7 +36,7 @@ function parseAnimationParams(animationValue) {
 
   const parts = animationValue.split(',').map((part) => part.trim());
 
-  if (parts.length < 4) {
+  if (parts.length < MIN_ANIMATION_PARTS_COUNT) {
     return null;
   }
 
@@ -21,8 +45,8 @@ function parseAnimationParams(animationValue) {
   return {
     direction,
     offset,
-    duration: Number.parseFloat(duration) || 1,
-    staggerDelay: Number.parseFloat(staggerDelay) || 0.1,
+    duration: Number.parseFloat(duration) || DEFAULT_DURATION,
+    staggerDelay: Number.parseFloat(staggerDelay) || DEFAULT_STAGGER_DELAY,
   };
 }
 
@@ -41,15 +65,15 @@ function wrapWordsInSpans(element) {
   const wordSpans = [];
 
   // Разбиваем оригинальный HTML на части, сохраняя <br> теги
-  const parts = originalHTML.split(/(<br\s*\/?>)/i);
+  const parts = originalHTML.split(BR_TAG_REGEX);
 
   parts.forEach((part, partIndex) => {
-    if (part.match(/<br\s*\/?>/i)) {
+    if (part.match(BR_TAG_REGEX)) {
       // Это <br> тег - добавляем как есть
       element.appendChild(document.createRange().createContextualFragment(part));
     } else {
       // Это текст - разбиваем на слова
-      const partWords = part.trim().split(/\s+/).filter((word) => word.length > 0);
+      const partWords = part.trim().split(WHITESPACE_REGEX).filter((word) => word.length > 0);
 
       partWords.forEach((word, index) => {
         const span = document.createElement('span');
@@ -69,7 +93,7 @@ function wrapWordsInSpans(element) {
       });
 
       // Добавляем пробел после текстовой части, если следующая часть не <br>
-      if (parts[partIndex + 1] && !parts[partIndex + 1].match(/<br\s*\/?>/i)) {
+      if (parts[partIndex + 1] && !parts[partIndex + 1].match(BR_TAG_REGEX)) {
         element.appendChild(document.createTextNode(' '));
       }
     }
@@ -91,8 +115,8 @@ function animateWords(wordSpans, params, reverse = false) {
     const delay = index * params.staggerDelay;
 
     // Устанавливаем начальное состояние
-    const offsetValue = Number.parseFloat(params.offset) || 20;
-    const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+    const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+    const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
     let initialX = 0;
     let initialY = 0;
 
@@ -120,11 +144,11 @@ function animateWords(wordSpans, params, reverse = false) {
 
     // Запускаем анимацию
     gsap.to(wordSpan, {
-      x: 0,
-      y: 0,
+      x: FINAL_POSITION,
+      y: FINAL_POSITION,
       duration: params.duration,
       delay,
-      ease: 'power2.out',
+      ease: EASING_SHOW,
     });
   });
 }
@@ -140,8 +164,8 @@ function animateWordsReverse(wordSpans, params) {
   words.forEach((wordSpan, index) => {
     const delay = index * params.staggerDelay;
 
-    const offsetValue = Number.parseFloat(params.offset) || 20;
-    const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+    const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+    const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
     let finalX = 0;
     let finalY = 0;
 
@@ -168,7 +192,7 @@ function animateWordsReverse(wordSpans, params) {
       y: `${finalY}${offsetUnit}`,
       duration: params.duration,
       delay,
-      ease: 'power2.in',
+      ease: EASING_HIDE,
     });
   });
 }
@@ -206,8 +230,8 @@ function initFooterTitleAnimation() {
   }
 
   // Устанавливаем начальные состояния для всех слов
-  const offsetValue = Number.parseFloat(params.offset) || 20;
-  const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+  const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+  const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
   let initialX = 0;
   let initialY = 0;
 
@@ -267,8 +291,8 @@ function initFooterTitleAnimation() {
     isAnimating = true;
 
     // Устанавливаем начальные состояния для всех слов
-    const offsetValue = Number.parseFloat(params.offset) || 20;
-    const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+    const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+    const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
     let initialX = 0;
     let initialY = 0;
 
@@ -309,7 +333,7 @@ function initFooterTitleAnimation() {
     animationTimeout = setTimeout(() => {
       isAnimating = false;
       animationTimeout = null;
-    }, (wordSpans.length * params.staggerDelay + params.duration) * 1000);
+    }, (wordSpans.length * params.staggerDelay + params.duration) * MILLISECONDS_PER_SECOND);
   }
 
   /**
@@ -326,14 +350,14 @@ function initFooterTitleAnimation() {
     animationTimeout = setTimeout(() => {
       isAnimating = false;
       animationTimeout = null;
-    }, (wordSpans.length * params.staggerDelay + params.duration) * 1000);
+    }, (wordSpans.length * params.staggerDelay + params.duration) * MILLISECONDS_PER_SECOND);
   }
 
   // Intersection Observer для отслеживания появления элемента в viewport
   const observerOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
+    rootMargin: OBSERVER_ROOT_MARGIN,
+    threshold: OBSERVER_THRESHOLD,
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -404,7 +428,7 @@ function initFooterTitleAnimation() {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       lastScrollY = currentScrollY;
-    }, 50);
+    }, SCROLL_DEBOUNCE_DELAY);
   }, { passive: true });
 
   // Начинаем наблюдение за элементом
@@ -434,8 +458,8 @@ function initFooterPolicyAnimation() {
   }
 
   // Устанавливаем начальное состояние
-  const offsetValue = Number.parseFloat(params.offset) || 20;
-  const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+  const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+  const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
   let initialX = 0;
   let initialY = 0;
 
@@ -487,8 +511,8 @@ function initFooterPolicyAnimation() {
     isAnimating = true;
 
     // Устанавливаем начальное состояние
-    const offsetValue = Number.parseFloat(params.offset) || 20;
-    const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+    const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+    const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
     let initialX = 0;
     let initialY = 0;
 
@@ -516,10 +540,10 @@ function initFooterPolicyAnimation() {
 
     // Запускаем анимацию
     gsap.to(footerPolicy, {
-      x: 0,
-      y: 0,
+      x: FINAL_POSITION,
+      y: FINAL_POSITION,
       duration: params.duration,
-      ease: 'power2.out',
+      ease: EASING_SHOW,
     });
 
     wasVisible = true;
@@ -528,7 +552,7 @@ function initFooterPolicyAnimation() {
     animationTimeout = setTimeout(() => {
       isAnimating = false;
       animationTimeout = null;
-    }, params.duration * 1000);
+    }, params.duration * MILLISECONDS_PER_SECOND);
   }
 
   /**
@@ -538,8 +562,8 @@ function initFooterPolicyAnimation() {
     stopCurrentAnimation();
     isAnimating = true;
 
-    const offsetValue = Number.parseFloat(params.offset) || 20;
-    const offsetUnit = params.offset.replace(/\d/g, '') || 'px';
+    const offsetValue = Number.parseFloat(params.offset) || DEFAULT_OFFSET_VALUE;
+    const offsetUnit = params.offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
     let finalX = 0;
     let finalY = 0;
 
@@ -564,7 +588,7 @@ function initFooterPolicyAnimation() {
       x: `${finalX}${offsetUnit}`,
       y: `${finalY}${offsetUnit}`,
       duration: params.duration,
-      ease: 'power2.in',
+      ease: EASING_HIDE,
     });
 
     wasVisible = false;
@@ -573,14 +597,14 @@ function initFooterPolicyAnimation() {
     animationTimeout = setTimeout(() => {
       isAnimating = false;
       animationTimeout = null;
-    }, params.duration * 1000);
+    }, params.duration * MILLISECONDS_PER_SECOND);
   }
 
   // Intersection Observer для отслеживания появления элемента в viewport
   const observerOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
+    rootMargin: OBSERVER_ROOT_MARGIN,
+    threshold: OBSERVER_THRESHOLD,
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -628,7 +652,7 @@ function initFooterPolicyAnimation() {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       // Таймер для debounce
-    }, 50);
+    }, SCROLL_DEBOUNCE_DELAY);
   }, { passive: true });
 
   // Начинаем наблюдение за элементом

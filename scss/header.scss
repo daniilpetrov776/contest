@@ -110,6 +110,10 @@
       outline: calc(2px / 16px * 1rem) solid $black;
       outline-offset: calc(2px / 16px * 1rem);
     }
+
+    &:active {
+      opacity: 0.5;
+    }
   }
 
   &__star {
@@ -152,7 +156,6 @@
     }
   }
 
-  // Псевдоэлементы и модификатор вынесены на уровень выше для уменьшения вложенности
   .header__toggle::before,
   .header__toggle::after {
     @include vp-1279 {

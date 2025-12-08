@@ -28,7 +28,6 @@
     }
   }
 
-  // Селектор вынесен на уровень выше для уменьшения вложенности
   .header-menu.is-open .header-menu__header-menu-nav {
     @include vp-1439 {
       opacity: 1;
@@ -59,6 +58,10 @@
 
     &:focus-visible {
       opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
     }
   }
 }

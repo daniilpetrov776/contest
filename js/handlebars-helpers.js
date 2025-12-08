@@ -1,5 +1,24 @@
 import hbs from 'handlebars';
 
+// Константы для размеров спрайтов
+const DEFAULT_SPRITE_WIDTH = 16;
+const DEFAULT_SPRITE_HEIGHT = 16;
+
+// Константы для путей
+const ICONS_PATH = '/icons/';
+
+// Константы для srcset
+const RETINA_1X = '1x';
+const RETINA_2X = '2x';
+
+// Константы для CSS спрайтов
+const DEFAULT_BG_POSITION_X = 0;
+const DEFAULT_BG_POSITION_Y = 0;
+
+// Константы для работы с массивами
+const BEM_MODIFIER_PARTS_COUNT = 2;
+const MODIFIER_PART_INDEX = 1;
+
 function getOptions(arg1, arg2) {
   if (arg1 && arg1.hash) {
     return arg1;
@@ -89,14 +108,14 @@ export const imageHelpers = {
     if (webp) {
       webpSrcset = webp;
       if (webp2x) {
-        webpSrcset += `, ${webp2x} 2x`;
+        webpSrcset += `, ${webp2x} ${RETINA_2X}`;
       }
     }
 
     // Формируем srcset для fallback
     let fallbackSrcset = fallback;
     if (fallback2x) {
-      fallbackSrcset += `, ${fallback2x} 2x`;
+      fallbackSrcset += `, ${fallback2x} ${RETINA_2X}`;
     }
 
     // Создаем source для webp
@@ -235,8 +254,8 @@ export const imageHelpers = {
         }
 
         if (part.sprite) {
-          const spriteWidth = part.sprite.width || 16;
-          const spriteHeight = part.sprite.height || 16;
+          const spriteWidth = part.sprite.width || DEFAULT_SPRITE_WIDTH;
+          const spriteHeight = part.sprite.height || DEFAULT_SPRITE_HEIGHT;
           const spriteClass = part.sprite.class || '';
           const spritePosition = part.sprite.position || 'after'; // 'before' или 'after'
           const spriteSequence = part.sprite.sequence || part.sequence || '';
@@ -256,8 +275,8 @@ export const imageHelpers = {
 
             if (hasImageExtension) {
               // Обычное изображение (png, jpg, webp и т.д.)
-              const imageSrc = `/icons/${spriteName}`;
-              const imageSrc2x = spriteSrc2x ? `/icons/${spriteSrc2x}` : '';
+              const imageSrc = `${ICONS_PATH}${spriteName}`;
+              const imageSrc2x = spriteSrc2x ? `${ICONS_PATH}${spriteSrc2x}` : '';
 
               const imgAttrs = [
                 `src="${imageSrc}"`,
@@ -265,7 +284,7 @@ export const imageHelpers = {
                 `width="${spriteWidth}"`,
                 `height="${spriteHeight}"`,
                 spriteAlt ? `alt="${spriteAlt}"` : '',
-                imageSrc2x ? `srcset="${imageSrc} 1x, ${imageSrc2x} 2x"` : '',
+                imageSrc2x ? `srcset="${imageSrc} ${RETINA_1X}, ${imageSrc2x} ${RETINA_2X}"` : '',
                 spriteSequence ? `data-sequence="${spriteSequence}"` : '',
               ]
                 .filter(Boolean)
@@ -290,8 +309,8 @@ export const imageHelpers = {
           } else if (part.sprite.cssSprite) {
             // CSS спрайт (background-image с background-position)
             const spriteSheet = part.sprite.cssSprite.sheet || part.sprite.cssSprite.url;
-            const bgX = part.sprite.cssSprite.x || 0;
-            const bgY = part.sprite.cssSprite.y || 0;
+            const bgX = part.sprite.cssSprite.x || DEFAULT_BG_POSITION_X;
+            const bgY = part.sprite.cssSprite.y || DEFAULT_BG_POSITION_Y;
             const bgSize = part.sprite.cssSprite.size || 'auto';
 
             const style = [
@@ -325,7 +344,7 @@ export const imageHelpers = {
               `width="${spriteWidth}"`,
               `height="${spriteHeight}"`,
               imageAlt ? `alt="${imageAlt}"` : '',
-              imageSrc2x ? `srcset="${imageSrc} 1x, ${imageSrc2x} 2x"` : '',
+              imageSrc2x ? `srcset="${imageSrc} ${RETINA_1X}, ${imageSrc2x} ${RETINA_2X}"` : '',
               spriteSequence ? `data-sequence="${spriteSequence}"` : '',
             ]
               .filter(Boolean)
@@ -465,11 +484,11 @@ export const imageHelpers = {
     // Ищем класс с модификатором (формат: base--modifier)
     const modifierClass = classes.find((cls) => {
       const parts = cls.split('--');
-      return parts.length === 2 && parts[0] && parts[1];
+      return parts.length === BEM_MODIFIER_PARTS_COUNT && parts[0] && parts[1];
     });
 
     if (modifierClass) {
-      const modifier = modifierClass.split('--')[1];
+      const modifier = modifierClass.split('--')[MODIFIER_PART_INDEX];
       return `${wrapperBase} ${wrapperBase}--${modifier}`;
     }
 

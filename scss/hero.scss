@@ -131,6 +131,13 @@
         background-color: $highlight;
       }
     }
+
+    &:active {
+      .hero__socials-icon-wrapper {
+        background-color: $highlight;
+        opacity: 0.8;
+      }
+    }
   }
 
   &__title {
@@ -210,6 +217,12 @@
     &:focus-visible {
       outline: calc(2px / 16px * 1rem) solid $black;
       outline-offset: calc(2px / 16px * 1rem);
+    }
+
+    &:active {
+      outline: calc(2px / 16px * 1rem) solid $black;
+      outline-offset: calc(2px / 16px * 1rem);
+      opacity: 0.9;
     }
 
     @include vp-1439 {
@@ -306,7 +319,6 @@
     }
   }
 
-  // Псевдоэлементы вынесены на уровень выше для уменьшения вложенности
   .hero__footer::before {
     @include vp-767 {
       height: 55%;
@@ -522,6 +534,11 @@
 
     &:focus-visible {
       color: $gray;
+    }
+
+    &:active {
+      color: $gray;
+      opacity: 0.7;
     }
 
     @include adaptive-value("font-size", 20, 18, 0, 1920, 1440);

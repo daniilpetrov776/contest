@@ -7,7 +7,7 @@
   font-family: "TT Runs", "Arial", sans-serif;
   font-weight: 600;
   letter-spacing: -0.03em;
-  transition: background-color 0.3s $smooth;
+  transition: background-color 0.3s $smooth, opacity 0.3s $smooth;
 
   @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
   @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
@@ -20,6 +20,11 @@
 
   &:focus-visible {
     background-color: $highlight;
+  }
+
+  &:active {
+    background-color: $highlight;
+    opacity: 0.5;
   }
 
   @include vp-1439 {

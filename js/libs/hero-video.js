@@ -1,5 +1,44 @@
 import { gsap } from 'gsap';
 
+// Константы для размеров экрана
+const EXPANDABLE_MIN_WIDTH = 376;
+const DESKTOP_MIN_WIDTH = 1280;
+const TABLET_MIN_WIDTH = 768;
+
+// Константы для размеров видео
+const DESKTOP_WIDTH_PX = 456;
+const DESKTOP_HEIGHT_PX = 230;
+const TABLET_WIDTH_PX = 416;
+const TABLET_HEIGHT_PX = 212;
+const MOBILE_WIDTH_PX = 225;
+const MOBILE_HEIGHT_PX = 105;
+
+// Константы для анимации
+const MAX_WIDTH = 100;
+const MAX_HEIGHT = 90;
+const STEP_SIZE = 25;
+const ANIMATION_DURATION_NORMAL = 1.6;
+const ANIMATION_DURATION_FAST = 0.6;
+const ANIMATION_DURATION_RESIZE = 0.3;
+const ANIMATION_EASE = 'power2.out';
+const SCROLL_PROGRESS_MULTIPLIER = 0.2;
+const SCROLL_PROGRESS_MAX = 1;
+const PERCENT_MULTIPLIER = 100;
+const MAX_STEP_CALCULATION = 100;
+
+// Константы для видео
+const VIDEO_READY_STATE_MIN = 2;
+const VIDEO_CURRENT_TIME_START = 0;
+const VIDEO_TABINDEX_DISABLED = '-1';
+const VIDEO_TABINDEX_ENABLED = '0';
+
+// Константы для атрибутов
+const ARIA_PRESSED_FALSE = 'false';
+const ARIA_PRESSED_TRUE = 'true';
+
+// Константы для обработки событий
+const RESIZE_DEBOUNCE_DELAY = 100;
+
 function initHeroVideo() {
   const heroVideo = document.querySelector('.hero__video');
   const mutedVideo = document.querySelector('.hero__video-element--muted');
@@ -12,18 +51,6 @@ function initHeroVideo() {
   let isPlayingWithSound = false;
   let isExpanded = false;
   let currentAnimation = null;
-
-  // Константы
-  const EXPANDABLE_MIN_WIDTH = 376; // Минимальная ширина для расширения видео при скролле
-  const DESKTOP_MIN_WIDTH = 1280; // Минимальная ширина для десктопных размеров
-  const MAX_WIDTH = 100;
-  const MAX_HEIGHT = 90;
-  const STEP_SIZE = 25;
-  const ANIMATION_DURATION_NORMAL = 1.6;
-  const ANIMATION_DURATION_FAST = 0.6;
-  const ANIMATION_DURATION_RESIZE = 0.3;
-  const ANIMATION_EASE = 'power2.out';
-  const SCROLL_PROGRESS_MULTIPLIER = 0.2;
 
   // Функция для проверки, должно ли видео расширяться при скролле
   const checkIsDesktop = () => window.innerWidth >= EXPANDABLE_MIN_WIDTH;
@@ -47,8 +74,8 @@ function initHeroVideo() {
 
   // Настраиваем доступность видео
   heroVideo.setAttribute('role', 'button');
-  heroVideo.setAttribute('tabindex', '0');
-  heroVideo.setAttribute('aria-pressed', 'false');
+  heroVideo.setAttribute('tabindex', VIDEO_TABINDEX_ENABLED);
+  heroVideo.setAttribute('aria-pressed', ARIA_PRESSED_FALSE);
   updateAriaLabel();
 
   // Функция для получения минимальных размеров в зависимости от размера экрана
@@ -57,24 +84,19 @@ function initHeroVideo() {
     const windowHeight = window.innerHeight;
 
     if (windowWidth >= DESKTOP_MIN_WIDTH) {
-      // Десктоп: 456px на 230px
       return {
-        width: (456 / windowWidth) * 100,
-        height: (230 / windowHeight) * 100,
+        width: (DESKTOP_WIDTH_PX / windowWidth) * PERCENT_MULTIPLIER,
+        height: (DESKTOP_HEIGHT_PX / windowHeight) * PERCENT_MULTIPLIER,
       };
-    } else if (windowWidth >= 768) {
-      // Планшет: 416px на 226px
-      // Высота рассчитывается от высоты окна для получения точного значения 226px
+    } else if (windowWidth >= TABLET_MIN_WIDTH) {
       return {
-        width: (416 / windowWidth) * 100,
-        height: (212 / windowHeight) * 100,
+        width: (TABLET_WIDTH_PX / windowWidth) * PERCENT_MULTIPLIER,
+        height: (TABLET_HEIGHT_PX / windowHeight) * PERCENT_MULTIPLIER,
       };
     } else {
-      // Мобилка: 225px на 135px
-      // Высота рассчитывается от высоты окна для получения точного значения 135px
       return {
-        width: (225 / windowWidth) * 100,
-        height: (105 / windowHeight) * 100,
+        width: (MOBILE_WIDTH_PX / windowWidth) * PERCENT_MULTIPLIER,
+        height: (MOBILE_HEIGHT_PX / windowHeight) * PERCENT_MULTIPLIER,
       };
     }
   };
@@ -83,9 +105,9 @@ function initHeroVideo() {
   const calculateSizesFromScroll = (scrollY, viewportHeight, useAggressiveProgress = false) => {
     const currentMinSizes = getMinSizes();
     const scrollProgress = useAggressiveProgress
-      ? Math.min(scrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER), 1)
-      : Math.min(scrollY / viewportHeight, 1);
-    const stepPercent = Math.min(scrollProgress, 1);
+      ? Math.min(scrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER), SCROLL_PROGRESS_MAX)
+      : Math.min(scrollY / viewportHeight, SCROLL_PROGRESS_MAX);
+    const stepPercent = Math.min(scrollProgress, SCROLL_PROGRESS_MAX);
 
     const widthRange = MAX_WIDTH - currentMinSizes.width;
     const heightRange = MAX_HEIGHT - currentMinSizes.height;
@@ -120,7 +142,7 @@ function initHeroVideo() {
   // Обработчик скролла для изменения размера видео
   let lastScrollY = window.scrollY;
   let currentStep = 0;
-  const MAX_STEP = Math.ceil(100 / STEP_SIZE);
+  const MAX_STEP = Math.ceil(MAX_STEP_CALCULATION / STEP_SIZE);
 
   const handleScroll = () => {
     // Работает только на десктопе
@@ -143,7 +165,7 @@ function initHeroVideo() {
     // Используем более агрессивное вычисление прогресса для быстрого раскрытия
     const scrollProgress = Math.min(
       currentScrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER),
-      1,
+      SCROLL_PROGRESS_MAX,
     );
     const newStep = Math.floor(scrollProgress * MAX_STEP);
     const clampedStep = Math.min(newStep, MAX_STEP);
@@ -215,12 +237,9 @@ function initHeroVideo() {
         const playSoundVideo = () => {
           // Используем requestAnimationFrame для гарантии, что pause() завершен
           requestAnimationFrame(() => {
-            if (soundVideo.readyState >= 2) {
-              soundVideo.play().catch((error) => {
-                // Игнорируем ошибку AbortError, так как она может возникнуть при быстром переключении
-                if (error.name !== 'AbortError') {
-                  console.error('Ошибка воспроизведения видео:', error);
-                }
+            if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {
+              soundVideo.play().catch(() => {
+                // Игнорируем ошибки воспроизведения видео
               });
             } else {
               soundVideo.addEventListener('loadeddata', playSoundVideo, { once: true });
@@ -235,19 +254,14 @@ function initHeroVideo() {
         } else {
           // Проверяем готовность перед воспроизведением
           requestAnimationFrame(() => {
-            if (soundVideo.readyState >= 2) {
-              soundVideo.play().catch((error) => {
-                // Игнорируем ошибку AbortError
-                if (error.name !== 'AbortError') {
-                  console.error('Ошибка воспроизведения видео:', error);
-                }
+            if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {
+              soundVideo.play().catch(() => {
+                // Игнорируем ошибки воспроизведения видео
               });
             } else {
               soundVideo.addEventListener('loadeddata', () => {
-                soundVideo.play().catch((error) => {
-                  if (error.name !== 'AbortError') {
-                    console.error('Ошибка воспроизведения видео:', error);
-                  }
+                soundVideo.play().catch(() => {
+                  // Игнорируем ошибки воспроизведения видео
                 });
               }, { once: true });
             }
@@ -262,7 +276,7 @@ function initHeroVideo() {
     if (isExpanded) {
       // Уменьшаем видео
       isExpanded = false;
-      heroVideo.setAttribute('aria-pressed', 'false');
+      heroVideo.setAttribute('aria-pressed', ARIA_PRESSED_FALSE);
       updateAriaLabel();
 
       if (currentAnimation) {
@@ -290,8 +304,8 @@ function initHeroVideo() {
         if (!soundVideo.paused) {
           soundVideo.pause();
         } else {
-          soundVideo.play().catch((error) => {
-            console.error('Ошибка воспроизведения видео:', error);
+          soundVideo.play().catch(() => {
+            // Игнорируем ошибки воспроизведения видео
           });
         }
       }
@@ -300,7 +314,7 @@ function initHeroVideo() {
 
     // Увеличиваем видео до максимума
     isExpanded = true;
-    heroVideo.setAttribute('aria-pressed', 'true');
+    heroVideo.setAttribute('aria-pressed', ARIA_PRESSED_TRUE);
     updateAriaLabel();
 
     if (currentAnimation) {
@@ -327,18 +341,18 @@ function initHeroVideo() {
 
       // Показываем и запускаем видео со звуком с начала
       soundVideo.style.display = 'block';
-      soundVideo.currentTime = 0;
+      soundVideo.currentTime = VIDEO_CURRENT_TIME_START;
       soundVideo.muted = false;
-      soundVideo.play().catch((error) => {
-        console.error('Ошибка воспроизведения видео:', error);
+      soundVideo.play().catch(() => {
+        // Игнорируем ошибки воспроизведения видео
       });
     } else {
       // Если уже активно - ставим на паузу/возобновляем
       if (!soundVideo.paused) {
         soundVideo.pause();
       } else {
-        soundVideo.play().catch((error) => {
-          console.error('Ошибка воспроизведения видео:', error);
+        soundVideo.play().catch(() => {
+          // Игнорируем ошибки воспроизведения видео
         });
       }
     }
@@ -355,8 +369,8 @@ function initHeroVideo() {
   soundVideo.addEventListener('click', handleVideoClick);
 
   // Делаем видео элементы недоступными через табуляцию (доступ через контейнер)
-  mutedVideo.setAttribute('tabindex', '-1');
-  soundVideo.setAttribute('tabindex', '-1');
+  mutedVideo.setAttribute('tabindex', VIDEO_TABINDEX_DISABLED);
+  soundVideo.setAttribute('tabindex', VIDEO_TABINDEX_DISABLED);
 
   // Добавляем обработчик скролла с оптимизацией через requestAnimationFrame
   let scrollTimeout;
@@ -400,7 +414,7 @@ function initHeroVideo() {
           },
         });
       }
-    }, 100);
+    }, RESIZE_DEBOUNCE_DELAY);
   });
 }
 

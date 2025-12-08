@@ -69,8 +69,6 @@
       height: calc(1px / 16px * 1rem);
       transform: translateX(-50%);
       z-index: 0;
-
-      // @include adaptive-value('top', 0, -10, 0, 1439, 1280);
     }
 
     &::after {
@@ -212,7 +210,6 @@
     }
   }
 
-  // Псевдоэлемент вынесен на уровень выше для уменьшения вложенности
   .portfolio__header::before {
     @include vp-767 {
       top: unset;
@@ -230,7 +227,6 @@
     }
   }
 
-  // Модификаторы вынесены на уровень выше для уменьшения вложенности
   .portfolio__grid-wrapper--desktop {
     @media (min-width: ($vp-1440 + 1px)) {
       display: grid;
@@ -392,11 +388,19 @@
         transform: scale(1.01);
       }
     }
+
+    &:active {
+      .portfolio__image {
+        border-radius: calc(70px / 16px * 1rem);
+        transform: scale(0.99);
+        opacity: 0.9;
+      }
+    }
   }
 
-  // Псевдоэлементы вынесены на уровень выше для уменьшения вложенности
   .portfolio__card:hover .portfolio__image,
-  .portfolio__card:focus-visible .portfolio__image {
+  .portfolio__card:focus-visible .portfolio__image,
+  .portfolio__card:active .portfolio__image {
     @include vp-1439 {
       border-radius: calc(52px / 16px * 1rem);
     }

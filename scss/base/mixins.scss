@@ -69,22 +69,6 @@
  * @example
  * // Размер шрифта от 14px (на 1440px) до 16px (на 1920px)
  * @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
- *
- * @example
- * // Padding от 20px (на 375px) до 40px (на 1420px)
- * @include adaptive-value('padding', 40, 20);
- *
- * @example
- * // Для десктопа: от 14px (1440px) до 18px (1920px)
- * @include adaptive-value('font-size', 18, 14, 0, $maxWidth, 1440);
- *
- * @note
- * - $startSize должен быть БОЛЬШЕ $minSize (если нужно увеличение при росте экрана)
- * - $startSize должен быть МЕНЬШЕ $minSize (если нужно уменьшение при росте экрана)
- * - $widthFrom должен быть БОЛЬШЕ $widthTo
- * - На экранах больше $widthFrom применяется фиксированный $startSize
- * - На экранах меньше $widthTo применяется фиксированный $minSize
- * - Между $widthTo и $widthFrom происходит плавное масштабирование
  */
 @mixin adaptive-value($property, $startSize, $minSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
   @if $startSize == 0 {
@@ -101,7 +85,6 @@
     $widthFrom: $maxWidth;
   }
 
-  // Извлекаем числовые значения без единиц
   $widthFromNum: if(math.is-unitless($widthFrom), $widthFrom, $widthFrom / 1px);
   $widthToNum: if(math.is-unitless($widthTo), $widthTo, $widthTo / 1px);
 

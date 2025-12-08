@@ -4,6 +4,32 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
+const SLIDES_PER_VIEW = 1;
+const SPACE_BETWEEN = 0;
+const SWIPER_SPEED = 300;
+const INIT_DELAY = 50;
+const RADIX_DECIMAL = 10;
+const TABINDEX_DISABLED = -1;
+const TABINDEX_ENABLED = 0;
+const MAX_VISIBLE_BULLETS = 4;
+const FIRST_SLIDE_INDEX = 0;
+const INITIAL_BULLETS_INDICES = [0, 1, 2, 3];
+const LAST_BULLET_INDEX = 3;
+const ACTIVE_BULLET_INDEX_CENTER = 2;
+const ACTIVE_BULLET_INDEX_OFFSET = 1;
+const SLIDES_BEFORE_THRESHOLD = 2;
+const SLIDES_AFTER_THRESHOLD_MIN = 1;
+const SLIDES_AFTER_THRESHOLD_MAX = 2;
+const BULLET_OFFSET_LEFT = -2;
+const BULLET_OFFSET_RIGHT = 2;
+const TRANSITION_DURATION = '0.3s';
+const TRANSITION_EASE = 'ease';
+const TRANSITION_PROPERTIES = `background-color ${TRANSITION_DURATION} ${TRANSITION_EASE}, transform ${TRANSITION_DURATION} ${TRANSITION_EASE}`;
+const GRAY_BULLET_INDICES = [1, 2];
+const LIGHT_BULLET_INDEX_END = 3;
+const LIGHT_BULLET_INDEX_START = 0;
+const BULLET_OFFSET_NEARBY = 1;
+
 let bannerSwiper = null;
 
 function initBannerSlider() {
@@ -24,9 +50,9 @@ function initBannerSlider() {
     fadeEffect: {
       crossFade: true,
     },
-    slidesPerView: 1,
-    spaceBetween: 0,
-    speed: 300,
+    slidesPerView: SLIDES_PER_VIEW,
+    spaceBetween: SPACE_BETWEEN,
+    speed: SWIPER_SPEED,
     pagination: {
       el: '.banner__pagination',
       clickable: false, // Управляем кликами вручную
@@ -44,7 +70,7 @@ function initBannerSlider() {
         setTimeout(() => {
           updatePaginationStyles(swiper);
           updateSlideButtonsAccessibility(swiper);
-        }, 50);
+        }, INIT_DELAY);
       },
       slideChange: (swiper) => {
         updatePaginationStyles(swiper);
@@ -70,9 +96,9 @@ function initBannerSlider() {
         interactiveElements.forEach((element) => {
           // Если элемент имеет tabindex, убираем его или устанавливаем 0
           if (element.hasAttribute('tabindex')) {
-            const currentTabIndex = Number.parseInt(element.getAttribute('tabindex'), 10);
+            const currentTabIndex = Number.parseInt(element.getAttribute('tabindex'), RADIX_DECIMAL);
             // Если tabindex был -1 (недоступный), убираем атрибут или ставим 0
-            if (currentTabIndex === -1) {
+            if (currentTabIndex === TABINDEX_DISABLED) {
               element.removeAttribute('tabindex');
             }
           }
@@ -81,8 +107,8 @@ function initBannerSlider() {
         // В неактивных слайдах делаем элементы недоступными
         interactiveElements.forEach((element) => {
           // Устанавливаем tabindex=-1 только если элемент не был специально скрыт
-          if (!element.hasAttribute('tabindex') || Number.parseInt(element.getAttribute('tabindex'), 10) >= 0) {
-            element.setAttribute('tabindex', '-1');
+          if (!element.hasAttribute('tabindex') || Number.parseInt(element.getAttribute('tabindex'), RADIX_DECIMAL) >= TABINDEX_ENABLED) {
+            element.setAttribute('tabindex', TABINDEX_DISABLED.toString());
           }
         });
       }
@@ -106,54 +132,54 @@ function initBannerSlider() {
     paginationEl.innerHTML = '';
     paginationEl.setAttribute('role', 'tablist');
     paginationEl.setAttribute('aria-label', 'Навигация по слайдам');
-    paginationEl.tabIndex = -1;
+    paginationEl.tabIndex = TABINDEX_DISABLED;
 
     // Определяем, какие точки показывать и как их стилизовать
     let visibleIndices = [];
     let activeBulletIndex = 0;
 
     // Всегда показываем 4 точки
-    if (totalSlides <= 4) {
+    if (totalSlides <= MAX_VISIBLE_BULLETS) {
       // Если слайдов 4 или меньше, показываем все существующие
-      visibleIndices = Array.from({ length: Math.min(4, totalSlides) }, (_, i) => i);
+      visibleIndices = Array.from({ length: Math.min(MAX_VISIBLE_BULLETS, totalSlides) }, (_, i) => i);
       activeBulletIndex = activeIndex;
     } else {
       // Если слайдов больше 4, показываем только 4 точки
-      if (activeIndex === 0) {
+      if (activeIndex === FIRST_SLIDE_INDEX) {
         // Первый слайд: показываем первые 4
-        visibleIndices = [0, 1, 2, 3];
-        activeBulletIndex = 0;
+        visibleIndices = INITIAL_BULLETS_INDICES;
+        activeBulletIndex = FIRST_SLIDE_INDEX;
       } else if (activeIndex === totalSlides - 1) {
         // Последний слайд: показываем последние 4
-        visibleIndices = [totalSlides - 4, totalSlides - 3, totalSlides - 2, totalSlides - 1];
-        activeBulletIndex = 3;
+        visibleIndices = [totalSlides - MAX_VISIBLE_BULLETS, totalSlides - 3, totalSlides - 2, totalSlides - 1];
+        activeBulletIndex = LAST_BULLET_INDEX;
       } else {
         // Промежуточный слайд
         const slidesBefore = activeIndex;
         const slidesAfter = totalSlides - activeIndex - 1;
 
-        if (slidesBefore >= 2 && slidesAfter >= 1) {
+        if (slidesBefore >= SLIDES_BEFORE_THRESHOLD && slidesAfter >= SLIDES_AFTER_THRESHOLD_MIN) {
           // Можно показать 2 слева и 1 справа
-          visibleIndices = [activeIndex - 2, activeIndex - 1, activeIndex, activeIndex + 1];
-          activeBulletIndex = 2;
-        } else if (slidesBefore >= 1 && slidesAfter >= 2) {
+          visibleIndices = [activeIndex + BULLET_OFFSET_LEFT, activeIndex - ACTIVE_BULLET_INDEX_OFFSET, activeIndex, activeIndex + ACTIVE_BULLET_INDEX_OFFSET];
+          activeBulletIndex = ACTIVE_BULLET_INDEX_CENTER;
+        } else if (slidesBefore >= ACTIVE_BULLET_INDEX_OFFSET && slidesAfter >= SLIDES_AFTER_THRESHOLD_MAX) {
           // Можно показать 1 слева и 2 справа
-          visibleIndices = [activeIndex - 1, activeIndex, activeIndex + 1, activeIndex + 2];
-          activeBulletIndex = 1;
-        } else if (slidesBefore < 2) {
+          visibleIndices = [activeIndex - ACTIVE_BULLET_INDEX_OFFSET, activeIndex, activeIndex + ACTIVE_BULLET_INDEX_OFFSET, activeIndex + BULLET_OFFSET_RIGHT];
+          activeBulletIndex = ACTIVE_BULLET_INDEX_OFFSET;
+        } else if (slidesBefore < SLIDES_BEFORE_THRESHOLD) {
           // Близко к началу
-          visibleIndices = [0, 1, 2, 3];
+          visibleIndices = INITIAL_BULLETS_INDICES;
           activeBulletIndex = activeIndex;
         } else {
           // Близко к концу
-          visibleIndices = [totalSlides - 4, totalSlides - 3, totalSlides - 2, totalSlides - 1];
-          activeBulletIndex = activeIndex - (totalSlides - 4);
+          visibleIndices = [totalSlides - MAX_VISIBLE_BULLETS, totalSlides - 3, totalSlides - 2, totalSlides - 1];
+          activeBulletIndex = activeIndex - (totalSlides - MAX_VISIBLE_BULLETS);
         }
       }
     }
 
     // Создаем 4 точки (или меньше, если слайдов меньше 4)
-    const bulletsToCreate = Math.min(4, totalSlides);
+    const bulletsToCreate = Math.min(MAX_VISIBLE_BULLETS, totalSlides);
     for (let i = 0; i < bulletsToCreate; i++) {
       // Если слайдов меньше 4 и индекс выходит за пределы, пропускаем
       if (i >= visibleIndices.length) {
@@ -167,14 +193,14 @@ function initBannerSlider() {
       bullet.className = 'swiper-pagination-bullet';
       bullet.type = 'button';
       bullet.setAttribute('role', 'tab');
-      bullet.tabIndex = 0;
+      bullet.tabIndex = TABINDEX_ENABLED;
       bullet.setAttribute('aria-label', `Перейти к слайду ${realSlideIndex + 1} из ${totalSlides}`);
       bullet.setAttribute('aria-selected', isActive ? 'true' : 'false');
       bullet.setAttribute('aria-controls', `banner-slide-${realSlideIndex}`);
       bullet.dataset.slideIndex = realSlideIndex.toString();
 
       // Принудительно применяем transition для плавной анимации
-      bullet.style.transition = 'background-color 0.3s ease, transform 0.3s ease';
+      bullet.style.transition = TRANSITION_PROPERTIES;
 
       if (isActive) {
         bullet.classList.add('swiper-pagination-bullet-active');
@@ -183,18 +209,18 @@ function initBannerSlider() {
       // Определяем стили в зависимости от позиции
       if (isActive) {
         // Активная точка - черная (уже через CSS класс)
-      } else if (activeIndex === 0) {
+      } else if (activeIndex === FIRST_SLIDE_INDEX) {
         // Первый слайд активен: [черная, серая, серая, бледная]
-        if (i === 1 || i === 2) {
+        if (GRAY_BULLET_INDICES.includes(i)) {
           bullet.classList.add('banner__pagination-bullet--gray');
-        } else if (i === 3) {
+        } else if (i === LIGHT_BULLET_INDEX_END) {
           bullet.classList.add('banner__pagination-bullet--light');
         }
       } else if (activeIndex === totalSlides - 1) {
         // Последний слайд активен: [бледная, серая, серая, черная]
-        if (i === 1 || i === 2) {
+        if (GRAY_BULLET_INDICES.includes(i)) {
           bullet.classList.add('banner__pagination-bullet--gray');
-        } else if (i === 0) {
+        } else if (i === LIGHT_BULLET_INDEX_START) {
           bullet.classList.add('banner__pagination-bullet--light');
         }
       } else {
@@ -202,16 +228,16 @@ function initBannerSlider() {
         const slidesBefore = activeIndex;
         const slidesAfter = totalSlides - activeIndex - 1;
 
-        if (i === activeBulletIndex - 1) {
+        if (i === activeBulletIndex - BULLET_OFFSET_NEARBY) {
           // Слева от активной - серая
           bullet.classList.add('banner__pagination-bullet--gray');
-        } else if (i === activeBulletIndex + 1) {
+        } else if (i === activeBulletIndex + BULLET_OFFSET_NEARBY) {
           // Справа от активной - серая
           bullet.classList.add('banner__pagination-bullet--gray');
-        } else if (slidesAfter > slidesBefore && i === activeBulletIndex + 2) {
+        } else if (slidesAfter > slidesBefore && i === activeBulletIndex + BULLET_OFFSET_RIGHT) {
           // Бледная справа, если справа больше слайдов
           bullet.classList.add('banner__pagination-bullet--light');
-        } else if (slidesBefore > slidesAfter && i === activeBulletIndex - 2) {
+        } else if (slidesBefore > slidesAfter && i === activeBulletIndex + BULLET_OFFSET_LEFT) {
           // Бледная слева, если слева больше слайдов
           bullet.classList.add('banner__pagination-bullet--light');
         }

@@ -22,7 +22,6 @@ export default [
       },
     },
     rules: {
-      'no-console': 'off',
       'no-nested-ternary': 'off',
       'brace-style': 'off',
       'no-shadow': 'off',

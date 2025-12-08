@@ -1,5 +1,3 @@
-// Экспорт всех модулей анимаций
-// Импорт для использования в основном коде
 import { gsap } from 'gsap';
 import { animateFade } from './fade.js';
 import { animateScale } from './scale.js';
@@ -10,6 +8,38 @@ export { animateFade } from './fade.js';
 export { animateScale } from './scale.js';
 export { animateSlide } from './slide.js';
 export { animateText } from './text.js';
+
+// Константы для парсинга последовательности
+const MIN_SEQUENCE_PARTS_COUNT = 5;
+const DEFAULT_DURATION = 1;
+const DEFAULT_ORDER = 0;
+
+// Константы для смещения
+const DEFAULT_OFFSET_VALUE = 20;
+const DEFAULT_OFFSET_UNIT = 'px';
+const INITIAL_POSITION = 0;
+
+// Константы для opacity
+const INITIAL_OPACITY = 0;
+
+// Константы для scale
+const INITIAL_SCALE = 0;
+const MEASUREMENT_SCALE = 1;
+
+// Константы для visibility
+const VISIBILITY_HIDDEN = 'hidden';
+const VISIBILITY_VISIBLE = 'visible';
+
+// Константы для анимации
+const GROUP_DELAY_MULTIPLIER = 0.1;
+
+// Константы для IntersectionObserver
+const OBSERVER_ROOT_MARGIN = '0px';
+const OBSERVER_THRESHOLD = 0.1;
+
+// Константы для задержек
+const SWIPER_INIT_DELAY = 200;
+const DOM_READY_DELAY = 100;
 
 const animations = {
   animateFade,
@@ -30,8 +60,7 @@ function parseSequence(sequenceValue) {
 
   const parts = sequenceValue.split(',').map((part) => part.trim());
 
-  if (parts.length < 5) {
-    console.warn('Неверный формат data-sequence. Ожидается: animationType, direction, offset, duration, order [, shift]');
+  if (parts.length < MIN_SEQUENCE_PARTS_COUNT) {
     return null;
   }
 
@@ -41,8 +70,8 @@ function parseSequence(sequenceValue) {
     animationType,
     direction,
     offset,
-    duration: Number.parseFloat(duration) || 1,
-    order: Number.parseInt(order, 10) || 0,
+    duration: Number.parseFloat(duration) || DEFAULT_DURATION,
+    order: Number.parseInt(order, 10) || DEFAULT_ORDER,
     shiftLine: shiftLine === 'shift', // Опциональный параметр для сдвига строки
   };
 }
@@ -71,10 +100,10 @@ function setInitialStates(slide) {
     // Устанавливаем начальные состояния в зависимости от типа анимации
     switch (animationType) {
       case 'text': {
-        const offsetValue = Number.parseFloat(offset) || 20;
-        const offsetUnit = offset.replace(/\d/g, '') || 'px';
-        let initialX = 0;
-        let initialY = 0;
+        const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET_VALUE;
+        const offsetUnit = offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
+        let initialX = INITIAL_POSITION;
+        let initialY = INITIAL_POSITION;
 
         switch (direction) {
           case 'from-down':
@@ -94,7 +123,7 @@ function setInitialStates(slide) {
         }
 
         gsap.set(element, {
-          opacity: 0,
+          opacity: INITIAL_OPACITY,
           x: `${initialX}${offsetUnit}`,
           y: `${initialY}${offsetUnit}`,
         });
@@ -103,16 +132,16 @@ function setInitialStates(slide) {
 
       case 'fade': {
         gsap.set(element, {
-          opacity: 0,
+          opacity: INITIAL_OPACITY,
         });
         break;
       }
 
       case 'slide': {
-        const offsetValue = Number.parseFloat(offset) || 20;
-        const offsetUnit = offset.replace(/\d/g, '') || 'px';
-        let initialX = 0;
-        let initialY = 0;
+        const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET_VALUE;
+        const offsetUnit = offset.replace(/\d/g, '') || DEFAULT_OFFSET_UNIT;
+        let initialX = INITIAL_POSITION;
+        let initialY = INITIAL_POSITION;
 
         switch (direction) {
           case 'from-down':
@@ -160,7 +189,7 @@ function setInitialStates(slide) {
         }
 
         gsap.set(element, {
-          scale: 0,
+          scale: INITIAL_SCALE,
           transformOrigin,
         });
 
@@ -174,16 +203,16 @@ function setInitialStates(slide) {
               // Временно устанавливаем scale: 1 для измерения ширины
               const originalVisibility = element.style.visibility;
               gsap.set(element, {
-                scale: 1,
-                visibility: 'hidden',
+                scale: MEASUREMENT_SCALE,
+                visibility: VISIBILITY_HIDDEN,
               });
 
               // Читаем ширину в следующем кадре после применения стилей
               requestAnimationFrame(() => {
-                const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0;
+                const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || INITIAL_POSITION;
                 gsap.set(element, {
-                  scale: 0,
-                  visibility: originalVisibility || 'visible',
+                  scale: INITIAL_SCALE,
+                  visibility: originalVisibility || VISIBILITY_VISIBLE,
                 });
 
                 const initialTranslateX = direction === 'from-left' ? -elementWidth : elementWidth;
@@ -232,7 +261,6 @@ function initSlideAnimations(slide) {
     const animationFunction = animations[`animate${params.animationType.charAt(0).toUpperCase() + params.animationType.slice(1)}`];
 
     if (!animationFunction) {
-      console.warn(`Анимация "${params.animationType}" не найдена`);
       return;
     }
 
@@ -271,7 +299,7 @@ function initSlideAnimations(slide) {
     const group = animationGroups.get(order);
     // Задержка между группами: 0.1 секунды на единицу разницы order
     // Например, между order=1 и order=2 будет задержка 0.1 секунды
-    const delay = index > 0 ? (order - sortedOrders[index - 1]) * 0.1 : 0;
+    const delay = index > 0 ? (order - sortedOrders[index - 1]) * GROUP_DELAY_MULTIPLIER : INITIAL_POSITION;
 
     // Запускаем все анимации в группе одновременно
     group.forEach(({ element, params, animationFunction }) => {
@@ -356,15 +384,15 @@ function initBannerAnimation() {
       // Небольшая задержка для инициализации Swiper
       setTimeout(() => {
         triggerAnimationsOnScroll();
-      }, 200);
+      }, SWIPER_INIT_DELAY);
     }
   };
 
   // Intersection Observer для отслеживания появления баннера в viewport
   const observerOptions = {
     root: null, // viewport
-    rootMargin: '0px',
-    threshold: 0.1, // Запускаем когда 10% баннера видно
+    rootMargin: OBSERVER_ROOT_MARGIN,
+    threshold: OBSERVER_THRESHOLD,
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -373,7 +401,7 @@ function initBannerAnimation() {
         // Небольшая задержка для инициализации Swiper
         setTimeout(() => {
           triggerAnimationsOnScroll();
-        }, 200);
+        }, SWIPER_INIT_DELAY);
         // Отключаем observer после первого срабатывания
         observer.unobserve(entry.target);
       }
@@ -399,7 +427,7 @@ function initBannerAnimation() {
         }
       });
     }
-  }, 200);
+  }, SWIPER_INIT_DELAY);
 }
 
 /**
@@ -409,7 +437,7 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initBannerAnimation);
 } else {
   // Небольшая задержка для инициализации Swiper
-  setTimeout(initBannerAnimation, 100);
+  setTimeout(initBannerAnimation, DOM_READY_DELAY);
 }
 
 export { initBannerAnimation };

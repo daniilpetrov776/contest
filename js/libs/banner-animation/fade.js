@@ -1,5 +1,9 @@
 import { gsap } from 'gsap';
 
+const INITIAL_OPACITY = 0;
+const FINAL_OPACITY = 1;
+const EASE_TYPE = 'power2.out';
+
 /**
  * Анимация fade (появление)
  * @param {HTMLElement} element - Элемент для анимации
@@ -9,15 +13,13 @@ import { gsap } from 'gsap';
  * @returns {gsap.core.Tween} - GSAP анимация
  */
 export function animateFade(element, direction, offset, duration) {
-  // Устанавливаем начальное состояние
   gsap.set(element, {
-    opacity: 0,
+    opacity: INITIAL_OPACITY,
   });
 
-  // Запускаем анимацию
   return gsap.to(element, {
-    opacity: 1,
+    opacity: FINAL_OPACITY,
     duration,
-    ease: 'power2.out',
+    ease: EASE_TYPE,
   });
 }

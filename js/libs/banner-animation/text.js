@@ -1,5 +1,11 @@
 import { gsap } from 'gsap';
 
+const DEFAULT_OFFSET = 20;
+const INITIAL_POSITION = 0;
+const INITIAL_OPACITY = 0;
+const FINAL_OPACITY = 1;
+const EASE_TYPE = 'power2.out';
+
 /**
  * Анимация текста с направлением
  * @param {HTMLElement} element - Элемент для анимации
@@ -10,14 +16,14 @@ import { gsap } from 'gsap';
  */
 export function animateText(element, direction, offset, duration) {
   // Парсим смещение
-  const offsetValue = Number.parseFloat(offset) || 20;
+  const offsetValue = Number.parseFloat(offset) || DEFAULT_OFFSET;
   const offsetUnit = offset.replace(/\d/g, '') || 'px';
 
   // Определяем начальные значения в зависимости от направления
-  let initialX = 0;
-  let initialY = 0;
-  const finalX = 0;
-  const finalY = 0;
+  let initialX = INITIAL_POSITION;
+  let initialY = INITIAL_POSITION;
+  const finalX = INITIAL_POSITION;
+  const finalY = INITIAL_POSITION;
 
   switch (direction) {
     case 'from-down':
@@ -38,17 +44,17 @@ export function animateText(element, direction, offset, duration) {
 
   // Устанавливаем начальное состояние
   gsap.set(element, {
-    opacity: 0,
+    opacity: INITIAL_OPACITY,
     x: `${initialX}${offsetUnit}`,
     y: `${initialY}${offsetUnit}`,
   });
 
   // Запускаем анимацию
   return gsap.to(element, {
-    opacity: 1,
+    opacity: FINAL_OPACITY,
     x: `${finalX}${offsetUnit}`,
     y: `${finalY}${offsetUnit}`,
     duration,
-    ease: 'power2.out',
+    ease: EASE_TYPE,
   });
 }

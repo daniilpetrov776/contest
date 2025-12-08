@@ -39,15 +39,19 @@ export default defineConfig({
     }),
   ],
   build: {
-    minify: 'esbuild', // Включаем минификацию для уменьшения размера CSS
-    cssMinify: true, // Минификация CSS
+    minify: 'terser',
+    cssMinify: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
       },
+      output: {
+        manualChunks: {},
+      },
     },
-    // Оптимизация CSS
-    cssCodeSplit: true, // Разделение CSS на чанки
+
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1000,
   },
   server: {
     port: 3000,

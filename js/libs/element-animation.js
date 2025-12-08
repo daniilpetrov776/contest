@@ -1,5 +1,13 @@
 import { gsap } from 'gsap';
 
+const DEFAULT_OFFSET = '30px';
+const DEFAULT_DURATION = 0.8;
+const INTERSECTION_THRESHOLD = 0.1;
+const INITIAL_OPACITY = 0;
+const FINAL_OPACITY = 1;
+const FINAL_Y_POSITION = 0;
+const EASE_TYPE = 'power2.out';
+
 function initElementAnimation() {
   // Находим все элементы с data-атрибутом для анимации
   const elements = document.querySelectorAll('[data-animate-element]');
@@ -12,7 +20,7 @@ function initElementAnimation() {
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.1, // Срабатывает, когда 10% элемента видно
+    threshold: INTERSECTION_THRESHOLD,
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -21,23 +29,23 @@ function initElementAnimation() {
         const element = entry.target;
 
         // Парсим значение из data-атрибута (формат: "translateY,duration" или просто "translateY")
-        const attrValue = element.dataset.animateElement || '30px';
+        const attrValue = element.dataset.animateElement || DEFAULT_OFFSET;
         const parts = attrValue.split(',').map((part) => part.trim());
-        const translateYValue = parts[0] || '30px';
-        const duration = parts[1] ? Number.parseFloat(parts[1]) : 0.8;
+        const translateYValue = parts[0] || DEFAULT_OFFSET;
+        const duration = parts[1] ? Number.parseFloat(parts[1]) : DEFAULT_DURATION;
 
         // Устанавливаем начальное состояние
         gsap.set(element, {
-          opacity: 0,
+          opacity: INITIAL_OPACITY,
           y: translateYValue,
         });
 
         // Анимируем элемент
         gsap.to(element, {
-          opacity: 1,
-          y: 0,
+          opacity: FINAL_OPACITY,
+          y: FINAL_Y_POSITION,
           duration,
-          ease: 'power2.out',
+          ease: EASE_TYPE,
         });
 
         // Отключаем наблюдение после первой анимации
