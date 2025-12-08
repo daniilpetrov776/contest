@@ -1,15 +1,15 @@
 // Экспорт всех модулей анимаций
-export { animateFade } from './fade.js'
-export { animateScale } from './scale.js'
-export { animateSlide } from './slide.js'
-export { animateText } from './text.js'
-
 // Импорт для использования в основном коде
 import { gsap } from 'gsap'
 import { animateFade } from './fade.js'
 import { animateScale } from './scale.js'
 import { animateSlide } from './slide.js'
 import { animateText } from './text.js'
+
+export { animateFade } from './fade.js'
+export { animateScale } from './scale.js'
+export { animateSlide } from './slide.js'
+export { animateText } from './text.js'
 
 const animations = {
     animateFade,
@@ -177,7 +177,7 @@ function setInitialStates(slide) {
                                 scale: 1,
                                 visibility: 'hidden',
                             })
-                            
+
                             // Читаем ширину в следующем кадре после применения стилей
                             requestAnimationFrame(() => {
                                 const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0

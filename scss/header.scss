@@ -1,187 +1,213 @@
 .header {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    background-color: $mainBackground;
-    z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  background-color: $mainBackground;
+  z-index: 100;
 
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        background-color: #e4e4e4;
-        width: var(--before-width, 0%);
-        height: size(1px);
-        transform: translateX(-50%);
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    background-color: #e4e4e4;
+    width: var(--before-width, 0%);
+    height: size(1px);
+    transform: translateX(-50%);
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap row;
+    align-items: center;
+    padding: size(6px) $desktop-padding;
+
+    @include adaptive-value("min-height", 58, 60, 0, 1920, 1440);
+
+    @include vp-1439 {
+      min-height: size(52px);
+
+      @include adaptive-value("min-height", 60, 52, 0, 1439, 1280);
+      padding: size(4px) $tablet-padding;
     }
 
-    &__container {
-        display: flex;
-        justify-content: space-between;
-        flex-flow: wrap row;
-        align-items: center;
-        padding: size(6px) $desktop-padding;
-        @include adaptive-value('min-height', 58, 60, 0, 1920, 1440);
-        @include vp-1439 {
-            padding: size(10px) $tablet-padding;
-            min-height: size(52px);
-            @include adaptive-value('min-height', 60, 52, 0, 1439, 1280);
-            padding: size(4px) $tablet-padding;
-        }
-        @include vp-767 {
-            padding: size(10px) $mobile-padding;
-        }
+    @include vp-767 {
+      padding: size(10px) $mobile-padding;
+    }
+  }
+
+  &__logo {
+    img {
+      @include adaptive-value("width", 82, 73, 0, 1920, 1440);
+      @include adaptive-value("height", 27, 24, 0, 1920, 1440);
+
+      @include vp-1439 {
+        @include adaptive-value("width", 73, 67, 0, 1439, 1280);
+        @include adaptive-value("height", 24, 22, 0, 1439, 1280);
+      }
+
+      @include vp-1279 {
+        @include adaptive-value("width", 67, 55, 0, 1279, 768);
+        @include adaptive-value("height", 22, 18, 0, 1279, 768);
+      }
+
+      @include vp-767 {
+        @include adaptive-value("width", 55, 52, 0, 767, 375);
+        @include adaptive-value("height", 18, 17, 0, 767, 375);
+      }
+    }
+  }
+
+  &__header-right {
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    max-width: 60%;
+
+    @include adaptive-value("gap", 189, 32, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("gap", 32, 28, 0, 1439, 1280);
+    }
+  }
+
+  &__nav {
+    max-width: 90%;
+  }
+
+  &__menu {
+    display: flex;
+    position: relative;
+
+    @include adaptive-value("gap", 40, 34, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("gap", 32, 26, 0, 1439, 1280);
     }
 
-    &__logo {
-        img {
-            @include adaptive-value('width', 82, 73, 0, 1920, 1440);
-            @include adaptive-value('height', 27, 24, 0, 1920, 1440);
+    @include vp-1279 {
+      display: none;
+    }
+  }
 
-            @include vp-1439 {
-                @include adaptive-value('width', 73, 67, 0, 1439, 1280);
-                @include adaptive-value('height', 24, 22, 0, 1439, 1280);
-            }
+  &__menu-link {
+    font-family: "TT Runs", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    transition: opacity 0.3s $smooth;
 
-            @include vp-1279 {
-                @include adaptive-value('width', 67, 55, 0, 1279, 768);
-                @include adaptive-value('height', 22, 18, 0, 1279, 768);
-            }
+    @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
+    @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
 
-            @include vp-767 {
-                @include adaptive-value('width', 55, 52, 0, 767, 375);
-                @include adaptive-value('height', 18, 17, 0, 767, 375);
-            }
-        }
+    @include hover {
+      opacity: 0.7;
     }
 
-    &__header-right {
-        display: flex;
-        flex-flow: wrap row;
-        align-items: center;
-        max-width: 60%;
-        @include adaptive-value('gap', 189, 32, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('gap', 32, 28, 0, 1439, 1280);
-        }
+    &:focus-visible {
+      opacity: 0.7;
+      outline: size(2px) solid $black;
+      outline-offset: size(2px);
+    }
+  }
+
+  &__star {
+    display: flex;
+    max-width: 5%;
+    align-items: center;
+    gap: size(10px);
+    position: relative;
+    top: size(2px);
+  }
+
+  &__star-text {
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-family: "TT Runs", sans-serif;
+    position: relative;
+    top: size(-2px);
+
+    @include adaptive-value("font-size", 12, 13, 0, 1920, 1440);
+    @include adaptive-value("line-height", 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("font-size", 13, 12, 0, 1439, 1280);
+      @include adaptive-value("line-height", 13 * 1.1, 12 * 1.1, 0, 1439, 1280);
     }
 
-    &__nav {
-        max-width: 90%;
+    @include vp-1279 {
+      display: none;
+    }
+  }
+
+  &__toggle {
+    pointer-events: none;
+
+    @include vp-1279 {
+      width: size(32px);
+      height: size(32px);
+      position: relative;
+      pointer-events: auto;
+    }
+  }
+
+  // Псевдоэлементы и модификатор вынесены на уровень выше для уменьшения вложенности
+  .header__toggle::before,
+  .header__toggle::after {
+    @include vp-1279 {
+      position: absolute;
+      content: "";
+      display: block;
+      width: size(30px);
+      height: size(3px);
+      background-color: $mainColor;
+      left: size(1px);
+      transform-origin: center;
+      transition:
+        transform 0.4s $smooth,
+        scale 0.4s $smooth,
+        top 0.4s $smooth;
+    }
+  }
+
+  .header__toggle::before {
+    @include vp-1279 {
+      top: 30%;
+    }
+  }
+
+  .header__toggle::after {
+    @include vp-1279 {
+      top: 50%;
+    }
+  }
+
+  .header__toggle.is-active::before {
+    @include vp-1279 {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg) scale(0.7);
+    }
+  }
+
+  .header__toggle.is-active::after {
+    @include vp-1279 {
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg) scale(0.7);
+    }
+  }
+
+  &__star-img {
+    @include adaptive-value("width", 42, 36, 0, 1920, 1440);
+    @include adaptive-value("height", 42, 36, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("width", 36, 32, 0, 1439, 1280);
+      @include adaptive-value("height", 36, 32, 0, 1439, 1280);
     }
 
-    &__menu {
-        display: flex;
-        position: relative;
-        @include adaptive-value('gap', 40, 34, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('gap', 32, 26, 0, 1439, 1280);
-        }
-        @include vp-1279 {
-            display: none;
-        }
+    @include vp-1279 {
+      opacity: 0;
     }
-
-    &__menu-link {
-        font-family: 'TT Runs', sans-serif;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        transition: opacity 0.3s $smooth;
-        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
-        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
-
-        @include hover {
-            opacity: 0.7;
-        }
-
-        &:focus-visible {
-            opacity: 0.7;
-            outline: size(2px) solid $black;
-            outline-offset: size(2px);
-        }
-    }
-
-    &__star {
-        display: flex;
-        max-width: 5%;
-        align-items: center;
-        gap: size(10px);
-        position: relative;
-        top: size(2px);
-    }
-
-    &__star-text {
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        font-family: 'TT Runs', sans-serif;
-        position: relative;
-        top: size(-2px);
-        @include adaptive-value('font-size', 12, 13, 0, 1920, 1440);
-        @include adaptive-value('line-height', 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('font-size', 13, 12, 0, 1439, 1280);
-            @include adaptive-value('line-height', 13 * 1.1, 12 * 1.1, 0, 1439, 1280);
-        }
-        @include vp-1279 {
-            display: none;
-        }
-    }
-
-    &__toggle {
-        @include vp-1279 {
-            width: size(32px);
-            height: size(32px);
-            position: relative;
-
-            &::before,
-            &::after {
-                position: absolute;
-                content: '';
-                display: block;
-                width: size(30px);
-                height: size(3px);
-                background-color: $mainColor;
-                left: size(1px);
-                transform-origin: center;
-                transition:
-                    transform 0.4s $smooth,
-                    scale 0.4s $smooth,
-                    top 0.4s $smooth;
-            }
-
-            &::before {
-                top: 30%;
-            }
-
-            &::after {
-                top: 50%;
-            }
-
-            &.is-active {
-                &::before {
-                    top: 50%;
-                    transform: translateY(-50%) rotate(45deg) scale(0.7);
-                }
-
-                &::after {
-                    top: 50%;
-                    transform: translateY(-50%) rotate(-45deg) scale(0.7);
-                }
-            }
-        }
-    }
-
-    &__star-img {
-        @include adaptive-value('width', 42, 36, 0, 1920, 1440);
-        @include adaptive-value('height', 42, 36, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('width', 36, 32, 0, 1439, 1280);
-            @include adaptive-value('height', 36, 32, 0, 1439, 1280);
-        }
-        @include vp-1279 {
-            opacity: 0;
-        }
-    }
+  }
 }

@@ -1,73 +1,68 @@
-@use 'sass:math';
-@import 'base/mixins';
-@import 'fonts/fonts';
-@import 'base/custom-properties';
-@import 'variables';
-
-@import 'base/null';
+@import "base/mixins";
+@import "fonts/fonts";
+@import "base/custom-properties";
+@import "variables";
+@import "base/null";
+@import "common";
+@import "header";
+@import "footer";
+@import "home";
+@import "header-menu";
+@import "container";
+@import "socials";
+@import "hero";
+@import "about-links";
+@import "button";
+@import "content";
+@import "portfolio";
+@import "banner";
+@import "secondary-button";
+@import "clients";
 
 body {
-    &::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(39, 38, 38, 0.5);
-        z-index: 99;
-        opacity: 0;
-        transition: opacity 0.6s $smooth;
-        pointer-events: none;
-    }
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-color: rgba(39, 38, 38, 0.5);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.6s $smooth;
+    pointer-events: none;
+  }
 }
 
 body.lock {
-    overflow: hidden;
-    overscroll-behavior: none;
-    touch-action: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 
-    &::before {
-        opacity: 1;
-        pointer-events: auto;
-    }
+  &::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-    .wrapper > main {
-        filter: blur(4px);
-    }
+  .wrapper > main {
+    filter: blur(4px);
+  }
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
 
-    @supports (overflow: clip) {
-        overflow: clip;
-    }
+  @supports (overflow: clip) {
+    overflow: clip;
+  }
 
-    > main {
-        flex: 1 1 auto;
-        transition: filter 0.3s $smooth;
-    }
+  > main {
+    flex: 1 1 auto;
+    transition: filter 0.3s $smooth;
+  }
 
-    > * {
-        min-width: 0;
-    }
+  > * {
+    min-width: 0;
+  }
 }
-@import 'common';
-@import 'header';
-@import 'footer';
-@import 'home';
-@import 'header-menu';
-@import 'container';
-@import 'socials';
-@import 'hero';
-@import 'about-links';
-@import 'button';
-@import 'content';
-@import 'portfolio';
-@import 'banner';
-@import 'secondary-button';
-@import 'clients';

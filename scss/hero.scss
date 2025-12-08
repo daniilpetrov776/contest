@@ -1,651 +1,677 @@
 .hero {
-    background-color: $mainBackground;
-    min-height: 100vh;
-    padding: 0 0 size(40px);
-    display: flex;
-    align-items: stretch;
-    position: relative;
+  background-color: $mainBackground;
+  min-height: 100vh;
+  padding: 0 0 size(40px);
+  display: flex;
+  align-items: stretch;
+  position: relative;
 
-    @include adaptive-value('padding-top', 138, 120, 0, 1920, 1440);
-    @include adaptive-value('padding-bottom', 40, 30, 0, 1920, 1440);
+  @include adaptive-value("padding-top", 138, 120, 0, 1920, 1440);
+  @include adaptive-value("padding-bottom", 40, 30, 0, 1920, 1440);
+
+  @include vp-1439 {
+    @include adaptive-value("padding-top", 120, 112, 0, 1439, 1280);
+  }
+
+  @include vp-1279 {
+    @include adaptive-value("padding-top", 112, 102, 0, 1279, 768);
+  }
+
+  @include vp-767 {
+    @include adaptive-value("padding-top", 102, 84, 0, 767, 375);
+    min-height: size(700px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: size(60px);
+    background-color: #e4e4e4;
+    width: size(1px);
+    height: var(--after-height, 0px);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+
     @include vp-1439 {
-        @include adaptive-value('padding-top', 120, 112, 0, 1439, 1280);
-    }
-
-    @include vp-1279 {
-        @include adaptive-value('padding-top', 112, 102, 0, 1279, 768);
+      top: size(52px);
     }
 
     @include vp-767 {
-        @include adaptive-value('padding-top', 102, 84, 0, 767, 375);
-        min-height: size(700px);
+      width: 0;
+    }
+  }
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__static-wrapper {
+    max-width: 100vw;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &__header {
+    display: flex;
+    flex-flow: wrap row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: size(24px);
+    min-height: size(384px);
+  }
+
+  &__socials {
+    @include vp-1279 {
+      display: none;
+    }
+  }
+
+  &__socials-item {
+    width: 100%;
+  }
+
+  &__socials-icon-wrapper {
+    // Модификаторы вынесены на уровень выше для уменьшения вложенности
+  }
+
+  .hero__socials-icon-wrapper--w svg {
+    @include adaptive-value("width", 28, 25.85, 0, 1920, 1440);
+    @include adaptive-value("height", 28, 25.85, 0, 1920, 1440);
+  }
+
+  .hero__socials-icon-wrapper--fwg svg {
+    @include adaptive-value("width", 40.35, 36.99, 0, 1920, 1440);
+    @include adaptive-value("height", 12, 11, 0, 1920, 1440);
+  }
+
+  .hero__socials-icon-wrapper--arrows svg {
+    @include adaptive-value("width", 25, 23.08, 0, 1920, 1440);
+    @include adaptive-value("height", 25, 23.08, 0, 1920, 1440);
+  }
+
+  .hero__socials-icon-wrapper--pointer svg {
+    @include adaptive-value("width", 22.46, 20.13, 0, 1920, 1440);
+    @include adaptive-value("height", 29, 26, 0, 1920, 1440);
+  }
+
+  .hero__socials-icon-wrapper--human svg {
+    @include adaptive-value("width", 33, 29.12, 0, 1920, 1440);
+    @include adaptive-value("height", 34, 30, 0, 1920, 1440);
+  }
+
+  &__socials-number {
+    display: flex;
+    justify-content: flex-end;
+    min-width: size(17px);
+    font-family: "TT Runs", "Arial", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-size: size(12px);
+    line-height: size(12px) * 1.1;
+    color: rgba(14, 14, 14, 0.8);
+  }
+
+  &__socials-link {
+    gap: size(10px);
+
+    @include hover {
+      .hero__socials-icon-wrapper {
+        background-color: $highlight;
+      }
+    }
+
+    &:focus-visible {
+      .hero__socials-icon-wrapper {
+        background-color: $highlight;
+      }
+    }
+  }
+
+  &__title {
+    font-family: "TT Runs", "Arial", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    max-width: size(700px);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    @include adaptive-value("font-size", 64, 50, 0, 1920, 1440);
+    @include adaptive-value("line-height", 64 * 1.25, 50 * 1.25, 0, 1920, 1440);
+
+    @include vp-1439 {
+      letter-spacing: -0.01em;
+
+      @include adaptive-value("font-size", 50, 42, 0, 1439, 1280);
+      @include adaptive-value("line-height", 50 * 1.25, 42 * 1.25, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      max-width: size(400px);
+
+      @include adaptive-value("font-size", 42, 38, 0, 1279, 768);
+      @include adaptive-value("line-height", 42 * 1.25, 38 * 1.25, 0, 1279, 768);
+    }
+
+    @include vp-767 {
+      @include adaptive-value("font-size", 38, 32, 0, 767, 375);
+      @include adaptive-value("line-height", 38 * 1.25, 32 * 1.25, 0, 767, 375);
+    }
+  }
+
+  &__video {
+    display: flex;
+    width: var(--video-width, 23.75%);
+    height: var(--video-height, 12.5%);
+    max-width: 100%;
+    max-height: 120%;
+    background: #000000;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    z-index: 2;
+    transform: translateX(-50%);
+    overflow: hidden;
+    cursor: pointer;
+    transition: outline 0.3s $smooth;
+
+    @include adaptive-value("min-width", 608, 456, 0, 1920, 1440);
+    @include adaptive-value("min-height", 304, 230, 0, 1920, 1440);
+    @include adaptive-value("border-radius", 20, 15, 0, 1920, 1440);
+    @include adaptive-value("top", 183, 154, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("top", 154, 153, 0, 1439, 1280);
+      @include adaptive-value("min-width", 456, 456, 0, 1439, 1280);
+      @include adaptive-value("min-height", 230, 230, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      @include adaptive-value("min-width", 456, 416, 0, 1279, 768);
+      @include adaptive-value("min-height", 230, 226, 0, 1279, 768);
+      @include adaptive-value("max-height", 442, 442, 0, 1279, 768);
+      @include adaptive-value("top", 153, 240, 0, 1279, 768);
+      @include adaptive-value("border-radius", 15, 12, 0, 1279, 768);
+    }
+
+    @include vp-767 {
+      @include adaptive-value("min-width", 416, 225, 0, 767, 375);
+      @include adaptive-value("min-height", 226, 135, 0, 767, 375);
+      @include adaptive-value("max-height", 442, 270, 0, 767, 375);
+      @include adaptive-value("top", 240, 178, 0, 767, 375);
+      @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
+    }
+
+    &:focus-visible {
+      outline: size(2px) solid $black;
+      outline-offset: size(2px);
+    }
+
+    @include vp-1439 {
+      @include adaptive-value("border-radius", 15, 12, 0, 1439, 768);
+    }
+
+    @include vp-767 {
+      @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
+    }
+  }
+
+  &__video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &--muted {
+      display: block;
+    }
+
+    &--sound {
+      display: none;
+    }
+  }
+
+  &__footer {
+    display: grid;
+    grid-template-columns: 1.2fr 0.98fr 1.1fr 0.9fr;
+    gap: 0 size(24px);
+    align-items: start;
+    position: relative;
+
+    @include adaptive-value("padding-bottom", 50, 40, 0, 1920, 1440);
+    @include adaptive-value("margin-top", 263, 110, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("padding-bottom", 40, 23, 0, 1439, 1280);
+      @include adaptive-value("margin-top", 110, 83, 0, 1439, 1280);
+    }
+
+    @media (min-width: $vp-1280) and (max-width: ($vp-1440 - 1px)) {
+      grid-template-columns: 1.5fr 1.1fr minmax(size(342px), 0.7fr) minmax(size(230px), 0.8fr);
+      gap: 0 size(19px);
+    }
+
+    @include vp-1279 {
+      @include adaptive-value("margin-top", 83, 190, 0, 1279, 768);
+      @include adaptive-value("column-gap", 24, 41, 0, 1279, 768);
+      @include adaptive-value("padding-bottom", 23, 12, 0, 1279, 768);
+    }
+
+    @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
+      grid-template-columns: 1fr 1fr;
+
+      @include adaptive-value("margin-top", 83, 273, 0, 1279, 768);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      background-color: #e4e4e4;
+      width: size(1px);
+      height: 100%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    @include vp-767 {
+      grid-template-columns: repeat(2, 1fr);
+
+      @include adaptive-value("row-gap", 24, 27, 0, 767, 375);
+      @include adaptive-value("padding-bottom", 20, 0, 0, 767, 375);
+      @include adaptive-value("margin-top", 190, 32, 0, 767, 375);
     }
 
     &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: size(60px);
-        background-color: #e4e4e4;
-        width: size(1px);
-        height: var(--after-height, 0px);
-        transform: translateX(-50%);
-        z-index: 0;
-        pointer-events: none;
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      background-color: #e4e4e4;
+      width: 100%;
+      height: size(1px);
+      transform: translateX(-50%);
+    }
+  }
 
-        @include vp-1439 {
-            top: size(52px);
-        }
+  // Псевдоэлементы вынесены на уровень выше для уменьшения вложенности
+  .hero__footer::before {
+    @include vp-767 {
+      height: 55%;
+      bottom: unset;
+      top: -10%;
+    }
+  }
 
-        @include vp-767 {
-            width: 0;
-        }
+  .hero__footer::after {
+    @include vp-767 {
+      bottom: size(18px);
+    }
+  }
+
+  &__footer-left {
+    display: grid;
+    grid-template-columns: minmax(size(87px), 0.97fr) 3fr;
+    align-items: start;
+    margin: size(67px) 0 0;
+    grid-row: span 2;
+
+    @include adaptive-value("column-gap", 0, 10, 0, 1920, 1440);
+    @include adaptive-value("margin-top", 88, 82, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("margin-top", 82, 101, 0, 1439, 1280);
+      grid-template-columns: 1fr 7fr;
+      grid-column: 1;
+      grid-row: span 2;
+      margin: 0;
+      gap: 0 size(14px);
     }
 
-    &__container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+    @include vp-1279 {
+      margin: 0;
+      gap: size(15px) size(10px);
     }
 
-    &__static-wrapper {
-        max-width: 100vw;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        z-index: 1;
+    @include vp-1023 {
+      grid-column: 1;
     }
 
-    &__header {
-        display: flex;
-        flex-flow: wrap row;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: size(24px);
-        min-height: size(384px);
+    @include vp-767 {
+      grid-column: 1;
+      grid-row: 1;
+      margin: 0;
+      gap: size(10px) size(7px);
+    }
+  }
+
+  &__years {
+    font-family: "TT Runs", "Arial", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    grid-row: span 2;
+
+    @include adaptive-value("font-size", 70, 56, 0, 1920, 1440);
+    @include adaptive-value("line-height", 70 * 0.9, 56 * 0.9, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("font-size", 56, 58, 0, 1439, 1280);
+      @include adaptive-value("line-height", 56 * 0.9, 58 * 0.9, 0, 1439, 1280);
+      grid-row: span 2;
+      position: relative;
+      top: size(-1px);
     }
 
-    &__socials {
-        @include vp-1279 {
-            display: none;
-        }
+    @include vp-1279 {
+      @include adaptive-value("font-size", 58, 38, 0, 1279, 768);
+      @include adaptive-value("line-height", 58 * 0.9, 38 * 0.9, 0, 1279, 768);
     }
 
-    &__socials-item {
-        width: 100%;
+    @include vp-767 {
+      @include adaptive-value("font-size", 38, 32, 0, 767, 375);
+      @include adaptive-value("line-height", 38 * 0.9, 32 * 0.9, 0, 767, 375);
+    }
+  }
+
+  &__years-label {
+    font-family: "TT Commons Pro", "Arial", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    position: relative;
+
+    @include adaptive-value("font-size", 20, 18, 0, 1920, 1440);
+    @include adaptive-value("line-height", 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
+    @include adaptive-value("top", -3, -4.5, 0, 1920, 1440);
+
+    @include vp-1439 {
+      @include adaptive-value("font-size", 18, 16, 0, 1439, 1280);
+      @include adaptive-value("line-height", 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
     }
 
-    &__socials-icon-wrapper {
-        &--w {
-            svg {
-                @include adaptive-value('width', 28, 25.85, 0, 1920, 1440);
-                @include adaptive-value('height', 28, 25.85, 0, 1920, 1440);
-            }
-        }
-        &--fwg {
-            svg {
-                @include adaptive-value('width', 40.35, 36.99, 0, 1920, 1440);
-                @include adaptive-value('height', 12, 11, 0, 1920, 1440);
-            }
-        }
-        &--arrows {
-            svg {
-                @include adaptive-value('width', 25, 23.08, 0, 1920, 1440);
-                @include adaptive-value('height', 25, 23.08, 0, 1920, 1440);
-            }
-        }
-        &--pointer {
-            svg {
-                @include adaptive-value('width', 22.46, 20.13, 0, 1920, 1440);
-                @include adaptive-value('height', 29, 26, 0, 1920, 1440);
-            }
-        }
-        &--human {
-            svg {
-                @include adaptive-value('width', 33, 29.12, 0, 1920, 1440);
-                @include adaptive-value('height', 34, 30, 0, 1920, 1440);
-            }
-        }
+    @include vp-1279 {
+      @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
+      @include adaptive-value("line-height", 16 * 1.25, 15 * 1.25, 0, 1279, 768);
+      grid-row: 1 / 3;
+      grid-column: 2 / 3;
+      align-self: end;
     }
 
-    &__socials-number {
-        display: flex;
-        justify-content: flex-end;
-        min-width: size(17px);
-        font-family: 'TT Runs', Arial, sans-serif;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        font-size: size(12px);
-        line-height: size(12px) * 1.1;
-        color: rgba(14, 14, 14, 0.8);
+    @include vp-767 {
+      align-self: end;
+
+      @include adaptive-value("font-size", 15, 16, 0, 767, 375);
+      @include adaptive-value("line-height", 15 * 1.22, 16 * 1.22, 0, 767, 375);
+      top: size(1px);
+    }
+  }
+
+  &__footer-description {
+    font-family: "TT Runs", "Arial", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: $gray;
+    position: relative;
+    top: size(-2px);
+
+    @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
+    @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+
+    @include vp-1439 {
+      grid-column: 2 / 3;
+
+      @include adaptive-value("font-size", 13, 13, 0, 1439, 1280);
+      @include adaptive-value("line-height", 13 * 1.1, 13 * 1.1, 0, 1439, 1280);
     }
 
-    &__socials-link {
-        gap: size(10px);
-
-        @include hover {
-            .hero__socials-icon-wrapper {
-                background-color: $highlight;
-            }
-        }
-
-        &:focus-visible {
-            .hero__socials-icon-wrapper {
-                background-color: $highlight;
-            }
-        }
+    @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
+      grid-column: span 2;
     }
 
-    &__title {
-        font-family: 'TT Runs', Arial, sans-serif;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        max-width: size(700px);
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        word-break: break-word;
+    @include vp-767 {
+      @include adaptive-value("font-size", 13, 12, 0, 767, 375);
+      @include adaptive-value("line-height", 13 * 1.1, 12 * 1.1, 0, 374, 320);
+      grid-column: 1 / 3;
+    }
+  }
 
-        @include adaptive-value('font-size', 64, 50, 0, 1920, 1440);
-        @include adaptive-value('line-height', 64 * 1.25, 50 * 1.25, 0, 1920, 1440);
+  &__footer-contacts {
+    display: flex;
+    flex-flow: wrap column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-row: span 2;
+    position: relative;
 
-        @include vp-1439 {
-            letter-spacing: -0.01em;
-            @include adaptive-value('font-size', 50, 42, 0, 1439, 1280);
-            @include adaptive-value('line-height', 50 * 1.25, 42 * 1.25, 0, 1439, 1280);
-        }
+    @include adaptive-value("gap", 51, 39, 0, 1920, 1440);
 
-        @include vp-1279 {
-            max-width: size(400px);
-            @include adaptive-value('font-size', 42, 38, 0, 1279, 768);
-            @include adaptive-value('line-height', 42 * 1.25, 38 * 1.25, 0, 1279, 768);
-        }
-
-        @include vp-767 {
-            @include adaptive-value('font-size', 38, 32, 0, 767, 375);
-            @include adaptive-value('line-height', 38 * 1.25, 32 * 1.25, 0, 767, 375);
-        }
+    @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
+      left: size(10px);
     }
 
-    &__video {
-        display: flex;
-        width: var(--video-width, 23.75%);
-        height: var(--video-height, 12.5%);
-        max-width: 100%;
-        max-height: 120%;
-        background: #000000;
-        position: absolute;
-        left: 50%;
-        right: 50%;
-        z-index: 2;
-        transform: translateX(-50%);
-        overflow: hidden;
-        cursor: pointer;
-        transition: outline 0.3s $smooth;
-        @include adaptive-value('min-width', 608, 456, 0, 1920, 1440);
-        @include adaptive-value('min-height', 304, 230, 0, 1920, 1440);
-        @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
-        @include adaptive-value('top', 183, 154, 0, 1920, 1440);
+    @include vp-1439 {
+      grid-column: 2;
+      grid-row: span 2;
+      flex-flow: wrap row;
 
-        @include vp-1439 {
-            @include adaptive-value('top', 154, 153, 0, 1439, 1280);
-            @include adaptive-value('min-width', 456, 456, 0, 1439, 1280);
-            @include adaptive-value('min-height', 230, 230, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-            @include adaptive-value('min-width', 456, 416, 0, 1279, 768);
-            @include adaptive-value('min-height', 230, 226, 0, 1279, 768);
-            @include adaptive-value('max-height', 442, 442, 0, 1279, 768);
-            @include adaptive-value('top', 153, 240, 0, 1279, 768);
-            @include adaptive-value('border-radius', 15, 12, 0, 1279, 768);
-        }
-
-        @include vp-767 {
-            @include adaptive-value('min-width', 416, 225, 0, 767, 375);
-            @include adaptive-value('min-height', 226, 135, 0, 767, 375);
-            @include adaptive-value('max-height', 442, 270, 0, 767, 375);
-            @include adaptive-value('top', 240, 178, 0, 767, 375);
-            @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
-        }
-
-        &:focus-visible {
-            outline: size(2px) solid $black;
-            outline-offset: size(2px);
-        }
-
-        @include vp-1439 {
-            @include adaptive-value('border-radius', 15, 12, 0, 1439, 768);
-        }
-
-        @include vp-767 {
-            @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
-        }
+      @include adaptive-value("gap", 39, 62, 0, 1439, 1280);
     }
 
-    &__video-element {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-        &--muted {
-            display: block;
-        }
-
-        &--sound {
-            display: none;
-        }
+    @include vp-1279 {
+      @include adaptive-value("gap", 62, 58, 0, 1279, 768);
     }
 
-    &__footer {
-        display: grid;
-        grid-template-columns: 1.2fr 0.98fr 1.1fr 0.9fr;
-        gap: 0 size(24px);
-        align-items: start;
-        position: relative;
-        @include adaptive-value('padding-bottom', 50, 40, 0, 1920, 1440);
-        @include adaptive-value('margin-top', 263, 110, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('padding-bottom', 40, 23, 0, 1439, 1280);
-            @include adaptive-value('margin-top', 110, 83, 0, 1439, 1280);
-        }
+    @include vp-767 {
+      grid-column: 2;
+      grid-row: 1;
+      flex-flow: wrap column;
 
-        @media (min-width: $vp-1280) and (max-width: ($vp-1440 - 1px)) {
-            grid-template-columns: 1.5fr 1.1fr minmax(size(342px), 0.7fr) minmax(size(230px), 0.8fr);
-            gap: 0 size(19px);
-        }
-        @include vp-1279 {
-            @include adaptive-value('margin-top', 83, 190, 0, 1279, 768);
-            @include adaptive-value('column-gap', 24, 41, 0, 1279, 768);
-            @include adaptive-value('padding-bottom', 23, 12, 0, 1279, 768);
-        }
+      @include adaptive-value("gap", 56, 20, 0, 767, 375);
+    }
+  }
 
-        @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
-            grid-template-columns: 1fr 1fr;
-            @include adaptive-value('margin-top', 83, 273, 0, 1279, 768);
-        }
+  &__footer-contacts-item {
+    display: flex;
+    flex-flow: wrap column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: size(4px);
 
-        &::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            background-color: #e4e4e4;
-            width: size(1px);
-            height: 100%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        @include vp-767 {
-            grid-template-columns: repeat(2, 1fr);
-            @include adaptive-value('row-gap', 24, 27, 0, 767, 375);
-            @include adaptive-value('padding-bottom', 20, 0, 0, 767, 375);
-            @include adaptive-value('margin-top', 190, 32, 0, 767, 375);
-
-            &::before {
-                height: 55%;
-                bottom: unset;
-                top: -10%;
-            }
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            background-color: #e4e4e4;
-            width: 100%;
-            height: size(1px);
-            transform: translateX(-50%);
-
-            @include vp-767 {
-                bottom: size(18px);
-            }
-        }
+    @include vp-1439 {
+      @include adaptive-value("gap", 4, 10, 0, 1439, 1280);
     }
 
-    &__footer-left {
-        display: grid;
-        grid-template-columns: minmax(size(87px), 0.97fr) 3fr;
-        align-items: start;
-        margin: size(67px) 0 0;
-        grid-row: span 2;
-        @include adaptive-value('column-gap', 0, 10, 0, 1920, 1440);
-        @include adaptive-value('margin-top', 88, 82, 0, 1920, 1440);
-        @include vp-1439 {
-            @include adaptive-value('margin-top', 82, 101, 0, 1439, 1280);
-            grid-template-columns: 1fr 7fr;
-            grid-column: 1;
-            grid-row: span 2;
-            margin: 0;
-            gap: 0 size(14px);
-        }
-
-        @include vp-1279 {
-            margin: 0;
-            gap: size(15px) size(10px);
-        }
-
-        @include vp-1023 {
-            grid-column: 1;
-        }
-
-        @include vp-767 {
-            grid-column: 1;
-            grid-row: 1;
-            margin: 0;
-            gap: size(10px) size(7px);
-        }
+    @include vp-767 {
+      @include adaptive-value("gap", 10, 8, 0, 767, 375);
     }
 
-    &__years {
-        font-family: 'TT Runs', Arial, sans-serif;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        grid-row: span 2;
-        @include adaptive-value('font-size', 70, 56, 0, 1920, 1440);
-        @include adaptive-value('line-height', 70 * 0.9, 56 * 0.9, 0, 1920, 1440);
+    &:last-child {
+      position: relative;
+      left: size(-1px);
+      gap: size(5px);
 
-        @include vp-1439 {
-            grid-row: span 1;
-            @include adaptive-value('font-size', 56, 58, 0, 1439, 1280);
-            @include adaptive-value('line-height', 56 * 0.9, 58 * 0.9, 0, 1439, 1280);
-            grid-row: span 2;
-            position: relative;
-            top: size(-1px);
-        }
-        @include vp-1279 {
-            @include adaptive-value('font-size', 58, 38, 0, 1279, 768);
-            @include adaptive-value('line-height', 58 * 0.9, 38 * 0.9, 0, 1279, 768);
-        }
+      @include vp-1279 {
+        @include adaptive-value("gap", 4, 10, 0, 1439, 1280);
+      }
+    }
+  }
 
-        @include vp-767 {
-            @include adaptive-value('font-size', 38, 32, 0, 767, 375);
-            @include adaptive-value('line-height', 38 * 0.9, 32 * 0.9, 0, 767, 375);
-        }
+  &__contact-link {
+    color: $black;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: underline;
+    text-underline-offset: size(5px);
+
+    transition: color 0.3s $smooth;
+
+    @include hover {
+      color: $gray;
     }
 
-    &__years-label {
-        font-family: 'TT Commons Pro', Arial, sans-serif;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-        position: relative;
-        @include adaptive-value('font-size', 20, 18, 0, 1920, 1440);
-        @include adaptive-value('line-height', 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
-        @include adaptive-value('top', -3, -4.5, 0, 1920, 1440);
-
-        @include vp-1439 {
-            @include adaptive-value('font-size', 18, 16, 0, 1439, 1280);
-            @include adaptive-value('line-height', 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
-            @include adaptive-value('line-height', 16 * 1.25, 15 * 1.25, 0, 1279, 768);
-            grid-row: 1 / 3;
-            grid-column: 2 / 3;
-            align-self: end;
-        }
-
-        @include vp-767 {
-            align-self: end;
-            @include adaptive-value('font-size', 15, 16, 0, 767, 375);
-            @include adaptive-value('line-height', 15 * 1.22, 16 * 1.22, 0, 767, 375);
-            top: size(1px);
-        }
+    &:focus-visible {
+      color: $gray;
     }
 
-    &__footer-description {
-        font-family: 'TT Runs', Arial, sans-serif;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        color: $gray;
-        position: relative;
-        top: size(-2px);
-        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
-        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+    @include adaptive-value("font-size", 20, 18, 0, 1920, 1440);
+    @include adaptive-value("line-height", 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
 
-        @include vp-1439 {
-            grid-column: 2 / 3;
-            @include adaptive-value('font-size', 13, 13, 0, 1439, 1280);
-            @include adaptive-value('line-height', 13 * 1.1, 13 * 1.1, 0, 1439, 1280);
-        }
-
-        @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
-            grid-column: span 2;
-        }
-
-        @include vp-767 {
-            @include adaptive-value('font-size', 13, 12, 0, 767, 375);
-            @include adaptive-value('line-height', 13 * 1.1, 12 * 1.1, 0, 374, 320);
-            grid-column: 1 / 3;
-        }
+    @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
+      position: relative;
+      top: size(1px);
     }
 
-    &__footer-contacts {
-        display: flex;
-        flex-flow: wrap column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        grid-row: span 2;
-        position: relative;
+    @include vp-1439 {
+      text-underline-offset: size(4px);
 
-        @include adaptive-value('gap', 51, 39, 0, 1920, 1440);
-
-        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
-            left: size(10px);
-        }
-
-        @include vp-1439 {
-            grid-column: 2;
-            grid-row: span 2;
-            flex-flow: wrap row;
-            @include adaptive-value('gap', 39, 62, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-            @include adaptive-value('gap', 62, 58, 0, 1279, 768);
-        }
-
-        @include vp-767 {
-            grid-column: 2;
-            grid-row: 1;
-            flex-flow: wrap column;
-            @include adaptive-value('gap', 56, 20, 0, 767, 375);
-        }
+      @include adaptive-value("font-size", 18, 16, 0, 1439, 1280);
+      @include adaptive-value("line-height", 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
     }
 
-    &__footer-contacts-item {
-        display: flex;
-        flex-flow: wrap column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: size(4px);
+    @include vp-1279 {
+      @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
+      @include adaptive-value("line-height", 16 * 1.25, 15 * 1.25, 0, 1279, 768);
+    }
+  }
 
-        @include vp-1439 {
-            @include adaptive-value('gap', 4, 10, 0, 1439, 1280);
-        }
+  &__telegram-label {
+    font-family: "TT Runs", "Arial", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: $gray;
 
-        @include vp-767 {
-            @include adaptive-value('gap', 10, 8, 0, 767, 375);
-        }
+    @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
+    @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
 
-        &:last-child {
-            position: relative;
-            left: size(-1px);
-            gap: size(5px);
+    @include vp-767 {
+      display: none;
+    }
+  }
 
-            @include vp-1279 {
-                @include adaptive-value('gap', 4, 10, 0, 1439, 1280);
-            }
-        }
+  &__telegram-icon {
+    display: none;
+
+    @include vp-767 {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: size(14px);
+      height: size(14px);
+      fill: currentColor;
+      left: size(3px);
+      top: size(1px);
+    }
+  }
+
+  &__footer-company-description-wrapper {
+    @include vp-1439 {
+      grid-column: 3;
     }
 
-    &__contact-link {
-        color: $black;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-        text-decoration: underline;
-        text-underline-offset: size(5px);
-
-        transition: color 0.3s $smooth;
-
-        @include hover {
-            color: $gray;
-        }
-
-        &:focus-visible {
-            color: $gray;
-        }
-        @include adaptive-value('font-size', 20, 18, 0, 1920, 1440);
-        @include adaptive-value('line-height', 20 * 1.25, 18 * 1.25, 0, 1920, 1440);
-
-        @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
-            position: relative;
-            top: size(1px);
-        }
-
-        @include vp-1439 {
-            text-underline-offset: size(4px);
-            @include adaptive-value('font-size', 18, 16, 0, 1439, 1280);
-            @include adaptive-value('line-height', 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
-            @include adaptive-value('line-height', 16 * 1.25, 15 * 1.25, 0, 1279, 768);
-        }
+    @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
+      grid-column: 2;
     }
 
-    &__telegram-label {
-        font-family: 'TT Runs', Arial, sans-serif;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        color: $gray;
-        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
-        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+    @include vp-1023 {
+      grid-column: 2;
+    }
+  }
 
-        @include vp-767 {
-            display: none;
-        }
+  &__company-description {
+    font-family: "TT Commons Pro", "Arial", sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: $mainColor;
+    position: relative;
+
+    @include adaptive-value("font-size", 18, 16, 0, 1920, 1440);
+    @include adaptive-value("line-height", 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+
+    @include vp-1439 {
+      grid-column: 3;
+      top: size(-1px);
     }
 
-    &__telegram-icon {
-        display: none;
-
-        @include vp-767 {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: size(14px);
-            height: size(14px);
-            fill: currentColor;
-            left: size(3px);
-            top: size(1px);
-        }
+    @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
+      grid-column: 2;
     }
 
-    &__footer-company-description-wrapper {
-        @include vp-1439 {
-            grid-column: 3;
-        }
-
-        @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
-            grid-column: 2;
-        }
-
-        @include vp-1023 {
-            grid-column: 2;
-        }
+    @include vp-1279 {
+      @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
+      @include adaptive-value("line-height", 16 * 1.4, 15 * 1.4, 0, 1279, 768);
+      top: size(-6px);
     }
 
-    &__company-description {
-        font-family: 'TT Commons Pro', Arial, sans-serif;
-        font-weight: 400;
-        letter-spacing: -0.02em;
-        color: $mainColor;
-        position: relative;
-        @include adaptive-value('font-size', 18, 16, 0, 1920, 1440);
-        @include adaptive-value('line-height', 18 * 1.4, 16 * 1.4, 0, 1920, 1440);
+    @include vp-767 {
+      display: none;
+    }
+  }
 
-        @include vp-1439 {
-            grid-column: 3;
-            top: size(-1px);
-        }
+  &__footer-about-links-wrapper {
+    grid-column: 3;
+    position: relative;
 
-        @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
-            grid-column: 2;
-        }
+    @include adaptive-value("margin-top", 25, 20, 0, 1920, 1440);
 
-        @include vp-1279 {
-            @include adaptive-value('font-size', 16, 15, 0, 1279, 768);
-            @include adaptive-value('line-height', 16 * 1.4, 15 * 1.4, 0, 1279, 768);
-            top: size(-6px);
-        }
-
-        @include vp-767 {
-            display: none;
-        }
+    @include vp-1439 {
+      grid-column: 3;
+      top: size(-5px);
+      left: size(2px);
     }
 
-    &__footer-about-links-wrapper {
-        grid-column: 3;
-        position: relative;
-
-        @include adaptive-value('margin-top', 25, 20, 0, 1920, 1440);
-        @include vp-1439 {
-            grid-column: 3;
-            top: size(-5px);
-            left: size(2px);
-        }
-
-        @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
-            grid-column: 1;
-        }
-
-        @include vp-1023 {
-            grid-column: 1;
-        }
-
-        @include vp-767 {
-            display: none;
-        }
+    @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
+      grid-column: 1;
     }
 
-    &__button {
-        align-self: end;
-        justify-self: end;
-        grid-column: 4;
-        width: 100%;
-        position: relative;
-        top: size(-1px);
-        @include adaptive-value('max-width', 287, 250, 0, 1920, 1440);
-
-        @include vp-1439 {
-            align-self: end;
-            top: size(-7px);
-            @include adaptive-value('max-width', 250, 230, 0, 1439, 1280);
-        }
-
-        @include vp-1279 {
-            grid-column: 2;
-            margin: size(40px) 0 0;
-            @include adaptive-value('max-width', 230, 217, 0, 1279, 768);
-            justify-self: start;
-        }
-
-        @include vp-767 {
-            grid-column: 1 / 3;
-            grid-row: 2;
-            margin: size(32px) 0 0;
-            justify-self: stretch;
-            max-width: unset;
-        }
+    @include vp-1023 {
+      grid-column: 1;
     }
+
+    @include vp-767 {
+      display: none;
+    }
+  }
+
+  &__button {
+    place-self: end end;
+    grid-column: 4;
+    width: 100%;
+    position: relative;
+    top: size(-1px);
+
+    @include adaptive-value("max-width", 287, 250, 0, 1920, 1440);
+
+    @include vp-1439 {
+      align-self: end;
+      top: size(-7px);
+
+      @include adaptive-value("max-width", 250, 230, 0, 1439, 1280);
+    }
+
+    @include vp-1279 {
+      grid-column: 2;
+      margin: size(40px) 0 0;
+
+      @include adaptive-value("max-width", 230, 217, 0, 1279, 768);
+      justify-self: start;
+    }
+
+    @include vp-767 {
+      grid-column: 1 / 3;
+      grid-row: 2;
+      margin: size(32px) 0 0;
+      justify-self: stretch;
+      max-width: unset;
+    }
+  }
 }

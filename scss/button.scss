@@ -1,70 +1,78 @@
 .button {
-    min-height: size(69px);
-    background-color: $black;
-    color: $white;
-    font-weight: 600;
-    font-family: 'TT Runs', Arial, sans-serif;
-    padding: size(22px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: wrap;
-    letter-spacing: -0.03em;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    transition:
-        color 0.3s $smooth,
-        background-color 0.3s $smooth,
-        box-shadow 0.3s $smooth,
-        border-radius 0.3s $smooth;
-    @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
-    @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
-    @include adaptive-value('border-radius', 20, 15, 0, 1920, 1440);
-    @include adaptive-value('min-height', 69, 61, 0, 1920, 1440);
-    @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0)), (0, 20, 20, 0, rgba(14, 14, 14, 0)));
+  min-height: size(69px);
+  background-color: $black;
+  color: $white;
+  font-weight: 600;
+  font-family: "TT Runs", "Arial", sans-serif;
+  padding: size(22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+  letter-spacing: -0.03em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition:
+    color 0.3s $smooth,
+    background-color 0.3s $smooth,
+    box-shadow 0.3s $smooth,
+    border-radius 0.3s $smooth;
 
-    @include hover {
-        background-color: $white;
-        color: $black;
-        border-radius: size(40px);
-        @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0.039)), (0, 20, 20, 0, rgba(14, 14, 14, 0.051)));
-    }
+  @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
+  @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+  @include adaptive-value("border-radius", 20, 15, 0, 1920, 1440);
+  @include adaptive-value("min-height", 69, 61, 0, 1920, 1440);
+  box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0);
+
+  @include hover {
+    background-color: $white;
+    color: $black;
+    border-radius: size(40px);
+
+    box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0.04), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0.05);
+  }
+
+  &:focus-visible {
+    background-color: $white;
+    color: $black;
+    border-radius: size(40px);
+
+    box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0.04), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0.05);
+  }
+
+  @include vp-1439 {
+    padding: size(16px);
 
     &:focus-visible {
-        background-color: $white;
-        color: $black;
-        border-radius: size(40px);
-        @include shadow((0, 7, 18, -15, rgba(14, 14, 14, 0.039)), (0, 20, 20, 0, rgba(14, 14, 14, 0.051)));
+      border-radius: size(30px);
     }
 
-    @include vp-1439 {
-        padding: size(16px);
-        &:focus-visible {
-            border-radius: size(30px);
-        }
-        @include adaptive-value('font-size', 14, 14, 0, 1439, 1280);
-        @include adaptive-value('line-height', 14 * 1.2, 14 * 1.2, 0, 1439, 1280);
-        @include adaptive-value('border-radius', 15, 15, 0, 1439, 1280);
-        @include adaptive-value('min-height', 61, 55, 0, 1439, 1280);
-        @include hover {
-            border-radius: size(30px);
-        }
+    @include adaptive-value("font-size", 14, 14, 0, 1439, 1280);
+    @include adaptive-value("line-height", 14 * 1.2, 14 * 1.2, 0, 1439, 1280);
+    @include adaptive-value("border-radius", 15, 15, 0, 1439, 1280);
+    @include adaptive-value("min-height", 61, 55, 0, 1439, 1280);
+
+    @include hover {
+      border-radius: size(30px);
+    }
+  }
+
+  @include vp-1279 {
+    &:focus-visible {
+      border-radius: size(25px);
     }
 
-    @include vp-1279 {
-        &:focus-visible {
-            border-radius: size(25px);
-        }
-        @include adaptive-value('font-size', 14, 13, 0, 1279, 768);
-        @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1279, 768);
-        @include adaptive-value('min-height', 55, 48, 0, 1279, 768);
-        @include hover {
-            border-radius: size(25px);
-        }
-    }
+    @include adaptive-value("font-size", 14, 13, 0, 1279, 768);
+    @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1279, 768);
+    @include adaptive-value("min-height", 55, 48, 0, 1279, 768);
 
-    @include vp-767 {
-        @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
+    @include hover {
+      border-radius: size(25px);
     }
+  }
+
+  @include vp-767 {
+    @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
+  }
 }

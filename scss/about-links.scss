@@ -1,73 +1,78 @@
 .about-links {
+  display: flex;
+  min-height: size(49px);
+  align-items: center;
+  flex-flow: wrap;
+
+  @include adaptive-value("gap", 15, 12, 0, 1920, 1440);
+
+  @include vp-1279 {
+    @include adaptive-value("gap", 12, 10, 0, 1279, 768);
+  }
+
+  @include vp-767 {
+    display: none;
+  }
+
+  &__list {
     display: flex;
-    min-height: size(49px);
+    flex-flow: wrap row;
     align-items: center;
-    flex-flow: wrap;
-    @include adaptive-value('gap', 15, 12, 0, 1920, 1440);
+    justify-content: flex-start;
+    gap: size(5px);
+  }
+
+  &__link {
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: size(45px);
+    color: $mainColor;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+
+    @include adaptive-value("border-radius", 15, 15, 0, 1920, 1440);
+    @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
+    @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
+    @include adaptive-value("min-height", 52, 48, 0, 1920, 1440);
+
+    &.secondary-button {
+      padding: size(14px) size(12px);
+
+      @include adaptive-value("min-height", 52, 48, 0, 1920, 1440);
+    }
+
+    @include vp-1439 {
+      @include adaptive-value("border-radius", 15, 12, 0, 1439, 1280);
+      @include adaptive-value("min-height", 48, 45, 0, 1439, 1280);
+
+      &.secondary-button {
+        @include adaptive-value("min-height", 48, 45, 0, 1439, 1280);
+      }
+    }
 
     @include vp-1279 {
-        @include adaptive-value('gap', 12, 10, 0, 1279, 768);
+      @include adaptive-value("font-size", 14, 13, 0, 1279, 768);
+      @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1279, 768);
+
+      &.secondary-button {
+        padding: size(14.5px) size(14px);
+      }
     }
 
     @include vp-767 {
-        display: none;
+      @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
     }
+  }
 
-    &__list {
-        display: flex;
-        flex-flow: wrap row;
-        align-items: center;
-        justify-content: flex-start;
-        gap: size(5px);
-    }
+  &__description {
+    color: $gray;
+    font-weight: 500;
+    font-family: "TT Runs", "Arial", sans-serif;
+    letter-spacing: -0.04em;
 
-    &__link {
-        background-color: $white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: size(45px);
-        color: $mainColor;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        @include adaptive-value('border-radius', 15, 15, 0, 1920, 1440);
-        @include adaptive-value('font-size', 16, 14, 0, 1920, 1440);
-        @include adaptive-value('line-height', 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
-        @include adaptive-value('min-height', 52, 48, 0, 1920, 1440);
-
-        &.secondary-button {
-            padding: size(14px) size(12px);
-            @include adaptive-value('min-height', 52, 48, 0, 1920, 1440);
-        }
-
-        @include vp-1439 {
-            @include adaptive-value('border-radius', 15, 12, 0, 1439, 1280);
-            @include adaptive-value('min-height', 48, 45, 0, 1439, 1280);
-
-            &.secondary-button {
-                @include adaptive-value('min-height', 48, 45, 0, 1439, 1280);
-            }
-        }
-
-        @include vp-1279 {
-            @include adaptive-value('font-size', 14, 13, 0, 1279, 768);
-            @include adaptive-value('line-height', 14 * 1.2, 13 * 1.2, 0, 1279, 768);
-            &.secondary-button {
-                padding: size(14.5px) size(14px);
-            }
-        }
-
-        @include vp-767 {
-            @include adaptive-value('border-radius', 12, 10, 0, 767, 375);
-        }
-    }
-
-    &__description {
-        color: $gray;
-        font-weight: 500;
-        font-family: 'TT Runs', Arial, sans-serif;
-        letter-spacing: -0.04em;
-        @include adaptive-value('font-size', 14, 13, 0, 1920, 1440);
-        @include adaptive-value('line-height', 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
-    }
+    @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
+    @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
+  }
 }

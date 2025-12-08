@@ -70,7 +70,7 @@ function initBannerSlider() {
                 interactiveElements.forEach((element) => {
                     // Если элемент имеет tabindex, убираем его или устанавливаем 0
                     if (element.hasAttribute('tabindex')) {
-                        const currentTabIndex = parseInt(element.getAttribute('tabindex'), 10)
+                        const currentTabIndex = Number.parseInt(element.getAttribute('tabindex'), 10)
                         // Если tabindex был -1 (недоступный), убираем атрибут или ставим 0
                         if (currentTabIndex === -1) {
                             element.removeAttribute('tabindex')
@@ -81,7 +81,7 @@ function initBannerSlider() {
                 // В неактивных слайдах делаем элементы недоступными
                 interactiveElements.forEach((element) => {
                     // Устанавливаем tabindex=-1 только если элемент не был специально скрыт
-                    if (!element.hasAttribute('tabindex') || parseInt(element.getAttribute('tabindex'), 10) >= 0) {
+                    if (!element.hasAttribute('tabindex') || Number.parseInt(element.getAttribute('tabindex'), 10) >= 0) {
                         element.setAttribute('tabindex', '-1')
                     }
                 })

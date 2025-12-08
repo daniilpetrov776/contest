@@ -1,74 +1,74 @@
 * {
-    padding: 0;
-    margin: 0;
-    border: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :focus,
 :active {
-    outline: none;
+  outline: none;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:focus,
 a:active {
-    outline: none;
+  outline: none;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 html,
 body {
-    min-width: $mobile-min-width;
-    height: 100%;
-    background-color: $mainBackground;
-    font-size: size-desktop($fz-default);
-    // overflow-y: hidden;
-    @include vp-1919 {
-        font-size: $fz-default;
-    }
+  min-width: $mobile-min-width;
+  height: 100%;
+  background-color: $mainBackground;
+  font-size: size-desktop($fz-default);
+
+  @include vp-1919 {
+    font-size: $fz-default;
+  }
 }
 
 body {
-    font-family: $fontFamily;
-    line-height: 1;
-    color: $mainColor;
-    text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: $fontFamily;
+  line-height: 1;
+  color: $mainColor;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input,
 button,
 textarea {
-    font-family: $fontFamily;
-    font-size: inherit;
+  font-family: $fontFamily;
+  font-size: inherit;
 }
 
 button {
-    color: inherit;
-    cursor: pointer;
-    background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 h1,
@@ -77,18 +77,18 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: inherit;
-    font-weight: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

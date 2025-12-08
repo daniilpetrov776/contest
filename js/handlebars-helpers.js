@@ -252,7 +252,7 @@ export const imageHelpers = {
 
                         // Определяем тип файла по расширению в имени
                         const imageExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']
-                        const hasImageExtension = imageExtensions.some((ext) => spriteName.toLowerCase().endsWith(ext))
+                        const hasImageExtension = imageExtensions.some(ext => spriteName.toLowerCase().endsWith(ext))
 
                         if (hasImageExtension) {
                             // Обычное изображение (png, jpg, webp и т.д.)
@@ -426,10 +426,10 @@ export const imageHelpers = {
         parts.forEach((part) => {
             if (part.text) {
                 if (typeof part.text === 'string') {
-                    text += part.text + ' '
+                    text += `${part.text} `
                 } else if (typeof part.text === 'object') {
                     const textValue = part.text.value || part.text.text || ''
-                    text += textValue + ' '
+                    text += `${textValue} `
                 }
             }
         })
@@ -445,7 +445,7 @@ export const imageHelpers = {
         }
 
         const classes = className.split(' ')
-        const modifierClass = classes.find((cls) => cls.startsWith(`${baseClass}--`))
+        const modifierClass = classes.find(cls => cls.startsWith(`${baseClass}--`))
 
         if (modifierClass) {
             return modifierClass.replace(baseClass, '')
