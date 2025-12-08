@@ -1,38 +1,19 @@
-/* eslint-disable perfectionist/sort-imports */
-/* eslint-disable unused-imports/no-unused-imports */
-import 'virtual:svg-icons-register'
-import * as flsFunctions from './files/functions'
-import * as flsForms from './files/forms/forms'
-// import './libs/parallax-mouse'
-// import './libs/popup'
-import './libs/burger'
-import './libs/header-animation'
-import './libs/hero-header-animation'
-import './libs/hero-after-animation'
-import './libs/hero-video'
-import './libs/children-animation'
-import './libs/element-animation'
-// import './libs/portfolio-sliders'
-// import './libs/banner-slider'
-// import './libs/banner-animation'
-// import './libs/footer-title-animation'
-import './libs/portfolio-sliders'
-import './libs/banner-slider'
-import './libs/banner-animation'
-import './libs/footer-title-animation'
-// import './files/forms/datepicker'
-// import './files/forms/inputmask'
-// import './files/forms/range'
-// import './files/sliders'
-// import './files/scroll/smooth-scrollbar'
-// import './libs/watcher'
-// import './files/gallery'
-// import './libs/dynamic-adapt'
-// import './files/select'
-// import './files/map'
-// import './files/tippy'
-import './files/script'
-import '../scss/style.scss'
+import 'virtual:svg-icons-register';
+
+import './libs/burger';
+import './libs/header-animation';
+import './libs/hero-header-animation';
+import './libs/hero-after-animation';
+import './libs/hero-video';
+import './libs/children-animation';
+import './libs/element-animation';
+
+import './libs/portfolio-sliders';
+import './libs/banner-slider';
+import './libs/banner-animation';
+import './libs/footer-title-animation';
+
+import '../scss/style.scss';
 
 // // Ленивая загрузка некритичных модулей для оптимизации критического пути
 // // Загружаем модули только когда соответствующие элементы появляются в viewport
@@ -97,20 +78,3 @@ import '../scss/style.scss'
 // } else {
 //     loadModulesOnIntersection()
 // }
-
-// flsFunctions.addTouchClass()
-// flsFunctions.addLoadedClass()
-// flsFunctions.menuInit()
-// flsFunctions.fullVHfix()
-// flsFunctions.spoilers()
-// flsFunctions.tabs()
-// flsFunctions.showMore()
-
-// flsForms.formQuantity()
-// flsForms.formRating()
-
-// flsScroll.pageNavigation()
-// flsScroll.headerScroll()
-// flsScroll.scrollDirection()
-// flsScroll.stickyBlock()
-// flsScroll.digitsCounter()

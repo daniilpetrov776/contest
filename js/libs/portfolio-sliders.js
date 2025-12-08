@@ -1,26 +1,26 @@
-import Swiper from 'swiper'
-import 'swiper/css'
+import Swiper from 'swiper';
+import 'swiper/css';
 
-const MOBILE_BREAKPOINT = 768
+const MOBILE_BREAKPOINT = 768;
 
-const portfolioSwipers = new Map()
+const portfolioSwipers = new Map();
 
 function initPortfolioSliders() {
-  const categories = document.querySelectorAll('.portfolio__category.swiper')
+  const categories = document.querySelectorAll('.portfolio__category.swiper');
 
   if (window.innerWidth >= MOBILE_BREAKPOINT) {
-    destroyPortfolioSliders()
-    return
+    destroyPortfolioSliders();
+    return;
   }
 
   if (!categories || categories.length === 0) {
-    return
+    return;
   }
 
   categories.forEach((category) => {
     // Если свайпер уже инициализирован для этого элемента, пропускаем
     if (portfolioSwipers.has(category)) {
-      return
+      return;
     }
 
     const swiper = new Swiper(category, {
@@ -29,43 +29,41 @@ function initPortfolioSliders() {
       speed: 800,
       observer: true,
       observeParents: true,
-    })
+    });
 
-    portfolioSwipers.set(category, swiper)
-  })
+    portfolioSwipers.set(category, swiper);
+  });
 }
 
 function destroyPortfolioSliders() {
   portfolioSwipers.forEach((swiper, element) => {
-    swiper.destroy(true, true)
-    portfolioSwipers.delete(element)
-  })
+    swiper.destroy(true, true);
+    portfolioSwipers.delete(element);
+  });
 }
 
 function handleResize() {
   if (window.innerWidth >= MOBILE_BREAKPOINT) {
-    destroyPortfolioSliders()
-  }
-  else {
-    initPortfolioSliders()
+    destroyPortfolioSliders();
+  } else {
+    initPortfolioSliders();
   }
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPortfolioSliders)
-}
-else {
-  initPortfolioSliders()
+  document.addEventListener('DOMContentLoaded', initPortfolioSliders);
+} else {
+  initPortfolioSliders();
 }
 
 // Обработка изменения размера окна с debounce
-let resizeTimer = null
+let resizeTimer = null;
 window.addEventListener('resize', () => {
   if (resizeTimer) {
-    clearTimeout(resizeTimer)
+    clearTimeout(resizeTimer);
   }
-  resizeTimer = setTimeout(handleResize, 250)
-})
+  resizeTimer = setTimeout(handleResize, 250);
+});
 
 // Экспорт для возможности ручного управления
-export { destroyPortfolioSliders, initPortfolioSliders }
+export { destroyPortfolioSliders, initPortfolioSliders };

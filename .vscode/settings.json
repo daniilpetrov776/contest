@@ -3,10 +3,34 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-  // Auto fix
+  // Auto fix - отключено из-за проблем с сохранением
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.eslint": "never",
     "source.organizeImports": "never"
+  },
+
+  // Исключаем конфигурационные файлы из проверки ESLint
+  "eslint.ignorePatterns": [
+    "package.json",
+    "package-lock.json",
+    "vite.config.js",
+    "postcss.config.cjs",
+    "eslint.config.js"
+  ],
+
+  // Настройки ESLint
+  "eslint.enable": true,
+  "eslint.lintTask.enable": false,
+
+  // Enable eslint только для JavaScript файлов
+  "eslint.validate": [
+    "javascript"
+  ],
+
+  // Настройки производительности ESLint
+  "eslint.options": {
+    "cache": true,
+    "cacheLocation": ".eslintcache"
   },
 
   // Silent the stylistic rules in you IDE, but still auto fix them
@@ -20,30 +44,5 @@
     { "rule": "*-newline", "severity": "off", "fixable": true },
     { "rule": "*quotes", "severity": "off", "fixable": true },
     { "rule": "*semi", "severity": "off", "fixable": true }
-  ],
-
-  // Enable eslint for all supported languages
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml",
-    "xml",
-    "gql",
-    "graphql",
-    "astro",
-    "svelte",
-    "css",
-    "less",
-    "scss",
-    "pcss",
-    "postcss"
   ]
 }

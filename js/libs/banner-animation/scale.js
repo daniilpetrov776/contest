@@ -1,4 +1,4 @@
-import { gsap } from 'gsap'
+import { gsap } from 'gsap';
 
 /**
  * Анимация scale (масштабирование) с настраиваемым origin
@@ -11,67 +11,67 @@ import { gsap } from 'gsap'
  */
 export function animateScale(element, direction, offset, duration, shiftLine = false) {
   // Определяем transform-origin в зависимости от направления
-  let transformOrigin = 'bottom'
-  const isHorizontal = direction === 'from-left' || direction === 'from-right'
+  let transformOrigin = 'bottom';
+  const isHorizontal = direction === 'from-left' || direction === 'from-right';
 
   switch (direction) {
     case 'from-down':
-      transformOrigin = 'bottom'
-      break
+      transformOrigin = 'bottom';
+      break;
     case 'from-up':
-      transformOrigin = 'top'
-      break
+      transformOrigin = 'top';
+      break;
     case 'from-left':
-      transformOrigin = 'left'
-      break
+      transformOrigin = 'left';
+      break;
     case 'from-right':
-      transformOrigin = 'right'
-      break
+      transformOrigin = 'right';
+      break;
     default:
-      transformOrigin = 'bottom'
+      transformOrigin = 'bottom';
   }
 
   // Устанавливаем начальное состояние
   gsap.set(element, {
     scale: 0,
     transformOrigin,
-  })
+  });
 
   // Если это горизонтальная анимация (from-left или from-right) и включен shiftLine, анимируем также сдвиг родительской строки
   if (isHorizontal && shiftLine) {
     // Ищем родительскую строку (banner__title-line)
-    const parentLine = element.closest('.banner__title-line')
+    const parentLine = element.closest('.banner__title-line');
 
     if (parentLine) {
       // Получаем ширину элемента для расчета сдвига
       // Используем временное скрытие для измерения без визуального эффекта
-      const originalVisibility = element.style.visibility
+      const originalVisibility = element.style.visibility;
       gsap.set(element, {
         scale: 1,
         visibility: 'hidden',
-      })
-      const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0
+      });
+      const elementWidth = element.offsetWidth || element.getBoundingClientRect().width || 0;
       gsap.set(element, {
         scale: 0,
         visibility: originalVisibility || 'visible',
-      })
+      });
 
       // Определяем начальный сдвиг строки
-      const initialTranslateX = direction === 'from-left' ? -elementWidth : elementWidth
+      const initialTranslateX = direction === 'from-left' ? -elementWidth : elementWidth;
 
       // Устанавливаем начальное состояние для строки
       gsap.set(parentLine, {
         x: initialTranslateX,
-      })
+      });
 
       // Создаем timeline для синхронной анимации scale и translateX
-      const timeline = gsap.timeline()
+      const timeline = gsap.timeline();
 
       timeline.to(element, {
         scale: 1,
         duration,
         ease: 'power2.out',
-      })
+      });
 
       timeline.to(
         parentLine,
@@ -81,9 +81,9 @@ export function animateScale(element, direction, offset, duration, shiftLine = f
           ease: 'power2.out',
         },
         0, // Запускаем одновременно
-      )
+      );
 
-      return timeline
+      return timeline;
     }
   }
 
@@ -92,5 +92,5 @@ export function animateScale(element, direction, offset, duration, shiftLine = f
     scale: 1,
     duration,
     ease: 'power2.out',
-  })
+  });
 }

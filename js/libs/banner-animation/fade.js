@@ -1,4 +1,4 @@
-import { gsap } from 'gsap'
+import { gsap } from 'gsap';
 
 /**
  * Анимация fade (появление)
@@ -12,12 +12,12 @@ export function animateFade(element, direction, offset, duration) {
   // Устанавливаем начальное состояние
   gsap.set(element, {
     opacity: 0,
-  })
+  });
 
   // Запускаем анимацию
   return gsap.to(element, {
     opacity: 1,
     duration,
     ease: 'power2.out',
-  })
+  });
 }

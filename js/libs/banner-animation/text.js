@@ -1,4 +1,4 @@
-import { gsap } from 'gsap'
+import { gsap } from 'gsap';
 
 /**
  * Анимация текста с направлением
@@ -10,30 +10,30 @@ import { gsap } from 'gsap'
  */
 export function animateText(element, direction, offset, duration) {
   // Парсим смещение
-  const offsetValue = Number.parseFloat(offset) || 20
-  const offsetUnit = offset.replace(/\d/g, '') || 'px'
+  const offsetValue = Number.parseFloat(offset) || 20;
+  const offsetUnit = offset.replace(/\d/g, '') || 'px';
 
   // Определяем начальные значения в зависимости от направления
-  let initialX = 0
-  let initialY = 0
-  const finalX = 0
-  const finalY = 0
+  let initialX = 0;
+  let initialY = 0;
+  const finalX = 0;
+  const finalY = 0;
 
   switch (direction) {
     case 'from-down':
-      initialY = offsetValue
-      break
+      initialY = offsetValue;
+      break;
     case 'from-up':
-      initialY = -offsetValue
-      break
+      initialY = -offsetValue;
+      break;
     case 'from-left':
-      initialX = -offsetValue
-      break
+      initialX = -offsetValue;
+      break;
     case 'from-right':
-      initialX = offsetValue
-      break
+      initialX = offsetValue;
+      break;
     default:
-      initialY = offsetValue
+      initialY = offsetValue;
   }
 
   // Устанавливаем начальное состояние
@@ -41,7 +41,7 @@ export function animateText(element, direction, offset, duration) {
     opacity: 0,
     x: `${initialX}${offsetUnit}`,
     y: `${initialY}${offsetUnit}`,
-  })
+  });
 
   // Запускаем анимацию
   return gsap.to(element, {
@@ -50,5 +50,5 @@ export function animateText(element, direction, offset, duration) {
     y: `${finalY}${offsetUnit}`,
     duration,
     ease: 'power2.out',
-  })
+  });
 }
