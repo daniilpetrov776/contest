@@ -38,8 +38,8 @@
     flex-flow: wrap row;
     align-items: flex-start;
     justify-content: space-between;
-    gap: size(24px);
-    min-height: size(170px);
+    gap: calc(24px / 16px * 1rem);
+    min-height: calc(170px / 16px * 1rem);
     position: relative;
 
     @include adaptive-value("padding-top", 50, 40, 0, 1920, 1440);
@@ -64,7 +64,7 @@
       top: 0;
       background-color: #e4e4e4;
       width: 100%;
-      height: size(1px);
+      height: calc(1px / 16px * 1rem);
       transform: translateX(-50%);
       z-index: 0;
 
@@ -77,7 +77,7 @@
       left: 50%;
       top: 0;
       background-color: #e4e4e4;
-      width: size(1px);
+      width: calc(1px / 16px * 1rem);
       height: 100%;
       transform: translateX(-50%);
       z-index: 0;
@@ -194,7 +194,7 @@
 
       &:not(:last-child) {
         @include vp-767 {
-          margin: 0 0 size(8px);
+          margin: 0 0 calc(8px / 16px * 1rem);
         }
       }
     }
@@ -208,7 +208,7 @@
   .portfolio__header::before {
     @include vp-767 {
       top: unset;
-      bottom: size(35px);
+      bottom: calc(35px / 16px * 1rem);
     }
   }
 
@@ -273,7 +273,7 @@
     @include vp-767 {
       &.swiper {
         overflow: hidden;
-        margin-bottom: size(24px);
+        margin-bottom: calc(24px / 16px * 1rem);
 
         &:last-child {
           margin-bottom: 0;
@@ -321,7 +321,7 @@
       &:not(.swiper-wrapper) {
         display: grid;
         grid-template-columns: 1fr;
-        margin-bottom: size(24px);
+        margin-bottom: calc(24px / 16px * 1rem);
 
         &:last-child {
           margin-bottom: 0;
@@ -340,7 +340,7 @@
     @include vp-767 {
       &.swiper-slide {
         width: 100%;
-        max-width: size(315px);
+        max-width: calc(315px / 16px * 1rem);
         height: auto;
         flex-shrink: 0;
       }
@@ -372,14 +372,14 @@
 
     @include hover {
       .portfolio__image {
-        border-radius: size(70px);
+        border-radius: calc(70px / 16px * 1rem);
         transform: scale(1.01);
       }
     }
 
     &:focus-visible {
       .portfolio__image {
-        border-radius: size(70px);
+        border-radius: calc(70px / 16px * 1rem);
         transform: scale(1.01);
       }
     }
@@ -389,7 +389,7 @@
   .portfolio__card:hover .portfolio__image,
   .portfolio__card:focus-visible .portfolio__image {
     @include vp-1439 {
-      border-radius: size(52px);
+      border-radius: calc(52px / 16px * 1rem);
     }
   }
 

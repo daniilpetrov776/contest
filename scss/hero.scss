@@ -1,7 +1,7 @@
 .hero {
   background-color: $mainBackground;
   min-height: 100vh;
-  padding: 0 0 size(40px);
+  padding: 0 0 calc(40px / 16px * 1rem);
   display: flex;
   align-items: stretch;
   position: relative;
@@ -19,23 +19,23 @@
 
   @include vp-767 {
     @include adaptive-value("padding-top", 102, 84, 0, 767, 375);
-    min-height: size(700px);
+    min-height: calc(700px / 16px * 1rem);
   }
 
   &::after {
     content: "";
     position: absolute;
     left: 50%;
-    top: size(60px);
+    top: calc(60px / 16px * 1rem);
     background-color: #e4e4e4;
-    width: size(1px);
+    width: calc(1px / 16px * 1rem);
     height: var(--after-height, 0px);
     transform: translateX(-50%);
     z-index: 0;
     pointer-events: none;
 
     @include vp-1439 {
-      top: size(52px);
+      top: calc(52px / 16px * 1rem);
     }
 
     @include vp-767 {
@@ -63,8 +63,8 @@
     flex-flow: wrap row;
     align-items: flex-start;
     justify-content: space-between;
-    gap: size(24px);
-    min-height: size(384px);
+    gap: calc(24px / 16px * 1rem);
+    min-height: calc(384px / 16px * 1rem);
   }
 
   &__socials {
@@ -109,17 +109,17 @@
   &__socials-number {
     display: flex;
     justify-content: flex-end;
-    min-width: size(17px);
+    min-width: calc(17px / 16px * 1rem);
     font-family: "TT Runs", "Arial", sans-serif;
     font-weight: 500;
     letter-spacing: -0.04em;
-    font-size: size(12px);
-    line-height: size(12px) * 1.1;
+    font-size: calc(12px / 16px * 1rem);
+    line-height: calc(calc(12px / 16px * 1rem) * 1.1);
     color: rgba(14, 14, 14, 0.8);
   }
 
   &__socials-link {
-    gap: size(10px);
+    gap: calc(10px / 16px * 1rem);
 
     @include hover {
       .hero__socials-icon-wrapper {
@@ -138,7 +138,7 @@
     font-family: "TT Runs", "Arial", sans-serif;
     font-weight: 600;
     letter-spacing: -0.03em;
-    max-width: size(700px);
+    max-width: calc(700px / 16px * 1rem);
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -154,7 +154,7 @@
     }
 
     @include vp-1279 {
-      max-width: size(400px);
+      max-width: calc(400px / 16px * 1rem);
 
       @include adaptive-value("font-size", 42, 38, 0, 1279, 768);
       @include adaptive-value("line-height", 42 * 1.25, 38 * 1.25, 0, 1279, 768);
@@ -210,8 +210,8 @@
     }
 
     &:focus-visible {
-      outline: size(2px) solid $black;
-      outline-offset: size(2px);
+      outline: calc(2px / 16px * 1rem) solid $black;
+      outline-offset: calc(2px / 16px * 1rem);
     }
 
     @include vp-1439 {
@@ -243,7 +243,7 @@
   &__footer {
     display: grid;
     grid-template-columns: 1.2fr 0.98fr 1.1fr 0.9fr;
-    gap: 0 size(24px);
+    gap: 0 calc(24px / 16px * 1rem);
     align-items: start;
     position: relative;
 
@@ -256,8 +256,8 @@
     }
 
     @media (min-width: $vp-1280) and (max-width: ($vp-1440 - 1px)) {
-      grid-template-columns: 1.5fr 1.1fr minmax(size(342px), 0.7fr) minmax(size(230px), 0.8fr);
-      gap: 0 size(19px);
+      grid-template-columns: 1.5fr 1.1fr minmax(calc(342px / 16px * 1rem), 0.7fr) minmax(calc(230px / 16px * 1rem), 0.8fr);
+      gap: 0 calc(19px / 16px * 1rem);
     }
 
     @include vp-1279 {
@@ -278,7 +278,7 @@
       left: 50%;
       bottom: 0;
       background-color: #e4e4e4;
-      width: size(1px);
+      width: calc(1px / 16px * 1rem);
       height: 100%;
       transform: translateX(-50%);
       z-index: 1;
@@ -299,7 +299,7 @@
       bottom: 0;
       background-color: #e4e4e4;
       width: 100%;
-      height: size(1px);
+      height: calc(1px / 16px * 1rem);
       transform: translateX(-50%);
     }
   }
@@ -315,15 +315,15 @@
 
   .hero__footer::after {
     @include vp-767 {
-      bottom: size(18px);
+      bottom: calc(18px / 16px * 1rem);
     }
   }
 
   &__footer-left {
     display: grid;
-    grid-template-columns: minmax(size(87px), 0.97fr) 3fr;
+    grid-template-columns: minmax(calc(87px / 16px * 1rem), 0.97fr) 3fr;
     align-items: start;
-    margin: size(67px) 0 0;
+    margin: calc(67px / 16px * 1rem) 0 0;
     grid-row: span 2;
 
     @include adaptive-value("column-gap", 0, 10, 0, 1920, 1440);
@@ -335,12 +335,12 @@
       grid-column: 1;
       grid-row: span 2;
       margin: 0;
-      gap: 0 size(14px);
+      gap: 0 calc(14px / 16px * 1rem);
     }
 
     @include vp-1279 {
       margin: 0;
-      gap: size(15px) size(10px);
+      gap: calc(15px / 16px * 1rem) calc(10px / 16px * 1rem);
     }
 
     @include vp-1023 {
@@ -351,7 +351,7 @@
       grid-column: 1;
       grid-row: 1;
       margin: 0;
-      gap: size(10px) size(7px);
+      gap: calc(10px / 16px * 1rem) calc(7px / 16px * 1rem);
     }
   }
 
@@ -369,7 +369,7 @@
       @include adaptive-value("line-height", 56 * 0.9, 58 * 0.9, 0, 1439, 1280);
       grid-row: span 2;
       position: relative;
-      top: size(-1px);
+      top: calc(-1px / 16px * 1rem);
     }
 
     @include vp-1279 {
@@ -411,7 +411,7 @@
 
       @include adaptive-value("font-size", 15, 16, 0, 767, 375);
       @include adaptive-value("line-height", 15 * 1.22, 16 * 1.22, 0, 767, 375);
-      top: size(1px);
+      top: calc(1px / 16px * 1rem);
     }
   }
 
@@ -421,7 +421,7 @@
     letter-spacing: -0.04em;
     color: $gray;
     position: relative;
-    top: size(-2px);
+    top: calc(-2px / 16px * 1rem);
 
     @include adaptive-value("font-size", 14, 13, 0, 1920, 1440);
     @include adaptive-value("line-height", 14 * 1.1, 13 * 1.1, 0, 1920, 1440);
@@ -455,7 +455,7 @@
     @include adaptive-value("gap", 51, 39, 0, 1920, 1440);
 
     @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
-      left: size(10px);
+      left: calc(10px / 16px * 1rem);
     }
 
     @include vp-1439 {
@@ -484,7 +484,7 @@
     flex-flow: wrap column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: size(4px);
+    gap: calc(4px / 16px * 1rem);
 
     @include vp-1439 {
       @include adaptive-value("gap", 4, 10, 0, 1439, 1280);
@@ -496,8 +496,8 @@
 
     &:last-child {
       position: relative;
-      left: size(-1px);
-      gap: size(5px);
+      left: calc(-1px / 16px * 1rem);
+      gap: calc(5px / 16px * 1rem);
 
       @include vp-1279 {
         @include adaptive-value("gap", 4, 10, 0, 1439, 1280);
@@ -510,7 +510,7 @@
     font-weight: 500;
     letter-spacing: -0.01em;
     text-decoration: underline;
-    text-underline-offset: size(5px);
+    text-underline-offset: calc(5px / 16px * 1rem);
 
     transition: color 0.3s $smooth;
 
@@ -527,11 +527,11 @@
 
     @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1px)) {
       position: relative;
-      top: size(1px);
+      top: calc(1px / 16px * 1rem);
     }
 
     @include vp-1439 {
-      text-underline-offset: size(4px);
+      text-underline-offset: calc(4px / 16px * 1rem);
 
       @include adaptive-value("font-size", 18, 16, 0, 1439, 1280);
       @include adaptive-value("line-height", 18 * 1.25, 16 * 1.25, 0, 1439, 1280);
@@ -565,11 +565,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: size(14px);
-      height: size(14px);
+      width: calc(14px / 16px * 1rem);
+      height: calc(14px / 16px * 1rem);
       fill: currentColor;
-      left: size(3px);
-      top: size(1px);
+      left: calc(3px / 16px * 1rem);
+      top: calc(1px / 16px * 1rem);
     }
   }
 
@@ -599,7 +599,7 @@
 
     @include vp-1439 {
       grid-column: 3;
-      top: size(-1px);
+      top: calc(-1px / 16px * 1rem);
     }
 
     @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
@@ -609,7 +609,7 @@
     @include vp-1279 {
       @include adaptive-value("font-size", 16, 15, 0, 1279, 768);
       @include adaptive-value("line-height", 16 * 1.4, 15 * 1.4, 0, 1279, 768);
-      top: size(-6px);
+      top: calc(-6px / 16px * 1rem);
     }
 
     @include vp-767 {
@@ -625,8 +625,8 @@
 
     @include vp-1439 {
       grid-column: 3;
-      top: size(-5px);
-      left: size(2px);
+      top: calc(-5px / 16px * 1rem);
+      left: calc(2px / 16px * 1rem);
     }
 
     @media (min-width: $vp-768) and (max-width: ($vp-1280 - 1px)) {
@@ -647,20 +647,20 @@
     grid-column: 4;
     width: 100%;
     position: relative;
-    top: size(-1px);
+    top: calc(-1px / 16px * 1rem);
 
     @include adaptive-value("max-width", 287, 250, 0, 1920, 1440);
 
     @include vp-1439 {
       align-self: end;
-      top: size(-7px);
+      top: calc(-7px / 16px * 1rem);
 
       @include adaptive-value("max-width", 250, 230, 0, 1439, 1280);
     }
 
     @include vp-1279 {
       grid-column: 2;
-      margin: size(40px) 0 0;
+      margin: calc(40px / 16px * 1rem) 0 0;
 
       @include adaptive-value("max-width", 230, 217, 0, 1279, 768);
       justify-self: start;
@@ -669,7 +669,7 @@
     @include vp-767 {
       grid-column: 1 / 3;
       grid-row: 2;
-      margin: size(32px) 0 0;
+      margin: calc(32px / 16px * 1rem) 0 0;
       justify-self: stretch;
       max-width: unset;
     }

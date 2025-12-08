@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   background-color: $white;
-  border-radius: size(15px);
+  border-radius: calc(15px / 16px * 1rem);
   font-family: "TT Runs", "Arial", sans-serif;
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -23,8 +23,8 @@
   }
 
   @include vp-1439 {
-    font-size: size(14px);
-    line-height: size(14px) * 1.2;
+    font-size: calc(14px / 16px * 1rem);
+    line-height: calc(calc(14px / 16px * 1rem) * 1.2);
 
     @include adaptive-value("width", 52, 48, 0, 1439, 1280);
     @include adaptive-value("border-radius", 15, 10, 0, 1439, 1280);
@@ -37,21 +37,21 @@
   }
 
   &--strict {
-    padding: 0 size(15px);
+    padding: 0 calc(15px / 16px * 1rem);
     width: auto;
   }
 
   &--loose {
     width: auto;
     min-height: unset;
-    padding: size(16px) size(15px);
+    padding: calc(16px / 16px * 1rem) calc(15px / 16px * 1rem);
 
     @include vp-1439 {
-      padding: size(14px) size(12px);
+      padding: calc(14px / 16px * 1rem) calc(12px / 16px * 1rem);
     }
 
     @include vp-1279 {
-      padding: size(14.5px) size(14px);
+      padding: calc(14.5px / 16px * 1rem) calc(14px / 16px * 1rem);
     }
   }
 }

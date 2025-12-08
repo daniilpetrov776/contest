@@ -401,13 +401,13 @@
 
   @media (min-width: $vp-1440) and (max-width: ($vp-1920 - 1)) {
     &__item {
-      min-height: size(180px);
+      min-height: calc(180px / 16px * 1rem);
     }
 
     &__item--severstal {
       order: 1;
-      width: size(187px);
-      height: size(60px);
+      width: calc(187px / 16px * 1rem);
+      height: calc(60px / 16px * 1rem);
     }
 
     &__item--sibur {

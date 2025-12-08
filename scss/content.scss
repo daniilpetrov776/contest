@@ -1,5 +1,5 @@
 .content {
-  padding: size(80px) 0;
+  padding: calc(80px / 16px * 1rem) 0;
   background-color: $mainBackground;
 
   &__wrapper {
@@ -10,7 +10,7 @@
     font-family: "TT Runs", "Arial", sans-serif;
     font-weight: 600;
     letter-spacing: -0.03em;
-    margin: 0 0 size(40px);
+    margin: 0 0 calc(40px / 16px * 1rem);
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -47,7 +47,7 @@
     }
 
     p {
-      margin: 0 0 size(24px);
+      margin: 0 0 calc(24px / 16px * 1rem);
 
       &:last-child {
         margin-bottom: 0;

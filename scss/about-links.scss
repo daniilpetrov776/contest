@@ -1,6 +1,6 @@
 .about-links {
   display: flex;
-  min-height: size(49px);
+  min-height: calc(49px / 16px * 1rem);
   align-items: center;
   flex-flow: wrap;
 
@@ -19,7 +19,7 @@
     flex-flow: wrap row;
     align-items: center;
     justify-content: flex-start;
-    gap: size(5px);
+    gap: calc(5px / 16px * 1rem);
   }
 
   &__link {
@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: size(45px);
+    min-height: calc(45px / 16px * 1rem);
     color: $mainColor;
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -38,7 +38,7 @@
     @include adaptive-value("min-height", 52, 48, 0, 1920, 1440);
 
     &.secondary-button {
-      padding: size(14px) size(12px);
+      padding: calc(14px / 16px * 1rem) calc(12px / 16px * 1rem);
 
       @include adaptive-value("min-height", 52, 48, 0, 1920, 1440);
     }
@@ -57,7 +57,7 @@
       @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1279, 768);
 
       &.secondary-button {
-        padding: size(14.5px) size(14px);
+        padding: calc(14.5px / 16px * 1rem) calc(14px / 16px * 1rem);
       }
     }
 

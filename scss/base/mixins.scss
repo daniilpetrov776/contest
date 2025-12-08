@@ -20,22 +20,6 @@
   font-weight: $weight;
 }
 
-@function rem($px) {
-  $result: math.div($px, 16) + rem;
-
-  @return $result;
-}
-
-@function size($size-in-px) {
-  @return calc($size-in-px / $fz-default * 1rem);
-}
-
-@function size-desktop($size-in-px) {
-  @return calc($size-in-px / $vp-1920 * 100vw);
-}
-
-// Desktop first
-
 @mixin vp-1919 {
   @media (max-width: ($vp-1920 - 1px)) {
     @content;
@@ -70,12 +54,6 @@
   @media (max-width: ($vp-375 - 1px)) {
     @content;
   }
-}
-
-@function em($px, $current: 16) {
-  $result: math.div($px, $current) + em;
-
-  @return $result;
 }
 
 /**
@@ -127,8 +105,8 @@
   $widthFromNum: if(math.is-unitless($widthFrom), $widthFrom, $widthFrom / 1px);
   $widthToNum: if(math.is-unitless($widthTo), $widthTo, $widthTo / 1px);
 
-  $widthFromMedia: em($widthFromNum);
-  $widthToMedia: em($widthToNum);
+  $widthFromMedia: math.div($widthFromNum, 16) + em;
+  $widthToMedia: math.div($widthToNum, 16) + em;
   $slope: math.div(($startSize - $minSize), ($widthFromNum - $widthToNum));
   $yIntersection: -$widthToNum * $slope + $minSize;
 
@@ -137,16 +115,20 @@
   }
 
   $slopeVw: $slope * 100;
-  $flyValue: #{rem($yIntersection)}" + " #{$slopeVw}vw;
-  $propertyValue: #{"clamp(" rem($minSize) "," $flyValue "," rem($startSize) ")"};
+  $yIntersectionRem: math.div($yIntersection, 16) + rem;
+  $minSizeRem: math.div($minSize, 16) + rem;
+  $startSizeRem: math.div($startSize, 16) + rem;
+  $widthToRem: math.div($widthTo, 16) + rem;
+  $flyValue: #{$yIntersectionRem}" + " #{$slopeVw}vw;
+  $propertyValue: #{"clamp(" $minSizeRem "," $flyValue "," $startSizeRem ")"};
 
   @if $minSize > $startSize {
-    $propertyValue: #{"clamp(" rem($startSize) "," $flyValue "," rem($minSize) ")"};
+    $propertyValue: #{"clamp(" $startSizeRem "," $flyValue "," $minSizeRem ")"};
   }
 
   @if $keepSize != 1 and $keepSize != 3 {
     @media (min-width: $widthFromMedia) {
-      #{$property}: rem($startSize);
+      #{$property}: $startSizeRem;
     }
   }
 
@@ -158,7 +140,7 @@
     @supports not (#{$property}: $propertyValue) {
       #{$property}:
         calc(
-          #{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) /
+          #{$minSizeRem} + #{$addSize} * (100vw - #{$widthToRem}) /
           #{math.div($widthFrom, 16) - math.div($widthTo, 16)}
         );
     }
@@ -166,7 +148,7 @@
 
   @if $keepSize != 1 and $keepSize != 2 {
     @media (max-width: $widthToMedia) {
-      #{$property}: rem($minSize);
+      #{$property}: $minSizeRem;
     }
   }
 }

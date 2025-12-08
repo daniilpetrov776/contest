@@ -13,7 +13,7 @@
     bottom: 0;
     background-color: #e4e4e4;
     width: var(--before-width, 0%);
-    height: size(1px);
+    height: calc(1px / 16px * 1rem);
     transform: translateX(-50%);
   }
 
@@ -22,19 +22,19 @@
     justify-content: space-between;
     flex-flow: wrap row;
     align-items: center;
-    padding: size(6px) $desktop-padding;
+    padding: calc(6px / 16px * 1rem) $desktop-padding;
 
     @include adaptive-value("min-height", 58, 60, 0, 1920, 1440);
 
     @include vp-1439 {
-      min-height: size(52px);
+      min-height: calc(52px / 16px * 1rem);
 
       @include adaptive-value("min-height", 60, 52, 0, 1439, 1280);
-      padding: size(4px) $tablet-padding;
+      padding: calc(4px / 16px * 1rem) $tablet-padding;
     }
 
     @include vp-767 {
-      padding: size(10px) $mobile-padding;
+      padding: calc(10px / 16px * 1rem) $mobile-padding;
     }
   }
 
@@ -107,8 +107,8 @@
 
     &:focus-visible {
       opacity: 0.7;
-      outline: size(2px) solid $black;
-      outline-offset: size(2px);
+      outline: calc(2px / 16px * 1rem) solid $black;
+      outline-offset: calc(2px / 16px * 1rem);
     }
   }
 
@@ -116,9 +116,9 @@
     display: flex;
     max-width: 5%;
     align-items: center;
-    gap: size(10px);
+    gap: calc(10px / 16px * 1rem);
     position: relative;
-    top: size(2px);
+    top: calc(2px / 16px * 1rem);
   }
 
   &__star-text {
@@ -126,7 +126,7 @@
     letter-spacing: -0.04em;
     font-family: "TT Runs", sans-serif;
     position: relative;
-    top: size(-2px);
+    top: calc(-2px / 16px * 1rem);
 
     @include adaptive-value("font-size", 12, 13, 0, 1920, 1440);
     @include adaptive-value("line-height", 12 * 1.1, 13 * 1.1, 0, 1920, 1440);
@@ -145,8 +145,8 @@
     pointer-events: none;
 
     @include vp-1279 {
-      width: size(32px);
-      height: size(32px);
+      width: calc(32px / 16px * 1rem);
+      height: calc(32px / 16px * 1rem);
       position: relative;
       pointer-events: auto;
     }
@@ -159,10 +159,10 @@
       position: absolute;
       content: "";
       display: block;
-      width: size(30px);
-      height: size(3px);
+      width: calc(30px / 16px * 1rem);
+      height: calc(3px / 16px * 1rem);
       background-color: $mainColor;
-      left: size(1px);
+      left: calc(1px / 16px * 1rem);
       transform-origin: center;
       transition:
         transform 0.4s $smooth,

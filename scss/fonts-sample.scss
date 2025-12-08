@@ -1,22 +1,22 @@
 .fonts-sample {
-  padding: rem(60) 0;
+  padding: #{math.div(60, 16) + rem} 0;
   background: #f7f7f7;
 
   &__container {
     display: flex;
     flex-direction: column;
-    gap: rem(32);
+    gap: #{math.div(32, 16) + rem};
   }
 
   &__header {
-    max-width: rem(720);
+    max-width: #{math.div(720, 16) + rem};
     display: flex;
     flex-direction: column;
-    gap: rem(12);
+    gap: #{math.div(12, 16) + rem};
   }
 
   &__eyebrow {
-    font-size: rem(14);
+    font-size: #{math.div(14, 16) + rem};
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -24,49 +24,49 @@
   }
 
   &__title {
-    font-size: clamp(rem(28), 4vw, rem(40));
+    font-size: clamp(#{math.div(28, 16) + rem}, 4vw, #{math.div(40, 16) + rem});
     font-weight: 600;
     line-height: 1.2;
   }
 
   &__description {
-    font-size: rem(16);
+    font-size: #{math.div(16, 16) + rem};
     color: rgba($mainColor, 0.7);
   }
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(280), 1fr));
-    gap: rem(24);
+    grid-template-columns: repeat(auto-fit, minmax(#{math.div(280, 16) + rem}, 1fr));
+    gap: #{math.div(24, 16) + rem};
   }
 
   &__item {
     display: flex;
     flex-direction: column;
-    gap: rem(14);
-    padding: rem(24);
-    border-radius: rem(16);
+    gap: #{math.div(14, 16) + rem};
+    padding: #{math.div(24, 16) + rem};
+    border-radius: #{math.div(16, 16) + rem};
     background: #ffffff;
-    box-shadow: 0 rem(12) rem(30) rgba(0, 0, 0, 0.05);
+    box-shadow: 0 #{math.div(12, 16) + rem} #{math.div(30, 16) + rem} rgba(0, 0, 0, 0.05);
     transition:
       box-shadow 0.2s ease,
       transform 0.2s ease;
 
     &:hover {
-      box-shadow: 0 rem(18) rem(40) rgba(0, 0, 0, 0.08);
-      transform: translateY(rem(-2));
+      box-shadow: 0 #{math.div(18, 16) + rem} #{math.div(40, 16) + rem} rgba(0, 0, 0, 0.08);
+      transform: translateY(#{math.div(-2, 16) + rem});
     }
 
     &:focus-visible {
-      outline: rem(2) solid rgba($mainColor, 0.25);
-      outline-offset: rem(4);
+      outline: #{math.div(2, 16) + rem} solid rgba($mainColor, 0.25);
+      outline-offset: #{math.div(4, 16) + rem};
     }
   }
 
   &__item-head {
     display: flex;
     justify-content: space-between;
-    gap: rem(12);
+    gap: #{math.div(12, 16) + rem};
     flex-wrap: wrap;
   }
 
@@ -76,12 +76,12 @@
   }
 
   &__meta {
-    font-size: rem(14);
+    font-size: #{math.div(14, 16) + rem};
     color: rgba($mainColor, 0.6);
   }
 
   &__text {
-    font-size: clamp(rem(18), 3vw, rem(24));
+    font-size: clamp(#{math.div(18, 16) + rem}, 3vw, #{math.div(24, 16) + rem});
     line-height: 1.4;
     color: $mainColor;
 

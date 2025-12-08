@@ -34,7 +34,8 @@ body {
   min-width: $mobile-min-width;
   height: 100%;
   background-color: $mainBackground;
-  font-size: size-desktop($fz-default);
+  // font-size: size-desktop($fz-default);
+  font-size: calc($fz-default / $vp-1920 * 100vw);
 
   @include vp-1919 {
     font-size: $fz-default;

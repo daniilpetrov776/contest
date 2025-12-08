@@ -37,10 +37,10 @@
 
   &__menu-list {
     @include vp-1439 {
-      margin: size(50px) 0 0;
+      margin: calc(50px / 16px * 1rem) 0 0;
       display: flex;
       flex-flow: wrap column;
-      gap: size(15px);
+      gap: calc(15px / 16px * 1rem);
     }
   }
 

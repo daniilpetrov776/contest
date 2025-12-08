@@ -1,14 +1,16 @@
+@use "sass:math";
+
 .banner {
   background-color: $mainBackground;
 
   @include adaptive-value("margin-top", 160, 70, 0, 1920, 1440);
 
   @include vp-1439 {
-    margin: size(70px) 0 0;
+    margin: calc(70px / 16px * 1rem) 0 0;
   }
 
   @include vp-1279 {
-    margin: size(60px) 0 0;
+    margin: calc(60px / 16px * 1rem) 0 0;
   }
 
   @include vp-767 {
@@ -19,7 +21,7 @@
     background-color: $white;
     display: grid;
     height: 100%;
-    grid-template-columns: minmax(size(539px), 1fr) 2fr;
+    grid-template-columns: minmax(calc(539px / 16px * 1rem), 1fr) 2fr;
 
     @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
     @include adaptive-value("padding-top", 180, 100, 0, 1920, 1440);
@@ -105,7 +107,7 @@
   }
 
   &__title {
-    width: size(723px);
+    width: calc(723px / 16px * 1rem);
     display: flex;
     flex-flow: wrap column;
     align-items: flex-start;
@@ -177,7 +179,7 @@
       justify-content: center;
       flex-flow: wrap row;
       background-color: $highlight;
-      border-radius: size(154px);
+      border-radius: calc(154px / 16px * 1rem);
       position: relative;
 
       @include adaptive-value("min-height", 62, 48.71, 0, 1920, 1440);
@@ -302,7 +304,9 @@
       z-index: 1;
 
       @include adaptive-value("border-radius", 8.6, 6.4, 0, 1920, 1440);
-      box-shadow: rem(0) rem(26.38) rem(49.42) rem(0) rgba(0, 0, 0, 0.16);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(26.38, 16) + rem} #{math.div(49.42, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.16);
 
       @include adaptive-value("top", 431, 327, 0, 1920, 1440);
       @include adaptive-value("right", 796, 571, 0, 1920, 1440);
@@ -314,10 +318,14 @@
       z-index: 2;
 
       box-shadow:
-        rem(0) rem(0.79) rem(0.67) rem(0) rgba(0, 0, 0, 0.04),
-        rem(0) rem(1.79) rem(1.53) rem(0) rgba(0, 0, 0, 0.06),
-        rem(0) rem(3.12) rem(2.65) rem(0) rgba(0, 0, 0, 0.07),
-        rem(0) rem(47.05) rem(33.68) rem(0) rgba(0, 0, 0, 0.14);
+        #{math.div(0, 16) + rem} #{math.div(0.79, 16) + rem} #{math.div(0.67, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.04),
+        #{math.div(0, 16) + rem} #{math.div(1.79, 16) + rem} #{math.div(1.53, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.06),
+        #{math.div(0, 16) + rem} #{math.div(3.12, 16) + rem} #{math.div(2.65, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.07),
+        #{math.div(0, 16) + rem} #{math.div(47.05, 16) + rem} #{math.div(33.68, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.14);
 
       @include adaptive-value("border-radius", 29, 21.6, 0, 1920, 1440);
       @include adaptive-value("top", 86, 71, 0, 1920, 1440);
@@ -330,7 +338,9 @@
       z-index: 4;
 
       @include adaptive-value("border-radius", 31, 23, 0, 1920, 1440);
-      box-shadow: rem(0) rem(32.83) rem(33.68) rem(0) rgba(0, 0, 0, 0.12);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(32.83, 16) + rem} #{math.div(33.68, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.12);
 
       @include adaptive-value("top", 388, 296, 0, 1920, 1440);
       @include adaptive-value("right", 312, 210, 0, 1920, 1440);
@@ -379,7 +389,9 @@
       z-index: 2;
 
       @include adaptive-value("border-radius", 20, 14.8, 0, 1920, 1440);
-      box-shadow: rem(0) rem(7.43) rem(14.86) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 473, 352, 0, 1920, 1440);
       @include adaptive-value("right", 893, 646.5, 0, 1920, 1440);
@@ -391,7 +403,9 @@
       z-index: 2;
 
       @include adaptive-value("border-radius", 30, 30, 0, 1920, 1440);
-      box-shadow: rem(0) rem(7.43) rem(14.86) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 337, 251, 0, 1920, 1440);
       @include adaptive-value("right", 1000, 725, 0, 1920, 1440);
@@ -454,7 +468,9 @@
     &--banquet {
       z-index: 2;
 
-      box-shadow: rem(0) rem(7.43) rem(14.86) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 570, 424, 0, 1920, 1440);
       @include adaptive-value("right", 154, 96, 0, 1920, 1440);
@@ -465,7 +481,9 @@
     &--place-order {
       z-index: 2;
 
-      box-shadow: rem(0) rem(7.43) rem(14.86) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(7.43, 16) + rem} #{math.div(14.86, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 689, 513, 0, 1920, 1440);
       @include adaptive-value("right", 222, 147, 0, 1920, 1440);
@@ -478,7 +496,9 @@
   .banner__image-wrapper--building {
     @include vp-1439 {
       @include adaptive-value("border-radius", 6.4, 5.3, 0, 1439, 1280);
-      box-shadow: rem(0) rem(19.6) rem(36.73) rem(0) rgba(0, 0, 0, 0.16);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(19.6, 16) + rem} #{math.div(36.73, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.16);
     }
 
     @include vp-1439 {
@@ -490,7 +510,9 @@
 
     @include vp-1279 {
       @include adaptive-value("border-radius", 5.3, 3.3, 0, 1279, 768);
-      box-shadow: rem(0) rem(16.41) rem(30.75) rem(0) rgba(0, 0, 0, 0.16);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(16.41, 16) + rem} #{math.div(30.75, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.16);
     }
 
     @include vp-1279 {
@@ -504,10 +526,14 @@
   .banner__image-wrapper--iphone {
     @include vp-1439 {
       box-shadow:
-        rem(0) rem(0.66) rem(0.56) rem(0) rgba(0, 0, 0, 0.04),
-        rem(0) rem(1.5) rem(1.28) rem(0) rgba(0, 0, 0, 0.06),
-        rem(0) rem(2.61) rem(2.22) rem(0) rgba(0, 0, 0, 0.07),
-        rem(0) rem(39.4) rem(28.2) rem(0) rgba(0, 0, 0, 0.14);
+        #{math.div(0, 16) + rem} #{math.div(0.66, 16) + rem} #{math.div(0.56, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.04),
+        #{math.div(0, 16) + rem} #{math.div(1.5, 16) + rem} #{math.div(1.28, 16) + rem} #{math.div(0, 16) + rem}
+        rgba(0, 0, 0, 0.06),
+        #{math.div(0, 16) + rem} #{math.div(2.61, 16) + rem} #{math.div(2.22, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.07),
+        #{math.div(0, 16) + rem} #{math.div(39.4, 16) + rem} #{math.div(28.2, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.14);
 
       @include adaptive-value("border-radius", 21.6, 18, 0, 1439, 1280);
       @include adaptive-value("top", 71, 75, 0, 1439, 1280);
@@ -518,10 +544,14 @@
 
     @include vp-1279 {
       box-shadow:
-        rem(0) rem(0.44) rem(0.37) rem(0) rgba(0, 0, 0, 0.04),
-        rem(0) rem(0.99) rem(0.84) rem(0) rgba(0, 0, 0, 0.06),
-        rem(0) rem(1.72) rem(1.46) rem(0) rgba(0, 0, 0, 0.07),
-        rem(0) rem(25.95) rem(18.58) rem(0) rgba(0, 0, 0, 0.14);
+        #{math.div(0, 16) + rem} #{math.div(0.44, 16) + rem} #{math.div(0.37, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.04),
+        #{math.div(0, 16) + rem} #{math.div(0.99, 16) + rem} #{math.div(0.84, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.06),
+        #{math.div(0, 16) + rem} #{math.div(1.72, 16) + rem} #{math.div(1.46, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.07),
+        #{math.div(0, 16) + rem} #{math.div(25.95, 16) + rem} #{math.div(18.58, 16) + rem} #{math.div(0, 16) +
+        rem} rgba(0, 0, 0, 0.14);
 
       @include adaptive-value("border-radius", 18, 12, 0, 1279, 768);
       @include adaptive-value("top", 75, 66, 0, 1279, 768);
@@ -534,7 +564,9 @@
   .banner__image-wrapper--number {
     @include vp-1439 {
       @include adaptive-value("border-radius", 23, 19.5, 0, 1439, 1280);
-      box-shadow: rem(0) rem(32.83) rem(33.68) rem(0) rgba(0, 0, 0, 0.12);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(32.83, 16) + rem} #{math.div(33.68, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.12);
 
       @include adaptive-value("top", 296, 262.6, 0, 1439, 1280);
       @include adaptive-value("right", 212, 182, 0, 1439, 1280);
@@ -544,7 +576,9 @@
 
     @include vp-1279 {
       @include adaptive-value("border-radius", 19.5, 12, 0, 1279, 768);
-      box-shadow: rem(0) rem(17.03) rem(17.47) rem(0) rgba(0, 0, 0, 0.12);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(17.03, 16) + rem} #{math.div(17.47, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.12);
 
       @include adaptive-value("top", 262.6, 229, 0, 1279, 768);
       @include adaptive-value("right", 182, 56, 0, 1279, 768);
@@ -556,7 +590,9 @@
   .banner__image-wrapper--chair {
     @include vp-1439 {
       @include adaptive-value("border-radius", 14.8, 13.3, 0, 1439, 1280);
-      box-shadow: rem(0) rem(6.67) rem(13.33) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 352, 313, 0, 1439, 1280);
       @include adaptive-value("right", 646.5, 554, 0, 1439, 1280);
@@ -571,7 +607,9 @@
 
   .banner__image-wrapper--catalog {
     @include vp-1439 {
-      box-shadow: rem(0) rem(6.67) rem(13.33) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("border-radius", 30, 25, 0, 1439, 1280);
       @include adaptive-value("top", 251, 222, 0, 1439, 1280);
@@ -587,7 +625,9 @@
 
   .banner__image-wrapper--banquet {
     @include vp-1439 {
-      box-shadow: rem(0) rem(6.67) rem(13.33) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 424, 377, 0, 1439, 1280);
       @include adaptive-value("right", 96, 61, 0, 1439, 1280);
@@ -602,7 +642,9 @@
 
   .banner__image-wrapper--place-order {
     @include vp-1439 {
-      box-shadow: rem(0) rem(6.67) rem(13.33) rem(0) rgba(0, 0, 0, 0.05);
+      box-shadow:
+        #{math.div(0, 16) + rem} #{math.div(6.67, 16) + rem} #{math.div(13.33, 16) + rem}
+        #{math.div(0, 16) + rem} rgba(0, 0, 0, 0.05);
 
       @include adaptive-value("top", 513, 457, 0, 1439, 1280);
       @include adaptive-value("right", 147, 107, 0, 1439, 1280);
@@ -683,7 +725,7 @@
     &.swiper-horizontal > .banner__pagination.swiper-pagination-bullets,
     > .banner__pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
       bottom: unset;
-      left: size(36px);
+      left: calc(36px / 16px * 1rem);
       top: auto;
       display: flex;
       width: auto;
@@ -703,8 +745,8 @@
     }
 
     .swiper-pagination-bullet {
-      width: size(10px);
-      height: size(10px);
+      width: calc(10px / 16px * 1rem);
+      height: calc(10px / 16px * 1rem);
       border-radius: 50%;
       background-color: rgba($black, 0.2);
       opacity: 1;
@@ -734,8 +776,8 @@
       }
 
       &:focus-visible {
-        outline: size(2px) solid $black;
-        outline-offset: size(2px);
+        outline: calc(2px / 16px * 1rem) solid $black;
+        outline-offset: calc(2px / 16px * 1rem);
         background-color: $black;
       }
     }
@@ -761,7 +803,7 @@
     @media (max-width: $vp-768) {
       left: 50%;
       transform: translateX(-50%);
-      gap: size(5px);
+      gap: calc(5px / 16px * 1rem);
     }
 
     @include vp-767 {

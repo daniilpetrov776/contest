@@ -34,9 +34,9 @@
   .footer__socials {
     flex-flow: wrap row;
     justify-content: flex-start;
-    max-width: size(300px);
+    max-width: calc(300px / 16px * 1rem);
     grid-column: 1 / 2;
-    gap: size(5px);
+    gap: calc(5px / 16px * 1rem);
 
     @include adaptive-value("margin-top", 111, 85, 0, 1920, 1440);
 
@@ -45,8 +45,8 @@
     }
 
     @include vp-1279 {
-      max-width: size(207px);
-      gap: size(5px);
+      max-width: calc(207px / 16px * 1rem);
+      gap: calc(5px / 16px * 1rem);
 
       @include adaptive-value("margin-top", 114, 52, 0, 1279, 768);
     }
@@ -63,7 +63,7 @@
     min-width: 0;
     max-width: 100%;
     width: 100%;
-    grid-template-columns: minmax(0, 0.55fr) minmax(0, size(409px)) minmax(0, size(188px));
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, calc(409px / 16px * 1rem)) minmax(0, calc(188px / 16px * 1rem));
     position: relative;
 
     &::before {
@@ -73,27 +73,27 @@
       top: 0;
       background-color: #e4e4e4;
       width: 100%;
-      height: size(1px);
+      height: calc(1px / 16px * 1rem);
       transform: translateX(-50%);
       z-index: 1;
     }
 
     @media (max-width: $vp-1440) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, size(462px)) minmax(0, size(188px));
+      grid-template-columns: minmax(0, 1fr) minmax(0, calc(462px / 16px * 1rem)) minmax(0, calc(188px / 16px * 1rem));
     }
 
     @include adaptive-value("padding-top", 51, 51, 0, 1920, 1440);
 
     @include vp-1439 {
-      grid-template-columns: minmax(0, 1fr) minmax(0, size(373px)) minmax(0, size(154px));
-      column-gap: size(63px);
+      grid-template-columns: minmax(0, 1fr) minmax(0, calc(373px / 16px * 1rem)) minmax(0, calc(154px / 16px * 1rem));
+      column-gap: calc(63px / 16px * 1rem);
 
       @include adaptive-value("padding-top", 50, 31, 0, 1439, 1280);
     }
 
     @include vp-1279 {
       @include adaptive-value("padding-top", 31, 30, 0, 1279, 768);
-      grid-template-columns: minmax(0, size(207px)) minmax(0, size(344px));
+      grid-template-columns: minmax(0, calc(207px / 16px * 1rem)) minmax(0, calc(344px / 16px * 1rem));
     }
 
     @include vp-767 {
@@ -127,7 +127,7 @@
 
     @include vp-1279 {
       grid-column: 1 / 2;
-      margin: 0 0 size(20px);
+      margin: 0 0 calc(20px / 16px * 1rem);
     }
 
     @include vp-767 {
@@ -163,13 +163,13 @@
   &__button {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    max-width: size(287px);
+    max-width: calc(287px / 16px * 1rem);
     position: relative;
 
     @include adaptive-value("max-width", 287, 250, 0, 1920, 1440);
 
     @include vp-1439 {
-      max-width: size(230px);
+      max-width: calc(230px / 16px * 1rem);
 
       @include adaptive-value("top", 0, 20, 0, 1439, 1280);
     }
@@ -243,7 +243,7 @@
 
     @include vp-767 {
       display: flex;
-      gap: size(15px);
+      gap: calc(15px / 16px * 1rem);
       flex-flow: wrap column;
     }
   }
@@ -253,7 +253,7 @@
     flex-flow: wrap column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: size(5px);
+    gap: calc(5px / 16px * 1rem);
 
     &:last-child {
       letter-spacing: -0.01em;
@@ -274,7 +274,7 @@
     font-weight: 500;
     letter-spacing: -0.01em;
     text-decoration: underline;
-    text-underline-offset: size(5px);
+    text-underline-offset: calc(5px / 16px * 1rem);
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -306,8 +306,8 @@
     }
 
     &--static {
-      font-size: size(24px);
-      line-height: size(24px) * 1.2;
+      font-size: calc(24px / 16px * 1rem);
+      line-height: calc(calc(24px / 16px * 1rem) * 1.2);
       letter-spacing: -0.01em;
     }
   }
@@ -385,7 +385,7 @@
     flex-flow: wrap column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: size(5px);
+    gap: calc(5px / 16px * 1rem);
 
     @include adaptive-value("margin-top", 25, 21, 0, 1920, 1440);
 
@@ -410,14 +410,14 @@
       bottom: -2px;
       left: 0;
       width: 0;
-      height: size(1px);
+      height: calc(1px / 16px * 1rem);
       background-image:
         repeating-linear-gradient(
           to right,
           #000000 0,
-          #000000 size(4px),
-          transparent size(4px),
-          transparent size(8px)
+          #000000 calc(4px / 16px * 1rem),
+          transparent calc(4px / 16px * 1rem),
+          transparent calc(8px / 16px * 1rem)
         );
       transition: width 0.5s $smooth;
     }
@@ -439,7 +439,7 @@
     }
 
     @include vp-767 {
-      top: size(-11px);
+      top: calc(-11px / 16px * 1rem);
     }
   }
 
@@ -498,8 +498,8 @@
 
     @include vp-767 {
       position: relative;
-      top: size(-18px);
-      left: size(-2px);
+      top: calc(-18px / 16px * 1rem);
+      left: calc(-2px / 16px * 1rem);
 
       @include adaptive-value("font-size", 46, 50, 0, 767, 375);
       @include adaptive-value("line-height", 46 * 1.2, 50 * 1.2, 0, 767, 375);

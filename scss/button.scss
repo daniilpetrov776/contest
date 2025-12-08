@@ -1,10 +1,12 @@
+@use "sass:math";
+
 .button {
-  min-height: size(69px);
+  min-height: calc(69px / 16px * 1rem);
   background-color: $black;
   color: $white;
   font-weight: 600;
   font-family: "TT Runs", "Arial", sans-serif;
-  padding: size(22px);
+  padding: calc(22px / 16px * 1rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,29 +25,29 @@
   @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
   @include adaptive-value("border-radius", 20, 15, 0, 1920, 1440);
   @include adaptive-value("min-height", 69, 61, 0, 1920, 1440);
-  box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0);
+  box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0);
 
   @include hover {
     background-color: $white;
     color: $black;
-    border-radius: size(40px);
+    border-radius: calc(40px / 16px * 1rem);
 
-    box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0.04), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0.05);
+    box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0.04), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0.05);
   }
 
   &:focus-visible {
     background-color: $white;
     color: $black;
-    border-radius: size(40px);
+    border-radius: calc(40px / 16px * 1rem);
 
-    box-shadow: rem(0) rem(7) rem(18) rem(-15) rgba(14, 14, 14, 0.04), rem(0) rem(20) rem(20) rem(0) rgba(14, 14, 14, 0.05);
+    box-shadow: #{math.div(0, 16) + rem} #{math.div(7, 16) + rem} #{math.div(18, 16) + rem} #{math.div(-15, 16) + rem} rgba(14, 14, 14, 0.04), #{math.div(0, 16) + rem} #{math.div(20, 16) + rem} #{math.div(20, 16) + rem} #{math.div(0, 16) + rem} rgba(14, 14, 14, 0.05);
   }
 
   @include vp-1439 {
-    padding: size(16px);
+    padding: calc(16px / 16px * 1rem);
 
     &:focus-visible {
-      border-radius: size(30px);
+      border-radius: calc(30px / 16px * 1rem);
     }
 
     @include adaptive-value("font-size", 14, 14, 0, 1439, 1280);
@@ -54,13 +56,13 @@
     @include adaptive-value("min-height", 61, 55, 0, 1439, 1280);
 
     @include hover {
-      border-radius: size(30px);
+      border-radius: calc(30px / 16px * 1rem);
     }
   }
 
   @include vp-1279 {
     &:focus-visible {
-      border-radius: size(25px);
+      border-radius: calc(25px / 16px * 1rem);
     }
 
     @include adaptive-value("font-size", 14, 13, 0, 1279, 768);
@@ -68,7 +70,7 @@
     @include adaptive-value("min-height", 55, 48, 0, 1279, 768);
 
     @include hover {
-      border-radius: size(25px);
+      border-radius: calc(25px / 16px * 1rem);
     }
   }
 

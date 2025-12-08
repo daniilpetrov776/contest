@@ -1,21 +1,21 @@
 .cards {
-  padding: rem(60) 0;
+  padding: #{math.div(60, 16) + rem} 0;
 
   &__title {
-    font-size: rem(36);
+    font-size: #{math.div(36, 16) + rem};
     font-weight: 700;
-    margin-bottom: rem(40);
+    margin-bottom: #{math.div(40, 16) + rem};
     text-align: center;
   }
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(rem(300), 1fr));
-    gap: rem(30);
+    grid-template-columns: repeat(auto-fill, minmax(#{math.div(300, 16) + rem}, 1fr));
+    gap: #{math.div(30, 16) + rem};
 
     @media (max-width: $mobile) {
       grid-template-columns: 1fr;
-      gap: rem(20);
+      gap: #{math.div(20, 16) + rem};
     }
   }
 }
@@ -24,17 +24,17 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border-radius: rem(12);
+  border-radius: #{math.div(12, 16) + rem};
   overflow: hidden;
-  box-shadow: 0 rem(4) rem(12) rgba(0, 0, 0, 0.1);
+  box-shadow: 0 #{math.div(4, 16) + rem} #{math.div(12, 16) + rem} rgba(0, 0, 0, 0.1);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 
   @media (any-hover: hover) {
     &:hover {
-      transform: translateY(rem(-5));
-      box-shadow: 0 rem(8) rem(20) rgba(0, 0, 0, 0.15);
+      transform: translateY(#{math.div(-5, 16) + rem});
+      box-shadow: 0 #{math.div(8, 16) + rem} #{math.div(20, 16) + rem} rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -58,20 +58,20 @@
   &__content {
     display: flex;
     flex-direction: column;
-    padding: rem(20);
+    padding: #{math.div(20, 16) + rem};
     flex: 1 1 auto;
-    gap: rem(12);
+    gap: #{math.div(12, 16) + rem};
   }
 
   &__title {
-    font-size: rem(20);
+    font-size: #{math.div(20, 16) + rem};
     font-weight: 600;
     margin: 0;
     color: $mainColor;
   }
 
   &__description {
-    font-size: rem(14);
+    font-size: #{math.div(14, 16) + rem};
     line-height: 1.5;
     color: #666666;
     margin: 0;
@@ -81,37 +81,37 @@
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: rem(8);
+    gap: #{math.div(8, 16) + rem};
   }
 
   &__tag {
     display: inline-block;
-    padding: rem(4) rem(12);
-    font-size: rem(12);
+    padding: #{math.div(4, 16) + rem} #{math.div(12, 16) + rem};
+    font-size: #{math.div(12, 16) + rem};
     background: #e8f4f8;
     color: #2c5f7d;
-    border-radius: rem(4);
+    border-radius: #{math.div(4, 16) + rem};
     font-weight: 500;
   }
 
   &__price {
-    font-size: rem(24);
+    font-size: #{math.div(24, 16) + rem};
     font-weight: 700;
     color: #4a90e2;
-    margin-top: rem(8);
+    margin-top: #{math.div(8, 16) + rem};
   }
 
   &__link {
     display: inline-block;
-    padding: rem(10) rem(20);
+    padding: #{math.div(10, 16) + rem} #{math.div(20, 16) + rem};
     background: #4a90e2;
     color: #ffffff;
     text-decoration: none;
-    border-radius: rem(6);
+    border-radius: #{math.div(6, 16) + rem};
     text-align: center;
     font-weight: 500;
     transition: background 0.3s ease;
-    margin-top: rem(8);
+    margin-top: #{math.div(8, 16) + rem};
 
     @media (any-hover: hover) {
       &:hover {
