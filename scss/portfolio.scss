@@ -19,7 +19,7 @@
 .portfolio__container {
   display: grid;
 
-  @include adaptive-value("gap", 98, 79, 0, 1920, 1440);
+  @include adaptive-value("gap", 98, 80, 0, 1920, 1440);
 
   @include vp-1439 {
     @include adaptive-value("gap", 80, 55, 0, 1439, 1280);
@@ -57,7 +57,8 @@
 
   @include vp-767 {
     @include adaptive-value("gap", 24, 90, 0, 767, 375);
-    @include adaptive-value("padding-top", 12, 23, 0, 767, 375);
+    @include adaptive-value("padding-top", 12, 30, 0, 767, 375);
+    flex-flow: wrap column;
   }
 
   &::before {
@@ -479,6 +480,34 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.portfolio__image-picture--smaller {
+  display: block;
+
+  @media (max-width: $vp-1280) {
+    display: none;
+  }
+}
+
+.portfolio__image-picture--larger {
+  display: none;
+
+  @media (max-width: $vp-1280) {
+    display: block;
+  }
+
+  @media (max-width: $vp-375) {
+    display: none;
+  }
+}
+
+.portfolio__image-picture--smallest {
+  display: none;
+
+  @media (max-width: $vp-375) {
+    display: block;
+  }
 }
 
 .portfolio__card-title {

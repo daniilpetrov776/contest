@@ -18,6 +18,18 @@ export const portfolioContext = {
             'jpeg': '/images/portfolio/sibur-smaller.png',
             'jpeg@2x': '/images/portfolio/sibur-smaller@2x.png',
           },
+          imageLarger: {
+            'webp': '/images/portfolio/sibur-larger-logo.webp',
+            'webp@2x': '/images/portfolio/sibur-larger-logo@2x.webp',
+            'jpeg': '/images/portfolio/sibur-larger-logo.png',
+            'jpeg@2x': '/images/portfolio/sibur-larger-logo@2x.png',
+          },
+          imageSmallest: {
+            'webp': '/images/portfolio/sibur-smallest.webp',
+            'webp@2x': '/images/portfolio/sibur-smallest@2x.webp',
+            'jpeg': '/images/portfolio/sibur-smallest.png',
+            'jpeg@2x': '/images/portfolio/sibur-smallest@2x.png',
+          },
         },
         {
           id: 'mr-group',

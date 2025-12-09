@@ -107,6 +107,8 @@
   @include adaptive-value("gap", 40, 34, 0, 1920, 1440);
 
   @include vp-1439 {
+    left: calc(-2px / 16px * 1rem);
+
     @include adaptive-value("gap", 32, 26, 0, 1439, 1280);
   }
 

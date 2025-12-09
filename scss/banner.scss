@@ -98,11 +98,14 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  position: relative;
+  top: calc(2px / 16px * 1rem);
 
   @include adaptive-value("font-size", 16, 14, 0, 1920, 1440);
   @include adaptive-value("line-height", 16 * 1.2, 14 * 1.2, 0, 1920, 1440);
 
   @include vp-1439 {
+    @include adaptive-value("top", 2, 0, 0, 1439, 1280);
     @include adaptive-value("font-size", 14, 13, 0, 1439, 768);
     @include adaptive-value("line-height", 14 * 1.2, 13 * 1.2, 0, 1439, 768);
   }

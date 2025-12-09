@@ -40,7 +40,13 @@
           <li class="portfolio__item swiper-slide">
             <a class="portfolio__card" href="{{href}}">
               <div class="portfolio__image" aria-hidden="true">
-                {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture"}} {{/if}}
+                {{#if imageLarger}}
+                  {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture portfolio__image-picture--smaller"}} {{/if}}
+                  {{#if imageLarger}} {{pictureRetina image=imageLarger alt=title class="portfolio__image-picture portfolio__image-picture--larger"}} {{/if}}
+                  {{#if imageSmallest}} {{pictureRetina image=imageSmallest alt=title class="portfolio__image-picture portfolio__image-picture--smallest"}} {{/if}}
+                {{else}}
+                  {{#if image}} {{pictureRetina image=image alt=title class="portfolio__image-picture"}} {{/if}}
+                {{/if}}
               </div>
               <div class="portfolio__content">
                 <h3 class="portfolio__card-title">{{title}}</h3>
