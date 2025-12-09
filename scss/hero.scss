@@ -189,7 +189,7 @@
   max-height: 120%;
   position: absolute;
   left: 50%;
-  right: 50%;
+  right: auto;
   z-index: 2;
   transform: translateX(-50%);
   overflow: hidden;
@@ -216,12 +216,33 @@
     @include adaptive-value("border-radius", 15, 12, 0, 1279, 768);
   }
 
-  @include vp-767 {
-    @include adaptive-value("min-width", 416, 225, 0, 767, 375);
-    @include adaptive-value("min-height", 226, 135, 0, 767, 375);
-    @include adaptive-value("max-height", 442, 270, 0, 767, 375);
-    @include adaptive-value("top", 240, 178, 0, 767, 375);
-    @include adaptive-value("border-radius", 12, 10, 0, 767, 375);
+  // Стили для разрешения 768px и ниже
+  @media (max-width: 768px) {
+    @include adaptive-value("min-width", 416, 225, 0, 768, 375);
+    @include adaptive-value("border-radius", 12, 10, 0, 768, 375);
+
+    // Убираем min-height для мобильных, чтобы не конфликтовал с динамической высотой
+    min-height: unset;
+
+    // Видео всегда центрировано
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+
+    // Используем CSS переменную для динамического изменения размеров и позиции при скролле
+    top: var(--video-top, 240px);
+    height: var(--video-height, 226px);
+    width: var(--video-width, auto);
+    max-width: 100%;
+
+    // Начальные значения для разных разрешений
+    // Используем более специфичный селектор для гарантии применения
+    @media (max-width: 375px) {
+      & {
+        top: var(--video-top, 178px);
+        height: var(--video-height, 135px);
+      }
+    }
   }
 
   &:focus-visible {

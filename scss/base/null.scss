@@ -8,6 +8,12 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  font-family: $fontFamily;
+  line-height: 1;
+  color: $mainColor;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
@@ -20,15 +26,6 @@ body {
   @include vp-1919 {
     font-size: $fz-default;
   }
-}
-
-body {
-  font-family: $fontFamily;
-  line-height: 1;
-  color: $mainColor;
-  text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .visually-hidden {
