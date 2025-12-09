@@ -1,8 +1,9 @@
 // Константы для размеров экрана
-// export const EXPANDABLE_MIN_WIDTH = 376;
 export const EXPANDABLE_MIN_WIDTH = 769;
 export const DESKTOP_MIN_WIDTH = 1280;
 export const TABLET_MIN_WIDTH = 768;
+export const MOBILE_MAX_WIDTH = 375;
+export const MOBILE_MAX_WIDTH_THRESHOLD = 375.5;
 
 // Константы для размеров видео
 export const DESKTOP_WIDTH_PX = 456;
@@ -36,3 +37,21 @@ export const ARIA_PRESSED_TRUE = 'true';
 
 // Константы для обработки событий
 export const RESIZE_DEBOUNCE_DELAY = 100;
+export const KEY_ENTER = 'Enter';
+export const KEY_SPACE = ' ';
+
+// Константы для мобильных размеров (375px)
+export const MOBILE_INITIAL_TOP = 178;
+export const MOBILE_INITIAL_HEIGHT = 135;
+export const MOBILE_FINAL_TOP = 120;
+export const MOBILE_FINAL_HEIGHT = 235;
+export const MOBILE_FINAL_WIDTH = 345;
+
+// Константы для планшетных размеров (768px)
+export const TABLET_INITIAL_TOP = 240;
+export const TABLET_INITIAL_HEIGHT = 226;
+export const TABLET_FINAL_TOP = 136;
+export const TABLET_FINAL_HEIGHT = 442;
+
+// Константы для анимации прогресса
+export const MOBILE_PROGRESS_STEPS = 200;

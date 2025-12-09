@@ -1,5 +1,3 @@
-import { gsap } from 'gsap';
-import { EASE_TYPE } from '../animation-constants.js';
 import {
   STEP_SIZE,
   ANIMATION_DURATION_NORMAL,
@@ -9,30 +7,30 @@ import {
   MAX_WIDTH,
   MAX_HEIGHT,
   TABLET_MIN_WIDTH,
+  MOBILE_MAX_WIDTH_THRESHOLD,
+  MOBILE_MAX_WIDTH,
+  MOBILE_INITIAL_TOP,
+  MOBILE_INITIAL_HEIGHT,
+  MOBILE_FINAL_TOP,
+  MOBILE_FINAL_HEIGHT,
+  MOBILE_FINAL_WIDTH,
+  MOBILE_WIDTH_PX,
+  TABLET_INITIAL_TOP,
+  TABLET_INITIAL_HEIGHT,
+  TABLET_FINAL_TOP,
+  TABLET_FINAL_HEIGHT,
+  TABLET_WIDTH_PX,
+  MOBILE_PROGRESS_STEPS,
 } from './constants.js';
-import { checkIsDesktop, getMinSizes } from './video-utils.js';
+import {
+  checkIsDesktop,
+  getMinSizes,
+  getViewportWidth,
+  checkIsMobileOrTablet,
+  interpolateValue,
+  createVideoAnimation,
+} from './video-utils.js';
 
-/**
- * Получает правильную ширину viewport
- * В адаптивном режиме браузера window.innerWidth может возвращать реальную ширину окна
- * @returns {number}
- */
-const getViewportWidth = () => {
-  // Используем visualViewport если доступен (более точный для эмуляторов)
-  if (window.visualViewport && window.visualViewport.width) {
-    return window.visualViewport.width;
-  }
-  // Иначе используем clientWidth, который более точно отражает размер viewport
-  return document.documentElement.clientWidth || window.innerWidth;
-};
-
-/**
- * Проверяет, является ли разрешение 768px и ниже
- * @returns {boolean}
- */
-const checkIsMobileOrTablet = () => {
-  return getViewportWidth() <= TABLET_MIN_WIDTH;
-};
 
 /**
  * Вычисляет начальное и конечное значение top и height для мобильных/планшетов
@@ -43,38 +41,54 @@ export const getMobileTopValues = () => {
 
   // Для 375px и меньше используем значения для мобильных
   // Используем строгое сравнение с учетом возможных погрешностей
-  if (windowWidth <= 375.5) {
+  if (windowWidth <= MOBILE_MAX_WIDTH_THRESHOLD) {
     return {
-      initialTop: 178,
-      finalTop: 120,
-      initialHeight: 135,
-      finalHeight: 235,
-      initialWidth: 225,
-      finalWidth: 345,
+      initialTop: MOBILE_INITIAL_TOP,
+      finalTop: MOBILE_FINAL_TOP,
+      initialHeight: MOBILE_INITIAL_HEIGHT,
+      finalHeight: MOBILE_FINAL_HEIGHT,
+      initialWidth: MOBILE_WIDTH_PX,
+      finalWidth: MOBILE_FINAL_WIDTH,
     };
-  } else if (windowWidth <= 768) {
-    const widthFrom = 768;
-    const widthTo = 375;
+  } else if (windowWidth <= TABLET_MIN_WIDTH) {
+    const widthFrom = TABLET_MIN_WIDTH;
+    const widthTo = MOBILE_MAX_WIDTH;
 
     // Интерполируем initialTop от 240px (768px) до 178px (375px)
-    const topStartSize = 240; // значение на 768px
-    const topMinSize = 178; // значение на 375px
-    const initialTop = Math.round(topMinSize + (topStartSize - topMinSize) * (windowWidth - widthTo) / (widthFrom - widthTo));
+    const initialTop = interpolateValue(
+      TABLET_INITIAL_TOP,
+      MOBILE_INITIAL_TOP,
+      widthFrom,
+      widthTo,
+      windowWidth,
+    );
 
     // Интерполируем finalTop от 136px (768px) до 120px (375px)
-    const finalTopStartSize = 136;
-    const finalTopMinSize = 120;
-    const finalTop = Math.round(finalTopMinSize + (finalTopStartSize - finalTopMinSize) * (windowWidth - widthTo) / (widthFrom - widthTo));
+    const finalTop = interpolateValue(
+      TABLET_FINAL_TOP,
+      MOBILE_FINAL_TOP,
+      widthFrom,
+      widthTo,
+      windowWidth,
+    );
 
     // Интерполируем initialHeight от 226px (768px) до 135px (375px)
-    const heightStartSize = 226; // значение на 768px
-    const heightMinSize = 135; // значение на 375px
-    const initialHeight = Math.round(heightMinSize + (heightStartSize - heightMinSize) * (windowWidth - widthTo) / (widthFrom - widthTo));
+    const initialHeight = interpolateValue(
+      TABLET_INITIAL_HEIGHT,
+      MOBILE_INITIAL_HEIGHT,
+      widthFrom,
+      widthTo,
+      windowWidth,
+    );
 
     // Интерполируем finalHeight от 442px (768px) до 235px (375px)
-    const finalHeightStartSize = 442; // значение на 768px
-    const finalHeightMinSize = 235; // значение на 375px
-    const finalHeight = Math.round(finalHeightMinSize + (finalHeightStartSize - finalHeightMinSize) * (windowWidth - widthTo) / (widthFrom - widthTo));
+    const finalHeight = interpolateValue(
+      TABLET_FINAL_HEIGHT,
+      MOBILE_FINAL_HEIGHT,
+      widthFrom,
+      widthTo,
+      windowWidth,
+    );
 
     return {
       initialTop,
@@ -132,7 +146,7 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
 
         // Округляем progress до шагов для предотвращения частых перезапусков анимации
         // Используем 200 шагов для более плавной анимации
-        const progressStep = Math.floor(progress * 200) / 200;
+        const progressStep = Math.floor(progress * MOBILE_PROGRESS_STEPS) / MOBILE_PROGRESS_STEPS;
         const lastProgressStep = state.mobileProgressStep !== undefined ? state.mobileProgressStep : -1;
 
         // Запускаем анимацию только если прогресс изменился достаточно
@@ -160,7 +174,7 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
             // Для других разрешений интерполируем от min-width до 100% viewport
             // Получаем текущее min-width из computed styles для точности
             const computedStyle = window.getComputedStyle(heroVideo);
-            const minWidth = parseFloat(computedStyle.minWidth) || 416; // fallback для 768px
+            const minWidth = parseFloat(computedStyle.minWidth) || TABLET_WIDTH_PX; // fallback для 768px
             const viewportWidth = getViewportWidth();
 
             // Интерполируем от minWidth до viewportWidth (100%)
@@ -169,24 +183,17 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
             targetWidth = `${targetWidthValue}px`;
           }
 
-          if (state.currentAnimation) {
-            state.currentAnimation.kill();
-          }
-
-          const animationProps = {
-            '--video-top': `${targetTop}px`,
-            '--video-height': `${targetHeight}px`,
-            '--video-width': targetWidth,
-            'duration': ANIMATION_DURATION_NORMAL,
-            'ease': EASE_TYPE,
-            'onComplete': () => {
-              setState({ currentAnimation: null });
+          createVideoAnimation(
+            heroVideo,
+            {
+              '--video-top': `${targetTop}px`,
+              '--video-height': `${targetHeight}px`,
+              '--video-width': targetWidth,
             },
-          };
-
-          const newAnimation = gsap.to(heroVideo, animationProps);
-
-          setState({ currentAnimation: newAnimation });
+            ANIMATION_DURATION_NORMAL,
+            setState,
+            state.currentAnimation,
+          );
         }
       }
 
@@ -224,21 +231,16 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
       targetHeight = Math.max(targetHeight, currentMinSizes.height);
       targetHeight = Math.min(targetHeight, MAX_HEIGHT);
 
-      if (state.currentAnimation) {
-        state.currentAnimation.kill();
-      }
-
-      const newAnimation = gsap.to(heroVideo, {
-        '--video-width': `${targetWidth}%`,
-        '--video-height': `${targetHeight}%`,
-        'duration': ANIMATION_DURATION_NORMAL,
-        'ease': EASE_TYPE,
-        'onComplete': () => {
-          setState({ currentAnimation: null });
+      createVideoAnimation(
+        heroVideo,
+        {
+          '--video-width': `${targetWidth}%`,
+          '--video-height': `${targetHeight}%`,
         },
-      });
-
-      setState({ currentAnimation: newAnimation });
+        ANIMATION_DURATION_NORMAL,
+        setState,
+        state.currentAnimation,
+      );
     }
 
     lastScrollY = currentScrollY;

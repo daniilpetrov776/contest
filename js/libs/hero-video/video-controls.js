@@ -1,5 +1,3 @@
-import { gsap } from 'gsap';
-import { EASE_TYPE } from '../animation-constants.js';
 import {
   VIDEO_READY_STATE_MIN,
   VIDEO_CURRENT_TIME_START,
@@ -10,71 +8,23 @@ import {
   ANIMATION_DURATION_FAST,
   MAX_WIDTH,
   MAX_HEIGHT,
-  TABLET_MIN_WIDTH,
+  MOBILE_MAX_WIDTH_THRESHOLD,
+  MOBILE_WIDTH_PX,
+  TABLET_WIDTH_PX,
+  MOBILE_FINAL_TOP,
+  KEY_ENTER,
+  KEY_SPACE,
 } from './constants.js';
-import { checkIsDesktop, calculateSizesFromScroll } from './video-utils.js';
+import {
+  checkIsDesktop,
+  calculateSizesFromScroll,
+  getViewportWidth,
+  getInitialMobileTop,
+  getInitialMobileHeight,
+  createVideoAnimation,
+} from './video-utils.js';
 import { getMobileTopValues } from './scroll-handler.js';
 
-/**
- * Получает правильную ширину viewport
- * В адаптивном режиме браузера window.innerWidth может возвращать реальную ширину окна
- * @returns {number}
- */
-const getViewportWidth = () => {
-  // Используем visualViewport если доступен (более точный для эмуляторов)
-  if (window.visualViewport && window.visualViewport.width) {
-    return window.visualViewport.width;
-  }
-  // Иначе используем clientWidth, который более точно отражает размер viewport
-  return document.documentElement.clientWidth || window.innerWidth;
-};
-
-/**
- * Получает начальное значение top для мобильных/планшетов
- * @returns {number|null}
- */
-const getInitialMobileTop = () => {
-  const windowWidth = getViewportWidth();
-
-  // Для 375px и меньше используем 178px
-  if (windowWidth <= 375.5) {
-    return 178;
-  } else if (windowWidth <= TABLET_MIN_WIDTH) {
-    // Интерполяция от 240px (768px) до 178px (375px)
-    const startSize = 240;
-    const minSize = 178;
-    const widthFrom = 768;
-    const widthTo = 375;
-
-    const value = minSize + (startSize - minSize) * (windowWidth - widthTo) / (widthFrom - widthTo);
-    return Math.round(value);
-  }
-
-  return null;
-};
-
-/**
- * Получает начальное значение height для мобильных/планшетов
- * @returns {number|null}
- */
-const getInitialMobileHeight = () => {
-  const windowWidth = getViewportWidth();
-
-  if (windowWidth <= 375.5) {
-    return 135;
-  } else if (windowWidth <= TABLET_MIN_WIDTH) {
-    // Интерполируем от 226px (768px) до 135px (375px)
-    const startSize = 226;
-    const minSize = 135;
-    const widthFrom = 768;
-    const widthTo = 375;
-
-    const value = minSize + (startSize - minSize) * (windowWidth - widthTo) / (widthFrom - widthTo);
-    return Math.round(value);
-  }
-
-  return null;
-};
 
 /**
  * Получает финальные размеры видео в пикселях для мобильных/планшетов
@@ -139,7 +89,18 @@ export function initVideoAccessibility(heroVideo, mutedVideo, soundVideo, isExpa
 }
 
 /**
- * Воспроизводит видео со звуком
+ * Безопасно воспроизводит видео с централизованной обработкой ошибок
+ * @param {HTMLVideoElement} video - Видео элемент для воспроизведения
+ */
+function safePlayVideo(video) {
+  video.play().catch(() => {
+    // Игнорируем ошибки воспроизведения видео
+  });
+}
+
+/**
+ * Воспроизводит видео со звуком с проверкой готовности
+ * Обрабатывает все случаи: загрузка, ожидание готовности, воспроизведение
  * @param {HTMLElement} soundVideo - Видео со звуком
  */
 function playSoundVideo(soundVideo) {
@@ -151,15 +112,11 @@ function playSoundVideo(soundVideo) {
   // Используем requestAnimationFrame для гарантии, что pause() завершен
   requestAnimationFrame(() => {
     if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {
-      soundVideo.play().catch(() => {
-        // Игнорируем ошибки воспроизведения видео
-      });
+      safePlayVideo(soundVideo);
     } else {
       // Ждем загрузки данных перед воспроизведением
       soundVideo.addEventListener('loadeddata', () => {
-        soundVideo.play().catch(() => {
-          // Игнорируем ошибки воспроизведения видео
-        });
+        safePlayVideo(soundVideo);
       }, { once: true });
     }
   });
@@ -176,7 +133,7 @@ function playSoundVideo(soundVideo) {
  */
 export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, setState) {
   // Предотвращаем стандартное поведение для клавиатуры
-  if (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' ')) {
+  if (e.type === 'keydown' && (e.key === KEY_ENTER || e.key === KEY_SPACE)) {
     e.preventDefault();
   }
 
@@ -200,24 +157,19 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
       if (initialTop !== null && initialHeight !== null) {
         // Получаем начальную ширину из min-width
         const computedStyle = window.getComputedStyle(heroVideo);
-        const minWidth = parseFloat(computedStyle.minWidth) || (windowWidth <= 375.5 ? 225 : 416);
+        const minWidth = parseFloat(computedStyle.minWidth) || (windowWidth <= MOBILE_MAX_WIDTH_THRESHOLD ? MOBILE_WIDTH_PX : TABLET_WIDTH_PX);
 
-        if (state.currentAnimation) {
-          state.currentAnimation.kill();
-        }
-
-        const newAnimation = gsap.to(heroVideo, {
-          '--video-top': `${initialTop}px`,
-          '--video-height': `${initialHeight}px`,
-          '--video-width': `${minWidth}px`,
-          'duration': ANIMATION_DURATION_FAST,
-          'ease': EASE_TYPE,
-          'onComplete': () => {
-            setState({ currentAnimation: null });
+        createVideoAnimation(
+          heroVideo,
+          {
+            '--video-top': `${initialTop}px`,
+            '--video-height': `${initialHeight}px`,
+            '--video-width': `${minWidth}px`,
           },
-        });
-
-        setState({ currentAnimation: newAnimation });
+          ANIMATION_DURATION_FAST,
+          setState,
+          state.currentAnimation,
+        );
       }
     } else {
       // Расширяем до финальных размеров
@@ -227,24 +179,19 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
         setState({ isExpanded: true });
 
         const topValues = getMobileTopValues();
-        const finalTop = topValues ? topValues.finalTop : 120;
+        const finalTop = topValues ? topValues.finalTop : MOBILE_FINAL_TOP;
 
-        if (state.currentAnimation) {
-          state.currentAnimation.kill();
-        }
-
-        const newAnimation = gsap.to(heroVideo, {
-          '--video-top': `${finalTop}px`,
-          '--video-height': `${finalSizes.height}px`,
-          '--video-width': `${finalSizes.width}px`,
-          'duration': ANIMATION_DURATION_FAST,
-          'ease': EASE_TYPE,
-          'onComplete': () => {
-            setState({ currentAnimation: null });
+        createVideoAnimation(
+          heroVideo,
+          {
+            '--video-top': `${finalTop}px`,
+            '--video-height': `${finalSizes.height}px`,
+            '--video-width': `${finalSizes.width}px`,
           },
-        });
-
-        setState({ currentAnimation: newAnimation });
+          ANIMATION_DURATION_FAST,
+          setState,
+          state.currentAnimation,
+        );
       }
     }
 
@@ -284,20 +231,8 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
           soundVideo.load();
         }
 
-        // Проверяем готовность перед воспроизведением
-        requestAnimationFrame(() => {
-          if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {
-            soundVideo.play().catch(() => {
-              // Игнорируем ошибки воспроизведения видео
-            });
-          } else {
-            soundVideo.addEventListener('loadeddata', () => {
-              soundVideo.play().catch(() => {
-                // Игнорируем ошибки воспроизведения видео
-              });
-            }, { once: true });
-          }
-        });
+        // Используем playSoundVideo для обработки всех случаев
+        playSoundVideo(soundVideo);
       }
     }
     updateAriaLabel(heroVideo, state.isExpanded, !state.isPlayingWithSound ? true : state.isPlayingWithSound);
@@ -311,9 +246,6 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
     heroVideo.setAttribute('aria-pressed', ARIA_PRESSED_FALSE);
     updateAriaLabel(heroVideo, false, state.isPlayingWithSound);
 
-    if (state.currentAnimation) {
-      state.currentAnimation.kill();
-    }
 
     // Возвращаем к размеру на основе текущего скролла
     const { targetWidth, targetHeight } = calculateSizesFromScroll(
@@ -321,26 +253,23 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
       window.innerHeight,
     );
 
-    const newAnimation = gsap.to(heroVideo, {
-      '--video-width': `${targetWidth}%`,
-      '--video-height': `${targetHeight}%`,
-      'duration': ANIMATION_DURATION_FAST,
-      'ease': EASE_TYPE,
-      'onComplete': () => {
-        setState({ currentAnimation: null });
+    createVideoAnimation(
+      heroVideo,
+      {
+        '--video-width': `${targetWidth}%`,
+        '--video-height': `${targetHeight}%`,
       },
-    });
-
-    setState({ currentAnimation: newAnimation });
+      ANIMATION_DURATION_FAST,
+      setState,
+      state.currentAnimation,
+    );
 
     // Если видео со звуком уже активно - ставим на паузу/возобновляем
     if (state.isPlayingWithSound) {
       if (!soundVideo.paused) {
         soundVideo.pause();
       } else {
-        soundVideo.play().catch(() => {
-          // Игнорируем ошибки воспроизведения видео
-        });
+        safePlayVideo(soundVideo);
       }
     }
     return;
@@ -351,21 +280,16 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
   heroVideo.setAttribute('aria-pressed', ARIA_PRESSED_TRUE);
   updateAriaLabel(heroVideo, true, state.isPlayingWithSound);
 
-  if (state.currentAnimation) {
-    state.currentAnimation.kill();
-  }
-
-  const newAnimation = gsap.to(heroVideo, {
-    '--video-width': `${MAX_WIDTH}%`,
-    '--video-height': `${MAX_HEIGHT}%`,
-    'duration': ANIMATION_DURATION_FAST,
-    'ease': EASE_TYPE,
-    'onComplete': () => {
-      setState({ currentAnimation: null });
+  createVideoAnimation(
+    heroVideo,
+    {
+      '--video-width': `${MAX_WIDTH}%`,
+      '--video-height': `${MAX_HEIGHT}%`,
     },
-  });
-
-  setState({ currentAnimation: newAnimation });
+    ANIMATION_DURATION_FAST,
+    setState,
+    state.currentAnimation,
+  );
 
   // Если видео со звуком еще не активно - переключаем на него
   if (!state.isPlayingWithSound) {
@@ -379,17 +303,13 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
     soundVideo.style.display = 'block';
     soundVideo.currentTime = VIDEO_CURRENT_TIME_START;
     soundVideo.muted = false;
-    soundVideo.play().catch(() => {
-      // Игнорируем ошибки воспроизведения видео
-    });
+    safePlayVideo(soundVideo);
   } else {
     // Если уже активно - ставим на паузу/возобновляем
     if (!soundVideo.paused) {
       soundVideo.pause();
     } else {
-      soundVideo.play().catch(() => {
-        // Игнорируем ошибки воспроизведения видео
-      });
+      safePlayVideo(soundVideo);
     }
   }
 }
