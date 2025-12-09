@@ -20,11 +20,6 @@ export default [
       globals: {
         ...globals.browser,
       },
-    },
-    rules: {
-      'no-nested-ternary': 'off',
-      'brace-style': 'off',
-      'no-shadow': 'off',
-    },
+    }
   },
 ];

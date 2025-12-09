@@ -210,9 +210,8 @@ export const imageHelpers = {
       // Если это объект с hash (как в других хелперах), извлекаем parts из hash
       if (parts.hash && parts.hash.parts) {
         parts = parts.hash.parts;
-      }
-      // Если это объект с свойством parts
-      else if (parts.parts) {
+      } else if (parts.parts) {
+        // Если это объект с свойством parts
         parts = parts.parts;
       }
     }
@@ -384,7 +383,12 @@ export const imageHelpers = {
             ]
               .filter(Boolean)
               .join(' ');
-            const textHtml = textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text);
+            let textHtml = text;
+            if (textAttrs) {
+              textHtml = `<span ${textAttrs}>${text}</span>`;
+            } else if (textClass) {
+              textHtml = `<span class="${textClass}">${text}</span>`;
+            }
             // Убираем внешний span, оставляем элементы на одном уровне
             if (spriteBeforeText || spritePosition === 'before') {
               lineHtml += `${iconHtml} ${textHtml}`;
@@ -398,7 +402,13 @@ export const imageHelpers = {
             ]
               .filter(Boolean)
               .join(' ');
-            lineHtml += textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text);
+            let textHtml = text;
+            if (textAttrs) {
+              textHtml = `<span ${textAttrs}>${text}</span>`;
+            } else if (textClass) {
+              textHtml = `<span class="${textClass}">${text}</span>`;
+            }
+            lineHtml += textHtml;
           }
         } else if (part.text) {
           // Текст без спрайта
@@ -421,7 +431,13 @@ export const imageHelpers = {
             .filter(Boolean)
             .join(' ');
 
-          lineHtml += textAttrs ? `<span ${textAttrs}>${text}</span>` : (textClass ? `<span class="${textClass}">${text}</span>` : text);
+          let textHtml = text;
+          if (textAttrs) {
+            textHtml = `<span ${textAttrs}>${text}</span>`;
+          } else if (textClass) {
+            textHtml = `<span class="${textClass}">${text}</span>`;
+          }
+          lineHtml += textHtml;
         }
       });
 

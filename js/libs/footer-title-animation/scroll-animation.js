@@ -172,9 +172,8 @@ export function createScrollAnimation(element, params, options = {}) {
         // Если элемент виден, но мы анимируем исчезновение, переключаем на появление
         if (isVisible && !wasVisible) {
           startShowAnimation(supportsReverse ? !scrollingDown : false);
-        }
-        // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
-        else if (!isVisible && wasVisible) {
+        } else if (!isVisible && wasVisible) {
+          // Если элемент не виден, но мы анимируем появление, переключаем на исчезновение
           startHideAnimation();
         }
       });

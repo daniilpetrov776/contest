@@ -130,11 +130,11 @@ function initHeroVideo() {
 
   // Обработчик изменения размера окна для пересчета минимальных размеров
   createDebouncedResizeHandler(() => {
-    const isDesktop = checkIsDesktop();
-    const isMobileOrTablet = checkIsMobileOrTablet();
+    const isDesktopResize = checkIsDesktop();
+    const isMobileOrTabletResize = checkIsMobileOrTablet();
 
     // Обработка для десктопа
-    if (isDesktop) {
+    if (isDesktopResize) {
     // Если видео не увеличено, обновляем размер на основе текущего скролла
       if (!state.isExpanded) {
         const { targetWidth, targetHeight } = calculateSizesFromScroll(
@@ -156,7 +156,7 @@ function initHeroVideo() {
     }
 
     // Обработка для мобильных/планшетов - обновляем значения в пикселях
-    if (isMobileOrTablet) {
+    if (isMobileOrTabletResize) {
       if (state.isExpanded) {
         // Если видео расширено - обновляем финальные размеры в пикселях
         const topValues = getMobileTopValues();

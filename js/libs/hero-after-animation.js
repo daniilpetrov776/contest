@@ -86,12 +86,12 @@ function initHeroAfterAnimation() {
     // Получаем начальную высоту в процентах от контейнера
     const isTablet = window.innerWidth >= TABLET_MIN_WIDTH && window.innerWidth < TABLET_MAX_WIDTH;
     const initialHeightPx = isTablet ? INITIAL_HEIGHT_TABLET_PX : INITIAL_HEIGHT_DESKTOP_PX;
-    const initialHeightPercent = (initialHeightPx / heroHeight) * PERCENT_MULTIPLIER;
+    const calculatedHeightPercent = (initialHeightPx / heroHeight) * PERCENT_MULTIPLIER;
 
     const maxHeightPercent = MAX_HEIGHT_PERCENT;
 
     // Вычисляем диапазон от начальной высоты до максимальной в процентах
-    const heightRangePercent = maxHeightPercent - initialHeightPercent;
+    const heightRangePercent = maxHeightPercent - calculatedHeightPercent;
 
     // Вычисляем новый шаг на основе позиции скролла
     // Используем высоту окна как единицу измерения
@@ -106,7 +106,7 @@ function initHeroAfterAnimation() {
     const stepPercent = clampedStep / maxStep;
 
     // Вычисляем высоту в процентах: начальная + процент от диапазона
-    const targetHeightPercent = initialHeightPercent + heightRangePercent * stepPercent;
+    const targetHeightPercent = calculatedHeightPercent + heightRangePercent * stepPercent;
 
     // Прерываем текущую анимацию, если она есть
     if (currentAnimation) {

@@ -136,13 +136,13 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
 
       if (topValues) {
         // Используем более агрессивное вычисление прогресса для быстрого раскрытия
-        const scrollProgress = Math.min(
+        const mobileScrollProgress = Math.min(
           currentScrollY / (viewportHeight * SCROLL_PROGRESS_MULTIPLIER),
           SCROLL_PROGRESS_MAX,
         );
 
         // Вычисляем процент прогресса от 0 до 1
-        const progress = Math.min(scrollProgress, SCROLL_PROGRESS_MAX);
+        const progress = Math.min(mobileScrollProgress, SCROLL_PROGRESS_MAX);
 
         // Округляем progress до шагов для предотвращения частых перезапусков анимации
         // Используем 200 шагов для более плавной анимации
