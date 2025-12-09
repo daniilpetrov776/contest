@@ -38,7 +38,7 @@ const checkIsMobileOrTablet = () => {
  * Вычисляет начальное и конечное значение top и height для мобильных/планшетов
  * @returns {object} - Объект с initialTop, finalTop, initialHeight и finalHeight
  */
-const getMobileTopValues = () => {
+export const getMobileTopValues = () => {
   const windowWidth = getViewportWidth();
 
   // Для 375px и меньше используем значения для мобильных
@@ -148,19 +148,25 @@ export function createScrollHandler(heroVideo, getIsExpanded, getState, setState
           const targetHeight = topValues.initialHeight + (heightRange * progress);
 
           // Ширина изменяется при скролле, но видео всегда центрировано
+          // Плавно интерполируем ширину, избегая резких переключений на 'auto'
           let targetWidth;
           if (topValues.initialWidth && topValues.finalWidth) {
             // Для 375px используем конкретные значения ширины
-            if (progress > 0) {
-              const widthRange = topValues.finalWidth - topValues.initialWidth;
-              const targetWidthValue = topValues.initialWidth + (widthRange * progress);
-              targetWidth = `${targetWidthValue}px`;
-            } else {
-              targetWidth = 'auto';
-            }
+            // Интерполируем от initialWidth до finalWidth плавно
+            const widthRange = topValues.finalWidth - topValues.initialWidth;
+            const targetWidthValue = topValues.initialWidth + (widthRange * progress);
+            targetWidth = `${targetWidthValue}px`;
           } else {
-            // Для других разрешений используем 100%
-            targetWidth = progress > 0 ? '100%' : 'auto';
+            // Для других разрешений интерполируем от min-width до 100% viewport
+            // Получаем текущее min-width из computed styles для точности
+            const computedStyle = window.getComputedStyle(heroVideo);
+            const minWidth = parseFloat(computedStyle.minWidth) || 416; // fallback для 768px
+            const viewportWidth = getViewportWidth();
+
+            // Интерполируем от minWidth до viewportWidth (100%)
+            const widthRange = viewportWidth - minWidth;
+            const targetWidthValue = minWidth + (widthRange * progress);
+            targetWidth = `${targetWidthValue}px`;
           }
 
           if (state.currentAnimation) {

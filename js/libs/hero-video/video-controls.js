@@ -10,8 +10,91 @@ import {
   ANIMATION_DURATION_FAST,
   MAX_WIDTH,
   MAX_HEIGHT,
+  TABLET_MIN_WIDTH,
 } from './constants.js';
 import { checkIsDesktop, calculateSizesFromScroll } from './video-utils.js';
+import { getMobileTopValues } from './scroll-handler.js';
+
+/**
+ * Получает правильную ширину viewport
+ * В адаптивном режиме браузера window.innerWidth может возвращать реальную ширину окна
+ * @returns {number}
+ */
+const getViewportWidth = () => {
+  // Используем visualViewport если доступен (более точный для эмуляторов)
+  if (window.visualViewport && window.visualViewport.width) {
+    return window.visualViewport.width;
+  }
+  // Иначе используем clientWidth, который более точно отражает размер viewport
+  return document.documentElement.clientWidth || window.innerWidth;
+};
+
+/**
+ * Получает начальное значение top для мобильных/планшетов
+ * @returns {number|null}
+ */
+const getInitialMobileTop = () => {
+  const windowWidth = getViewportWidth();
+
+  // Для 375px и меньше используем 178px
+  if (windowWidth <= 375.5) {
+    return 178;
+  } else if (windowWidth <= TABLET_MIN_WIDTH) {
+    // Интерполяция от 240px (768px) до 178px (375px)
+    const startSize = 240;
+    const minSize = 178;
+    const widthFrom = 768;
+    const widthTo = 375;
+
+    const value = minSize + (startSize - minSize) * (windowWidth - widthTo) / (widthFrom - widthTo);
+    return Math.round(value);
+  }
+
+  return null;
+};
+
+/**
+ * Получает начальное значение height для мобильных/планшетов
+ * @returns {number|null}
+ */
+const getInitialMobileHeight = () => {
+  const windowWidth = getViewportWidth();
+
+  if (windowWidth <= 375.5) {
+    return 135;
+  } else if (windowWidth <= TABLET_MIN_WIDTH) {
+    // Интерполируем от 226px (768px) до 135px (375px)
+    const startSize = 226;
+    const minSize = 135;
+    const widthFrom = 768;
+    const widthTo = 375;
+
+    const value = minSize + (startSize - minSize) * (windowWidth - widthTo) / (widthFrom - widthTo);
+    return Math.round(value);
+  }
+
+  return null;
+};
+
+/**
+ * Получает финальные размеры видео в пикселях для мобильных/планшетов
+ * @returns {object} - Объект с width и height в пикселях
+ */
+const getMobileFinalSizes = () => {
+  const topValues = getMobileTopValues();
+
+  if (!topValues) {
+    return null;
+  }
+
+  const windowWidth = getViewportWidth();
+
+  // Ширина всегда 100% viewport (в пикселях)
+  return {
+    width: windowWidth,
+    height: topValues.finalHeight,
+  };
+};
 
 /**
  * Обновляет aria-label в зависимости от состояния
@@ -60,6 +143,11 @@ export function initVideoAccessibility(heroVideo, mutedVideo, soundVideo, isExpa
  * @param {HTMLElement} soundVideo - Видео со звуком
  */
 function playSoundVideo(soundVideo) {
+  // Загружаем видео, если оно еще не загружено (preload="none")
+  if (soundVideo.readyState < VIDEO_READY_STATE_MIN) {
+    soundVideo.load();
+  }
+
   // Используем requestAnimationFrame для гарантии, что pause() завершен
   requestAnimationFrame(() => {
     if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {
@@ -67,7 +155,12 @@ function playSoundVideo(soundVideo) {
         // Игнорируем ошибки воспроизведения видео
       });
     } else {
-      soundVideo.addEventListener('loadeddata', playSoundVideo, { once: true });
+      // Ждем загрузки данных перед воспроизведением
+      soundVideo.addEventListener('loadeddata', () => {
+        soundVideo.play().catch(() => {
+          // Игнорируем ошибки воспроизведения видео
+        });
+      }, { once: true });
     }
   });
 }
@@ -94,7 +187,68 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
 
   // Работает только на десктопе
   if (!checkIsDesktop()) {
-    // На планшете и мобилке просто переключаем звук без изменения размера
+    // На планшете и мобилке при клике расширяем до финальных размеров в пикселях
+    // и переключаем звук
+    if (state.isExpanded) {
+      // Если уже расширено - возвращаем к начальным размерам
+      setState({ isExpanded: false });
+
+      const initialTop = getInitialMobileTop();
+      const initialHeight = getInitialMobileHeight();
+      const windowWidth = getViewportWidth();
+
+      if (initialTop !== null && initialHeight !== null) {
+        // Получаем начальную ширину из min-width
+        const computedStyle = window.getComputedStyle(heroVideo);
+        const minWidth = parseFloat(computedStyle.minWidth) || (windowWidth <= 375.5 ? 225 : 416);
+
+        if (state.currentAnimation) {
+          state.currentAnimation.kill();
+        }
+
+        const newAnimation = gsap.to(heroVideo, {
+          '--video-top': `${initialTop}px`,
+          '--video-height': `${initialHeight}px`,
+          '--video-width': `${minWidth}px`,
+          'duration': ANIMATION_DURATION_FAST,
+          'ease': EASE_TYPE,
+          'onComplete': () => {
+            setState({ currentAnimation: null });
+          },
+        });
+
+        setState({ currentAnimation: newAnimation });
+      }
+    } else {
+      // Расширяем до финальных размеров
+      const finalSizes = getMobileFinalSizes();
+
+      if (finalSizes) {
+        setState({ isExpanded: true });
+
+        const topValues = getMobileTopValues();
+        const finalTop = topValues ? topValues.finalTop : 120;
+
+        if (state.currentAnimation) {
+          state.currentAnimation.kill();
+        }
+
+        const newAnimation = gsap.to(heroVideo, {
+          '--video-top': `${finalTop}px`,
+          '--video-height': `${finalSizes.height}px`,
+          '--video-width': `${finalSizes.width}px`,
+          'duration': ANIMATION_DURATION_FAST,
+          'ease': EASE_TYPE,
+          'onComplete': () => {
+            setState({ currentAnimation: null });
+          },
+        });
+
+        setState({ currentAnimation: newAnimation });
+      }
+    }
+
+    // Переключаем звук
     if (!state.isPlayingWithSound) {
       setState({ isPlayingWithSound: true });
 
@@ -104,16 +258,32 @@ export function handleVideoClick(e, heroVideo, mutedVideo, soundVideo, state, se
       }
       mutedVideo.style.display = 'none';
 
-      // Показываем и настраиваем видео со звуком
+      // Показываем видео со звуком перед загрузкой и воспроизведением
       soundVideo.style.display = 'block';
       soundVideo.currentTime = 0;
       soundVideo.muted = false;
 
-      playSoundVideo(soundVideo);
+      // Загружаем видео перед воспроизведением (если preload="none")
+      // Важно: загружаем после того, как видео стало видимым
+      if (soundVideo.readyState < VIDEO_READY_STATE_MIN) {
+        soundVideo.load();
+        // Ждем загрузки данных перед воспроизведением
+        soundVideo.addEventListener('loadeddata', () => {
+          playSoundVideo(soundVideo);
+        }, { once: true });
+      } else {
+        // Если уже загружено - сразу воспроизводим
+        playSoundVideo(soundVideo);
+      }
     } else {
       if (!soundVideo.paused) {
         soundVideo.pause();
       } else {
+        // Загружаем видео перед воспроизведением (если preload="none")
+        if (soundVideo.readyState < VIDEO_READY_STATE_MIN) {
+          soundVideo.load();
+        }
+
         // Проверяем готовность перед воспроизведением
         requestAnimationFrame(() => {
           if (soundVideo.readyState >= VIDEO_READY_STATE_MIN) {

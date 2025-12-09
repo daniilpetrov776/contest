@@ -1,5 +1,6 @@
 // Константы для размеров экрана
-export const EXPANDABLE_MIN_WIDTH = 376;
+// export const EXPANDABLE_MIN_WIDTH = 376;
+export const EXPANDABLE_MIN_WIDTH = 769;
 export const DESKTOP_MIN_WIDTH = 1280;
 export const TABLET_MIN_WIDTH = 768;
 

@@ -4,7 +4,7 @@ import { createOptimizedScrollHandler, createDebouncedResizeHandler, initOnDOMRe
 import { RESIZE_DEBOUNCE_DELAY, ANIMATION_DURATION_RESIZE, TABLET_MIN_WIDTH } from './constants.js';
 import { checkIsDesktop, calculateSizesFromScroll } from './video-utils.js';
 import { initVideoAccessibility, handleVideoClick, updateAriaLabel } from './video-controls.js';
-import { createScrollHandler } from './scroll-handler.js';
+import { createScrollHandler, getMobileTopValues } from './scroll-handler.js';
 
 /**
  * Получает правильную ширину viewport
@@ -173,41 +173,60 @@ function initHeroVideo() {
 
     // Обработка для десктопа
     if (isDesktop) {
-      // Если видео не увеличено, обновляем размер на основе текущего скролла
-      if (!state.isExpanded) {
-        const { targetWidth, targetHeight } = calculateSizesFromScroll(
-          window.scrollY,
-          window.innerHeight,
-        );
+    // Если видео не увеличено, обновляем размер на основе текущего скролла
+    if (!state.isExpanded) {
+      const { targetWidth, targetHeight } = calculateSizesFromScroll(
+        window.scrollY,
+        window.innerHeight,
+      );
 
-        if (state.currentAnimation) {
-          state.currentAnimation.kill();
-        }
+      if (state.currentAnimation) {
+        state.currentAnimation.kill();
+      }
 
-        const newAnimation = gsap.to(heroVideo, {
-          '--video-width': `${targetWidth}%`,
-          '--video-height': `${targetHeight}%`,
-          'duration': ANIMATION_DURATION_RESIZE,
-          'ease': EASE_TYPE,
-          'onComplete': () => {
-            setState({ currentAnimation: null });
-          },
-        });
+      const newAnimation = gsap.to(heroVideo, {
+        '--video-width': `${targetWidth}%`,
+        '--video-height': `${targetHeight}%`,
+        'duration': ANIMATION_DURATION_RESIZE,
+        'ease': EASE_TYPE,
+        'onComplete': () => {
+          setState({ currentAnimation: null });
+        },
+      });
 
-        setState({ currentAnimation: newAnimation });
+      setState({ currentAnimation: newAnimation });
       }
     }
 
-    // Обработка для мобильных/планшетов - обновляем начальные значения
+    // Обработка для мобильных/планшетов - обновляем значения в пикселях
     if (isMobileOrTablet) {
-      const initialTop = getInitialMobileTop();
-      const initialHeight = getInitialMobileHeight();
-      if (initialTop !== null && initialHeight !== null && !state.isExpanded) {
-        gsap.set(heroVideo, {
-          '--video-top': `${initialTop}px`,
-          '--video-height': `${initialHeight}px`,
-          '--video-width': 'auto',
-        });
+      if (state.isExpanded) {
+        // Если видео расширено - обновляем финальные размеры в пикселях
+        const topValues = getMobileTopValues();
+        if (topValues) {
+          const viewportWidth = getViewportWidth();
+          const finalSizes = {
+            width: viewportWidth,
+            height: topValues.finalHeight,
+          };
+
+          gsap.set(heroVideo, {
+            '--video-top': `${topValues.finalTop}px`,
+            '--video-height': `${finalSizes.height}px`,
+            '--video-width': `${finalSizes.width}px`,
+          });
+        }
+      } else {
+        // Если не расширено - обновляем начальные значения в пикселях
+        const initialTop = getInitialMobileTop();
+        const initialHeight = getInitialMobileHeight();
+        if (initialTop !== null && initialHeight !== null) {
+          gsap.set(heroVideo, {
+            '--video-top': `${initialTop}px`,
+            '--video-height': `${initialHeight}px`,
+            '--video-width': 'auto',
+          });
+        }
       }
     }
   }, RESIZE_DEBOUNCE_DELAY);

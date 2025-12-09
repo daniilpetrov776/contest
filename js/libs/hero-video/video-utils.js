@@ -16,11 +16,25 @@ import {
 } from './constants.js';
 
 /**
+ * Получает правильную ширину viewport
+ * В адаптивном режиме браузера window.innerWidth может возвращать реальную ширину окна
+ * @returns {number}
+ */
+const getViewportWidth = () => {
+  // Используем visualViewport если доступен (более точный для эмуляторов)
+  if (window.visualViewport && window.visualViewport.width) {
+    return window.visualViewport.width;
+  }
+  // Иначе используем clientWidth, который более точно отражает размер viewport
+  return document.documentElement.clientWidth || window.innerWidth;
+};
+
+/**
  * Проверяет, должно ли видео расширяться при скролле
  * @returns {boolean}
  */
 export function checkIsDesktop() {
-  return window.innerWidth >= EXPANDABLE_MIN_WIDTH;
+  return getViewportWidth() >= EXPANDABLE_MIN_WIDTH;
 }
 
 /**
@@ -28,7 +42,7 @@ export function checkIsDesktop() {
  * @returns {object} - Объект с width и height в процентах
  */
 export function getMinSizes() {
-  const windowWidth = window.innerWidth;
+  const windowWidth = getViewportWidth();
   const windowHeight = window.innerHeight;
 
   if (windowWidth >= DESKTOP_MIN_WIDTH) {
